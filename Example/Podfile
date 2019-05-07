@@ -1,0 +1,14 @@
+source 'https://github.com/CocoaPods/Specs.git'
+inhibit_all_warnings!
+use_frameworks!
+platform :ios, '8.0'
+
+target 'ZMJImageEditor_Example' do
+  #pod 'ZMJImageEditor', :path => '../'
+
+  target 'ZMJImageEditor_Tests' do
+    inherit! :search_paths
+
+    pod 'FBSnapshotTestCase'
+  end
+end
