@@ -7,8 +7,8 @@
 //
 
 #import "ZMJViewController.h"
-#import <ZMJImageEditor/WBGImageEditor.h>
-#import <ZMJImageEditor/WBGMoreKeyboardItem.h>
+#import "WBGImageEditor.h"
+#import "WBGMoreKeyboardItem.h"
 @interface ZMJViewController () <WBGImageEditorDelegate, WBGImageEditorDataSource>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 

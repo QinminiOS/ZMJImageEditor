@@ -21,6 +21,36 @@
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
+		71858E722281756F00EE6CF2 /* TOActivityCroppedImageProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E292281756F00EE6CF2 /* TOActivityCroppedImageProvider.m */; };
+		71858E732281756F00EE6CF2 /* XPixelItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E2B2281756F00EE6CF2 /* XPixelItem.m */; };
+		71858E742281756F00EE6CF2 /* XScratchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E2F2281756F00EE6CF2 /* XScratchView.m */; };
+		71858E752281756F00EE6CF2 /* XRGBTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E302281756F00EE6CF2 /* XRGBTool.m */; };
+		71858E762281756F00EE6CF2 /* WBGImageToolBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E332281756F00EE6CF2 /* WBGImageToolBase.m */; };
+		71858E772281756F00EE6CF2 /* WBGTextTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E352281756F00EE6CF2 /* WBGTextTool.m */; };
+		71858E782281756F00EE6CF2 /* WBGDrawTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E372281756F00EE6CF2 /* WBGDrawTool.m */; };
+		71858E792281756F00EE6CF2 /* TOCroppedImageAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E3B2281756F00EE6CF2 /* TOCroppedImageAttributes.m */; };
+		71858E7A2281756F00EE6CF2 /* WBGImageEditorGestureManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E3E2281756F00EE6CF2 /* WBGImageEditorGestureManager.m */; };
+		71858E7B2281756F00EE6CF2 /* ColorfullButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E432281756F00EE6CF2 /* ColorfullButton.m */; };
+		71858E7C2281756F00EE6CF2 /* TOCropViewControllerTransitioning.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E452281756F00EE6CF2 /* TOCropViewControllerTransitioning.m */; };
+		71858E7D2281756F00EE6CF2 /* WBGMosicaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E472281756F00EE6CF2 /* WBGMosicaViewController.m */; };
+		71858E7E2281756F00EE6CF2 /* TOCropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E482281756F00EE6CF2 /* TOCropViewController.m */; };
+		71858E7F2281756F00EE6CF2 /* WBGImageEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E492281756F00EE6CF2 /* WBGImageEditorViewController.m */; };
+		71858E802281756F00EE6CF2 /* WBGImageEditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 71858E4C2281756F00EE6CF2 /* WBGImageEditorViewController.xib */; };
+		71858E812281756F00EE6CF2 /* WBGTextToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E522281756F00EE6CF2 /* WBGTextToolView.m */; };
+		71858E822281756F00EE6CF2 /* TOCropScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E552281756F00EE6CF2 /* TOCropScrollView.m */; };
+		71858E832281756F00EE6CF2 /* TOCropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E562281756F00EE6CF2 /* TOCropView.m */; };
+		71858E842281756F00EE6CF2 /* TOCropOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E572281756F00EE6CF2 /* TOCropOverlayView.m */; };
+		71858E852281756F00EE6CF2 /* WBGMoreKeyboardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E582281756F00EE6CF2 /* WBGMoreKeyboardCell.m */; };
+		71858E862281756F00EE6CF2 /* TOCropToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E592281756F00EE6CF2 /* TOCropToolbar.m */; };
+		71858E872281756F00EE6CF2 /* UIImage+library.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E5A2281756F00EE6CF2 /* UIImage+library.m */; };
+		71858E882281756F00EE6CF2 /* EditImage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71858E5E2281756F00EE6CF2 /* EditImage.xcassets */; };
+		71858E8A2281756F00EE6CF2 /* UIImage+CropRotate.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E622281756F00EE6CF2 /* UIImage+CropRotate.m */; };
+		71858E8B2281756F00EE6CF2 /* WBGMoreKeyboard+CollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E652281756F00EE6CF2 /* WBGMoreKeyboard+CollectionView.m */; };
+		71858E8C2281756F00EE6CF2 /* UIColor+TLChat.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E662281756F00EE6CF2 /* UIColor+TLChat.m */; };
+		71858E8D2281756F00EE6CF2 /* WBGImageEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E672281756F00EE6CF2 /* WBGImageEditor.m */; };
+		71858E8E2281756F00EE6CF2 /* WBGMoreKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E692281756F00EE6CF2 /* WBGMoreKeyboard.m */; };
+		71858E8F2281756F00EE6CF2 /* WBGMoreKeyboardItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E6F2281756F00EE6CF2 /* WBGMoreKeyboardItem.m */; };
+		71858E902281756F00EE6CF2 /* WBGBaseKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E712281756F00EE6CF2 /* WBGBaseKeyboard.m */; };
 		79E1363813D4552F3FB8302D /* Pods_ZMJImageEditor_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD4383784075711AC3458819 /* Pods_ZMJImageEditor_Example.framework */; };
 		805FDBA7CDD5AC04FA437661 /* Pods_ZMJImageEditor_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27DE14A43CA3CFB572079268 /* Pods_ZMJImageEditor_Tests.framework */; };
 		96FC64921FECDE2600ACB842 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96FC64941FECDE2600ACB842 /* Main.storyboard */; };
@@ -62,6 +92,68 @@
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		61B4020DC01A3C1A893ADD31 /* Pods-ZMJImageEditor_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZMJImageEditor_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZMJImageEditor_Tests/Pods-ZMJImageEditor_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		71858E292281756F00EE6CF2 /* TOActivityCroppedImageProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TOActivityCroppedImageProvider.m; sourceTree = "<group>"; };
+		71858E2B2281756F00EE6CF2 /* XPixelItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XPixelItem.m; sourceTree = "<group>"; };
+		71858E2C2281756F00EE6CF2 /* XScratchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XScratchView.h; sourceTree = "<group>"; };
+		71858E2D2281756F00EE6CF2 /* XRGBTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRGBTool.h; sourceTree = "<group>"; };
+		71858E2E2281756F00EE6CF2 /* XPixelItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XPixelItem.h; sourceTree = "<group>"; };
+		71858E2F2281756F00EE6CF2 /* XScratchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XScratchView.m; sourceTree = "<group>"; };
+		71858E302281756F00EE6CF2 /* XRGBTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XRGBTool.m; sourceTree = "<group>"; };
+		71858E322281756F00EE6CF2 /* WBGTextTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBGTextTool.h; sourceTree = "<group>"; };
+		71858E332281756F00EE6CF2 /* WBGImageToolBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBGImageToolBase.m; sourceTree = "<group>"; };
+		71858E342281756F00EE6CF2 /* WBGDrawTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBGDrawTool.h; sourceTree = "<group>"; };
+		71858E352281756F00EE6CF2 /* WBGTextTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBGTextTool.m; sourceTree = "<group>"; };
+		71858E362281756F00EE6CF2 /* WBGImageToolBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBGImageToolBase.h; sourceTree = "<group>"; };
+		71858E372281756F00EE6CF2 /* WBGDrawTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBGDrawTool.m; sourceTree = "<group>"; };
+		71858E382281756F00EE6CF2 /* ColorfullButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorfullButton.h; sourceTree = "<group>"; };
+		71858E392281756F00EE6CF2 /* WBGImageEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBGImageEditor.h; sourceTree = "<group>"; };
+		71858E3B2281756F00EE6CF2 /* TOCroppedImageAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TOCroppedImageAttributes.m; sourceTree = "<group>"; };
+		71858E3C2281756F00EE6CF2 /* TOCroppedImageAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TOCroppedImageAttributes.h; sourceTree = "<group>"; };
+		71858E3E2281756F00EE6CF2 /* WBGImageEditorGestureManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBGImageEditorGestureManager.m; sourceTree = "<group>"; };
+		71858E3F2281756F00EE6CF2 /* WBGImageEditorGestureManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBGImageEditorGestureManager.h; sourceTree = "<group>"; };
+		71858E402281756F00EE6CF2 /* TOActivityCroppedImageProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TOActivityCroppedImageProvider.h; sourceTree = "<group>"; };
+		71858E422281756F00EE6CF2 /* WBGChatMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBGChatMacros.h; sourceTree = "<group>"; };
+		71858E432281756F00EE6CF2 /* ColorfullButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorfullButton.m; sourceTree = "<group>"; };
+		71858E452281756F00EE6CF2 /* TOCropViewControllerTransitioning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TOCropViewControllerTransitioning.m; sourceTree = "<group>"; };
+		71858E462281756F00EE6CF2 /* WBGImageEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBGImageEditorViewController.h; sourceTree = "<group>"; };
+		71858E472281756F00EE6CF2 /* WBGMosicaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBGMosicaViewController.m; sourceTree = "<group>"; };
+		71858E482281756F00EE6CF2 /* TOCropViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TOCropViewController.m; sourceTree = "<group>"; };
+		71858E492281756F00EE6CF2 /* WBGImageEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBGImageEditorViewController.m; sourceTree = "<group>"; };
+		71858E4A2281756F00EE6CF2 /* TOCropViewControllerTransitioning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TOCropViewControllerTransitioning.h; sourceTree = "<group>"; };
+		71858E4B2281756F00EE6CF2 /* WBGMosicaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBGMosicaViewController.h; sourceTree = "<group>"; };
+		71858E4C2281756F00EE6CF2 /* WBGImageEditorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WBGImageEditorViewController.xib; sourceTree = "<group>"; };
+		71858E4D2281756F00EE6CF2 /* TOCropViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TOCropViewController.h; sourceTree = "<group>"; };
+		71858E4F2281756F00EE6CF2 /* TOCropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TOCropView.h; sourceTree = "<group>"; };
+		71858E502281756F00EE6CF2 /* WBGMoreKeyboardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBGMoreKeyboardCell.h; sourceTree = "<group>"; };
+		71858E512281756F00EE6CF2 /* TOCropOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TOCropOverlayView.h; sourceTree = "<group>"; };
+		71858E522281756F00EE6CF2 /* WBGTextToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBGTextToolView.m; sourceTree = "<group>"; };
+		71858E532281756F00EE6CF2 /* UIImage+library.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+library.h"; sourceTree = "<group>"; };
+		71858E542281756F00EE6CF2 /* TOCropToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TOCropToolbar.h; sourceTree = "<group>"; };
+		71858E552281756F00EE6CF2 /* TOCropScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TOCropScrollView.m; sourceTree = "<group>"; };
+		71858E562281756F00EE6CF2 /* TOCropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TOCropView.m; sourceTree = "<group>"; };
+		71858E572281756F00EE6CF2 /* TOCropOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TOCropOverlayView.m; sourceTree = "<group>"; };
+		71858E582281756F00EE6CF2 /* WBGMoreKeyboardCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBGMoreKeyboardCell.m; sourceTree = "<group>"; };
+		71858E592281756F00EE6CF2 /* TOCropToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TOCropToolbar.m; sourceTree = "<group>"; };
+		71858E5A2281756F00EE6CF2 /* UIImage+library.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+library.m"; sourceTree = "<group>"; };
+		71858E5B2281756F00EE6CF2 /* WBGTextToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBGTextToolView.h; sourceTree = "<group>"; };
+		71858E5C2281756F00EE6CF2 /* TOCropScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TOCropScrollView.h; sourceTree = "<group>"; };
+		71858E5E2281756F00EE6CF2 /* EditImage.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = EditImage.xcassets; sourceTree = "<group>"; };
+		71858E612281756F00EE6CF2 /* WBGMoreKeyboard+CollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBGMoreKeyboard+CollectionView.h"; sourceTree = "<group>"; };
+		71858E622281756F00EE6CF2 /* UIImage+CropRotate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CropRotate.m"; sourceTree = "<group>"; };
+		71858E632281756F00EE6CF2 /* UIColor+TLChat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+TLChat.h"; sourceTree = "<group>"; };
+		71858E642281756F00EE6CF2 /* UIImage+CropRotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+CropRotate.h"; sourceTree = "<group>"; };
+		71858E652281756F00EE6CF2 /* WBGMoreKeyboard+CollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WBGMoreKeyboard+CollectionView.m"; sourceTree = "<group>"; };
+		71858E662281756F00EE6CF2 /* UIColor+TLChat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+TLChat.m"; sourceTree = "<group>"; };
+		71858E672281756F00EE6CF2 /* WBGImageEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBGImageEditor.m; sourceTree = "<group>"; };
+		71858E692281756F00EE6CF2 /* WBGMoreKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBGMoreKeyboard.m; sourceTree = "<group>"; };
+		71858E6A2281756F00EE6CF2 /* WBGMoreKeyboardItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBGMoreKeyboardItem.h; sourceTree = "<group>"; };
+		71858E6B2281756F00EE6CF2 /* WBGBaseKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBGBaseKeyboard.h; sourceTree = "<group>"; };
+		71858E6C2281756F00EE6CF2 /* WBGMoreKeyboardDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBGMoreKeyboardDelegate.h; sourceTree = "<group>"; };
+		71858E6D2281756F00EE6CF2 /* WBGKeyboardDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBGKeyboardDelegate.h; sourceTree = "<group>"; };
+		71858E6E2281756F00EE6CF2 /* WBGKeyboardProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBGKeyboardProtocol.h; sourceTree = "<group>"; };
+		71858E6F2281756F00EE6CF2 /* WBGMoreKeyboardItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBGMoreKeyboardItem.m; sourceTree = "<group>"; };
+		71858E702281756F00EE6CF2 /* WBGMoreKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBGMoreKeyboard.h; sourceTree = "<group>"; };
+		71858E712281756F00EE6CF2 /* WBGBaseKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBGBaseKeyboard.m; sourceTree = "<group>"; };
 		8160F7BC79F30F2E4C7F8903 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		96FC64911FECDE0200ACB842 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		96FC64931FECDE2600ACB842 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -135,6 +227,7 @@
 		6003F593195388D20070C39A /* Example for ZMJImageEditor */ = {
 			isa = PBXGroup;
 			children = (
+				71858E282281756F00EE6CF2 /* ZMJImageEditor */,
 				6003F59C195388D20070C39A /* ZMJAppDelegate.h */,
 				6003F59D195388D20070C39A /* ZMJAppDelegate.m */,
 				96FC64941FECDE2600ACB842 /* Main.storyboard */,
@@ -188,6 +281,147 @@
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
+		71858E282281756F00EE6CF2 /* ZMJImageEditor */ = {
+			isa = PBXGroup;
+			children = (
+				71858E422281756F00EE6CF2 /* WBGChatMacros.h */,
+				71858E392281756F00EE6CF2 /* WBGImageEditor.h */,
+				71858E672281756F00EE6CF2 /* WBGImageEditor.m */,
+				71858E402281756F00EE6CF2 /* TOActivityCroppedImageProvider.h */,
+				71858E292281756F00EE6CF2 /* TOActivityCroppedImageProvider.m */,
+				71858E3A2281756F00EE6CF2 /* Models */,
+				71858E4E2281756F00EE6CF2 /* Views */,
+				71858E442281756F00EE6CF2 /* Controllers */,
+				71858E312281756F00EE6CF2 /* Tools */,
+				71858E2A2281756F00EE6CF2 /* Mosica */,
+				71858E3D2281756F00EE6CF2 /* Manager */,
+				71858E682281756F00EE6CF2 /* Keyboard */,
+				71858E5D2281756F00EE6CF2 /* Assets */,
+				71858E602281756F00EE6CF2 /* Categories */,
+			);
+			path = ZMJImageEditor;
+			sourceTree = "<group>";
+		};
+		71858E2A2281756F00EE6CF2 /* Mosica */ = {
+			isa = PBXGroup;
+			children = (
+				71858E2E2281756F00EE6CF2 /* XPixelItem.h */,
+				71858E2B2281756F00EE6CF2 /* XPixelItem.m */,
+				71858E2D2281756F00EE6CF2 /* XRGBTool.h */,
+				71858E302281756F00EE6CF2 /* XRGBTool.m */,
+				71858E2C2281756F00EE6CF2 /* XScratchView.h */,
+				71858E2F2281756F00EE6CF2 /* XScratchView.m */,
+			);
+			path = Mosica;
+			sourceTree = "<group>";
+		};
+		71858E312281756F00EE6CF2 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				71858E342281756F00EE6CF2 /* WBGDrawTool.h */,
+				71858E372281756F00EE6CF2 /* WBGDrawTool.m */,
+				71858E362281756F00EE6CF2 /* WBGImageToolBase.h */,
+				71858E332281756F00EE6CF2 /* WBGImageToolBase.m */,
+				71858E322281756F00EE6CF2 /* WBGTextTool.h */,
+				71858E352281756F00EE6CF2 /* WBGTextTool.m */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		71858E3A2281756F00EE6CF2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				71858E3C2281756F00EE6CF2 /* TOCroppedImageAttributes.h */,
+				71858E3B2281756F00EE6CF2 /* TOCroppedImageAttributes.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		71858E3D2281756F00EE6CF2 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				71858E3F2281756F00EE6CF2 /* WBGImageEditorGestureManager.h */,
+				71858E3E2281756F00EE6CF2 /* WBGImageEditorGestureManager.m */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		71858E442281756F00EE6CF2 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				71858E4D2281756F00EE6CF2 /* TOCropViewController.h */,
+				71858E482281756F00EE6CF2 /* TOCropViewController.m */,
+				71858E4A2281756F00EE6CF2 /* TOCropViewControllerTransitioning.h */,
+				71858E452281756F00EE6CF2 /* TOCropViewControllerTransitioning.m */,
+				71858E462281756F00EE6CF2 /* WBGImageEditorViewController.h */,
+				71858E492281756F00EE6CF2 /* WBGImageEditorViewController.m */,
+				71858E4C2281756F00EE6CF2 /* WBGImageEditorViewController.xib */,
+				71858E4B2281756F00EE6CF2 /* WBGMosicaViewController.h */,
+				71858E472281756F00EE6CF2 /* WBGMosicaViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		71858E4E2281756F00EE6CF2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				71858E382281756F00EE6CF2 /* ColorfullButton.h */,
+				71858E432281756F00EE6CF2 /* ColorfullButton.m */,
+				71858E512281756F00EE6CF2 /* TOCropOverlayView.h */,
+				71858E572281756F00EE6CF2 /* TOCropOverlayView.m */,
+				71858E5C2281756F00EE6CF2 /* TOCropScrollView.h */,
+				71858E552281756F00EE6CF2 /* TOCropScrollView.m */,
+				71858E542281756F00EE6CF2 /* TOCropToolbar.h */,
+				71858E592281756F00EE6CF2 /* TOCropToolbar.m */,
+				71858E4F2281756F00EE6CF2 /* TOCropView.h */,
+				71858E562281756F00EE6CF2 /* TOCropView.m */,
+				71858E502281756F00EE6CF2 /* WBGMoreKeyboardCell.h */,
+				71858E582281756F00EE6CF2 /* WBGMoreKeyboardCell.m */,
+				71858E5B2281756F00EE6CF2 /* WBGTextToolView.h */,
+				71858E522281756F00EE6CF2 /* WBGTextToolView.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		71858E5D2281756F00EE6CF2 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				71858E5E2281756F00EE6CF2 /* EditImage.xcassets */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		71858E602281756F00EE6CF2 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				71858E532281756F00EE6CF2 /* UIImage+library.h */,
+				71858E5A2281756F00EE6CF2 /* UIImage+library.m */,
+				71858E612281756F00EE6CF2 /* WBGMoreKeyboard+CollectionView.h */,
+				71858E652281756F00EE6CF2 /* WBGMoreKeyboard+CollectionView.m */,
+				71858E632281756F00EE6CF2 /* UIColor+TLChat.h */,
+				71858E662281756F00EE6CF2 /* UIColor+TLChat.m */,
+				71858E642281756F00EE6CF2 /* UIImage+CropRotate.h */,
+				71858E622281756F00EE6CF2 /* UIImage+CropRotate.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		71858E682281756F00EE6CF2 /* Keyboard */ = {
+			isa = PBXGroup;
+			children = (
+				71858E6B2281756F00EE6CF2 /* WBGBaseKeyboard.h */,
+				71858E712281756F00EE6CF2 /* WBGBaseKeyboard.m */,
+				71858E6D2281756F00EE6CF2 /* WBGKeyboardDelegate.h */,
+				71858E6E2281756F00EE6CF2 /* WBGKeyboardProtocol.h */,
+				71858E702281756F00EE6CF2 /* WBGMoreKeyboard.h */,
+				71858E692281756F00EE6CF2 /* WBGMoreKeyboard.m */,
+				71858E6C2281756F00EE6CF2 /* WBGMoreKeyboardDelegate.h */,
+				71858E6A2281756F00EE6CF2 /* WBGMoreKeyboardItem.h */,
+				71858E6F2281756F00EE6CF2 /* WBGMoreKeyboardItem.m */,
+			);
+			path = Keyboard;
+			sourceTree = "<group>";
+		};
 		ECFF949E9BE1709B8569CA3F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -211,7 +445,6 @@
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
 				DF06A7BD642897C55BC3BC46 /* [CP] Embed Pods Frameworks */,
-				1604AEFDCC452111DA4CB72C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -230,8 +463,6 @@
 				6003F5AA195388D20070C39A /* Sources */,
 				6003F5AB195388D20070C39A /* Frameworks */,
 				6003F5AC195388D20070C39A /* Resources */,
-				87A42F18CDB7C9877F01CF77 /* [CP] Embed Pods Frameworks */,
-				713808C7EC77CBBC4B6FFBDA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -291,8 +522,10 @@
 			files = (
 				96FC64921FECDE2600ACB842 /* Main.storyboard in Resources */,
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
+				71858E802281756F00EE6CF2 /* WBGImageEditorViewController.xib in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
+				71858E882281756F00EE6CF2 /* EditImage.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,74 +540,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1604AEFDCC452111DA4CB72C /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZMJImageEditor_Example/Pods-ZMJImageEditor_Example-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		713808C7EC77CBBC4B6FFBDA /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZMJImageEditor_Tests/Pods-ZMJImageEditor_Tests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		87A42F18CDB7C9877F01CF77 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-ZMJImageEditor_Tests/Pods-ZMJImageEditor_Tests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/FBSnapshotTestCase/FBSnapshotTestCase.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSnapshotTestCase.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZMJImageEditor_Tests/Pods-ZMJImageEditor_Tests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		DF06A7BD642897C55BC3BC46 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-ZMJImageEditor_Example/Pods-ZMJImageEditor_Example-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-ZMJImageEditor_Example/Pods-ZMJImageEditor_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/YYCategories/YYCategories.framework",
-				"${BUILT_PRODUCTS_DIR}/ZMJImageEditor/ZMJImageEditor.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYCategories.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZMJImageEditor.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZMJImageEditor_Example/Pods-ZMJImageEditor_Example-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ZMJImageEditor_Example/Pods-ZMJImageEditor_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F17ABF75A67E9614DF132916 /* [CP] Check Pods Manifest.lock */ = {
@@ -420,9 +603,37 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71858E772281756F00EE6CF2 /* WBGTextTool.m in Sources */,
+				71858E8D2281756F00EE6CF2 /* WBGImageEditor.m in Sources */,
+				71858E832281756F00EE6CF2 /* TOCropView.m in Sources */,
+				71858E7B2281756F00EE6CF2 /* ColorfullButton.m in Sources */,
+				71858E8E2281756F00EE6CF2 /* WBGMoreKeyboard.m in Sources */,
+				71858E862281756F00EE6CF2 /* TOCropToolbar.m in Sources */,
+				71858E7F2281756F00EE6CF2 /* WBGImageEditorViewController.m in Sources */,
+				71858E902281756F00EE6CF2 /* WBGBaseKeyboard.m in Sources */,
+				71858E722281756F00EE6CF2 /* TOActivityCroppedImageProvider.m in Sources */,
+				71858E7D2281756F00EE6CF2 /* WBGMosicaViewController.m in Sources */,
+				71858E762281756F00EE6CF2 /* WBGImageToolBase.m in Sources */,
+				71858E812281756F00EE6CF2 /* WBGTextToolView.m in Sources */,
 				6003F59E195388D20070C39A /* ZMJAppDelegate.m in Sources */,
+				71858E8A2281756F00EE6CF2 /* UIImage+CropRotate.m in Sources */,
+				71858E782281756F00EE6CF2 /* WBGDrawTool.m in Sources */,
+				71858E7E2281756F00EE6CF2 /* TOCropViewController.m in Sources */,
+				71858E842281756F00EE6CF2 /* TOCropOverlayView.m in Sources */,
+				71858E872281756F00EE6CF2 /* UIImage+library.m in Sources */,
 				6003F5A7195388D20070C39A /* ZMJViewController.m in Sources */,
+				71858E792281756F00EE6CF2 /* TOCroppedImageAttributes.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
+				71858E7C2281756F00EE6CF2 /* TOCropViewControllerTransitioning.m in Sources */,
+				71858E8C2281756F00EE6CF2 /* UIColor+TLChat.m in Sources */,
+				71858E742281756F00EE6CF2 /* XScratchView.m in Sources */,
+				71858E7A2281756F00EE6CF2 /* WBGImageEditorGestureManager.m in Sources */,
+				71858E852281756F00EE6CF2 /* WBGMoreKeyboardCell.m in Sources */,
+				71858E8F2281756F00EE6CF2 /* WBGMoreKeyboardItem.m in Sources */,
+				71858E732281756F00EE6CF2 /* XPixelItem.m in Sources */,
+				71858E822281756F00EE6CF2 /* TOCropScrollView.m in Sources */,
+				71858E8B2281756F00EE6CF2 /* WBGMoreKeyboard+CollectionView.m in Sources */,
+				71858E752281756F00EE6CF2 /* XRGBTool.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

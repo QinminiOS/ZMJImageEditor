@@ -5,10 +5,12 @@ platform :ios, '8.0'
 
 target 'ZMJImageEditor_Example' do
   #pod 'ZMJImageEditor', :path => '../'
+  pod 'YYCategories'
+  pod 'Masonry' 
 
   target 'ZMJImageEditor_Tests' do
     inherit! :search_paths
 
-    pod 'FBSnapshotTestCase'
+    #pod 'FBSnapshotTestCase'
   end
 end
