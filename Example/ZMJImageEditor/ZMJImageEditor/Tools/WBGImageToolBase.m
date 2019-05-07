@@ -10,9 +10,11 @@
 
 @implementation WBGImageToolBase
 
-- (instancetype)initWithImageEditor:(WBGImageEditorViewController *)editor {
+- (instancetype)initWithImageEditor:(WBGImageEditorViewController *)editor
+{
     self = [super init];
-    if(self) {
+    if(self)
+    {
         self.editor   = editor;
     }
     return self;
@@ -37,7 +39,8 @@
     }
 }
 
-- (UIImage*)imageForKey:(NSString*)key defaultImageName:(NSString*)defaultImageName {
+- (UIImage*)imageForKey:(NSString*)key defaultImageName:(NSString*)defaultImageName
+{
     return nil;
 }
 

@@ -151,11 +151,13 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/XXNibBridge/XXNibBridge.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/YYCategories/YYCategories.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/YYText/YYText.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/XXNibBridge/XXNibBridge.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/YYCategories/YYCategories.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/YYText/YYText.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait

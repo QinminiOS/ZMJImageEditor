@@ -8,6 +8,7 @@ target 'ZMJImageEditor_Example' do
   pod 'YYCategories'
   pod 'Masonry'
   pod 'XXNibBridge'
+  pod 'YYText'
 
   target 'ZMJImageEditor_Tests' do
     inherit! :search_paths

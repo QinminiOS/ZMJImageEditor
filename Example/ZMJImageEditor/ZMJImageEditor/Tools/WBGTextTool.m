@@ -9,15 +9,18 @@
 #import "WBGTextTool.h"
 #import "WBGTextToolView.h"
 #import "UIView+YYAdd.h"
+#import "WBGColorPanel.h"
 
 static const CGFloat kTopOffset = 0.f;
 static const CGFloat kTextTopOffset = 20.f;
 static const NSInteger kTextMaxLimitNumber = 100;
 
+@interface WBGTextTool ()
+@property (nonatomic, weak) UIImageView *drawingView;
+@property (nonatomic, weak) WBGColorPanel *colorPanel;
+@end
+
 @implementation WBGTextTool
-{
-    __weak UIImageView *_drawingView;
-}
 
 - (void)setup
 {
@@ -96,13 +99,12 @@ static const NSInteger kTextMaxLimitNumber = 100;
 
 @end
 
+
 #pragma mark - WBGTextView
-@interface _WBGTextView () <UITextViewDelegate>
-//@property (nonatomic, strong) _WBGToolBar *keyboardToolBar;
+@interface _WBGTextView () <YYTextViewDelegate>
 @property (nonatomic, strong) NSString *needReplaceString;
 @property (nonatomic, assign) NSRange   needReplaceRange;
 @end
-
 
 @implementation _WBGTextView
 
@@ -115,17 +117,20 @@ static const NSInteger kTextMaxLimitNumber = 100;
         
         //__weak typeof(self)weakSelf = self;
 
-        UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleRegular];
-        self.effectView = [[UIVisualEffectView alloc] initWithEffect:blur];
+        // UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleRegular];
+        // self.effectView = [[UIVisualEffectView alloc] initWithEffect:blur];
+        
+        self.effectView = [[UIView alloc] init];
+        self.effectView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.7f];
         self.effectView.frame = CGRectMake(0, -kTopOffset, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
         [self addSubview:self.effectView];
         
-        self.textView = [[UITextView alloc] initWithFrame:CGRectInset(self.bounds, 14, 0)];
+        self.textView = [[YYTextView alloc] initWithFrame:CGRectInset(self.bounds, 14, 0)];
         self.textView.top = kTextTopOffset;
         self.textView.scrollEnabled = YES;
         self.textView.returnKeyType = UIReturnKeyDone;
         self.textView.delegate = self;
-        self.textView.backgroundColor = [UIColor clearColor];
+        self.textView.backgroundColor = [UIColor greenColor];
         
         //self.keyboardToolBar = [_WBGToolBar createToolBarWithCancel:^{
         //    [weakSelf dismissTextEditing:NO];
@@ -238,11 +243,13 @@ static const NSInteger kTextMaxLimitNumber = 100;
         [textView setText:str];
         //[AlertBox showMessage:@"输入字符不能超过100\n多余部分已截断" hideAfter:3];
     }
-    
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
+    NSArray *arr = self.textView.textLayout.lines;
+    NSLog(@"--->%@", arr);
+    
     NSLog(@"%@", text);
     if ([text isEqualToString:@"\n"])
     {
@@ -324,53 +331,3 @@ static const NSInteger kTextMaxLimitNumber = 100;
 }
 
 @end
-
-//#pragma mark - WBGToolBar
-//@interface _WBGToolBar ()
-//@property (nonatomic, copy) dispatch_block_t cancelBlock;
-//@property (nonatomic, copy) dispatch_block_t doneBlock;
-//@end
-//
-//@implementation _WBGToolBar
-//
-//+ (instancetype)createToolBarWithCancel:(dispatch_block_t)cancelBlock done:(dispatch_block_t)doneBlock
-//{
-//    _WBGToolBar *tool = [[_WBGToolBar alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 44)];
-//    tool.cancelBlock = cancelBlock;
-//    tool.doneBlock   = doneBlock;
-//    
-//    return tool;
-//}
-//
-//- (instancetype)initWithFrame:(CGRect)frame
-//{
-//    self = [super initWithFrame:frame];
-//    if (self)
-//    {
-//        self.items = [NSArray arrayWithObjects:
-//                      [[UIBarButtonItem alloc]initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancelPad)],
-//                      [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
-//                      [[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(donePad)],
-//                      nil];
-//    }
-//    
-//    return self;
-//}
-//
-//- (void)cancelPad
-//{
-//    NSLog(@"%@", NSStringFromSelector(_cmd));
-//    if (self.cancelBlock) {
-//        self.cancelBlock();
-//    }
-//}
-//
-//- (void)donePad
-//{
-//    NSLog(@"%@", NSStringFromSelector(_cmd));
-//    if (self.doneBlock) {
-//        self.doneBlock();
-//    }
-//}
-//
-//@end

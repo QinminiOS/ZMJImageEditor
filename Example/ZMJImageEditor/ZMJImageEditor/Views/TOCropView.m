@@ -942,7 +942,15 @@ typedef NS_ENUM(NSInteger, TOCropViewOverlayEdge) {
 - (void)setCropBoxFrame:(CGRect)cropBoxFrame
 {
     if (CGRectEqualToRect(cropBoxFrame, _cropBoxFrame))
+    {
         return;
+    }
+    
+    // isnan
+    cropBoxFrame.origin.x = (isnan(cropBoxFrame.origin.x) ? 0 : cropBoxFrame.origin.x);
+    cropBoxFrame.origin.y = (isnan(cropBoxFrame.origin.y) ? 0 : cropBoxFrame.origin.y);
+    cropBoxFrame.size.width = (isnan(cropBoxFrame.size.width) ? 0 : cropBoxFrame.size.width);
+    cropBoxFrame.size.height = (isnan(cropBoxFrame.size.height) ? 0 : cropBoxFrame.size.height);
     
     //Upon init, sometimes the box size is still 0, which can result in CALayer issues
     if (cropBoxFrame.size.width < FLT_EPSILON || cropBoxFrame.size.height < FLT_EPSILON)

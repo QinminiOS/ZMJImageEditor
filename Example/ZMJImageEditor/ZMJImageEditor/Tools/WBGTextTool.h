@@ -7,6 +7,8 @@
 //
 
 #import "WBGImageToolBase.h"
+#import "YYText.h"
+
 @class _WBGTextView;
 
 @interface WBGTextTool : WBGImageToolBase
@@ -18,11 +20,7 @@
 
 
 @interface _WBGTextView : UIView
-@property (nonatomic, strong) UIVisualEffectView *effectView;
+@property (nonatomic, strong) UIView *effectView;
 @property (nonatomic, copy) void(^dissmissTextTool)(NSString *currentText, BOOL isUse);//, BOOL isEditAgain);
-@property (nonatomic, strong) UITextView *textView;
+@property (nonatomic, strong) YYTextView *textView;
 @end
-
-//@interface _WBGToolBar : UIToolbar
-//+ (instancetype)createToolBarWithCancel:(dispatch_block_t)cancelBlock done:(dispatch_block_t)doneBlock;
-//@end

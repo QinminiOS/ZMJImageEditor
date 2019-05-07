@@ -453,7 +453,7 @@
      {
         TOCropViewController *cropController = [[TOCropViewController alloc] initWithCroppingStyle:TOCropViewCroppingStyleDefault image:clipedImage];
         cropController.delegate = self;
-        __weak typeof(self)weakSelf = self;
+        __weak typeof(self) weakSelf = self;
          
         CGRect viewFrame = [self.view convertRect:self.imageView.frame
                                            toView:self.navigationController.view];

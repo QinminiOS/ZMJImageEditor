@@ -4,23 +4,27 @@ PODS:
   - YYCategories (1.0.4):
     - YYCategories/no-arc (= 1.0.4)
   - YYCategories/no-arc (1.0.4)
+  - YYText (1.0.7)
 
 DEPENDENCIES:
   - Masonry
   - XXNibBridge
   - YYCategories
+  - YYText
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Masonry
     - XXNibBridge
     - YYCategories
+    - YYText
 
 SPEC CHECKSUMS:
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   XXNibBridge: addb780e6db076eb2c61716aa60b176a6799b80f
   YYCategories: 6bcd4314c6661a561410dce4a793379ebd306abd
+  YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: b8722c5e4b2b3b353ececb7ba27311b198fcbd46
+PODFILE CHECKSUM: 05ada66c0e374883de87507d53f43b53bb679b98
 
 COCOAPODS: 1.6.0.beta.1

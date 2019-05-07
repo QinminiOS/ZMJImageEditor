@@ -319,10 +319,10 @@
 		71858E312281756F00EE6CF2 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
-				71858E342281756F00EE6CF2 /* WBGDrawTool.h */,
-				71858E372281756F00EE6CF2 /* WBGDrawTool.m */,
 				71858E362281756F00EE6CF2 /* WBGImageToolBase.h */,
 				71858E332281756F00EE6CF2 /* WBGImageToolBase.m */,
+				71858E342281756F00EE6CF2 /* WBGDrawTool.h */,
+				71858E372281756F00EE6CF2 /* WBGDrawTool.m */,
 				71858E322281756F00EE6CF2 /* WBGTextTool.h */,
 				71858E352281756F00EE6CF2 /* WBGTextTool.m */,
 			);
@@ -551,12 +551,14 @@
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/XXNibBridge/XXNibBridge.framework",
 				"${BUILT_PRODUCTS_DIR}/YYCategories/YYCategories.framework",
+				"${BUILT_PRODUCTS_DIR}/YYText/YYText.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XXNibBridge.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYCategories.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYText.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

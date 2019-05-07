@@ -89,7 +89,7 @@
     }
     
     _doneTextButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_doneTextButton setImage:[UIImage my_imageNamed:@"clip_ok" inBundle:classBundle] forState:UIControlStateNormal];
+    [_doneTextButton setImage:[UIImage my_imageNamed:@"icon_queren" inBundle:classBundle] forState:UIControlStateNormal];
 
     [_doneTextButton setTitleColor:[UIColor colorWithRed:1.0f green:0.8f blue:0.0f alpha:1.0f] forState:UIControlStateNormal];
     [_doneTextButton.titleLabel setFont:[UIFont systemFontOfSize:17.0f]];
@@ -103,7 +103,7 @@
     [self addSubview:_doneIconButton];
     
     _cancelTextButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_cancelTextButton setImage:[UIImage my_imageNamed:@"clip_close" inBundle:classBundle] forState:UIControlStateNormal];
+    [_cancelTextButton setImage:[UIImage my_imageNamed:@"icon_quxiao" inBundle:classBundle] forState:UIControlStateNormal];
 
     [_cancelTextButton.titleLabel setFont:[UIFont systemFontOfSize:17.0f]];
     [_cancelTextButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
@@ -124,7 +124,7 @@
     _rotateCounterclockwiseButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _rotateCounterclockwiseButton.contentMode = UIViewContentModeCenter;
     _rotateCounterclockwiseButton.tintColor = [UIColor whiteColor];
-    [_rotateCounterclockwiseButton setImage:[UIImage my_imageNamed:@"clip_rotate" inBundle:classBundle] forState:UIControlStateNormal];
+    [_rotateCounterclockwiseButton setImage:[UIImage my_imageNamed:@"icon_fanzhuan_xuanzhong" inBundle:classBundle] forState:UIControlStateNormal];
     [_rotateCounterclockwiseButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_rotateCounterclockwiseButton];
     

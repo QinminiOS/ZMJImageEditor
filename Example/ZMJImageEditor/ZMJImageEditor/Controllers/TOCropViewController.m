@@ -73,7 +73,7 @@
 
 - (instancetype)initWithCroppingStyle:(TOCropViewCroppingStyle)style image:(UIImage *)image
 {
-    NSParameterAssert(image);
+    // NSParameterAssert(image);
 
     self = [super init];
     if (self) {

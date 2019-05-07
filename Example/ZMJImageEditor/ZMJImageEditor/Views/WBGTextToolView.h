@@ -30,7 +30,8 @@
 
 @end
 
-@interface EditImageCropOverLayView : UIView @end
+@interface EditImageCropOverLayView : UIView
+@end
 
 @interface WBGTextToolOverlapView : UIView
 @property (nonatomic, copy  ) NSString *text;
