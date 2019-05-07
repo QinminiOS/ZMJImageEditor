@@ -62,19 +62,11 @@
 
 @implementation WBGImageEditorViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        
-    }
-    return self;
-}
-
 - (id)init
 {
     self = [self initWithNibName:@"WBGImageEditorViewController" bundle:[NSBundle bundleForClass:self.class]];
-    if (self){
+    if (self)
+    {
         
     }
     return self;
@@ -140,7 +132,8 @@
     self.colorPanel.hidden = YES;
 }
 
-- (void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
     
     //ShowBusyIndicatorForView(self.view);
@@ -153,7 +146,8 @@
     [self configCustomComponent];
 }
 
-- (void)configCustomComponent {
+- (void)configCustomComponent
+{
     NSMutableArray *valibleCompoment = [NSMutableArray new];
     WBGImageEditorComponent curComponent = [self.dataSource respondsToSelector:@selector(imageEditorCompoment)] ? [self.dataSource imageEditorCompoment] : 0;
     if (curComponent == 0) { curComponent = WBGImageEditorWholeComponent; }
@@ -191,9 +185,12 @@
     self.rightBannerView.frame= CGRectMake(CGRectGetMaxX(self.imageView.frame), 0, self.drawingView.width - CGRectGetMaxX(self.imageView.frame), self.drawingView.height);
 }
 
-- (UIView *)topBannerView {
-    if (!_topBannerView) {
-        _topBannerView = ({
+- (UIView *)topBannerView
+{
+    if (!_topBannerView)
+    {
+        _topBannerView =
+        ({
             UIView *view = [[UIView alloc] init];
             view.backgroundColor = self.scrollView.backgroundColor;
             [self.imageView.superview addSubview:view];
@@ -204,9 +201,12 @@
     return _topBannerView;
 }
 
-- (UIView *)bottomBannerView {
-    if (!_bottomBannerView) {
-        _bottomBannerView = ({
+- (UIView *)bottomBannerView
+{
+    if (!_bottomBannerView)
+    {
+        _bottomBannerView =
+        ({
             UIView *view = [[UIView alloc] init];
             view.backgroundColor = self.scrollView.backgroundColor;
             [self.imageView.superview addSubview:view];
@@ -275,11 +275,14 @@
     return _drawTool;
 }
 
-- (WBGTextTool *)textTool {
-    if (_textTool == nil) {
+- (WBGTextTool *)textTool
+{
+    if (_textTool == nil)
+    {
         _textTool = [[WBGTextTool alloc] initWithImageEditor:self];
         __weak typeof(self)weakSelf = self;
-        _textTool.dissmissTextTool = ^(NSString *currentText) {
+        _textTool.dissmissTextTool = ^(NSString *currentText)
+        {
             [weakSelf hiddenColorPan:NO animation:YES];
             weakSelf.currentMode = EditorNonMode;
             weakSelf.currentTool = nil;
@@ -289,7 +292,8 @@
     return _textTool;
 }
 
-- (void)initImageScrollView {
+- (void)initImageScrollView
+{
     self.scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.scrollView.showsHorizontalScrollIndicator = NO;
     self.scrollView.showsVerticalScrollIndicator = NO;
@@ -299,8 +303,10 @@
 
 }
 
-- (void)refreshImageView {
-    if (self.imageView.image == nil) {
+- (void)refreshImageView
+{
+    if (self.imageView.image == nil)
+    {
         self.imageView.image = self.originImage;
     }
     
@@ -309,9 +315,11 @@
     [self viewDidLayoutSubviews];
 }
 
-- (void)resetImageViewFrame {
+- (void)resetImageViewFrame
+{
     CGSize size = (_imageView.image) ? _imageView.image.size : _imageView.frame.size;
-    if(size.width > 0 && size.height > 0 ) {
+    if(size.width > 0 && size.height > 0 )
+    {
         CGFloat ratio = MIN(_scrollView.frame.size.width / size.width, _scrollView.frame.size.height / size.height);
         CGFloat W = ratio * size.width * _scrollView.zoomScale;
         CGFloat H = ratio * size.height * _scrollView.zoomScale;
@@ -338,26 +346,27 @@
     [self scrollViewDidZoom:_scrollView];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (BOOL)prefersStatusBarHidden
 {
     return YES;
 }
 
 #pragma mark- ScrollView delegate
-- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
+{
     return _imageView.superview;
 }
 
-- (void)scrollViewDidZoom:(UIScrollView *)scrollView{ }
+- (void)scrollViewDidZoom:(UIScrollView *)scrollView
+{
+    
+}
 
 #pragma mark - Property
-- (void)setCurrentTool:(WBGImageToolBase *)currentTool {
-    if(_currentTool != currentTool) {
+- (void)setCurrentTool:(WBGImageToolBase *)currentTool
+{
+    if(_currentTool != currentTool)
+    {
         [_currentTool cleanup];
         _currentTool = currentTool;
         [_currentTool setup];
@@ -368,27 +377,33 @@
 }
 
 #pragma mark- ImageTool setting
-+ (NSString*)defaultIconImagePath {
++ (NSString*)defaultIconImagePath
+{
     return nil;
 }
 
-+ (CGFloat)defaultDockedNumber {
++ (CGFloat)defaultDockedNumber
+{
     return 0;
 }
 
-+ (NSString *)defaultTitle {
++ (NSString *)defaultTitle
+{
     return @"";
 }
 
-+ (BOOL)isAvailable {
++ (BOOL)isAvailable
+{
     return YES;
 }
 
-+ (NSArray *)subtools {
++ (NSArray *)subtools
+{
     return [NSArray new];
 }
 
-+ (NSDictionary*)optionalInfo {
++ (NSDictionary*)optionalInfo
+{
     return nil;
 }
 
@@ -405,7 +420,8 @@
 
 #pragma mark - Actions
 ///发送
-- (IBAction)sendAction:(UIButton *)sender {
+- (IBAction)sendAction:(UIButton *)sender
+{
 
     [self buildClipImageShowHud:YES clipedCallback:^(UIImage *clipedImage) {
         if ([self.delegate respondsToSelector:@selector(imageEditor:didFinishEdittingWithImage:)]) {
@@ -416,8 +432,10 @@
 }
 
 ///涂鸦模式
-- (IBAction)panAction:(UIButton *)sender {
-    if (_currentMode == EditorDrawMode) {
+- (IBAction)panAction:(UIButton *)sender
+{
+    if (_currentMode == EditorDrawMode)
+    {
         return;
     }
     //先设置状态，然后在干别的
@@ -427,13 +445,19 @@
 }
 
 ///裁剪模式
-- (IBAction)clipAction:(UIButton *)sender {
+- (IBAction)clipAction:(UIButton *)sender
+{
     
-    [self buildClipImageShowHud:NO clipedCallback:^(UIImage *clipedImage) {
+    [self buildClipImageShowHud:NO
+                 clipedCallback:^(UIImage *clipedImage)
+     {
         TOCropViewController *cropController = [[TOCropViewController alloc] initWithCroppingStyle:TOCropViewCroppingStyleDefault image:clipedImage];
         cropController.delegate = self;
         __weak typeof(self)weakSelf = self;
-        CGRect viewFrame = [self.view convertRect:self.imageView.frame toView:self.navigationController.view];
+         
+        CGRect viewFrame = [self.view convertRect:self.imageView.frame
+                                           toView:self.navigationController.view];
+         
         [cropController presentAnimatedFromParentViewController:self
                                                       fromImage:clipedImage
                                                        fromView:nil
@@ -453,8 +477,10 @@
 }
 
 //文字模式
-- (IBAction)textAction:(UIButton *)sender {
-    if (_currentMode == EditorTextMode) {
+- (IBAction)textAction:(UIButton *)sender
+{
+    if (_currentMode == EditorTextMode)
+    {
         return;
     }
     //先设置状态，然后在干别的
@@ -472,7 +498,9 @@
     self.currentMode = EditorPaperMode;
     
     __weak typeof(self)weakSelf = self;
-    [self buildClipImageShowHud:NO clipedCallback:^(UIImage *clipedImage) {
+    [self buildClipImageShowHud:NO
+                 clipedCallback:^(UIImage *clipedImage)
+    {
         typeof (self) strongSelf = weakSelf;
         CGRect viewFrame = [strongSelf.view convertRect:strongSelf.imageView.frame toView:strongSelf.navigationController.view];
         
@@ -533,13 +561,15 @@
 {
     //WBGTextTool 钩子调用
     
-    if (_currentMode == EditorTextMode) {
+    if (_currentMode == EditorTextMode)
+    {
         return;
     }
     //先设置状态，然后在干别的
     self.currentMode = EditorTextMode;
     
-    if(_currentTool != self.textTool) {
+    if(_currentTool != self.textTool)
+    {
         [_currentTool cleanup];
         _currentTool = self.textTool;
         [_currentTool setup];
@@ -554,23 +584,28 @@
     
 }
 
-- (void)resetCurrentTool {
+- (void)resetCurrentTool
+{
     self.currentMode = EditorNonMode;
     self.currentTool = nil;
 }
 
-- (WBGMoreKeyboard *)keyboard {
-    if (!_keyboard) {
+- (WBGMoreKeyboard *)keyboard
+{
+    if (!_keyboard)
+    {
         WBGMoreKeyboard *keyboard = [WBGMoreKeyboard keyboard];
         [keyboard setKeyboardDelegate:self];
         [keyboard setDelegate:self];
         _keyboard = keyboard;
     }
+    
     return _keyboard;
 }
 
 #pragma mark - WBGMoreKeyboardDelegate
-- (void) moreKeyboard:(id)keyboard didSelectedFunctionItem:(WBGMoreKeyboardItem *)funcItem {
+- (void) moreKeyboard:(id)keyboard didSelectedFunctionItem:(WBGMoreKeyboardItem *)funcItem
+{
     WBGMoreKeyboard *kb = (WBGMoreKeyboard *)keyboard;
     [kb dismissWithAnimation:YES];
     
@@ -621,7 +656,8 @@
                                                              weakSelf.colorPanel.hidden = NO;
                                                          }];
     }
-    else {
+    else
+    {
         
         [cropViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     }
@@ -653,8 +689,10 @@
 }
 
 #pragma mark -
-- (void)swapToolBarWithEditting {
-    switch (_currentMode) {
+- (void)swapToolBarWithEditting
+{
+    switch (_currentMode)
+    {
         case EditorDrawMode:
         {
             self.panButton.selected = YES;

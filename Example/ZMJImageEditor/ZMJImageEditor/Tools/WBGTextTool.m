@@ -19,7 +19,8 @@ static const NSInteger kTextMaxLimitNumber = 100;
     __weak UIImageView *_drawingView;
 }
 
-- (void)setup {
+- (void)setup
+{
     _drawingView = self.editor.drawingView;
     self.editor.scrollView.pinchGestureRecognizer.enabled = NO;
     __weak typeof(self)weakSelf = self;
@@ -52,27 +53,31 @@ static const NSInteger kTextMaxLimitNumber = 100;
     //TODO: todo?
 }
 
-- (void)cleanup {
-
+- (void)cleanup
+{
     [self.textView removeFromSuperview];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"kColorPanNotificaiton" object:nil];
     //TODO: todo?
 }
 
-- (void)executeWithCompletionBlock:(void (^)(UIImage *, NSError *, NSDictionary *))completionBlock {
+- (void)executeWithCompletionBlock:(void (^)(UIImage *, NSError *, NSDictionary *))completionBlock
+{
     
 }
 
-- (void)changeColor:(NSNotification *)notification {
+- (void)changeColor:(NSNotification *)notification
+{
     UIColor *panColor = (UIColor *)notification.object;
-    if (panColor && self.textView) {
+    if (panColor && self.textView)
+    {
         [self.textView.textView setTextColor:panColor];
     }
 }
 
 - (void)addNewText:(NSString *)text
 {
-    if (text == nil || text.length <= 0) {
+    if (text == nil || text.length <= 0)
+    {
         return;
     }
     
@@ -93,7 +98,7 @@ static const NSInteger kTextMaxLimitNumber = 100;
 
 #pragma mark - WBGTextView
 @interface _WBGTextView () <UITextViewDelegate>
-@property (nonatomic, strong) _WBGToolBar *keyboardToolBar;
+//@property (nonatomic, strong) _WBGToolBar *keyboardToolBar;
 @property (nonatomic, strong) NSString *needReplaceString;
 @property (nonatomic, assign) NSRange   needReplaceRange;
 @end
@@ -104,12 +109,13 @@ static const NSInteger kTextMaxLimitNumber = 100;
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if (self) {
+    if (self)
+    {
         self.backgroundColor = [UIColor clearColor];
         
-        __weak typeof(self)weakSelf = self;
+        //__weak typeof(self)weakSelf = self;
 
-        UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+        UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleRegular];
         self.effectView = [[UIVisualEffectView alloc] initWithEffect:blur];
         self.effectView.frame = CGRectMake(0, -kTopOffset, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
         [self addSubview:self.effectView];
@@ -121,28 +127,36 @@ static const NSInteger kTextMaxLimitNumber = 100;
         self.textView.delegate = self;
         self.textView.backgroundColor = [UIColor clearColor];
         
-        self.keyboardToolBar = [_WBGToolBar createToolBarWithCancel:^{
-            [weakSelf dismissTextEditing:NO];
-        } done:^{
-            [weakSelf dismissTextEditing:YES];
-        }];
-        self.textView.inputAccessoryView = self.keyboardToolBar;
+        //self.keyboardToolBar = [_WBGToolBar createToolBarWithCancel:^{
+        //    [weakSelf dismissTextEditing:NO];
+        //} done:^{
+        //    [weakSelf dismissTextEditing:YES];
+        //}];
+        
+        // self.textView.inputAccessoryView = self.keyboardToolBar;
         [self addSubview:self.textView];
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(keyboardWillShow:)
-                                                     name:UIKeyboardWillShowNotification
-                                                   object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(keyboardWillHide:)
-                                                     name:UIKeyboardWillHideNotification
-                                                   object:nil];
+        
+        [self addNotify];
     }
+    
     return self;
 }
 
+- (void)addNotify
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+}
 
-
-- (void)keyboardWillShow:(NSNotification *)notification {
+- (void)keyboardWillShow:(NSNotification *)notification
+{
     NSDictionary *userinfo = notification.userInfo;
     CGRect  keyboardRect              = [[userinfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
     CGFloat keyboardAnimationDuration = [[userinfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
@@ -162,7 +176,8 @@ static const NSInteger kTextMaxLimitNumber = 100;
     
 }
 
-- (void)keyboardWillHide:(NSNotification *)notification {
+- (void)keyboardWillHide:(NSNotification *)notification
+{
     NSDictionary *userinfo = notification.userInfo;
     CGFloat keyboardAnimationDuration = [[userinfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     UIViewAnimationOptions keyboardAnimationCurve = [[userinfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
@@ -175,7 +190,8 @@ static const NSInteger kTextMaxLimitNumber = 100;
     }];
 }
 
-- (void)dismissTextEditing:(BOOL)done {
+- (void)dismissTextEditing:(BOOL)done
+{
     
     [self.textView resignFirstResponder];
     if (self.dissmissTextTool) {
@@ -183,7 +199,8 @@ static const NSInteger kTextMaxLimitNumber = 100;
     }
 }
 
-- (void)willMoveToSuperview:(UIView *)newSuperview {
+- (void)willMoveToSuperview:(UIView *)newSuperview
+{
     if (newSuperview) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self.textView becomeFirstResponder];
@@ -227,7 +244,8 @@ static const NSInteger kTextMaxLimitNumber = 100;
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
     NSLog(@"%@", text);
-    if ([text isEqualToString:@"\n"]) {
+    if ([text isEqualToString:@"\n"])
+    {
         [self dismissTextEditing:YES];
         return NO;
     }
@@ -307,46 +325,52 @@ static const NSInteger kTextMaxLimitNumber = 100;
 
 @end
 
-#pragma mark - WBGToolBar
-@interface _WBGToolBar ()
-@property (nonatomic, copy) dispatch_block_t cancelBlock;
-@property (nonatomic, copy) dispatch_block_t doneBlock;
-@end
-
-@implementation _WBGToolBar
-
-+ (instancetype)createToolBarWithCancel:(dispatch_block_t)cancelBlock done:(dispatch_block_t)doneBlock {
-    _WBGToolBar *tool = [[_WBGToolBar alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 44)];
-    tool.cancelBlock = cancelBlock;
-    tool.doneBlock   = doneBlock;
-    return tool;
-}
-
-- (instancetype)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        self.items = [NSArray arrayWithObjects:
-                      [[UIBarButtonItem alloc]initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancelPad)],
-                      [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
-                      [[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(donePad)],
-                      nil];
-    }
-    return self;
-}
-
-- (void)cancelPad {
-    NSLog(@"%@", NSStringFromSelector(_cmd));
-    if (self.cancelBlock) {
-        self.cancelBlock();
-    }
-}
-
-- (void)donePad {
-    NSLog(@"%@", NSStringFromSelector(_cmd));
-    if (self.doneBlock) {
-        self.doneBlock();
-    }
-}
-
-@end
+//#pragma mark - WBGToolBar
+//@interface _WBGToolBar ()
+//@property (nonatomic, copy) dispatch_block_t cancelBlock;
+//@property (nonatomic, copy) dispatch_block_t doneBlock;
+//@end
+//
+//@implementation _WBGToolBar
+//
+//+ (instancetype)createToolBarWithCancel:(dispatch_block_t)cancelBlock done:(dispatch_block_t)doneBlock
+//{
+//    _WBGToolBar *tool = [[_WBGToolBar alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 44)];
+//    tool.cancelBlock = cancelBlock;
+//    tool.doneBlock   = doneBlock;
+//    
+//    return tool;
+//}
+//
+//- (instancetype)initWithFrame:(CGRect)frame
+//{
+//    self = [super initWithFrame:frame];
+//    if (self)
+//    {
+//        self.items = [NSArray arrayWithObjects:
+//                      [[UIBarButtonItem alloc]initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancelPad)],
+//                      [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
+//                      [[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(donePad)],
+//                      nil];
+//    }
+//    
+//    return self;
+//}
+//
+//- (void)cancelPad
+//{
+//    NSLog(@"%@", NSStringFromSelector(_cmd));
+//    if (self.cancelBlock) {
+//        self.cancelBlock();
+//    }
+//}
+//
+//- (void)donePad
+//{
+//    NSLog(@"%@", NSStringFromSelector(_cmd));
+//    if (self.doneBlock) {
+//        self.doneBlock();
+//    }
+//}
+//
+//@end

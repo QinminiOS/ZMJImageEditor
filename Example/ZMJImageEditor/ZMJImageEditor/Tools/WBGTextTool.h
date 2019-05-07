@@ -23,6 +23,6 @@
 @property (nonatomic, strong) UITextView *textView;
 @end
 
-@interface _WBGToolBar : UIToolbar
-+ (instancetype)createToolBarWithCancel:(dispatch_block_t)cancelBlock done:(dispatch_block_t)doneBlock;
-@end
+//@interface _WBGToolBar : UIToolbar
+//+ (instancetype)createToolBarWithCancel:(dispatch_block_t)cancelBlock done:(dispatch_block_t)doneBlock;
+//@end
