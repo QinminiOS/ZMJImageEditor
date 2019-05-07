@@ -19,7 +19,7 @@ typedef NS_ENUM(NSUInteger, EditorMode) {
 
 @interface WBGImageEditorViewController : WBGImageEditor
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
-@property (weak, nonatomic) IBOutlet UIButton *undoButton;
+@property (weak, nonatomic) IBOutlet UIButton *finishButton;
 
 @property (weak,   nonatomic, readonly) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic, readonly) IBOutlet UIImageView *drawingView;

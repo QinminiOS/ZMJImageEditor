@@ -27,11 +27,11 @@ static const NSInteger kTextMaxLimitNumber = 100;
     self.textView.textView.textColor = self.editor.colorPanel.currentColor;
     self.textView.textView.font = [UIFont systemFontOfSize:24.f weight:UIFontWeightRegular];
     self.editor.backButton.enabled = NO;
-    self.editor.undoButton.enabled = NO;
+    // self.editor.undoButton.enabled = NO;
     self.textView.dissmissTextTool = ^(NSString *currentText, BOOL isUse) {
         weakSelf.editor.scrollView.pinchGestureRecognizer.enabled = YES;
         weakSelf.editor.backButton.enabled = YES;
-        weakSelf.editor.undoButton.enabled = YES;
+        // weakSelf.editor.undoButton.enabled = YES;
         
         if (weakSelf.isEditAgain) {
             if (weakSelf.editAgainCallback && isUse) {

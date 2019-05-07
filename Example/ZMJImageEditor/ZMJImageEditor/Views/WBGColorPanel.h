@@ -9,9 +9,12 @@
 #import <UIKit/UIKit.h>
 
 extern NSString * const kColorPanelNotificaiton;
+
 @protocol WBGImageEditorDataSource;
+typedef void (^WBGUndoButtonTappedBlock)();
 
 @interface WBGColorPanel : UIView
 @property (nonatomic, strong, readonly) UIColor *currentColor;
 @property (nonatomic, weak) id<WBGImageEditorDataSource> dataSource;
+@property (nonatomic, copy) WBGUndoButtonTappedBlock undoButtonTappedBlock;
 @end

@@ -14,17 +14,23 @@
 @property (nonatomic, strong) UIPanGestureRecognizer *panGesture;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGesture;
 @end
-@implementation WBGDrawTool {
-    __weak UIImageView        *_drawingView;
-    CGSize                     _originalImageSize;
+
+@implementation WBGDrawTool
+{
+    __weak UIImageView *_drawingView;
+    CGSize _originalImageSize;
 }
 
-- (instancetype)initWithImageEditor:(WBGImageEditorViewController *)editor {
+- (instancetype)initWithImageEditor:(WBGImageEditorViewController *)editor
+{
     self = [super init];
-    if(self) {
+    
+    if(self)
+    {
         self.editor   = editor;
         _allLineMutableArray = [NSMutableArray new];
     }
+    
     return self;
 }
 
@@ -32,15 +38,19 @@
 {
     [_allLineMutableArray removeLastObject];
     [self drawLine];
-    if (self.drawToolStatus) {
+    
+    if (self.drawToolStatus)
+    {
         self.drawToolStatus(_allLineMutableArray.count > 0 ? : NO);
     }
 }
 
 #pragma mark - Gesture
 //tap
-- (void)drawingViewDidTap:(UITapGestureRecognizer *)sender {
-    if (self.drawingDidTap) {
+- (void)drawingViewDidTap:(UITapGestureRecognizer *)sender
+{
+    if (self.drawingDidTap)
+    {
         self.drawingDidTap();
     }
 }
@@ -50,10 +60,13 @@
 {
     CGPoint currentDraggingPosition = [sender locationInView:_drawingView];
     
-    if(sender.state == UIGestureRecognizerStateBegan) {
+    if(sender.state == UIGestureRecognizerStateBegan)
+    {
         //取消所有加入文字激活状态
-        for (UIView *subView in self.editor.drawingView.subviews) {
-            if ([subView isKindOfClass:[WBGTextToolView class]]) {
+        for (UIView *subView in self.editor.drawingView.subviews)
+        {
+            if ([subView isKindOfClass:[WBGTextToolView class]])
+            {
                 [WBGTextToolView setInactiveTextView:(WBGTextToolView *)subView];
             }
         }
@@ -66,29 +79,35 @@
         
     }
     
-    if(sender.state == UIGestureRecognizerStateChanged) {
+    if(sender.state == UIGestureRecognizerStateChanged)
+    {
         // 获得数组中的最后一个UIBezierPath对象(因为我们每次都把UIBezierPath存入到数组最后一个,因此获取时也取最后一个)
         WBGPath *path = [_allLineMutableArray lastObject];
         [path pathLineToPoint:currentDraggingPosition];//添加点
         [self drawLine];
         
-        if (self.drawingCallback) {
+        if (self.drawingCallback)
+        {
             self.drawingCallback(YES);
         }
     }
     
-    if (sender.state == UIGestureRecognizerStateEnded) {
-        if (self.drawToolStatus) {
+    if (sender.state == UIGestureRecognizerStateEnded)
+    {
+        if (self.drawToolStatus)
+        {
             self.drawToolStatus(_allLineMutableArray.count > 0 ? : NO);
         }
         
-        if (self.drawingCallback) {
+        if (self.drawingCallback)
+        {
             self.drawingCallback(NO);
         }
     }
 }
 
-- (void)drawLine {
+- (void)drawLine
+{
     CGSize size = _drawingView.frame.size;
     UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -105,7 +124,8 @@
     UIGraphicsEndImageContext();
 }
 
-- (UIImage *)buildImage {
+- (UIImage *)buildImage
+{
     UIGraphicsBeginImageContextWithOptions(_originalImageSize, NO, self.editor.imageView.image.scale);
     [self.editor.imageView.image drawAtPoint:CGPointZero];
     [_drawingView.image drawInRect:CGRectMake(0, 0, _originalImageSize.width, _originalImageSize.height)];
@@ -116,23 +136,28 @@
 }
 
 #pragma mark - implementation 重写父方法
-- (void)setup {
+- (void)setup
+{
     //初始化一些东西
     _originalImageSize   = self.editor.imageView.image.size;
     _drawingView         = self.editor.drawingView;
     
     //滑动手势
-    if (!self.panGesture) {
+    if (!self.panGesture)
+    {
         self.panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(drawingViewDidPan:)];
         self.panGesture.delegate = [WBGImageEditorGestureManager instance];
         self.panGesture.maximumNumberOfTouches = 1;
     }
-    if (!self.panGesture.isEnabled) {
+    
+    if (!self.panGesture.isEnabled)
+    {
         self.panGesture.enabled = YES;
     }
     
     //点击手势
-    if (!self.tapGesture) {
+    if (!self.tapGesture)
+    {
         self.tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(drawingViewDidTap:)];
         self.tapGesture.delegate = [WBGImageEditorGestureManager instance];
         self.tapGesture.numberOfTouchesRequired = 1;
@@ -155,7 +180,8 @@
 
 }
 
-- (void)cleanup {
+- (void)cleanup
+{
     self.editor.imageView.userInteractionEnabled = NO;
     self.editor.scrollView.panGestureRecognizer.minimumNumberOfTouches = 1;
     self.panGesture.enabled = NO;
@@ -188,7 +214,8 @@
 @implementation WBGPath
 
 
-+ (instancetype)pathToPoint:(CGPoint)beginPoint pathWidth:(CGFloat)pathWidth {
++ (instancetype)pathToPoint:(CGPoint)beginPoint pathWidth:(CGFloat)pathWidth
+{
     UIBezierPath *bezierPath = [UIBezierPath bezierPath];
     bezierPath.lineWidth     = pathWidth;
     bezierPath.lineCapStyle  = kCGLineCapRound;
@@ -220,7 +247,8 @@
     self.shape.path = self.bezierPath.CGPath;
 }
 
-- (void)drawPath {
+- (void)drawPath
+{
     [self.pathColor set];
     [self.bezierPath stroke];
 }

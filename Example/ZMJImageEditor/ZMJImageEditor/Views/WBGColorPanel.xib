@@ -116,7 +116,10 @@
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jYJ-ld-Zvb">
                     <rect key="frame" x="328" y="0.0" width="47" height="50"/>
-                    <state key="normal" image="clip_rotate"/>
+                    <state key="normal" image="icon_shanchushangyibu"/>
+                    <connections>
+                        <action selector="onUndoButtonTapped:" destination="Cw0-tf-npd" eventType="touchUpInside" id="8Lp-xK-8r4"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -177,6 +180,6 @@
         </view>
     </objects>
     <resources>
-        <image name="clip_rotate" width="32" height="32"/>
+        <image name="icon_shanchushangyibu" width="22" height="22"/>
     </resources>
 </document>

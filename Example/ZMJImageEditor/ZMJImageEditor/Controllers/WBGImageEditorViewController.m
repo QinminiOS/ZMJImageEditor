@@ -110,8 +110,14 @@
 {
     [super viewDidLoad];
     
+    @weakify(self);
     self.colorPanel = [WBGColorPanel xx_instantiateFromNib];
-    self.undoButton.hidden = YES;
+    [self.colorPanel setUndoButtonTappedBlock:^{
+        @strongify(self);
+        [self undoAction];
+    }];
+    
+    // self.undoButton.hidden = YES;
     
     //self.colorPan.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 60, 100, self.colorPan.bounds.size.width, self.colorPan.bounds.size.height);
     self.colorPanel.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height-99, [UIScreen mainScreen].bounds.size.width, 50);
@@ -120,7 +126,6 @@
     
     [self initImageScrollView];
     
-    @weakify(self);
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         @strongify(self)
         if ([self.dataSource respondsToSelector:@selector(imageEditorCompoment)] && [self.dataSource imageEditorCompoment] & WBGImageEditorDrawComponent) {
@@ -211,9 +216,12 @@
     return _bottomBannerView;
 }
 
-- (UIView *)leftBannerView {
-    if (!_leftBannerView) {
-        _leftBannerView = ({
+- (UIView *)leftBannerView
+{
+    if (!_leftBannerView)
+    {
+        _leftBannerView =
+        ({
             UIView *view = [[UIView alloc] init];
             view.backgroundColor = self.scrollView.backgroundColor;
             [self.imageView.superview addSubview:view];
@@ -224,9 +232,12 @@
     return _leftBannerView;
 }
 
-- (UIView *)rightBannerView {
-    if (!_rightBannerView) {
-        _rightBannerView = ({
+- (UIView *)rightBannerView
+{
+    if (!_rightBannerView)
+    {
+        _rightBannerView =
+        ({
             UIView *view = [[UIView alloc] init];
             view.backgroundColor = self.scrollView.backgroundColor;
             [self.imageView.superview addSubview:view];
@@ -238,17 +249,19 @@
 }
 
 #pragma mark - 初始化 &getter
-- (WBGDrawTool *)drawTool {
-    if (_drawTool == nil) {
+- (WBGDrawTool *)drawTool
+{
+    if (_drawTool == nil)
+    {
         _drawTool = [[WBGDrawTool alloc] initWithImageEditor:self];
         
         __weak typeof(self)weakSelf = self;
         _drawTool.drawToolStatus = ^(BOOL canPrev) {
-            if (canPrev) {
-                weakSelf.undoButton.hidden = NO;
-            } else {
-                weakSelf.undoButton.hidden = YES;
-            }
+            //if (canPrev) {
+            //    weakSelf.undoButton.hidden = NO;
+            //} else {
+            //    weakSelf.undoButton.hidden = YES;
+            //}
         };
         _drawTool.drawingCallback = ^(BOOL isDrawing) {
             [weakSelf hiddenTopAndBottomBar:isDrawing animation:YES];
@@ -379,6 +392,16 @@
     return nil;
 }
 
+#pragma mark - Undo
+- (void)undoAction
+{
+    if (self.currentMode == EditorDrawMode)
+    {
+        WBGDrawTool *tool = (WBGDrawTool *)self.currentTool;
+        [tool backToLastDraw];
+    }
+}
+
 
 #pragma mark - Actions
 ///发送
@@ -471,7 +494,7 @@
             [strongSelf.drawTool.allLineMutableArray removeAllObjects];
             [strongSelf.drawTool drawLine];
             [strongSelf.drawingView removeAllSubviews];
-            strongSelf.undoButton.hidden = YES;
+            // strongSelf.undoButton.hidden = YES;
         };
         
         [weakSelf presentViewController:vc animated:YES completion:^{
@@ -492,19 +515,22 @@
 //    [self.keyboard showInView:self.view withAnimation:YES];
 }
 
-- (IBAction)backAction:(UIButton *)sender {
+- (IBAction)backAction:(UIButton *)sender
+{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (IBAction)undoAction:(UIButton *)sender {
-    if (self.currentMode == EditorDrawMode) {
+- (IBAction)undoAction:(UIButton *)sender
+{
+    if (self.currentMode == EditorDrawMode)
+    {
         WBGDrawTool *tool = (WBGDrawTool *)self.currentTool;
         [tool backToLastDraw];
     }
 }
 
-
-- (void)editTextAgain {
+- (void)editTextAgain
+{
     //WBGTextTool 钩子调用
     
     if (_currentMode == EditorTextMode) {
@@ -521,6 +547,11 @@
     }
     
     [self hiddenColorPan:YES animation:YES];
+}
+
+- (IBAction)onFinishButtonTapped:(UIButton *)sender
+{
+    
 }
 
 - (void)resetCurrentTool {
@@ -599,7 +630,6 @@
     [self.drawTool.allLineMutableArray removeAllObjects];
     [self.drawTool drawLine];
     [_drawingView removeAllSubviews];
-    self.undoButton.hidden = YES;
 }
 
 - (void)cropViewController:(TOCropViewController *)cropViewController didFinishCancelled:(BOOL)cancelled {
@@ -629,7 +659,7 @@
         {
             self.panButton.selected = YES;
             if (self.drawTool.allLineMutableArray.count > 0) {
-                self.undoButton.hidden  = NO;
+                //self.undoButton.hidden  = NO;
             }
         }
             break;
@@ -638,7 +668,7 @@
         case EditorNonMode:
         {
             self.panButton.selected = NO;
-            self.undoButton.hidden  = YES;
+            //self.undoButton.hidden  = YES;
         }
             break;
         default:
@@ -646,19 +676,28 @@
     }
 }
 
-- (void)hiddenTopAndBottomBar:(BOOL)isHide animation:(BOOL)animation {
-    if (self.keyboard.isShow) {
+- (void)hiddenTopAndBottomBar:(BOOL)isHide animation:(BOOL)animation
+{
+    if (self.keyboard.isShow)
+    {
         [self.keyboard dismissWithAnimation:YES];
         return;
     }
     
-    [UIView animateWithDuration:animation ? .25f : 0.f delay:0 usingSpringWithDamping:1 initialSpringVelocity:1 options:isHide ? UIViewAnimationOptionCurveEaseOut : UIViewAnimationOptionCurveEaseIn animations:^{
+    [UIView animateWithDuration:animation ? .25f : 0.f
+                          delay:0
+         usingSpringWithDamping:1
+          initialSpringVelocity:1
+                        options:isHide ? UIViewAnimationOptionCurveEaseOut : UIViewAnimationOptionCurveEaseIn
+                     animations:^{
         if (isHide) {
             bottomBarBottom.constant = -49.f;
             topBarTop.constant = -64.f;
+            self.colorPanel.hidden = YES;
         } else {
             bottomBarBottom.constant = 0;
             topBarTop.constant = 0;
+            self.colorPanel.hidden = NO;
         }
         _barsHiddenStatus = isHide;
         [self.view layoutIfNeeded];

@@ -45,7 +45,8 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
     return self;
 }
 
-- (UIColor *)currentColor {
+- (UIColor *)currentColor
+{
     if (_currentColor == nil) {
         _currentColor = ([self.dataSource respondsToSelector:@selector(imageEditorDefaultColor)] && [self.dataSource imageEditorDefaultColor]) ? [self.dataSource imageEditorDefaultColor] : UIColor.redColor;
     }
@@ -57,12 +58,14 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)panSelectColor:(UIPanGestureRecognizer *)recognizer {
+- (void)panSelectColor:(UIPanGestureRecognizer *)recognizer
+{
     
     NSLog(@"recon = %@", NSStringFromCGPoint([recognizer translationInView:self]));
 }
 
-- (IBAction)buttonAction:(UIButton *)sender {
+- (IBAction)buttonAction:(UIButton *)sender
+{
     WBGColorfullButton *theBtns = (WBGColorfullButton *)sender;
     
     for (WBGColorfullButton *button in _colorButtons) {
@@ -76,7 +79,8 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
     }
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
     UITouch *touch = [touches anyObject];
     NSLog(@"point: %@", NSStringFromCGPoint([touch locationInView:self]));
     NSLog(@"view=%@", touch.view);
@@ -89,7 +93,8 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
     }
 }
 
-- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
     UITouch *touch = [touches anyObject];
     //NSLog(@"move->point: %@", NSStringFromCGPoint([touch locationInView:self]));
     CGPoint touchPoint = [touch locationInView:self];
@@ -102,4 +107,11 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
     }
 }
 
+- (IBAction)onUndoButtonTapped:(UIButton *)sender
+{
+    if (self.undoButtonTappedBlock)
+    {
+        self.undoButtonTappedBlock();
+    }
+}
 @end
