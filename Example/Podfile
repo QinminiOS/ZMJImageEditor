@@ -6,7 +6,8 @@ platform :ios, '8.0'
 target 'ZMJImageEditor_Example' do
   #pod 'ZMJImageEditor', :path => '../'
   pod 'YYCategories'
-  pod 'Masonry' 
+  pod 'Masonry'
+  pod 'XXNibBridge'
 
   target 'ZMJImageEditor_Tests' do
     inherit! :search_paths

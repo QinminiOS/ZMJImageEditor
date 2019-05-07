@@ -130,7 +130,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
     
     if (animated) {
         self.inTransition = YES;

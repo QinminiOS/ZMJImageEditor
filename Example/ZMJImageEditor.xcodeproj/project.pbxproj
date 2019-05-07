@@ -352,15 +352,15 @@
 		71858E442281756F00EE6CF2 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				71858E4D2281756F00EE6CF2 /* TOCropViewController.h */,
-				71858E482281756F00EE6CF2 /* TOCropViewController.m */,
-				71858E4A2281756F00EE6CF2 /* TOCropViewControllerTransitioning.h */,
-				71858E452281756F00EE6CF2 /* TOCropViewControllerTransitioning.m */,
 				71858E462281756F00EE6CF2 /* WBGImageEditorViewController.h */,
 				71858E492281756F00EE6CF2 /* WBGImageEditorViewController.m */,
 				71858E4C2281756F00EE6CF2 /* WBGImageEditorViewController.xib */,
+				71858E4D2281756F00EE6CF2 /* TOCropViewController.h */,
+				71858E482281756F00EE6CF2 /* TOCropViewController.m */,
 				71858E4B2281756F00EE6CF2 /* WBGMosicaViewController.h */,
 				71858E472281756F00EE6CF2 /* WBGMosicaViewController.m */,
+				71858E4A2281756F00EE6CF2 /* TOCropViewControllerTransitioning.h */,
+				71858E452281756F00EE6CF2 /* TOCropViewControllerTransitioning.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -553,11 +553,13 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ZMJImageEditor_Example/Pods-ZMJImageEditor_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
+				"${BUILT_PRODUCTS_DIR}/XXNibBridge/XXNibBridge.framework",
 				"${BUILT_PRODUCTS_DIR}/YYCategories/YYCategories.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XXNibBridge.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYCategories.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -18,14 +18,14 @@
 #import "WBGImageEditor.h"
 #import "WBGMoreKeyboard.h"
 #import "WBGMosicaViewController.h"
-@import YYCategories;
+#import "XXNibBridge.h"
+#import "YYCategories.h"
 
 
 #pragma mark - WBGImageEditorViewController
 
 @interface WBGImageEditorViewController () <UINavigationBarDelegate, UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBGKeyboardDelegate>
 {
-    
     __weak IBOutlet NSLayoutConstraint *topBarTop;
     __weak IBOutlet NSLayoutConstraint *bottomBarBottom;
 }
@@ -109,11 +109,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
     
+    self.colorPanel = [WBGColorPanel xx_instantiateFromNib];
     self.undoButton.hidden = YES;
     
-//    self.colorPan.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 60, 100, self.colorPan.bounds.size.width, self.colorPan.bounds.size.height);
+    //self.colorPan.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 60, 100, self.colorPan.bounds.size.width, self.colorPan.bounds.size.height);
     self.colorPanel.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height-99, [UIScreen mainScreen].bounds.size.width, 50);
     self.colorPanel.dataSource = self.dataSource;
     [self.view addSubview:_colorPanel];
