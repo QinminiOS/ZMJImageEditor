@@ -19,7 +19,6 @@
                 <outlet property="panButton" destination="vif-ym-mAZ" id="dhq-qL-UOU"/>
                 <outlet property="paperButton" destination="dR4-MJ-4Kq" id="ljA-cj-EGo"/>
                 <outlet property="scrollView" destination="eg2-dz-mJn" id="syX-xc-Eiv"/>
-                <outlet property="sendButton" destination="Li1-F3-HD7" id="ILa-6f-mdo"/>
                 <outlet property="textButton" destination="cnm-kZ-dpx" id="Gv1-I7-f2Y"/>
                 <outlet property="topBar" destination="vKW-ZA-nXo" id="4f1-Hp-06S"/>
                 <outlet property="topBarTop" destination="V7Y-h0-Shc" id="Y3q-lg-gKw"/>
@@ -64,54 +63,45 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="toj-tM-hDH">
                             <rect key="frame" x="0.0" y="618" width="375" height="49"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Li1-F3-HD7">
-                                    <rect key="frame" x="309" y="0.0" width="66" height="49"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <state key="normal" title="发送">
-                                        <color key="titleColor" red="0.15686274509803921" green="0.60784313725490191" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="sendAction:" destination="-1" eventType="touchUpInside" id="9Z9-uw-HJK"/>
-                                    </connections>
-                                </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vif-ym-mAZ">
                                     <rect key="frame" x="30" y="8" width="32" height="32"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <state key="normal" image="annotate"/>
-                                    <state key="selected" image="annotate_selected"/>
+                                    <state key="normal" image="icon_tuya"/>
+                                    <state key="selected" image="icon_tuya_xuanzhong"/>
                                     <connections>
                                         <action selector="panAction:" destination="-1" eventType="touchUpInside" id="CwB-Bi-vo0"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PFB-Ig-Llj">
-                                    <rect key="frame" x="154" y="8" width="32" height="32"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <state key="normal" image="clip"/>
-                                    <connections>
-                                        <action selector="clipAction:" destination="-1" eventType="touchUpInside" id="1Eo-0X-hEe"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cnm-kZ-dpx">
                                     <rect key="frame" x="92" y="8" width="32" height="32"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <state key="normal" image="text"/>
-                                    <state key="selected" image="text_selected"/>
+                                    <state key="normal" image="icon_tianjiawenzi_wukuang"/>
+                                    <state key="selected" image="icon_tianjiawenzi_youkuang"/>
                                     <connections>
                                         <action selector="textAction:" destination="-1" eventType="touchUpInside" id="oFt-qU-bGu"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dR4-MJ-4Kq">
-                                    <rect key="frame" x="216" y="8" width="32" height="32"/>
+                                    <rect key="frame" x="148" y="8" width="32" height="32"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                                    <state key="normal" image="paper"/>
+                                    <state key="normal" image="icon_masaike"/>
+                                    <state key="selected" image="icon_masaike_xuanzhong"/>
                                     <connections>
                                         <action selector="paperAction:" destination="-1" eventType="touchUpInside" id="uSp-LB-Pto"/>
                                     </connections>
                                 </button>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PFB-Ig-Llj">
+                                    <rect key="frame" x="216" y="8" width="32" height="32"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" image="icon_caiqie"/>
+                                    <state key="selected" image="icon_caiqie"/>
+                                    <connections>
+                                        <action selector="clipAction:" destination="-1" eventType="touchUpInside" id="1Eo-0X-hEe"/>
+                                    </connections>
+                                </button>
                             </subviews>
-                            <color key="backgroundColor" red="0.086274509799999996" green="0.098039215690000001" blue="0.1019607843" alpha="0.88" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="49" id="tEl-cY-7Xw"/>
                             </constraints>
@@ -182,11 +172,12 @@
         </view>
     </objects>
     <resources>
-        <image name="annotate" width="32" height="32"/>
-        <image name="annotate_selected" width="32" height="32"/>
-        <image name="clip" width="32" height="32"/>
-        <image name="paper" width="100" height="100"/>
-        <image name="text" width="32" height="32"/>
-        <image name="text_selected" width="32" height="32"/>
+        <image name="icon_caiqie" width="22" height="22"/>
+        <image name="icon_masaike" width="22" height="22"/>
+        <image name="icon_masaike_xuanzhong" width="22" height="22"/>
+        <image name="icon_tianjiawenzi_wukuang" width="22" height="22"/>
+        <image name="icon_tianjiawenzi_youkuang" width="22" height="22"/>
+        <image name="icon_tuya" width="22" height="22"/>
+        <image name="icon_tuya_xuanzhong" width="22" height="22"/>
     </resources>
 </document>

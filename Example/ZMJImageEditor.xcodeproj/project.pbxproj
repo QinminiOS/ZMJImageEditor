@@ -43,7 +43,6 @@
 		71858E852281756F00EE6CF2 /* WBGMoreKeyboardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E582281756F00EE6CF2 /* WBGMoreKeyboardCell.m */; };
 		71858E862281756F00EE6CF2 /* TOCropToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E592281756F00EE6CF2 /* TOCropToolbar.m */; };
 		71858E872281756F00EE6CF2 /* UIImage+library.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E5A2281756F00EE6CF2 /* UIImage+library.m */; };
-		71858E882281756F00EE6CF2 /* EditImage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71858E5E2281756F00EE6CF2 /* EditImage.xcassets */; };
 		71858E8A2281756F00EE6CF2 /* UIImage+CropRotate.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E622281756F00EE6CF2 /* UIImage+CropRotate.m */; };
 		71858E8B2281756F00EE6CF2 /* WBGMoreKeyboard+CollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E652281756F00EE6CF2 /* WBGMoreKeyboard+CollectionView.m */; };
 		71858E8C2281756F00EE6CF2 /* UIColor+TLChat.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E662281756F00EE6CF2 /* UIColor+TLChat.m */; };
@@ -139,7 +138,6 @@
 		71858E5A2281756F00EE6CF2 /* UIImage+library.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+library.m"; sourceTree = "<group>"; };
 		71858E5B2281756F00EE6CF2 /* WBGTextToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBGTextToolView.h; sourceTree = "<group>"; };
 		71858E5C2281756F00EE6CF2 /* TOCropScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TOCropScrollView.h; sourceTree = "<group>"; };
-		71858E5E2281756F00EE6CF2 /* EditImage.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = EditImage.xcassets; sourceTree = "<group>"; };
 		71858E612281756F00EE6CF2 /* WBGMoreKeyboard+CollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBGMoreKeyboard+CollectionView.h"; sourceTree = "<group>"; };
 		71858E622281756F00EE6CF2 /* UIImage+CropRotate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CropRotate.m"; sourceTree = "<group>"; };
 		71858E632281756F00EE6CF2 /* UIColor+TLChat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+TLChat.h"; sourceTree = "<group>"; };
@@ -392,7 +390,6 @@
 		71858E5D2281756F00EE6CF2 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				71858E5E2281756F00EE6CF2 /* EditImage.xcassets */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -530,7 +527,6 @@
 				71858E802281756F00EE6CF2 /* WBGImageEditorViewController.xib in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
-				71858E882281756F00EE6CF2 /* EditImage.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

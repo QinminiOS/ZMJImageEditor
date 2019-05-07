@@ -119,7 +119,7 @@
                     <state key="normal" image="clip_rotate"/>
                 </button>
             </subviews>
-            <color key="backgroundColor" red="0.086274509799999996" green="0.098039215690000001" blue="0.1019607843" alpha="0.88" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="ADy-tJ-IdC" secondAttribute="bottom" id="2yI-3f-qmK"/>
                 <constraint firstItem="eoR-Gu-vbS" firstAttribute="leading" secondItem="bHG-fd-srA" secondAttribute="trailing" id="35i-Qs-s1d"/>
