@@ -60,8 +60,8 @@
         
         // 初始化一个UIBezierPath对象, 把起始点存储到UIBezierPath对象中, 用来存储所有的轨迹点
         WBGPath *path = [WBGPath pathToPoint:currentDraggingPosition pathWidth:MAX(1, self.pathWidth)];
-        path.pathColor         = self.editor.colorPan.currentColor;
-        path.shape.strokeColor = self.editor.colorPan.currentColor.CGColor;
+        path.pathColor         = self.editor.colorPanel.currentColor;
+        path.shape.strokeColor = self.editor.colorPanel.currentColor.CGColor;
         [_allLineMutableArray addObject:path];
         
     }

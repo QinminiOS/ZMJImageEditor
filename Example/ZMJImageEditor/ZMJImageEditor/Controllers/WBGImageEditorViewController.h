@@ -7,6 +7,7 @@
 //
 
 #import "WBGImageEditor.h"
+#import "WBGColorPanel.h"
 
 typedef NS_ENUM(NSUInteger, EditorMode) {
     EditorNonMode,
@@ -16,13 +17,6 @@ typedef NS_ENUM(NSUInteger, EditorMode) {
     EditorPaperMode,
 };
 
-extern NSString * const kColorPanNotificaiton;
-
-@interface WBGColorPan : UIView
-@property (nonatomic, strong, readonly) UIColor *currentColor;
-@property (nonatomic, weak) id<WBGImageEditorDataSource> dataSource;
-@end
-
 @interface WBGImageEditorViewController : WBGImageEditor
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
 @property (weak, nonatomic) IBOutlet UIButton *undoButton;
@@ -30,7 +24,7 @@ extern NSString * const kColorPanNotificaiton;
 @property (weak,   nonatomic, readonly) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic, readonly) IBOutlet UIImageView *drawingView;
 @property (weak,   nonatomic, readonly) IBOutlet UIScrollView *scrollView;
-@property (strong, nonatomic, readonly) IBOutlet WBGColorPan *colorPan;
+@property (strong, nonatomic, readonly) WBGColorPanel *colorPanel;
 
 @property (nonatomic, assign) EditorMode currentMode;
 

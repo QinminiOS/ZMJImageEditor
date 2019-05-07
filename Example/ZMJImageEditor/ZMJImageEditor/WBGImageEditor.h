@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol WBGImageEditorDelegate, WBGImageEditorTransitionDelegate, WBGImageEditorDataSource;
+@protocol WBGImageEditorDelegate,
+          WBGImageEditorTransitionDelegate,
+          WBGImageEditorDataSource;
+
 @class WBGMoreKeyboardItem;
 
 typedef NS_OPTIONS(NSInteger, WBGImageEditorComponent) {

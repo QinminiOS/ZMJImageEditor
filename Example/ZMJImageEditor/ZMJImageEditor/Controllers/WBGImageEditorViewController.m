@@ -8,7 +8,7 @@
 
 #import "WBGImageEditorViewController.h"
 #import "WBGImageToolBase.h"
-#import "ColorfullButton.h"
+#import "WBGColorfullButton.h"
 #import "WBGDrawTool.h"
 #import "WBGTextTool.h"
 #import "TOCropViewController.h"
@@ -18,13 +18,13 @@
 #import "WBGImageEditor.h"
 #import "WBGMoreKeyboard.h"
 #import "WBGMosicaViewController.h"
-
 @import YYCategories;
 
-NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
+
 #pragma mark - WBGImageEditorViewController
 
-@interface WBGImageEditorViewController () <UINavigationBarDelegate, UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBGKeyboardDelegate> {
+@interface WBGImageEditorViewController () <UINavigationBarDelegate, UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBGKeyboardDelegate>
+{
     
     __weak IBOutlet NSLayoutConstraint *topBarTop;
     __weak IBOutlet NSLayoutConstraint *bottomBarBottom;
@@ -41,7 +41,7 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
 @property (weak,   nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) IBOutlet UIImageView *drawingView;
 @property (weak,   nonatomic) IBOutlet UIScrollView *scrollView;
-@property (strong, nonatomic) IBOutlet WBGColorPan *colorPan;
+@property (strong, nonatomic) WBGColorPanel *colorPanel;
 
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
 @property (weak, nonatomic) IBOutlet UIButton *panButton;
@@ -106,16 +106,17 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
     return self;
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
     self.undoButton.hidden = YES;
     
 //    self.colorPan.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 60, 100, self.colorPan.bounds.size.width, self.colorPan.bounds.size.height);
-    self.colorPan.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height-99, [UIScreen mainScreen].bounds.size.width, 50);
-    self.colorPan.dataSource = self.dataSource;
-    [self.view addSubview:_colorPan];
+    self.colorPanel.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height-99, [UIScreen mainScreen].bounds.size.width, 50);
+    self.colorPanel.dataSource = self.dataSource;
+    [self.view addSubview:_colorPanel];
     
     [self initImageScrollView];
     
@@ -131,7 +132,7 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
     self.textButton.hidden = YES;
     self.clipButton.hidden = YES;
     self.paperButton.hidden = YES;
-    self.colorPan.hidden = YES;
+    self.colorPanel.hidden = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -155,7 +156,7 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
     if (curComponent & WBGImageEditorTextComponent) { self.textButton.hidden = NO; [valibleCompoment addObject:self.textButton]; }
     if (curComponent & WBGImageEditorClipComponent) { self.clipButton.hidden = NO; [valibleCompoment addObject:self.clipButton]; }
     if (curComponent & WBGImageEditorPaperComponent) { self.paperButton.hidden = NO; [valibleCompoment addObject:self.paperButton]; }
-    if (curComponent & WBGImageEditorColorPanComponent) { self.colorPan.hidden = NO; }
+    if (curComponent & WBGImageEditorColorPanComponent) { self.colorPanel.hidden = NO; }
     
     [valibleCompoment enumerateObjectsUsingBlock:^(UIButton * _Nonnull button, NSUInteger idx, BOOL * _Nonnull stop) {
         CGRect originFrame = button.frame;
@@ -164,18 +165,8 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
     }];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:NO];
-}
-
-- (void)viewDidLayoutSubviews {
+- (void)viewDidLayoutSubviews
+{
     [super viewDidLayoutSubviews];
     
     if (!self.drawingView) {
@@ -339,7 +330,8 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
     // Dispose of any resources that can be recreated.
 }
 
-- (BOOL)prefersStatusBarHidden {
+- (BOOL)prefersStatusBarHidden
+{
     return YES;
 }
 
@@ -427,7 +419,7 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
                                                    toImageFrame:CGRectZero
                                                           setup:^{
                                                               [weakSelf refreshImageView];
-                                                              weakSelf.colorPan.hidden = YES;
+                                                              weakSelf.colorPanel.hidden = YES;
                                                               weakSelf.currentMode = EditorClipMode;
                                                               [weakSelf setCurrentTool:nil];
                                                           }
@@ -485,7 +477,7 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
         [weakSelf presentViewController:vc animated:YES completion:^{
             typeof (self) strongSelf = weakSelf;
             [strongSelf refreshImageView];
-            strongSelf.colorPan.hidden = YES;
+            strongSelf.colorPanel.hidden = YES;
             strongSelf.currentMode = EditorClipMode;
             [strongSelf setCurrentTool:nil];
         }];
@@ -592,10 +584,10 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
                                                               setup:^{
                                                                   [weakSelf refreshImageView];
                                                                   [weakSelf viewDidLayoutSubviews];
-                                                                  weakSelf.colorPan.hidden = NO;
+                                                                  weakSelf.colorPanel.hidden = NO;
                                                               }
                                                          completion:^{
-                                                             weakSelf.colorPan.hidden = NO;
+                                                             weakSelf.colorPanel.hidden = NO;
                                                          }];
     }
     else {
@@ -620,11 +612,11 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
                                                           setup:^{
                                                               [weakSelf refreshImageView];
                                                               [weakSelf viewDidLayoutSubviews];
-                                                              weakSelf.colorPan.hidden = NO;
+                                                              weakSelf.colorPanel.hidden = NO;
                                                           }
                                                      completion:^{
                                                          [UIView animateWithDuration:.3f animations:^{
-                                                             weakSelf.colorPan.hidden = NO;
+                                                             weakSelf.colorPanel.hidden = NO;
                                                          }];
                                                          
                                                      }];
@@ -677,7 +669,7 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
 
 - (void)hiddenColorPan:(BOOL)yesOrNot animation:(BOOL)animation {
     [UIView animateWithDuration:animation ? .25f : 0.f delay:0 usingSpringWithDamping:1 initialSpringVelocity:1 options:yesOrNot ? UIViewAnimationOptionCurveEaseOut : UIViewAnimationOptionCurveEaseIn animations:^{
-        self.colorPan.hidden = yesOrNot;
+        self.colorPanel.hidden = yesOrNot;
     } completion:^(BOOL finished) {
     
     }];
@@ -769,99 +761,6 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
     UIGraphicsEndImageContext();
     
     return image;
-}
-
-@end
-
-#pragma mark - Class WBGWColorPan
-@interface WBGColorPan ()
-@property (nonatomic, strong) UIColor *currentColor;
-@property (strong, nonatomic) IBOutletCollection(ColorfullButton) NSArray *colorButtons;
-
-@property (weak, nonatomic) IBOutlet ColorfullButton *redButton;
-@property (weak, nonatomic) IBOutlet ColorfullButton *orangeButton;
-@property (weak, nonatomic) IBOutlet ColorfullButton *yellowButton;
-@property (weak, nonatomic) IBOutlet ColorfullButton *greenButton;
-@property (weak, nonatomic) IBOutlet ColorfullButton *blueButton;
-@property (weak, nonatomic) IBOutlet ColorfullButton *pinkButton;
-@property (weak, nonatomic) IBOutlet ColorfullButton *whiteButton;
-
-@end
-
-@implementation WBGColorPan
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        //[self addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panSelectColor:)]];
-    }
-    return self;
-}
-
-- (instancetype)initWithCoder:(NSCoder *)coder
-{
-    self = [super initWithCoder:coder];
-    if (self) {
-        //[self addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panSelectColor:)]];
-    }
-    return self;
-}
-
-- (UIColor *)currentColor {
-    if (_currentColor == nil) {
-        _currentColor = ([self.dataSource respondsToSelector:@selector(imageEditorDefaultColor)] && [self.dataSource imageEditorDefaultColor]) ? [self.dataSource imageEditorDefaultColor] : UIColor.redColor;
-    }
-    return _currentColor;
-}
-
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-- (void)panSelectColor:(UIPanGestureRecognizer *)recognizer {
-    
-    NSLog(@"recon = %@", NSStringFromCGPoint([recognizer translationInView:self]));
-}
-
-- (IBAction)buttonAction:(UIButton *)sender {
-    ColorfullButton *theBtns = (ColorfullButton *)sender;
-    
-    for (ColorfullButton *button in _colorButtons) {
-        if (button == theBtns) {
-            button.isUse = YES;
-            self.currentColor = theBtns.color;
-            [[NSNotificationCenter defaultCenter] postNotificationName:kColorPanNotificaiton object:self.currentColor];
-        } else {
-            button.isUse = NO;
-        }
-    }
-}
-
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    UITouch *touch = [touches anyObject];
-    NSLog(@"point: %@", NSStringFromCGPoint([touch locationInView:self]));
-    NSLog(@"view=%@", touch.view);
-    CGPoint touchPoint = [touch locationInView:self];
-    for (ColorfullButton *button in _colorButtons) {
-        CGRect rect = [button convertRect:button.bounds toView:self];
-        if (CGRectContainsPoint(rect, touchPoint) && button.isUse == NO) {
-            [self buttonAction:button];
-        }
-    }
-}
-
-- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    UITouch *touch = [touches anyObject];
-    //NSLog(@"move->point: %@", NSStringFromCGPoint([touch locationInView:self]));
-    CGPoint touchPoint = [touch locationInView:self];
-    
-    for (ColorfullButton *button in _colorButtons) {
-        CGRect rect = [button convertRect:button.bounds toView:self];
-        if (CGRectContainsPoint(rect, touchPoint) && button.isUse == NO) {
-            [self buttonAction:button];
-        }
-    }
 }
 
 @end

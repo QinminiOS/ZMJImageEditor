@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="Cw0-tf-npd" customClass="WBGColorPanel">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ADy-tJ-IdC" customClass="WBGColorfullButton">
+                    <rect key="frame" x="0.0" y="0.0" width="47" height="50"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="color">
+                            <color key="value" red="1" green="0.058155415100000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="radius">
+                            <real key="value" value="9"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="buttonAction:" destination="Cw0-tf-npd" eventType="touchUpInside" id="L4a-Tl-f5w"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="woL-hv-GBa" customClass="WBGColorfullButton">
+                    <rect key="frame" x="47" y="0.0" width="47" height="50"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="radius">
+                            <real key="value" value="9"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="color">
+                            <color key="value" red="1" green="0.57647058819999997" blue="0.10980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="buttonAction:" destination="Cw0-tf-npd" eventType="touchUpInside" id="EB7-j2-bKA"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ho-yx-UH7" customClass="WBGColorfullButton">
+                    <rect key="frame" x="94" y="0.0" width="46.5" height="50"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="radius">
+                            <real key="value" value="9"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="color">
+                            <color key="value" red="1" green="0.9638961318" blue="0.06622636874" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="buttonAction:" destination="Cw0-tf-npd" eventType="touchUpInside" id="e1T-0N-qis"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bHG-fd-srA" customClass="WBGColorfullButton">
+                    <rect key="frame" x="140.5" y="0.0" width="47" height="50"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="radius">
+                            <real key="value" value="9"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="color">
+                            <color key="value" red="0.0" green="0.90588235289999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="buttonAction:" destination="Cw0-tf-npd" eventType="touchUpInside" id="7oG-Qj-Zaf"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gQA-nc-82Q" customClass="WBGColorfullButton">
+                    <rect key="frame" x="234.5" y="0.0" width="47" height="50"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="radius">
+                            <real key="value" value="9"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="color">
+                            <color key="value" red="0.98039215690000003" green="0.1764705882" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="buttonAction:" destination="Cw0-tf-npd" eventType="touchUpInside" id="cH6-eO-Mt6"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IxS-lG-oih" customClass="WBGColorfullButton">
+                    <rect key="frame" x="281.5" y="0.0" width="46.5" height="50"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="radius">
+                            <real key="value" value="9"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="color">
+                            <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="buttonAction:" destination="Cw0-tf-npd" eventType="touchUpInside" id="7ft-F7-BM0"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eoR-Gu-vbS" customClass="WBGColorfullButton">
+                    <rect key="frame" x="187.5" y="0.0" width="47" height="50"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="radius">
+                            <real key="value" value="9"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="color">
+                            <color key="value" red="0.098039215690000001" green="0.5568627451" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="buttonAction:" destination="Cw0-tf-npd" eventType="touchUpInside" id="ogc-E4-Dns"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jYJ-ld-Zvb">
+                    <rect key="frame" x="328" y="0.0" width="47" height="50"/>
+                    <state key="normal" image="clip_rotate"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.086274509799999996" green="0.098039215690000001" blue="0.1019607843" alpha="0.88" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="ADy-tJ-IdC" secondAttribute="bottom" id="2yI-3f-qmK"/>
+                <constraint firstItem="eoR-Gu-vbS" firstAttribute="leading" secondItem="bHG-fd-srA" secondAttribute="trailing" id="35i-Qs-s1d"/>
+                <constraint firstAttribute="trailing" secondItem="jYJ-ld-Zvb" secondAttribute="trailing" id="8CL-el-VNv"/>
+                <constraint firstItem="6ho-yx-UH7" firstAttribute="leading" secondItem="woL-hv-GBa" secondAttribute="trailing" id="CJ7-L7-hLY"/>
+                <constraint firstItem="jYJ-ld-Zvb" firstAttribute="width" secondItem="IxS-lG-oih" secondAttribute="width" id="Dy3-In-H8w"/>
+                <constraint firstItem="woL-hv-GBa" firstAttribute="leading" secondItem="ADy-tJ-IdC" secondAttribute="trailing" id="GRC-el-mNE"/>
+                <constraint firstItem="IxS-lG-oih" firstAttribute="leading" secondItem="gQA-nc-82Q" secondAttribute="trailing" id="GvI-TX-NHI"/>
+                <constraint firstItem="IxS-lG-oih" firstAttribute="width" secondItem="gQA-nc-82Q" secondAttribute="width" id="HVX-rN-dMi"/>
+                <constraint firstItem="bHG-fd-srA" firstAttribute="leading" secondItem="6ho-yx-UH7" secondAttribute="trailing" id="IFw-pk-bhi"/>
+                <constraint firstItem="IxS-lG-oih" firstAttribute="bottom" secondItem="gQA-nc-82Q" secondAttribute="bottom" id="Oge-PW-bcw"/>
+                <constraint firstItem="6ho-yx-UH7" firstAttribute="bottom" secondItem="woL-hv-GBa" secondAttribute="bottom" id="T2R-AC-VXS"/>
+                <constraint firstItem="gQA-nc-82Q" firstAttribute="top" secondItem="eoR-Gu-vbS" secondAttribute="top" id="Tod-1P-vdE"/>
+                <constraint firstItem="ADy-tJ-IdC" firstAttribute="top" secondItem="Cw0-tf-npd" secondAttribute="top" id="UVx-DB-SUE"/>
+                <constraint firstItem="eoR-Gu-vbS" firstAttribute="width" secondItem="bHG-fd-srA" secondAttribute="width" id="Wg3-mE-U0L"/>
+                <constraint firstItem="eoR-Gu-vbS" firstAttribute="bottom" secondItem="bHG-fd-srA" secondAttribute="bottom" id="XZ7-B0-ymH"/>
+                <constraint firstItem="6ho-yx-UH7" firstAttribute="width" secondItem="woL-hv-GBa" secondAttribute="width" id="Yry-RW-WuI"/>
+                <constraint firstItem="6ho-yx-UH7" firstAttribute="top" secondItem="woL-hv-GBa" secondAttribute="top" id="bw3-lu-GM8"/>
+                <constraint firstItem="gQA-nc-82Q" firstAttribute="bottom" secondItem="eoR-Gu-vbS" secondAttribute="bottom" id="cbC-wG-dtF"/>
+                <constraint firstItem="jYJ-ld-Zvb" firstAttribute="top" secondItem="IxS-lG-oih" secondAttribute="top" id="eY0-4S-vjZ"/>
+                <constraint firstItem="bHG-fd-srA" firstAttribute="width" secondItem="6ho-yx-UH7" secondAttribute="width" id="eac-CA-VKd"/>
+                <constraint firstItem="gQA-nc-82Q" firstAttribute="leading" secondItem="eoR-Gu-vbS" secondAttribute="trailing" id="foB-qf-ZPF"/>
+                <constraint firstItem="gQA-nc-82Q" firstAttribute="width" secondItem="eoR-Gu-vbS" secondAttribute="width" id="iB1-Um-opF"/>
+                <constraint firstItem="ADy-tJ-IdC" firstAttribute="leading" secondItem="Cw0-tf-npd" secondAttribute="leading" id="jBf-gy-gDI"/>
+                <constraint firstItem="eoR-Gu-vbS" firstAttribute="leading" secondItem="bHG-fd-srA" secondAttribute="trailing" id="jw4-3b-I5C"/>
+                <constraint firstItem="woL-hv-GBa" firstAttribute="top" secondItem="ADy-tJ-IdC" secondAttribute="top" id="kKD-zu-gCI"/>
+                <constraint firstItem="bHG-fd-srA" firstAttribute="top" secondItem="6ho-yx-UH7" secondAttribute="top" id="l0S-7U-b3Q"/>
+                <constraint firstItem="IxS-lG-oih" firstAttribute="top" secondItem="gQA-nc-82Q" secondAttribute="top" id="mFL-hU-oq7"/>
+                <constraint firstItem="woL-hv-GBa" firstAttribute="bottom" secondItem="ADy-tJ-IdC" secondAttribute="bottom" id="me6-OA-ipf"/>
+                <constraint firstItem="jYJ-ld-Zvb" firstAttribute="bottom" secondItem="IxS-lG-oih" secondAttribute="bottom" id="oBY-iH-dE1"/>
+                <constraint firstItem="jYJ-ld-Zvb" firstAttribute="leading" secondItem="IxS-lG-oih" secondAttribute="trailing" id="pWP-s0-hl9"/>
+                <constraint firstItem="eoR-Gu-vbS" firstAttribute="top" secondItem="bHG-fd-srA" secondAttribute="top" id="qV0-0r-Mtc"/>
+                <constraint firstItem="bHG-fd-srA" firstAttribute="bottom" secondItem="6ho-yx-UH7" secondAttribute="bottom" id="s8J-ZW-Qgf"/>
+                <constraint firstItem="woL-hv-GBa" firstAttribute="width" secondItem="ADy-tJ-IdC" secondAttribute="width" id="vwf-XW-DiL"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="m00-VI-yJH"/>
+            <connections>
+                <outlet property="blueButton" destination="eoR-Gu-vbS" id="WGC-cg-5FS"/>
+                <outlet property="greenButton" destination="bHG-fd-srA" id="4uq-gT-Awj"/>
+                <outlet property="orangeButton" destination="woL-hv-GBa" id="0ZK-b4-woZ"/>
+                <outlet property="pinkButton" destination="gQA-nc-82Q" id="DW6-FG-yqG"/>
+                <outlet property="redButton" destination="ADy-tJ-IdC" id="BNe-pu-uxw"/>
+                <outlet property="whiteButton" destination="IxS-lG-oih" id="9cy-zh-1EM"/>
+                <outlet property="yellowButton" destination="6ho-yx-UH7" id="BPm-Df-a9V"/>
+                <outletCollection property="colorButtons" destination="bHG-fd-srA" id="QdK-g9-apy"/>
+                <outletCollection property="colorButtons" destination="ADy-tJ-IdC" id="CMX-l7-fyW"/>
+                <outletCollection property="colorButtons" destination="woL-hv-GBa" id="bUL-aA-EN7"/>
+                <outletCollection property="colorButtons" destination="6ho-yx-UH7" id="dQM-a7-Idu"/>
+                <outletCollection property="colorButtons" destination="eoR-Gu-vbS" id="lST-I2-Uki"/>
+                <outletCollection property="colorButtons" destination="gQA-nc-82Q" id="11m-UJ-HWf"/>
+                <outletCollection property="colorButtons" destination="IxS-lG-oih" id="9cy-MF-MAt"/>
+            </connections>
+            <point key="canvasLocation" x="-727" y="-229"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="clip_rotate" width="32" height="32"/>
+    </resources>
+</document>

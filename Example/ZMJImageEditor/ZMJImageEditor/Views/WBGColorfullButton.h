@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ColorfullButton : UIButton
+@interface WBGColorfullButton : UIButton
 @property (nonatomic, assign) IBInspectable CGFloat radius;
 @property (nonatomic, strong) IBInspectable UIColor *color;
 @property (nonatomic, assign) BOOL isUse;

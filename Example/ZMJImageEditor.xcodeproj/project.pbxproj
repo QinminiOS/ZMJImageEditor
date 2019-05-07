@@ -30,7 +30,7 @@
 		71858E782281756F00EE6CF2 /* WBGDrawTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E372281756F00EE6CF2 /* WBGDrawTool.m */; };
 		71858E792281756F00EE6CF2 /* TOCroppedImageAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E3B2281756F00EE6CF2 /* TOCroppedImageAttributes.m */; };
 		71858E7A2281756F00EE6CF2 /* WBGImageEditorGestureManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E3E2281756F00EE6CF2 /* WBGImageEditorGestureManager.m */; };
-		71858E7B2281756F00EE6CF2 /* ColorfullButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E432281756F00EE6CF2 /* ColorfullButton.m */; };
+		71858E7B2281756F00EE6CF2 /* WBGColorfullButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E432281756F00EE6CF2 /* WBGColorfullButton.m */; };
 		71858E7C2281756F00EE6CF2 /* TOCropViewControllerTransitioning.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E452281756F00EE6CF2 /* TOCropViewControllerTransitioning.m */; };
 		71858E7D2281756F00EE6CF2 /* WBGMosicaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E472281756F00EE6CF2 /* WBGMosicaViewController.m */; };
 		71858E7E2281756F00EE6CF2 /* TOCropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E482281756F00EE6CF2 /* TOCropViewController.m */; };
@@ -51,6 +51,8 @@
 		71858E8E2281756F00EE6CF2 /* WBGMoreKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E692281756F00EE6CF2 /* WBGMoreKeyboard.m */; };
 		71858E8F2281756F00EE6CF2 /* WBGMoreKeyboardItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E6F2281756F00EE6CF2 /* WBGMoreKeyboardItem.m */; };
 		71858E902281756F00EE6CF2 /* WBGBaseKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E712281756F00EE6CF2 /* WBGBaseKeyboard.m */; };
+		71858E932281787D00EE6CF2 /* WBGColorPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E922281787D00EE6CF2 /* WBGColorPanel.m */; };
+		71858E9522817A2E00EE6CF2 /* WBGColorPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 71858E9422817A2E00EE6CF2 /* WBGColorPanel.xib */; };
 		79E1363813D4552F3FB8302D /* Pods_ZMJImageEditor_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD4383784075711AC3458819 /* Pods_ZMJImageEditor_Example.framework */; };
 		805FDBA7CDD5AC04FA437661 /* Pods_ZMJImageEditor_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27DE14A43CA3CFB572079268 /* Pods_ZMJImageEditor_Tests.framework */; };
 		96FC64921FECDE2600ACB842 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96FC64941FECDE2600ACB842 /* Main.storyboard */; };
@@ -105,7 +107,7 @@
 		71858E352281756F00EE6CF2 /* WBGTextTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBGTextTool.m; sourceTree = "<group>"; };
 		71858E362281756F00EE6CF2 /* WBGImageToolBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBGImageToolBase.h; sourceTree = "<group>"; };
 		71858E372281756F00EE6CF2 /* WBGDrawTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBGDrawTool.m; sourceTree = "<group>"; };
-		71858E382281756F00EE6CF2 /* ColorfullButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorfullButton.h; sourceTree = "<group>"; };
+		71858E382281756F00EE6CF2 /* WBGColorfullButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBGColorfullButton.h; sourceTree = "<group>"; };
 		71858E392281756F00EE6CF2 /* WBGImageEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBGImageEditor.h; sourceTree = "<group>"; };
 		71858E3B2281756F00EE6CF2 /* TOCroppedImageAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TOCroppedImageAttributes.m; sourceTree = "<group>"; };
 		71858E3C2281756F00EE6CF2 /* TOCroppedImageAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TOCroppedImageAttributes.h; sourceTree = "<group>"; };
@@ -113,7 +115,7 @@
 		71858E3F2281756F00EE6CF2 /* WBGImageEditorGestureManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBGImageEditorGestureManager.h; sourceTree = "<group>"; };
 		71858E402281756F00EE6CF2 /* TOActivityCroppedImageProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TOActivityCroppedImageProvider.h; sourceTree = "<group>"; };
 		71858E422281756F00EE6CF2 /* WBGChatMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBGChatMacros.h; sourceTree = "<group>"; };
-		71858E432281756F00EE6CF2 /* ColorfullButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorfullButton.m; sourceTree = "<group>"; };
+		71858E432281756F00EE6CF2 /* WBGColorfullButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBGColorfullButton.m; sourceTree = "<group>"; };
 		71858E452281756F00EE6CF2 /* TOCropViewControllerTransitioning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TOCropViewControllerTransitioning.m; sourceTree = "<group>"; };
 		71858E462281756F00EE6CF2 /* WBGImageEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBGImageEditorViewController.h; sourceTree = "<group>"; };
 		71858E472281756F00EE6CF2 /* WBGMosicaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBGMosicaViewController.m; sourceTree = "<group>"; };
@@ -154,11 +156,12 @@
 		71858E6F2281756F00EE6CF2 /* WBGMoreKeyboardItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBGMoreKeyboardItem.m; sourceTree = "<group>"; };
 		71858E702281756F00EE6CF2 /* WBGMoreKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBGMoreKeyboard.h; sourceTree = "<group>"; };
 		71858E712281756F00EE6CF2 /* WBGBaseKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBGBaseKeyboard.m; sourceTree = "<group>"; };
+		71858E912281787D00EE6CF2 /* WBGColorPanel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WBGColorPanel.h; sourceTree = "<group>"; };
+		71858E922281787D00EE6CF2 /* WBGColorPanel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WBGColorPanel.m; sourceTree = "<group>"; };
+		71858E9422817A2E00EE6CF2 /* WBGColorPanel.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WBGColorPanel.xib; sourceTree = "<group>"; };
 		8160F7BC79F30F2E4C7F8903 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		96FC64911FECDE0200ACB842 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		96FC64931FECDE2600ACB842 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		96FC64961FECDE2A00ACB842 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
-		96FC64981FECDE2D00ACB842 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		BD4383784075711AC3458819 /* Pods_ZMJImageEditor_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZMJImageEditor_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C43CCE604ABC815A6FCB6D1A /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		F8B003FCF35DA1C073F3898D /* Pods-ZMJImageEditor_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZMJImageEditor_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZMJImageEditor_Example/Pods-ZMJImageEditor_Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -365,8 +368,8 @@
 		71858E4E2281756F00EE6CF2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				71858E382281756F00EE6CF2 /* ColorfullButton.h */,
-				71858E432281756F00EE6CF2 /* ColorfullButton.m */,
+				71858E382281756F00EE6CF2 /* WBGColorfullButton.h */,
+				71858E432281756F00EE6CF2 /* WBGColorfullButton.m */,
 				71858E512281756F00EE6CF2 /* TOCropOverlayView.h */,
 				71858E572281756F00EE6CF2 /* TOCropOverlayView.m */,
 				71858E5C2281756F00EE6CF2 /* TOCropScrollView.h */,
@@ -379,6 +382,9 @@
 				71858E582281756F00EE6CF2 /* WBGMoreKeyboardCell.m */,
 				71858E5B2281756F00EE6CF2 /* WBGTextToolView.h */,
 				71858E522281756F00EE6CF2 /* WBGTextToolView.m */,
+				71858E912281787D00EE6CF2 /* WBGColorPanel.h */,
+				71858E922281787D00EE6CF2 /* WBGColorPanel.m */,
+				71858E9422817A2E00EE6CF2 /* WBGColorPanel.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -496,13 +502,11 @@
 			};
 			buildConfigurationList = 6003F585195388D10070C39A /* Build configuration list for PBXProject "ZMJImageEditor" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
-				"zh-Hans",
 			);
 			mainGroup = 6003F581195388D10070C39A;
 			productRefGroup = 6003F58B195388D20070C39A /* Products */;
@@ -520,6 +524,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71858E9522817A2E00EE6CF2 /* WBGColorPanel.xib in Resources */,
 				96FC64921FECDE2600ACB842 /* Main.storyboard in Resources */,
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
 				71858E802281756F00EE6CF2 /* WBGImageEditorViewController.xib in Resources */,
@@ -606,7 +611,7 @@
 				71858E772281756F00EE6CF2 /* WBGTextTool.m in Sources */,
 				71858E8D2281756F00EE6CF2 /* WBGImageEditor.m in Sources */,
 				71858E832281756F00EE6CF2 /* TOCropView.m in Sources */,
-				71858E7B2281756F00EE6CF2 /* ColorfullButton.m in Sources */,
+				71858E7B2281756F00EE6CF2 /* WBGColorfullButton.m in Sources */,
 				71858E8E2281756F00EE6CF2 /* WBGMoreKeyboard.m in Sources */,
 				71858E862281756F00EE6CF2 /* TOCropToolbar.m in Sources */,
 				71858E7F2281756F00EE6CF2 /* WBGImageEditorViewController.m in Sources */,
@@ -628,6 +633,7 @@
 				71858E8C2281756F00EE6CF2 /* UIColor+TLChat.m in Sources */,
 				71858E742281756F00EE6CF2 /* XScratchView.m in Sources */,
 				71858E7A2281756F00EE6CF2 /* WBGImageEditorGestureManager.m in Sources */,
+				71858E932281787D00EE6CF2 /* WBGColorPanel.m in Sources */,
 				71858E852281756F00EE6CF2 /* WBGMoreKeyboardCell.m in Sources */,
 				71858E8F2281756F00EE6CF2 /* WBGMoreKeyboardItem.m in Sources */,
 				71858E732281756F00EE6CF2 /* XPixelItem.m in Sources */,
@@ -676,7 +682,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				71719F9E1E33DC2100824A3D /* Base */,
-				96FC64911FECDE0200ACB842 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -686,7 +691,6 @@
 			children = (
 				96FC64931FECDE2600ACB842 /* Base */,
 				96FC64961FECDE2A00ACB842 /* en */,
-				96FC64981FECDE2D00ACB842 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			path = Base.lproj;
@@ -779,6 +783,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ZMJImageEditor/ZMJImageEditor-Prefix.pch";
 				INFOPLIST_FILE = "ZMJImageEditor/ZMJImageEditor-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.ZMJImageEditor-Example111";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -795,6 +800,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ZMJImageEditor/ZMJImageEditor-Prefix.pch";
 				INFOPLIST_FILE = "ZMJImageEditor/ZMJImageEditor-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.ZMJImageEditor-Example111";
 				PRODUCT_NAME = "$(TARGET_NAME)";

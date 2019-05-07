@@ -6,9 +6,10 @@
 //  Copyright © 2017年 CALACULU. All rights reserved.
 //
 
-#import "ColorfullButton.h"
+#import "WBGColorfullButton.h"
 IB_DESIGNABLE
-@implementation ColorfullButton {
+@implementation WBGColorfullButton
+{
     UIColor *_color;
     CGFloat _radius;
 }
