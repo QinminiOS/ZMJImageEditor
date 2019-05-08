@@ -20,15 +20,15 @@
 #import "WBGMosicaViewController.h"
 #import "XXNibBridge.h"
 #import "YYCategories.h"
+#import "WBGMosicaTool.h"
 
 
 #pragma mark - WBGImageEditorViewController
 
 @interface WBGImageEditorViewController () <UINavigationBarDelegate, UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBGKeyboardDelegate>
-{
-    __weak IBOutlet NSLayoutConstraint *topBarTop;
-    __weak IBOutlet NSLayoutConstraint *bottomBarBottom;
-}
+
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *topBarTop;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *bottomBarBottom;
 @property (nonatomic, strong, nullable) WBGImageToolBase *currentTool;
 @property (weak, nonatomic) IBOutlet UIView *bottomBar;
 @property (weak, nonatomic) IBOutlet UIView *topBar;
@@ -51,6 +51,7 @@
 
 @property (nonatomic, strong) WBGDrawTool *drawTool;
 @property (nonatomic, strong) WBGTextTool *textTool;
+@property (nonatomic, strong) WBGMosicaTool *mosicaTool;
 
 @property (nonatomic, copy) UIImage   *originImage;
 
@@ -75,10 +76,14 @@
     return [self initWithImage:image delegate:nil dataSource:nil];
 }
 
-- (id)initWithImage:(UIImage*)image delegate:(id<WBGImageEditorDelegate>)delegate dataSource:(id<WBGImageEditorDataSource>)dataSource;
+- (id)initWithImage:(UIImage*)image
+           delegate:(id<WBGImageEditorDelegate>)delegate
+         dataSource:(id<WBGImageEditorDataSource>)dataSource;
 {
     self = [self init];
-    if (self){
+    
+    if (self)
+    {
         _originImage = image;
         self.delegate = delegate;
         self.dataSource = dataSource;
@@ -116,9 +121,13 @@
     
     [self initImageScrollView];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW,
+                                 (int64_t)(.25 * NSEC_PER_SEC)),
+                   dispatch_get_main_queue(), ^{
         @strongify(self)
-        if ([self.dataSource respondsToSelector:@selector(imageEditorCompoment)] && [self.dataSource imageEditorCompoment] & WBGImageEditorDrawComponent) {
+        if ([self.dataSource respondsToSelector:@selector(imageEditorCompoment)] &&
+            ([self.dataSource imageEditorCompoment] & WBGImageEditorDrawComponent))
+        {
             [self.panButton sendActionsForControlEvents:UIControlEventTouchUpInside];
         }
     });
@@ -197,16 +206,18 @@
 {
     [super viewDidLayoutSubviews];
     
-    if (!self.drawingView) {
+    if (!self.drawingView)
+    {
         self.drawingView = [[UIImageView alloc] initWithFrame:self.imageView.superview.frame];
         self.drawingView.contentMode = UIViewContentModeCenter;
         self.drawingView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin;
         [self.imageView.superview addSubview:self.drawingView];
         self.drawingView.userInteractionEnabled = YES;
-    } else {
+    }
+    else
+    {
         //self.drawingView.frame = self.imageView.superview.frame;
     }
-    
     
     self.topBannerView.frame = CGRectMake(0, 0, self.imageView.width, CGRectGetMinY(self.imageView.frame));
     self.bottomBannerView.frame = CGRectMake(0, CGRectGetMaxY(self.imageView.frame), self.imageView.width, self.drawingView.height - CGRectGetMaxY(self.imageView.frame));
@@ -319,6 +330,16 @@
     }
     
     return _textTool;
+}
+
+- (WBGMosicaTool *)mosicaTool
+{
+    if (_mosicaTool == nil)
+    {
+        _mosicaTool = [[WBGMosicaTool alloc] initWithImageEditor:self];
+    }
+    
+    return _mosicaTool;
 }
 
 - (void)initImageScrollView
@@ -521,47 +542,13 @@
 
 //马赛克模式
 - (IBAction)paperAction:(UIButton *)sender {
-    if (_currentMode == WBGEditorModeText) {
+    if (_currentMode == WBGEditorModeMosica)
+    {
         return;
     }
-    self.currentMode = WBGEditorModePaper;
     
-//    __weak typeof(self)weakSelf = self;
-//    [self buildClipImageShowHud:NO
-//                 clipedCallback:^(UIImage *clipedImage)
-//    {
-//        typeof (self) strongSelf = weakSelf;
-//        CGRect viewFrame = [strongSelf.view convertRect:strongSelf.imageView.frame toView:strongSelf.navigationController.view];
-//
-//        WBGMosicaViewController *vc = [[WBGMosicaViewController alloc] initWithImage:clipedImage frame:viewFrame];
-//        __weak typeof(self)weakSelf = strongSelf;
-//
-//        vc.mosicaCallback = ^(UIImage *mosicaImage) {
-//            typeof (self) strongSelf = weakSelf;
-//            self.imageView.image = mosicaImage;
-//            CGRect bounds = strongSelf.drawingView.bounds;
-//            bounds.size = CGSizeMake(bounds.size.width/strongSelf.clipInitScale, bounds.size.height/self.clipInitScale);
-//
-//            [strongSelf refreshImageView];
-//            [strongSelf viewDidLayoutSubviews];
-//
-//            strongSelf.navigationItem.rightBarButtonItem.enabled = YES;
-//
-//            //生成图片后，清空画布内容
-//            [strongSelf.drawTool.allLineMutableArray removeAllObjects];
-//            [strongSelf.drawTool drawLine];
-//            [strongSelf.drawingView removeAllSubviews];
-//            // strongSelf.undoButton.hidden = YES;
-//        };
-//
-//        [weakSelf presentViewController:vc animated:YES completion:^{
-//            typeof (self) strongSelf = weakSelf;
-//            [strongSelf refreshImageView];
-//            strongSelf.colorPanel.hidden = YES;
-//            strongSelf.currentMode = EditorClipMode;
-//            [strongSelf setCurrentTool:nil];
-//        }];
-//    }];
+    self.currentMode = WBGEditorModeMosica;
+    self.currentTool = self.mosicaTool;
 }
 
 - (IBAction)backAction:(UIButton *)sender
@@ -656,7 +643,9 @@
 #pragma mark - WBGKeyboardDelegate
 
 #pragma mark - Cropper Delegate
-- (void)cropViewController:(TOCropViewController *)cropViewController didCropToImage:(UIImage *)image withRect:(CGRect)cropRect angle:(NSInteger)angle
+- (void)cropViewController:(TOCropViewController *)cropViewController
+            didCropToImage:(UIImage *)image
+                  withRect:(CGRect)cropRect angle:(NSInteger)angle
 {
     [self updateImageViewWithImage:image fromCropViewController:cropViewController];
 }
@@ -729,7 +718,8 @@
         case WBGEditorModeDraw:
         {
             self.panButton.selected = YES;
-            if (self.drawTool.allLineMutableArray.count > 0) {
+            if (self.drawTool.allLineMutableArray.count > 0)
+            {
                 //self.undoButton.hidden  = NO;
             }
         }
@@ -747,7 +737,8 @@
     }
 }
 
-- (void)hiddenTopAndBottomBar:(BOOL)isHide animation:(BOOL)animation
+- (void)hiddenTopAndBottomBar:(BOOL)isHide
+                    animation:(BOOL)animation
 {
     if (self.keyboard.isShow)
     {
@@ -762,12 +753,12 @@
                         options:isHide ? UIViewAnimationOptionCurveEaseOut : UIViewAnimationOptionCurveEaseIn
                      animations:^{
         if (isHide) {
-            bottomBarBottom.constant = -49.f;
-            topBarTop.constant = -64.f;
+            _bottomBarBottom.constant = -49.f;
+            _topBarTop.constant = -64.f;
             self.colorPanel.hidden = YES;
         } else {
-            bottomBarBottom.constant = 0;
-            topBarTop.constant = 0;
+            _bottomBarBottom.constant = 0;
+            _topBarTop.constant = 0;
             self.colorPanel.hidden = NO;
         }
         _barsHiddenStatus = isHide;
@@ -777,15 +768,25 @@
     }];
 }
 
-- (void)hiddenColorPan:(BOOL)yesOrNot animation:(BOOL)animation {
-    [UIView animateWithDuration:animation ? .25f : 0.f delay:0 usingSpringWithDamping:1 initialSpringVelocity:1 options:yesOrNot ? UIViewAnimationOptionCurveEaseOut : UIViewAnimationOptionCurveEaseIn animations:^{
+- (void)hiddenColorPan:(BOOL)yesOrNot
+             animation:(BOOL)animation
+{
+    UIViewAnimationOptions options = yesOrNot ? UIViewAnimationOptionCurveEaseOut : UIViewAnimationOptionCurveEaseIn;
+    
+    [UIView animateWithDuration:animation ? .25f : 0.f
+                          delay:0
+         usingSpringWithDamping:1
+          initialSpringVelocity:1
+                        options:options
+                     animations:^{
         self.colorPanel.hidden = yesOrNot;
     } completion:^(BOOL finished) {
     
     }];
 }
 
-+ (UIImage *)createViewImage:(UIView *)shareView {
++ (UIImage *)createViewImage:(UIView *)shareView
+{
     UIGraphicsBeginImageContextWithOptions(shareView.bounds.size, NO, [UIScreen mainScreen].scale);
     [shareView.layer renderInContext:UIGraphicsGetCurrentContext()];
     shareView.layer.affineTransform = shareView.transform;
@@ -794,7 +795,8 @@
     return image;
 }
 
-- (void)buildClipImageShowHud:(BOOL)showHud clipedCallback:(void(^)(UIImage *clipedImage))clipedCallback
+- (void)buildClipImageShowHud:(BOOL)showHud
+               clipedCallback:(void(^)(UIImage *clipedImage))clipedCallback
 {
     if (showHud)
     {
@@ -852,7 +854,9 @@
     });
 }
 
-+ (UIImage *)screenshot:(UIView *)view orientation:(UIDeviceOrientation)orientation usePresentationLayer:(BOOL)usePresentationLayer
++ (UIImage *)screenshot:(UIView *)view
+            orientation:(UIDeviceOrientation)orientation
+   usePresentationLayer:(BOOL)usePresentationLayer
 {
     __block CGSize targetSize = CGSizeZero;
     dispatch_async(dispatch_get_main_queue(), ^{

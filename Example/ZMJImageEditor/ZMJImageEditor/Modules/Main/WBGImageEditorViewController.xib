@@ -13,7 +13,7 @@
             <connections>
                 <outlet property="backButton" destination="U1E-fP-iEK" id="5iE-72-bQz"/>
                 <outlet property="bottomBar" destination="toj-tM-hDH" id="aaz-UD-NrS"/>
-                <outlet property="bottomBarBottom" destination="UO5-vP-LGM" id="i97-CY-8ik"/>
+                <outlet property="bottomBarBottom" destination="UO5-vP-LGM" id="COv-xT-wFV"/>
                 <outlet property="clipButton" destination="PFB-Ig-Llj" id="Sdg-B5-Hzf"/>
                 <outlet property="finishButton" destination="yeV-aj-vVt" id="Cvb-g2-Sj7"/>
                 <outlet property="imageView" destination="L0E-Hz-dO7" id="8Uo-zs-uHX"/>
@@ -22,7 +22,7 @@
                 <outlet property="scrollView" destination="eg2-dz-mJn" id="syX-xc-Eiv"/>
                 <outlet property="textButton" destination="cnm-kZ-dpx" id="Gv1-I7-f2Y"/>
                 <outlet property="topBar" destination="vKW-ZA-nXo" id="4f1-Hp-06S"/>
-                <outlet property="topBarTop" destination="V7Y-h0-Shc" id="Y3q-lg-gKw"/>
+                <outlet property="topBarTop" destination="V7Y-h0-Shc" id="iHW-Cp-hXa"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

@@ -9,6 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "WBGImageEditorViewController.h"
 
+typedef void (^WBGImageToolCompletionBlock)(UIImage *image,
+                                            NSError *error,
+                                            NSDictionary *userInfo);
+
 @interface WBGImageToolBase : NSObject
 
 @property (nonatomic, weak) WBGImageEditorViewController *editor;
@@ -17,6 +21,6 @@
 
 - (void)setup;
 - (void)cleanup;
-- (void)executeWithCompletionBlock:(void(^)(UIImage *image, NSError *error, NSDictionary *userInfo))completionBlock;
+- (void)executeWithCompletionBlock:(WBGImageToolCompletionBlock)completionBlock;
 
 @end

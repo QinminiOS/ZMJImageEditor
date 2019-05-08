@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="WBGMosicaToolBar">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="55"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RDs-zR-bUy">
+                    <rect key="frame" x="0.0" y="54" width="414" height="1"/>
+                    <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="0.050000000000000003" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="7ez-AC-BX4"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="aAF-Vw-GFM"/>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cWi-cH-ouP">
+                    <rect key="frame" x="91" y="17" width="22" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="icon_masaike_1"/>
+                    <state key="selected" image="icon_masaike_1_xuanzhong"/>
+                    <connections>
+                        <action selector="onMasicNormalButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="XXs-Rg-IyR"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PYC-vs-yS1">
+                    <rect key="frame" x="292" y="16" width="22" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="icon_shanchushangyibu"/>
+                    <state key="selected" image="icon_masaike_1_xuanzhong"/>
+                    <connections>
+                        <action selector="onBackButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="N8P-bw-Q8x"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="RDs-zR-bUy" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="1JU-VZ-T6C"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="RDs-zR-bUy" secondAttribute="bottom" id="b8Y-8i-zW2"/>
+                <constraint firstAttribute="trailing" secondItem="RDs-zR-bUy" secondAttribute="trailing" id="cbm-e9-XQQ"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="backButton" destination="PYC-vs-yS1" id="b96-gM-U8d"/>
+                <outlet property="masicNormal" destination="cWi-cH-ouP" id="tev-rl-s9d"/>
+            </connections>
+            <point key="canvasLocation" x="333" y="-69"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="icon_masaike_1" width="22" height="22"/>
+        <image name="icon_masaike_1_xuanzhong" width="22" height="22"/>
+        <image name="icon_shanchushangyibu" width="22" height="22"/>
+    </resources>
+</document>

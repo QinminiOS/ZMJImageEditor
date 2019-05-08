@@ -63,7 +63,7 @@ static const NSInteger kTextMaxLimitNumber = 100;
     //TODO: todo?
 }
 
-- (void)executeWithCompletionBlock:(void (^)(UIImage *, NSError *, NSDictionary *))completionBlock
+- (void)executeWithCompletionBlock:(WBGImageToolCompletionBlock)completionBlock
 {
     
 }

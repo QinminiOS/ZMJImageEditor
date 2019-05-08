@@ -52,6 +52,9 @@
 		71858E902281756F00EE6CF2 /* WBGBaseKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E712281756F00EE6CF2 /* WBGBaseKeyboard.m */; };
 		71858E932281787D00EE6CF2 /* WBGColorPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E922281787D00EE6CF2 /* WBGColorPanel.m */; };
 		71858E9522817A2E00EE6CF2 /* WBGColorPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 71858E9422817A2E00EE6CF2 /* WBGColorPanel.xib */; };
+		71FA89AE22827E58009349CB /* WBGMosicaTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 71FA89AD22827E57009349CB /* WBGMosicaTool.m */; };
+		71FA89B022827F06009349CB /* WBGMosicaToolBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 71FA89AF22827F06009349CB /* WBGMosicaToolBar.xib */; };
+		71FA89B322827F14009349CB /* WBGMosicaToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 71FA89B222827F14009349CB /* WBGMosicaToolBar.m */; };
 		79E1363813D4552F3FB8302D /* Pods_ZMJImageEditor_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD4383784075711AC3458819 /* Pods_ZMJImageEditor_Example.framework */; };
 		805FDBA7CDD5AC04FA437661 /* Pods_ZMJImageEditor_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27DE14A43CA3CFB572079268 /* Pods_ZMJImageEditor_Tests.framework */; };
 		96FC64921FECDE2600ACB842 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96FC64941FECDE2600ACB842 /* Main.storyboard */; };
@@ -157,6 +160,11 @@
 		71858E912281787D00EE6CF2 /* WBGColorPanel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WBGColorPanel.h; sourceTree = "<group>"; };
 		71858E922281787D00EE6CF2 /* WBGColorPanel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WBGColorPanel.m; sourceTree = "<group>"; };
 		71858E9422817A2E00EE6CF2 /* WBGColorPanel.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WBGColorPanel.xib; sourceTree = "<group>"; };
+		71FA89AC22827E57009349CB /* WBGMosicaTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBGMosicaTool.h; sourceTree = "<group>"; };
+		71FA89AD22827E57009349CB /* WBGMosicaTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBGMosicaTool.m; sourceTree = "<group>"; };
+		71FA89AF22827F06009349CB /* WBGMosicaToolBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WBGMosicaToolBar.xib; sourceTree = "<group>"; };
+		71FA89B122827F14009349CB /* WBGMosicaToolBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WBGMosicaToolBar.h; sourceTree = "<group>"; };
+		71FA89B222827F14009349CB /* WBGMosicaToolBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WBGMosicaToolBar.m; sourceTree = "<group>"; };
 		8160F7BC79F30F2E4C7F8903 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		96FC64931FECDE2600ACB842 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		96FC64961FECDE2A00ACB842 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
@@ -299,8 +307,10 @@
 		71858E2A2281756F00EE6CF2 /* Mosica */ = {
 			isa = PBXGroup;
 			children = (
+				71FA89AC22827E57009349CB /* WBGMosicaTool.h */,
+				71FA89AD22827E57009349CB /* WBGMosicaTool.m */,
+				71FA89A8228278B7009349CB /* Utils */,
 				71FA89A9228278C9009349CB /* View */,
-				71FA89A8228278B7009349CB /* Tool */,
 				71FA89A7228278AC009349CB /* Controller */,
 			);
 			path = Mosica;
@@ -327,7 +337,6 @@
 		71858E4E2281756F00EE6CF2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				71FA899C228274DD009349CB /* Cells */,
 				71858E382281756F00EE6CF2 /* WBGColorfullButton.h */,
 				71858E432281756F00EE6CF2 /* WBGColorfullButton.m */,
 				71858E5C2281756F00EE6CF2 /* TOCropScrollView.h */,
@@ -382,6 +391,7 @@
 		71FA899D228276AA009349CB /* Text */ = {
 			isa = PBXGroup;
 			children = (
+				71FA899C228274DD009349CB /* Cells */,
 				71FA89A62282789A009349CB /* View */,
 				71858E682281756F00EE6CF2 /* Keyboard */,
 				71858E322281756F00EE6CF2 /* WBGTextTool.h */,
@@ -491,7 +501,7 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		71FA89A8228278B7009349CB /* Tool */ = {
+		71FA89A8228278B7009349CB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
 				71858E2E2281756F00EE6CF2 /* XPixelItem.h */,
@@ -499,7 +509,7 @@
 				71858E2D2281756F00EE6CF2 /* XRGBTool.h */,
 				71858E302281756F00EE6CF2 /* XRGBTool.m */,
 			);
-			path = Tool;
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		71FA89A9228278C9009349CB /* View */ = {
@@ -507,6 +517,9 @@
 			children = (
 				71858E2C2281756F00EE6CF2 /* XScratchView.h */,
 				71858E2F2281756F00EE6CF2 /* XScratchView.m */,
+				71FA89B122827F14009349CB /* WBGMosicaToolBar.h */,
+				71FA89B222827F14009349CB /* WBGMosicaToolBar.m */,
+				71FA89AF22827F06009349CB /* WBGMosicaToolBar.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -630,6 +643,7 @@
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
 				71858E802281756F00EE6CF2 /* WBGImageEditorViewController.xib in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
+				71FA89B022827F06009349CB /* WBGMosicaToolBar.xib in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -718,6 +732,7 @@
 				71858E7B2281756F00EE6CF2 /* WBGColorfullButton.m in Sources */,
 				71858E8E2281756F00EE6CF2 /* WBGMoreKeyboard.m in Sources */,
 				71858E862281756F00EE6CF2 /* TOCropToolbar.m in Sources */,
+				71FA89AE22827E58009349CB /* WBGMosicaTool.m in Sources */,
 				71858E7F2281756F00EE6CF2 /* WBGImageEditorViewController.m in Sources */,
 				71858E902281756F00EE6CF2 /* WBGBaseKeyboard.m in Sources */,
 				71858E722281756F00EE6CF2 /* TOActivityCroppedImageProvider.m in Sources */,
@@ -737,6 +752,7 @@
 				71858E8C2281756F00EE6CF2 /* UIColor+TLChat.m in Sources */,
 				71858E742281756F00EE6CF2 /* XScratchView.m in Sources */,
 				71858E7A2281756F00EE6CF2 /* WBGImageEditorGestureManager.m in Sources */,
+				71FA89B322827F14009349CB /* WBGMosicaToolBar.m in Sources */,
 				71858E932281787D00EE6CF2 /* WBGColorPanel.m in Sources */,
 				71858E852281756F00EE6CF2 /* WBGMoreKeyboardCell.m in Sources */,
 				71858E8F2281756F00EE6CF2 /* WBGMoreKeyboardItem.m in Sources */,

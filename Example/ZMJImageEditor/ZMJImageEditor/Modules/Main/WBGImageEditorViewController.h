@@ -26,6 +26,7 @@ typedef NS_ENUM(NSUInteger, WBGEditorMode)
 @property (weak,   nonatomic, readonly) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic, readonly) IBOutlet UIImageView *drawingView;
 @property (weak,   nonatomic, readonly) IBOutlet UIScrollView *scrollView;
+
 @property (strong, nonatomic, readonly) WBGColorPanel *colorPanel;
 
 @property (nonatomic, assign) WBGEditorMode currentMode;
@@ -33,5 +34,7 @@ typedef NS_ENUM(NSUInteger, WBGEditorMode)
 - (void)resetCurrentTool;
 
 - (void)editTextAgain;
-- (void)hiddenTopAndBottomBar:(BOOL)isHide animation:(BOOL)animation;
+
+- (void)hiddenTopAndBottomBar:(BOOL)isHide
+                    animation:(BOOL)animation;
 @end
