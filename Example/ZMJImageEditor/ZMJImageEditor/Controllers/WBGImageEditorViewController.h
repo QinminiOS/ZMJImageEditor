@@ -9,12 +9,14 @@
 #import "WBGImageEditor.h"
 #import "WBGColorPanel.h"
 
-typedef NS_ENUM(NSUInteger, EditorMode) {
-    EditorNonMode,
-    EditorDrawMode,
-    EditorTextMode,
-    EditorClipMode,
-    EditorPaperMode,
+typedef NS_ENUM(NSUInteger, WBGEditorMode)
+{
+    WBGEditorModeNone,
+    WBGEditorModeDraw,
+    WBGEditorModeText,
+    WBGEditorModeClip,
+    WBGEditorModePaper,
+    WBGEditorModeMosica
 };
 
 @interface WBGImageEditorViewController : WBGImageEditor
@@ -26,7 +28,7 @@ typedef NS_ENUM(NSUInteger, EditorMode) {
 @property (weak,   nonatomic, readonly) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic, readonly) WBGColorPanel *colorPanel;
 
-@property (nonatomic, assign) EditorMode currentMode;
+@property (nonatomic, assign) WBGEditorMode currentMode;
 
 - (void)resetCurrentTool;
 

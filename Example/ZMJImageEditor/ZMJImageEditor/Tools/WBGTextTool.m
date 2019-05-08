@@ -130,7 +130,7 @@ static const NSInteger kTextMaxLimitNumber = 100;
         self.textView.scrollEnabled = YES;
         self.textView.returnKeyType = UIReturnKeyDone;
         self.textView.delegate = self;
-        self.textView.backgroundColor = [UIColor greenColor];
+        self.textView.backgroundColor = [UIColor clearColor];
         
         //self.keyboardToolBar = [_WBGToolBar createToolBarWithCancel:^{
         //    [weakSelf dismissTextEditing:NO];
@@ -247,9 +247,6 @@ static const NSInteger kTextMaxLimitNumber = 100;
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
-    NSArray *arr = self.textView.textLayout.lines;
-    NSLog(@"--->%@", arr);
-    
     NSLog(@"%@", text);
     if ([text isEqualToString:@"\n"])
     {

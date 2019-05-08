@@ -52,7 +52,7 @@
 @property (nonatomic, strong) WBGDrawTool *drawTool;
 @property (nonatomic, strong) WBGTextTool *textTool;
 
-@property (nonatomic, copy  ) UIImage   *originImage;
+@property (nonatomic, copy) UIImage   *originImage;
 
 @property (nonatomic, assign) CGFloat clipInitScale;
 @property (nonatomic, assign) BOOL barsHiddenStatus;
@@ -315,7 +315,7 @@
         _textTool.dissmissTextTool = ^(NSString *currentText)
         {
             [weakSelf hiddenColorPan:NO animation:YES];
-            weakSelf.currentMode = EditorNonMode;
+            weakSelf.currentMode = WBGEditorModeNone;
             weakSelf.currentTool = nil;
         };
     }
@@ -441,7 +441,7 @@
 #pragma mark - Undo
 - (void)undoAction
 {
-    if (self.currentMode == EditorDrawMode)
+    if (self.currentMode == WBGEditorModeDraw)
     {
         WBGDrawTool *tool = (WBGDrawTool *)self.currentTool;
         [tool backToLastDraw];
@@ -465,12 +465,12 @@
 ///涂鸦模式
 - (IBAction)panAction:(UIButton *)sender
 {
-    if (_currentMode == EditorDrawMode)
+    if (_currentMode == WBGEditorModeDraw)
     {
         return;
     }
     //先设置状态，然后在干别的
-    self.currentMode = EditorDrawMode;
+    self.currentMode = WBGEditorModeDraw;
     
     self.currentTool = self.drawTool;
 }
@@ -498,7 +498,7 @@
                                                           setup:^{
                                                               [weakSelf refreshImageView];
                                                               weakSelf.colorPanel.hidden = YES;
-                                                              weakSelf.currentMode = EditorClipMode;
+                                                              weakSelf.currentMode = WBGEditorModeClip;
                                                               [weakSelf setCurrentTool:nil];
                                                           }
                                                      completion:^{
@@ -510,12 +510,12 @@
 //文字模式
 - (IBAction)textAction:(UIButton *)sender
 {
-    if (_currentMode == EditorTextMode)
+    if (_currentMode == WBGEditorModeText)
     {
         return;
     }
     //先设置状态，然后在干别的
-    self.currentMode = EditorTextMode;
+    self.currentMode = WBGEditorModeText;
     
     self.currentTool = self.textTool;
     [self hiddenColorPan:YES animation:YES];
@@ -523,10 +523,10 @@
 
 //马赛克模式
 - (IBAction)paperAction:(UIButton *)sender {
-    if (_currentMode == EditorTextMode) {
+    if (_currentMode == WBGEditorModeText) {
         return;
     }
-    self.currentMode = EditorPaperMode;
+    self.currentMode = WBGEditorModePaper;
     
 //    __weak typeof(self)weakSelf = self;
 //    [self buildClipImageShowHud:NO
@@ -573,7 +573,7 @@
 
 - (IBAction)undoAction:(UIButton *)sender
 {
-    if (self.currentMode == EditorDrawMode)
+    if (self.currentMode == WBGEditorModeDraw)
     {
         WBGDrawTool *tool = (WBGDrawTool *)self.currentTool;
         [tool backToLastDraw];
@@ -584,12 +584,12 @@
 {
     //WBGTextTool 钩子调用
     
-    if (_currentMode == EditorTextMode)
+    if (_currentMode == WBGEditorModeText)
     {
         return;
     }
     //先设置状态，然后在干别的
-    self.currentMode = EditorTextMode;
+    self.currentMode = WBGEditorModeText;
     
     if(_currentTool != self.textTool)
     {
@@ -621,7 +621,7 @@
 
 - (void)resetCurrentTool
 {
-    self.currentMode = EditorNonMode;
+    self.currentMode = WBGEditorModeNone;
     self.currentTool = nil;
 }
 
@@ -728,7 +728,7 @@
 {
     switch (_currentMode)
     {
-        case EditorDrawMode:
+        case WBGEditorModeDraw:
         {
             self.panButton.selected = YES;
             if (self.drawTool.allLineMutableArray.count > 0) {
@@ -736,9 +736,9 @@
             }
         }
             break;
-        case EditorTextMode:
-        case EditorClipMode:
-        case EditorNonMode:
+        case WBGEditorModeText:
+        case WBGEditorModeClip:
+        case WBGEditorModeNone:
         {
             self.panButton.selected = NO;
             //self.undoButton.hidden  = YES;
