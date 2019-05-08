@@ -150,14 +150,45 @@
 {
     NSMutableArray *valibleCompoment = [NSMutableArray new];
     WBGImageEditorComponent curComponent = [self.dataSource respondsToSelector:@selector(imageEditorCompoment)] ? [self.dataSource imageEditorCompoment] : 0;
-    if (curComponent == 0) { curComponent = WBGImageEditorWholeComponent; }
-    if (curComponent & WBGImageEditorDrawComponent) { self.panButton.hidden = NO; [valibleCompoment addObject:self.panButton]; }
-    if (curComponent & WBGImageEditorTextComponent) { self.textButton.hidden = NO; [valibleCompoment addObject:self.textButton]; }
-    if (curComponent & WBGImageEditorClipComponent) { self.clipButton.hidden = NO; [valibleCompoment addObject:self.clipButton]; }
-    if (curComponent & WBGImageEditorPaperComponent) { self.paperButton.hidden = NO; [valibleCompoment addObject:self.paperButton]; }
-    if (curComponent & WBGImageEditorColorPanComponent) { self.colorPanel.hidden = NO; }
     
-    [valibleCompoment enumerateObjectsUsingBlock:^(UIButton * _Nonnull button, NSUInteger idx, BOOL * _Nonnull stop) {
+    if (curComponent == 0)
+    {
+        curComponent = WBGImageEditorWholeComponent;
+    }
+    
+    if (curComponent & WBGImageEditorDrawComponent)
+    {
+        self.panButton.hidden = NO;
+        [valibleCompoment addObject:self.panButton];
+    }
+    
+    if (curComponent & WBGImageEditorTextComponent)
+    {
+        self.textButton.hidden = NO;
+        [valibleCompoment addObject:self.textButton];
+    }
+    
+    if (curComponent & WBGImageEditorPaperComponent)
+    {
+        self.paperButton.hidden = NO;
+        [valibleCompoment addObject:self.paperButton];
+    }
+    
+    if (curComponent & WBGImageEditorClipComponent)
+    {
+        self.clipButton.hidden = NO;
+        [valibleCompoment addObject:self.clipButton];
+    }
+    
+    if (curComponent & WBGImageEditorColorPanComponent)
+    {
+        self.colorPanel.hidden = NO;
+    }
+    
+    [valibleCompoment enumerateObjectsUsingBlock:^(UIButton * _Nonnull button,
+                                                   NSUInteger idx,
+                                                   BOOL * _Nonnull stop)
+    {
         CGRect originFrame = button.frame;
         originFrame.origin.x = idx == 0 ?(idx + 1) * 30.f : (idx + 1) * 30.f + originFrame.size.width * idx;
         button.frame = originFrame;
@@ -490,57 +521,49 @@
     [self hiddenColorPan:YES animation:YES];
 }
 
-//贴图模式
+//马赛克模式
 - (IBAction)paperAction:(UIButton *)sender {
     if (_currentMode == EditorTextMode) {
         return;
     }
     self.currentMode = EditorPaperMode;
     
-    __weak typeof(self)weakSelf = self;
-    [self buildClipImageShowHud:NO
-                 clipedCallback:^(UIImage *clipedImage)
-    {
-        typeof (self) strongSelf = weakSelf;
-        CGRect viewFrame = [strongSelf.view convertRect:strongSelf.imageView.frame toView:strongSelf.navigationController.view];
-        
-        WBGMosicaViewController *vc = [[WBGMosicaViewController alloc] initWithImage:clipedImage frame:viewFrame];
-        __weak typeof(self)weakSelf = strongSelf;
-        
-        vc.mosicaCallback = ^(UIImage *mosicaImage) {
-            typeof (self) strongSelf = weakSelf;
-            self.imageView.image = mosicaImage;
-            CGRect bounds = strongSelf.drawingView.bounds;
-            bounds.size = CGSizeMake(bounds.size.width/strongSelf.clipInitScale, bounds.size.height/self.clipInitScale);
-            
-            [strongSelf refreshImageView];
-            [strongSelf viewDidLayoutSubviews];
-            
-            strongSelf.navigationItem.rightBarButtonItem.enabled = YES;
-            
-            //生成图片后，清空画布内容
-            [strongSelf.drawTool.allLineMutableArray removeAllObjects];
-            [strongSelf.drawTool drawLine];
-            [strongSelf.drawingView removeAllSubviews];
-            // strongSelf.undoButton.hidden = YES;
-        };
-        
-        [weakSelf presentViewController:vc animated:YES completion:^{
-            typeof (self) strongSelf = weakSelf;
-            [strongSelf refreshImageView];
-            strongSelf.colorPanel.hidden = YES;
-            strongSelf.currentMode = EditorClipMode;
-            [strongSelf setCurrentTool:nil];
-        }];
-    }];
-    
-//    NSArray<WBGMoreKeyboardItem *> *sources = nil;
-//    if (self.dataSource) {
-//        sources = [self.dataSource imageItemsEditor:self];
-//    }
-//    //贴图模块
-//    [self.keyboard setChatMoreKeyboardData:sources];
-//    [self.keyboard showInView:self.view withAnimation:YES];
+//    __weak typeof(self)weakSelf = self;
+//    [self buildClipImageShowHud:NO
+//                 clipedCallback:^(UIImage *clipedImage)
+//    {
+//        typeof (self) strongSelf = weakSelf;
+//        CGRect viewFrame = [strongSelf.view convertRect:strongSelf.imageView.frame toView:strongSelf.navigationController.view];
+//
+//        WBGMosicaViewController *vc = [[WBGMosicaViewController alloc] initWithImage:clipedImage frame:viewFrame];
+//        __weak typeof(self)weakSelf = strongSelf;
+//
+//        vc.mosicaCallback = ^(UIImage *mosicaImage) {
+//            typeof (self) strongSelf = weakSelf;
+//            self.imageView.image = mosicaImage;
+//            CGRect bounds = strongSelf.drawingView.bounds;
+//            bounds.size = CGSizeMake(bounds.size.width/strongSelf.clipInitScale, bounds.size.height/self.clipInitScale);
+//
+//            [strongSelf refreshImageView];
+//            [strongSelf viewDidLayoutSubviews];
+//
+//            strongSelf.navigationItem.rightBarButtonItem.enabled = YES;
+//
+//            //生成图片后，清空画布内容
+//            [strongSelf.drawTool.allLineMutableArray removeAllObjects];
+//            [strongSelf.drawTool drawLine];
+//            [strongSelf.drawingView removeAllSubviews];
+//            // strongSelf.undoButton.hidden = YES;
+//        };
+//
+//        [weakSelf presentViewController:vc animated:YES completion:^{
+//            typeof (self) strongSelf = weakSelf;
+//            [strongSelf refreshImageView];
+//            strongSelf.colorPanel.hidden = YES;
+//            strongSelf.currentMode = EditorClipMode;
+//            [strongSelf setCurrentTool:nil];
+//        }];
+//    }];
 }
 
 - (IBAction)backAction:(UIButton *)sender
@@ -582,6 +605,18 @@
 - (IBAction)onFinishButtonTapped:(UIButton *)sender
 {
     
+}
+
+//贴图模块
+- (IBAction)onPicButtonTapped:(UIButton *)sender
+{
+    NSArray<WBGMoreKeyboardItem *> *sources = nil;
+    if (self.dataSource) {
+        sources = [self.dataSource imageItemsEditor:self];
+    }
+    
+    [self.keyboard setChatMoreKeyboardData:sources.mutableCopy];
+    [self.keyboard showInView:self.view withAnimation:YES];
 }
 
 - (void)resetCurrentTool
@@ -761,29 +796,32 @@
     return image;
 }
 
-- (void)buildClipImageShowHud:(BOOL)showHud clipedCallback:(void(^)(UIImage *clipedImage))clipedCallback {
-    if (showHud) {
-        //ShowBusyTextIndicatorForView(self.view, @"生成图片中...", nil);
+- (void)buildClipImageShowHud:(BOOL)showHud clipedCallback:(void(^)(UIImage *clipedImage))clipedCallback
+{
+    if (showHud)
+    {
+        // ShowBusyTextIndicatorForView(self.view, @"生成图片中...", nil);
     }
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        CGFloat WS = self.imageView.width/ self.drawingView.width;
-        CGFloat HS = self.imageView.height/ self.drawingView.height;
+    
+    CGFloat WS = self.imageView.width/ self.drawingView.width;
+    CGFloat HS = self.imageView.height/ self.drawingView.height;
+
+    UIGraphicsBeginImageContextWithOptions(self.imageView.size,
+                                           NO,
+                                           self.imageView.image.scale);
+
+    [self.imageView.image drawAtPoint:CGPointZero];
+    CGFloat viewToimgW = self.imageView.width/self.imageView.image.size.width;
+    CGFloat viewToimgH = self.imageView.height/self.imageView.image.size.height;
+    __unused CGFloat drawX = self.imageView.left/viewToimgW;
+    CGFloat drawY = self.imageView.top/viewToimgH;
+    [_drawingView.image drawInRect:CGRectMake(0, -drawY, self.imageView.image.size.width/WS, self.imageView.image.size.height/HS)];
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        UIGraphicsBeginImageContextWithOptions(CGSizeMake(self.imageView.image.size.width, self.imageView.image.size.height),
-                                               NO,
-                                               self.imageView.image.scale);
-    });
-    
-        [self.imageView.image drawAtPoint:CGPointZero];
-        CGFloat viewToimgW = self.imageView.width/self.imageView.image.size.width;
-        CGFloat viewToimgH = self.imageView.height/self.imageView.image.size.height;
-        __unused CGFloat drawX = self.imageView.left/viewToimgW;
-        CGFloat drawY = self.imageView.top/viewToimgH;
-        [_drawingView.image drawInRect:CGRectMake(0, -drawY, self.imageView.image.size.width/WS, self.imageView.image.size.height/HS)];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        for (UIView *subV in _drawingView.subviews) {
-            if ([subV isKindOfClass:[WBGTextToolView class]]) {
+        for (UIView *subV in _drawingView.subviews)
+        {
+            if ([subV isKindOfClass:[WBGTextToolView class]])
+            {
                 WBGTextToolView *textLabel = (WBGTextToolView *)subV;
                 //进入正常状态
                 [WBGTextToolView setInactiveTextView:textLabel];
@@ -805,16 +843,15 @@
         }
     });
     
-        UIImage *tmp = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
+    UIImage *tmp = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        //HideBusyIndicatorForView(self.view);
+        UIImage *image = [UIImage imageWithCGImage:tmp.CGImage scale:[UIScreen mainScreen].scale orientation:UIImageOrientationUp];
+        clipedCallback(image);
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-            //HideBusyIndicatorForView(self.view);
-            UIImage *image = [UIImage imageWithCGImage:tmp.CGImage scale:[UIScreen mainScreen].scale orientation:UIImageOrientationUp];
-            clipedCallback(image);
-            
-        });
-//    });
+    });
 }
 
 + (UIImage *)screenshot:(UIView *)view orientation:(UIDeviceOrientation)orientation usePresentationLayer:(BOOL)usePresentationLayer

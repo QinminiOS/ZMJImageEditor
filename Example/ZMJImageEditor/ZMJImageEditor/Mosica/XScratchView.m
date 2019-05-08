@@ -10,11 +10,11 @@
 
 @interface XScratchView ()
 
-/** <##> */
+/**  */
 @property (nonatomic, strong) UIImageView *surfaceImageView;
-/** <##> */
+/**  */
 @property (nonatomic, strong) CALayer *imageLayer;
-/** <##> */
+/**  */
 @property (nonatomic, strong) CAShapeLayer *shapeLayer;
 /** 手指的涂抹路径 */
 @property (nonatomic, assign) CGMutablePathRef path;
