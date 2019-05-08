@@ -285,19 +285,12 @@
 		71858E282281756F00EE6CF2 /* ZMJImageEditor */ = {
 			isa = PBXGroup;
 			children = (
-				71858E422281756F00EE6CF2 /* WBGChatMacros.h */,
 				71858E392281756F00EE6CF2 /* WBGImageEditor.h */,
 				71858E672281756F00EE6CF2 /* WBGImageEditor.m */,
-				71858E402281756F00EE6CF2 /* TOActivityCroppedImageProvider.h */,
-				71858E292281756F00EE6CF2 /* TOActivityCroppedImageProvider.m */,
-				71858E3A2281756F00EE6CF2 /* Models */,
-				71858E4E2281756F00EE6CF2 /* Views */,
-				71858E442281756F00EE6CF2 /* Controllers */,
-				71858E312281756F00EE6CF2 /* Tools */,
-				71858E2A2281756F00EE6CF2 /* Mosica */,
+				71FA89AA228278F7009349CB /* Macros */,
+				71FA899E228276CC009349CB /* Base */,
+				71FA89A2228277D0009349CB /* Modules */,
 				71858E3D2281756F00EE6CF2 /* Manager */,
-				71858E682281756F00EE6CF2 /* Keyboard */,
-				71858E5D2281756F00EE6CF2 /* Assets */,
 				71858E602281756F00EE6CF2 /* Categories */,
 			);
 			path = ZMJImageEditor;
@@ -306,36 +299,20 @@
 		71858E2A2281756F00EE6CF2 /* Mosica */ = {
 			isa = PBXGroup;
 			children = (
-				71858E2E2281756F00EE6CF2 /* XPixelItem.h */,
-				71858E2B2281756F00EE6CF2 /* XPixelItem.m */,
-				71858E2D2281756F00EE6CF2 /* XRGBTool.h */,
-				71858E302281756F00EE6CF2 /* XRGBTool.m */,
-				71858E2C2281756F00EE6CF2 /* XScratchView.h */,
-				71858E2F2281756F00EE6CF2 /* XScratchView.m */,
+				71FA89A9228278C9009349CB /* View */,
+				71FA89A8228278B7009349CB /* Tool */,
+				71FA89A7228278AC009349CB /* Controller */,
 			);
 			path = Mosica;
 			sourceTree = "<group>";
 		};
-		71858E312281756F00EE6CF2 /* Tools */ = {
-			isa = PBXGroup;
-			children = (
-				71858E362281756F00EE6CF2 /* WBGImageToolBase.h */,
-				71858E332281756F00EE6CF2 /* WBGImageToolBase.m */,
-				71858E342281756F00EE6CF2 /* WBGDrawTool.h */,
-				71858E372281756F00EE6CF2 /* WBGDrawTool.m */,
-				71858E322281756F00EE6CF2 /* WBGTextTool.h */,
-				71858E352281756F00EE6CF2 /* WBGTextTool.m */,
-			);
-			path = Tools;
-			sourceTree = "<group>";
-		};
-		71858E3A2281756F00EE6CF2 /* Models */ = {
+		71858E3A2281756F00EE6CF2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				71858E3C2281756F00EE6CF2 /* TOCroppedImageAttributes.h */,
 				71858E3B2281756F00EE6CF2 /* TOCroppedImageAttributes.m */,
 			);
-			path = Models;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		71858E3D2281756F00EE6CF2 /* Manager */ = {
@@ -347,51 +324,19 @@
 			path = Manager;
 			sourceTree = "<group>";
 		};
-		71858E442281756F00EE6CF2 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				71858E462281756F00EE6CF2 /* WBGImageEditorViewController.h */,
-				71858E492281756F00EE6CF2 /* WBGImageEditorViewController.m */,
-				71858E4C2281756F00EE6CF2 /* WBGImageEditorViewController.xib */,
-				71858E4D2281756F00EE6CF2 /* TOCropViewController.h */,
-				71858E482281756F00EE6CF2 /* TOCropViewController.m */,
-				71858E4B2281756F00EE6CF2 /* WBGMosicaViewController.h */,
-				71858E472281756F00EE6CF2 /* WBGMosicaViewController.m */,
-				71858E4A2281756F00EE6CF2 /* TOCropViewControllerTransitioning.h */,
-				71858E452281756F00EE6CF2 /* TOCropViewControllerTransitioning.m */,
-			);
-			path = Controllers;
-			sourceTree = "<group>";
-		};
 		71858E4E2281756F00EE6CF2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				71FA899C228274DD009349CB /* Cells */,
 				71858E382281756F00EE6CF2 /* WBGColorfullButton.h */,
 				71858E432281756F00EE6CF2 /* WBGColorfullButton.m */,
-				71858E512281756F00EE6CF2 /* TOCropOverlayView.h */,
-				71858E572281756F00EE6CF2 /* TOCropOverlayView.m */,
 				71858E5C2281756F00EE6CF2 /* TOCropScrollView.h */,
 				71858E552281756F00EE6CF2 /* TOCropScrollView.m */,
-				71858E542281756F00EE6CF2 /* TOCropToolbar.h */,
-				71858E592281756F00EE6CF2 /* TOCropToolbar.m */,
-				71858E4F2281756F00EE6CF2 /* TOCropView.h */,
-				71858E562281756F00EE6CF2 /* TOCropView.m */,
-				71858E502281756F00EE6CF2 /* WBGMoreKeyboardCell.h */,
-				71858E582281756F00EE6CF2 /* WBGMoreKeyboardCell.m */,
-				71858E5B2281756F00EE6CF2 /* WBGTextToolView.h */,
-				71858E522281756F00EE6CF2 /* WBGTextToolView.m */,
 				71858E912281787D00EE6CF2 /* WBGColorPanel.h */,
 				71858E922281787D00EE6CF2 /* WBGColorPanel.m */,
 				71858E9422817A2E00EE6CF2 /* WBGColorPanel.xib */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		71858E5D2281756F00EE6CF2 /* Assets */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Assets;
 			sourceTree = "<group>";
 		};
 		71858E602281756F00EE6CF2 /* Categories */ = {
@@ -423,6 +368,165 @@
 				71858E6F2281756F00EE6CF2 /* WBGMoreKeyboardItem.m */,
 			);
 			path = Keyboard;
+			sourceTree = "<group>";
+		};
+		71FA899C228274DD009349CB /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				71858E502281756F00EE6CF2 /* WBGMoreKeyboardCell.h */,
+				71858E582281756F00EE6CF2 /* WBGMoreKeyboardCell.m */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		71FA899D228276AA009349CB /* Text */ = {
+			isa = PBXGroup;
+			children = (
+				71FA89A62282789A009349CB /* View */,
+				71858E682281756F00EE6CF2 /* Keyboard */,
+				71858E322281756F00EE6CF2 /* WBGTextTool.h */,
+				71858E352281756F00EE6CF2 /* WBGTextTool.m */,
+			);
+			path = Text;
+			sourceTree = "<group>";
+		};
+		71FA899E228276CC009349CB /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				71858E4E2281756F00EE6CF2 /* Views */,
+				71FA899F228276D2009349CB /* Tools */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		71FA899F228276D2009349CB /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				71858E362281756F00EE6CF2 /* WBGImageToolBase.h */,
+				71858E332281756F00EE6CF2 /* WBGImageToolBase.m */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		71FA89A0228276F6009349CB /* Draw */ = {
+			isa = PBXGroup;
+			children = (
+				71858E342281756F00EE6CF2 /* WBGDrawTool.h */,
+				71858E372281756F00EE6CF2 /* WBGDrawTool.m */,
+			);
+			path = Draw;
+			sourceTree = "<group>";
+		};
+		71FA89A12282772A009349CB /* Crop */ = {
+			isa = PBXGroup;
+			children = (
+				71858E3A2281756F00EE6CF2 /* Model */,
+				71FA89A42282786C009349CB /* View */,
+				71FA89A322827856009349CB /* Controller */,
+				71FA89A52282787D009349CB /* Provider */,
+			);
+			path = Crop;
+			sourceTree = "<group>";
+		};
+		71FA89A2228277D0009349CB /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				71FA89AB228279A8009349CB /* Main */,
+				71FA89A0228276F6009349CB /* Draw */,
+				71FA899D228276AA009349CB /* Text */,
+				71858E2A2281756F00EE6CF2 /* Mosica */,
+				71FA89A12282772A009349CB /* Crop */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		71FA89A322827856009349CB /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				71858E4D2281756F00EE6CF2 /* TOCropViewController.h */,
+				71858E482281756F00EE6CF2 /* TOCropViewController.m */,
+				71858E4A2281756F00EE6CF2 /* TOCropViewControllerTransitioning.h */,
+				71858E452281756F00EE6CF2 /* TOCropViewControllerTransitioning.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		71FA89A42282786C009349CB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				71858E512281756F00EE6CF2 /* TOCropOverlayView.h */,
+				71858E572281756F00EE6CF2 /* TOCropOverlayView.m */,
+				71858E542281756F00EE6CF2 /* TOCropToolbar.h */,
+				71858E592281756F00EE6CF2 /* TOCropToolbar.m */,
+				71858E4F2281756F00EE6CF2 /* TOCropView.h */,
+				71858E562281756F00EE6CF2 /* TOCropView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		71FA89A52282787D009349CB /* Provider */ = {
+			isa = PBXGroup;
+			children = (
+				71858E402281756F00EE6CF2 /* TOActivityCroppedImageProvider.h */,
+				71858E292281756F00EE6CF2 /* TOActivityCroppedImageProvider.m */,
+			);
+			path = Provider;
+			sourceTree = "<group>";
+		};
+		71FA89A62282789A009349CB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				71858E5B2281756F00EE6CF2 /* WBGTextToolView.h */,
+				71858E522281756F00EE6CF2 /* WBGTextToolView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		71FA89A7228278AC009349CB /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				71858E4B2281756F00EE6CF2 /* WBGMosicaViewController.h */,
+				71858E472281756F00EE6CF2 /* WBGMosicaViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		71FA89A8228278B7009349CB /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				71858E2E2281756F00EE6CF2 /* XPixelItem.h */,
+				71858E2B2281756F00EE6CF2 /* XPixelItem.m */,
+				71858E2D2281756F00EE6CF2 /* XRGBTool.h */,
+				71858E302281756F00EE6CF2 /* XRGBTool.m */,
+			);
+			path = Tool;
+			sourceTree = "<group>";
+		};
+		71FA89A9228278C9009349CB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				71858E2C2281756F00EE6CF2 /* XScratchView.h */,
+				71858E2F2281756F00EE6CF2 /* XScratchView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		71FA89AA228278F7009349CB /* Macros */ = {
+			isa = PBXGroup;
+			children = (
+				71858E422281756F00EE6CF2 /* WBGChatMacros.h */,
+			);
+			path = Macros;
+			sourceTree = "<group>";
+		};
+		71FA89AB228279A8009349CB /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				71858E462281756F00EE6CF2 /* WBGImageEditorViewController.h */,
+				71858E492281756F00EE6CF2 /* WBGImageEditorViewController.m */,
+				71858E4C2281756F00EE6CF2 /* WBGImageEditorViewController.xib */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 		ECFF949E9BE1709B8569CA3F /* Pods */ = {

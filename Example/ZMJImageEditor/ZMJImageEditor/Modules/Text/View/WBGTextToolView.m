@@ -12,6 +12,8 @@
 #import "UIView+YYAdd.h"
 #import "UIImage+library.h"
 
+#define IMAGE_MAXSIZE 200
+
 static const CGFloat MAX_FONT_SIZE = 50.0f;
 static const CGFloat MIN_TEXT_SCAL = 0.614f;
 static const CGFloat MAX_TEXT_SCAL = 4.0f;
@@ -57,7 +59,8 @@ static const CGFloat DELETEBUTTON_BOUNDS = 26.f;
     }
 }
 
-- (void)drawRect:(CGRect)rect {
+- (void)drawRect:(CGRect)rect
+{
     if (self.image) {
         [self.image drawInRect:CGRectInset(rect, 21, 25)];
         return;
@@ -129,12 +132,11 @@ static const CGFloat DELETEBUTTON_BOUNDS = 26.f;
     _contentView.origin = CGPointZero;
 }
 
-- (void)drawRect:(CGRect)rect {
+- (void)drawRect:(CGRect)rect
+{
     //CGFloat scale = [(NSNumber *)[self valueForKeyPath:@"layer.transform.scale.x"] floatValue];
     
     //UIFont *font = [self.textFont fontWithSize:_defaultFont * scale];
-    
-    
 }
 
 @end
@@ -165,7 +167,8 @@ static const CGFloat DELETEBUTTON_BOUNDS = 26.f;
 static WBGTextToolView *activeView = nil;
 + (void)setActiveTextView:(WBGTextToolView *)view
 {
-    if(view != activeView){
+    if(view != activeView)
+    {
         [activeView setAvtive:NO];
         activeView = view;
         [activeView setAvtive:YES];
@@ -176,16 +179,24 @@ static WBGTextToolView *activeView = nil;
     }
 }
 
-+ (void)setInactiveTextView:(WBGTextToolView *)view {
-    if (activeView) {activeView = nil;}
++ (void)setInactiveTextView:(WBGTextToolView *)view
+{
+    if (activeView)
+    {
+        activeView = nil;
+    }
     
     [view setAvtive:NO];
 }
 
-- (instancetype)initWithTool:(WBGTextTool *)tool text:(NSString *)text font:(UIFont *)font orImage:(UIImage *)image
+- (instancetype)initWithTool:(WBGTextTool *)tool
+                        text:(NSString *)text
+                        font:(UIFont *)font
+                     orImage:(UIImage *)image
 {
     self = [super initWithFrame:CGRectMake(0, 0, 132, 132)];
-    if(self){
+    if(self)
+    {
         
         _archerBGView = [[WBGTextToolOverlapView alloc] initWithFrame:CGRectMake(0, 0, 132, 132)];
         _archerBGView.backgroundColor = [UIColor clearColor];
@@ -206,8 +217,9 @@ static WBGTextToolView *activeView = nil;
         
         CGSize size = [_label sizeThatFits:CGSizeMake(tool.editor.drawingView.width - 2*LABEL_OFFSET, FLT_MAX)];
         _label.frame = CGRectMake(LABEL_OFFSET, LABEL_OFFSET, size.width + 20, size.height + _label.font.pointSize);
-#define IMAGE_MAXSIZE 200
-        if (image) {
+
+        if (image)
+        {
             CGSize imageSize = image.size;
             CGFloat DI = imageSize.width / imageSize.height; //宽高比例
             CGFloat maxLength = MAX(imageSize.width, imageSize.height);
@@ -226,6 +238,7 @@ static WBGTextToolView *activeView = nil;
             
             _label.frame = CGRectMake(LABEL_OFFSET, LABEL_OFFSET, imageSize.width, imageSize.height);
         }
+        
         self.frame = CGRectMake(0, 0, _label.width + 2*LABEL_OFFSET, _label.height + 2*LABEL_OFFSET);
         
         _deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -239,6 +252,7 @@ static WBGTextToolView *activeView = nil;
         
         [self initGestures];
     }
+    
     return self;
 }
 
@@ -353,7 +367,8 @@ static WBGTextToolView *activeView = nil;
     [self layoutSubviews];
 }
 
-- (void)viewDidPinch:(UIPinchGestureRecognizer *)recognizer {
+- (void)viewDidPinch:(UIPinchGestureRecognizer *)recognizer
+{
     //缩放
     [[self class] setActiveTextView:self];
     
@@ -391,7 +406,8 @@ static WBGTextToolView *activeView = nil;
     }
 }
 
-- (void)viewDidRotation:(UIRotationGestureRecognizer *)recognizer {
+- (void)viewDidRotation:(UIRotationGestureRecognizer *)recognizer
+{
     //旋转
     if (recognizer.state == UIGestureRecognizerStateBegan ||
         recognizer.state == UIGestureRecognizerStateChanged) {
@@ -412,7 +428,8 @@ static WBGTextToolView *activeView = nil;
 }
 
 #pragma mark - Edit it again
-- (void)editTextAgain:(UITapGestureRecognizer *)recognizer {
+- (void)editTextAgain:(UITapGestureRecognizer *)recognizer
+{
     //事件源
     [self.textTool.editor editTextAgain];
     self.textTool.isEditAgain = YES;
@@ -429,9 +446,8 @@ static WBGTextToolView *activeView = nil;
     
 }
 
-- (void)resizeSelf {
-    
-    
+- (void)resizeSelf
+{
     CGSize size = [_label sizeThatFits:CGSizeMake(self.textTool.editor.drawingView.width - 2*LABEL_OFFSET, FLT_MAX)];
     _label.frame = CGRectMake(LABEL_OFFSET, LABEL_OFFSET, size.width + 20, size.height + _label.font.pointSize);
     self.bounds = CGRectMake(0, 0, _label.width + 2*LABEL_OFFSET, _label.height + 2*LABEL_OFFSET);
@@ -442,7 +458,8 @@ static WBGTextToolView *activeView = nil;
     rectLayer3.frame = CGRectMake(_label.width - 2 - _scale/2.f, _label.height - 2 - _scale/2.f, 4, 4);
 }
 
-- (void)layoutSubviews {
+- (void)layoutSubviews
+{
     [super layoutSubviews];
     
     CGRect boundss;
@@ -685,8 +702,9 @@ static WBGTextToolView *activeView = nil;
 
 @implementation EditImageCropOverLayView
 
-- (void)drawRect:(CGRect)rect {
-    CGContextRef context = UIGraphicsGetCurrentContext();
+- (void)drawRect:(CGRect)rect
+{
+    // CGContextRef context = UIGraphicsGetCurrentContext();
     
     UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:0];
     path.lineWidth = 2.5;

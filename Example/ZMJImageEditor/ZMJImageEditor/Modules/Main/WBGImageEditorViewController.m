@@ -64,11 +64,9 @@
 
 - (id)init
 {
-    self = [self initWithNibName:@"WBGImageEditorViewController" bundle:[NSBundle bundleForClass:self.class]];
-    if (self)
-    {
-        
-    }
+    self = [self initWithNibName:@"WBGImageEditorViewController"
+                          bundle:[NSBundle bundleForClass:self.class]];
+    
     return self;
 }
 
@@ -153,7 +151,7 @@
     
     if (curComponent == 0)
     {
-        curComponent = WBGImageEditorWholeComponent;
+        curComponent = WBGImageEditorALLComponent;
     }
     
     if (curComponent & WBGImageEditorDrawComponent)
@@ -639,7 +637,7 @@
 }
 
 #pragma mark - WBGMoreKeyboardDelegate
-- (void) moreKeyboard:(id)keyboard didSelectedFunctionItem:(WBGMoreKeyboardItem *)funcItem
+- (void)moreKeyboard:(id)keyboard didSelectedFunctionItem:(WBGMoreKeyboardItem *)funcItem
 {
     WBGMoreKeyboard *kb = (WBGMoreKeyboard *)keyboard;
     [kb dismissWithAnimation:YES];

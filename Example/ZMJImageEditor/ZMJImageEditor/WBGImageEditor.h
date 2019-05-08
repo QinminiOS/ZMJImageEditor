@@ -8,20 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol WBGImageEditorDelegate,
-          WBGImageEditorTransitionDelegate,
-          WBGImageEditorDataSource;
-
+@protocol WBGImageEditorDelegate;
+@protocol WBGImageEditorTransitionDelegate;
+@protocol WBGImageEditorDataSource;
 @class WBGMoreKeyboardItem;
 
-typedef NS_OPTIONS(NSInteger, WBGImageEditorComponent) {
+typedef NS_OPTIONS(NSInteger, WBGImageEditorComponent)
+{
     WBGImageEditorDrawComponent = 1 << 0,
     WBGImageEditorTextComponent = 1 << 1,
     WBGImageEditorClipComponent = 1 << 2,
     WBGImageEditorPaperComponent = 1 << 3,
     WBGImageEditorColorPanComponent = 1 << 4,
+    
     //all
-    WBGImageEditorWholeComponent = WBGImageEditorDrawComponent
+    WBGImageEditorALLComponent = WBGImageEditorDrawComponent
                                  | WBGImageEditorTextComponent
                                  | WBGImageEditorClipComponent
                                  | WBGImageEditorPaperComponent
@@ -34,10 +35,15 @@ typedef NS_OPTIONS(NSInteger, WBGImageEditorComponent) {
 @property (nonatomic, weak) id<WBGImageEditorDataSource> dataSource;
 
 - (id)initWithImage:(UIImage*)image;
-- (id)initWithImage:(UIImage*)image delegate:(id<WBGImageEditorDelegate>)delegate dataSource:(id<WBGImageEditorDataSource>)dataSource;
 - (id)initWithDelegate:(id<WBGImageEditorDelegate>)delegate;
 
-- (void)showInViewController:(UIViewController<WBGImageEditorTransitionDelegate> *)controller withImageView:(UIImageView*)imageView;
+- (id)initWithImage:(UIImage*)image
+           delegate:(id<WBGImageEditorDelegate>)delegate
+         dataSource:(id<WBGImageEditorDataSource>)dataSource;
+
+- (void)showInViewController:(UIViewController<WBGImageEditorTransitionDelegate> *)controller
+               withImageView:(UIImageView*)imageView;
+
 - (void)refreshToolSettings;
 @end
 
@@ -45,7 +51,9 @@ typedef NS_OPTIONS(NSInteger, WBGImageEditorComponent) {
 #pragma mark - Protocol
 @protocol WBGImageEditorDelegate <NSObject>
 @optional
-- (void)imageEditor:(WBGImageEditor *)editor didFinishEdittingWithImage:(UIImage *)image;
+- (void)imageEditor:(WBGImageEditor *)editor
+didFinishEdittingWithImage:(UIImage *)image;
+
 - (void)imageEditorDidCancel:(WBGImageEditor *)editor;
 
 @end
@@ -64,7 +72,12 @@ typedef NS_OPTIONS(NSInteger, WBGImageEditorComponent) {
 
 @protocol WBGImageEditorTransitionDelegate <WBGImageEditorDelegate>
 @optional
-- (void)imageEditor:(WBGImageEditor *)editor willDismissWithImageView:(UIImageView *)imageView canceled:(BOOL)canceled;
-- (void)imageEditor:(WBGImageEditor *)editor didDismissWithImageView:(UIImageView *)imageView canceled:(BOOL)canceled;
+- (void)imageEditor:(WBGImageEditor *)editor
+willDismissWithImageView:(UIImageView *)imageView
+           canceled:(BOOL)canceled;
+
+- (void)imageEditor:(WBGImageEditor *)editor
+didDismissWithImageView:(UIImageView *)imageView
+           canceled:(BOOL)canceled;
 
 @end

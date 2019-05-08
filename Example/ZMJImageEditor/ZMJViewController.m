@@ -61,7 +61,7 @@
 }
 
 - (WBGImageEditorComponent)imageEditorCompoment {
-    return WBGImageEditorWholeComponent;
+    return WBGImageEditorALLComponent;
 }
 
 - (UIColor *)imageEditorDefaultColor {
