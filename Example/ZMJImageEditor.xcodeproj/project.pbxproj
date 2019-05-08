@@ -23,7 +23,7 @@
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		71858E722281756F00EE6CF2 /* TOActivityCroppedImageProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E292281756F00EE6CF2 /* TOActivityCroppedImageProvider.m */; };
 		71858E732281756F00EE6CF2 /* XPixelItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E2B2281756F00EE6CF2 /* XPixelItem.m */; };
-		71858E742281756F00EE6CF2 /* XScratchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E2F2281756F00EE6CF2 /* XScratchView.m */; };
+		71858E742281756F00EE6CF2 /* WBGScratchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E2F2281756F00EE6CF2 /* WBGScratchView.m */; };
 		71858E752281756F00EE6CF2 /* XRGBTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E302281756F00EE6CF2 /* XRGBTool.m */; };
 		71858E762281756F00EE6CF2 /* WBGImageToolBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E332281756F00EE6CF2 /* WBGImageToolBase.m */; };
 		71858E772281756F00EE6CF2 /* WBGTextTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E352281756F00EE6CF2 /* WBGTextTool.m */; };
@@ -98,10 +98,10 @@
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		71858E292281756F00EE6CF2 /* TOActivityCroppedImageProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TOActivityCroppedImageProvider.m; sourceTree = "<group>"; };
 		71858E2B2281756F00EE6CF2 /* XPixelItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XPixelItem.m; sourceTree = "<group>"; };
-		71858E2C2281756F00EE6CF2 /* XScratchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XScratchView.h; sourceTree = "<group>"; };
+		71858E2C2281756F00EE6CF2 /* WBGScratchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBGScratchView.h; sourceTree = "<group>"; };
 		71858E2D2281756F00EE6CF2 /* XRGBTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRGBTool.h; sourceTree = "<group>"; };
 		71858E2E2281756F00EE6CF2 /* XPixelItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XPixelItem.h; sourceTree = "<group>"; };
-		71858E2F2281756F00EE6CF2 /* XScratchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XScratchView.m; sourceTree = "<group>"; };
+		71858E2F2281756F00EE6CF2 /* WBGScratchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBGScratchView.m; sourceTree = "<group>"; };
 		71858E302281756F00EE6CF2 /* XRGBTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XRGBTool.m; sourceTree = "<group>"; };
 		71858E322281756F00EE6CF2 /* WBGTextTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBGTextTool.h; sourceTree = "<group>"; };
 		71858E332281756F00EE6CF2 /* WBGImageToolBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBGImageToolBase.m; sourceTree = "<group>"; };
@@ -515,8 +515,8 @@
 		71FA89A9228278C9009349CB /* View */ = {
 			isa = PBXGroup;
 			children = (
-				71858E2C2281756F00EE6CF2 /* XScratchView.h */,
-				71858E2F2281756F00EE6CF2 /* XScratchView.m */,
+				71858E2C2281756F00EE6CF2 /* WBGScratchView.h */,
+				71858E2F2281756F00EE6CF2 /* WBGScratchView.m */,
 				71FA89B122827F14009349CB /* WBGMosicaToolBar.h */,
 				71FA89B222827F14009349CB /* WBGMosicaToolBar.m */,
 				71FA89AF22827F06009349CB /* WBGMosicaToolBar.xib */,
@@ -750,7 +750,7 @@
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				71858E7C2281756F00EE6CF2 /* TOCropViewControllerTransitioning.m in Sources */,
 				71858E8C2281756F00EE6CF2 /* UIColor+TLChat.m in Sources */,
-				71858E742281756F00EE6CF2 /* XScratchView.m in Sources */,
+				71858E742281756F00EE6CF2 /* WBGScratchView.m in Sources */,
 				71858E7A2281756F00EE6CF2 /* WBGImageEditorGestureManager.m in Sources */,
 				71FA89B322827F14009349CB /* WBGMosicaToolBar.m in Sources */,
 				71858E932281787D00EE6CF2 /* WBGColorPanel.m in Sources */,

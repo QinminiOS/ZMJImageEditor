@@ -25,35 +25,42 @@
 
 #pragma mark - WBGImageEditorViewController
 
-@interface WBGImageEditorViewController () <UINavigationBarDelegate, UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBGKeyboardDelegate>
+@interface WBGImageEditorViewController () <UINavigationBarDelegate,
+UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBGKeyboardDelegate>
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *topBarTop;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *bottomBarBottom;
-@property (nonatomic, strong, nullable) WBGImageToolBase *currentTool;
+
+@property (weak, nonatomic) IBOutlet UIButton *backButton;
+@property (weak, nonatomic) IBOutlet UIButton *finishButton;
 @property (weak, nonatomic) IBOutlet UIView *bottomBar;
 @property (weak, nonatomic) IBOutlet UIView *topBar;
 
-@property (strong, nonatomic) IBOutlet UIView *topBannerView;
-@property (strong, nonatomic) IBOutlet UIView *bottomBannerView;
-@property (strong, nonatomic) IBOutlet UIView *leftBannerView;
-@property (strong, nonatomic) IBOutlet UIView *rightBannerView;
-
-@property (weak,   nonatomic) IBOutlet UIImageView *imageView;
-@property (strong, nonatomic) IBOutlet UIImageView *drawingView;
-@property (weak,   nonatomic) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, assign) WBGEditorMode currentMode;
 @property (strong, nonatomic) WBGColorPanel *colorPanel;
 
-@property (weak, nonatomic) IBOutlet UIButton *sendButton;
+@property (strong, nonatomic) UIView *topBannerView;
+@property (strong, nonatomic) UIView *bottomBannerView;
+@property (strong, nonatomic) UIView *leftBannerView;
+@property (strong, nonatomic) UIView *rightBannerView;
+
+@property (weak,   nonatomic) IBOutlet UIImageView *imageView;
+@property (weak,   nonatomic) IBOutlet UIScrollView *scrollView;
+
+@property (strong, nonatomic) UIImageView *drawingView;
+@property (strong, nonatomic) UIView *mosicaView;
+
 @property (weak, nonatomic) IBOutlet UIButton *panButton;
 @property (weak, nonatomic) IBOutlet UIButton *textButton;
 @property (weak, nonatomic) IBOutlet UIButton *clipButton;
 @property (weak, nonatomic) IBOutlet UIButton *paperButton;
 
+@property (nonatomic, strong) WBGImageToolBase *currentTool;
 @property (nonatomic, strong) WBGDrawTool *drawTool;
 @property (nonatomic, strong) WBGTextTool *textTool;
 @property (nonatomic, strong) WBGMosicaTool *mosicaTool;
 
-@property (nonatomic, copy) UIImage   *originImage;
+@property (nonatomic, copy) UIImage *originImage;
 
 @property (nonatomic, assign) CGFloat clipInitScale;
 @property (nonatomic, assign) BOOL barsHiddenStatus;
@@ -206,6 +213,13 @@
 {
     [super viewDidLayoutSubviews];
     
+    if (!self.mosicaView)
+    {
+        self.mosicaView = [[UIView alloc] initWithFrame:self.imageView.superview.frame];
+        self.mosicaView.backgroundColor = [UIColor clearColor];
+        [self.imageView.superview addSubview:self.mosicaView];
+    }
+    
     if (!self.drawingView)
     {
         self.drawingView = [[UIImageView alloc] initWithFrame:self.imageView.superview.frame];
@@ -213,10 +227,6 @@
         self.drawingView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin;
         [self.imageView.superview addSubview:self.drawingView];
         self.drawingView.userInteractionEnabled = YES;
-    }
-    else
-    {
-        //self.drawingView.frame = self.imageView.superview.frame;
     }
     
     self.topBannerView.frame = CGRectMake(0, 0, self.imageView.width, CGRectGetMinY(self.imageView.frame));
@@ -639,8 +649,6 @@
     [WBGTextToolView setActiveTextView:view];
     
 }
-
-#pragma mark - WBGKeyboardDelegate
 
 #pragma mark - Cropper Delegate
 - (void)cropViewController:(TOCropViewController *)cropViewController

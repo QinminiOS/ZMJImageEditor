@@ -6,11 +6,11 @@
 //
 
 #import "WBGMosicaViewController.h"
-#import "XScratchView.h"
+#import "WBGScratchView.h"
 #import "XRGBTool.h"
 
 @interface WBGMosicaViewController ()
-@property (nonatomic, strong) XScratchView *scratchView;
+@property (nonatomic, strong) WBGScratchView *scratchView;
 @property (nonatomic, strong) UIView *toolView;
 @end
 
@@ -32,7 +32,7 @@
     CGFloat WIDTH = self.view.frame.size.width;
     CGFloat HEIGHT = self.view.frame.size.height;
 
-    XScratchView *scratchView = [[XScratchView alloc] initWithFrame:self.frame];
+    WBGScratchView *scratchView = [[WBGScratchView alloc] initWithFrame:self.frame];
     //    scratchView.mosaicImage = [XRGBTool getFilterMosaicImageWith:[UIImage imageNamed:@"qq.png"]];
     scratchView.surfaceImage = self.image;
     scratchView.mosaicImage = [XRGBTool getMosaicImageWith:self.image level:0];

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XScratchView : UIView
+@interface WBGScratchView : UIView
 
 /** masoicImage(放在底层) */
 @property (nonatomic, strong) UIImage *mosaicImage;

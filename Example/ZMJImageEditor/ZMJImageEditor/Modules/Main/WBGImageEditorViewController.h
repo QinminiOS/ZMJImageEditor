@@ -20,16 +20,17 @@ typedef NS_ENUM(NSUInteger, WBGEditorMode)
 };
 
 @interface WBGImageEditorViewController : WBGImageEditor
-@property (weak, nonatomic) IBOutlet UIButton *backButton;
-@property (weak, nonatomic) IBOutlet UIButton *finishButton;
+
+@property (nonatomic, copy, readonly) UIImage *originImage;
 
 @property (weak,   nonatomic, readonly) IBOutlet UIImageView *imageView;
-@property (strong, nonatomic, readonly) IBOutlet UIImageView *drawingView;
 @property (weak,   nonatomic, readonly) IBOutlet UIScrollView *scrollView;
 
-@property (strong, nonatomic, readonly) WBGColorPanel *colorPanel;
+@property (strong, nonatomic, readonly) UIView *mosicaView;
+@property (strong, nonatomic, readonly) UIImageView *drawingView;
 
-@property (nonatomic, assign) WBGEditorMode currentMode;
+@property (nonatomic, strong, readonly) WBGColorPanel *colorPanel;
+@property (nonatomic, assign, readonly) WBGEditorMode currentMode;
 
 - (void)resetCurrentTool;
 

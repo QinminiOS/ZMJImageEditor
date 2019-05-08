@@ -41,7 +41,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L0E-Hz-dO7">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="666"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
                                     </subviews>
@@ -168,7 +168,7 @@
                 <constraint firstItem="H4n-yc-FcR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Wor-oY-6q8"/>
                 <constraint firstItem="H4n-yc-FcR" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="ylf-ys-XpV"/>
             </constraints>
-            <point key="canvasLocation" x="-71" y="-65"/>
+            <point key="canvasLocation" x="-71.200000000000003" y="-65.217391304347828"/>
         </view>
     </objects>
     <resources>

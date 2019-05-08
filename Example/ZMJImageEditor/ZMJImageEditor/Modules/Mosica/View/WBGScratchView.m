@@ -6,25 +6,24 @@
 //  Copyright © 2017 gcg. All rights reserved.
 //
 
-#import "XScratchView.h"
+#import "WBGScratchView.h"
 
-@interface XScratchView ()
+@interface WBGScratchView ()
 
-/**  */
 @property (nonatomic, strong) UIImageView *surfaceImageView;
-/**  */
 @property (nonatomic, strong) CALayer *imageLayer;
-/**  */
 @property (nonatomic, strong) CAShapeLayer *shapeLayer;
 /** 手指的涂抹路径 */
 @property (nonatomic, assign) CGMutablePathRef path;
 
 @end
 
-@implementation XScratchView
+@implementation WBGScratchView
 
-- (instancetype)initWithFrame:(CGRect)frame{
-    if (self = [super initWithFrame:frame]) {
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    if (self = [super initWithFrame:frame])
+    {
         self.surfaceImageView = [[UIImageView alloc] initWithFrame:self.bounds];
         [self addSubview:self.surfaceImageView];
         
@@ -43,20 +42,24 @@
         self.imageLayer.mask = self.shapeLayer;
         self.path = CGPathCreateMutable();
     }
+    
     return self;
 }
 
-- (void)setMosaicImage:(UIImage *)mosaicImage{
+- (void)setMosaicImage:(UIImage *)mosaicImage
+{
     _mosaicImage = mosaicImage;
     self.imageLayer.contents = (id)mosaicImage.CGImage;
 }
 
-- (void)setSurfaceImage:(UIImage *)surfaceImage{
+- (void)setSurfaceImage:(UIImage *)surfaceImage
+{
     _surfaceImage = surfaceImage;
     self.surfaceImageView.image = surfaceImage;
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
     [super touchesBegan:touches withEvent:event];
     UITouch *touch = [touches anyObject];
     CGPoint point = [touch locationInView:self];
@@ -65,7 +68,8 @@
     
 }
 
-- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
     [super touchesMoved:touches withEvent:event];
     UITouch *touch = [touches anyObject];
     CGPoint point = [touch locationInView:self];
@@ -73,18 +77,22 @@
     self.shapeLayer.path = self.path;
 }
 
-- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
     [super touchesEnded:touches withEvent:event];
 }
 
-- (void)recover{
+- (void)recover
+{
     CGPathRelease(self.path);
     self.path = CGPathCreateMutable();
     self.shapeLayer.path = nil;
 }
 
-- (void)dealloc{
-    if (self.path) {
+- (void)dealloc
+{
+    if (self.path)
+    {
         CGPathRelease(self.path);
     }
 }
