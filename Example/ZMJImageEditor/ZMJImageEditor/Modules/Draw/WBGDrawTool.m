@@ -150,11 +150,6 @@
         self.panGesture.maximumNumberOfTouches = 1;
     }
     
-    if (!self.panGesture.isEnabled)
-    {
-        self.panGesture.enabled = YES;
-    }
-    
     //点击手势
     if (!self.tapGesture)
     {
@@ -176,8 +171,8 @@
     self.editor.scrollView.panGestureRecognizer.delaysTouchesBegan = NO;
     self.editor.scrollView.pinchGestureRecognizer.delaysTouchesBegan = NO;
     
-    //TODO: todo?
-
+    self.panGesture.enabled = YES;
+    self.tapGesture.enabled = YES;
 }
 
 - (void)cleanup
@@ -185,6 +180,7 @@
     self.editor.imageView.userInteractionEnabled = NO;
     self.editor.scrollView.panGestureRecognizer.minimumNumberOfTouches = 1;
     self.panGesture.enabled = NO;
+    self.tapGesture.enabled = NO;
     //TODO: todo?
 }
 

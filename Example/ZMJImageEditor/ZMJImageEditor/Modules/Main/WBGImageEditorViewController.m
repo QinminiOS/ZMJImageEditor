@@ -41,8 +41,6 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 
 @property (strong, nonatomic) UIView *topBannerView;
 @property (strong, nonatomic) UIView *bottomBannerView;
-@property (strong, nonatomic) UIView *leftBannerView;
-@property (strong, nonatomic) UIView *rightBannerView;
 
 @property (weak,   nonatomic) IBOutlet UIImageView *imageView;
 @property (weak,   nonatomic) IBOutlet UIScrollView *scrollView;
@@ -231,8 +229,6 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     
     self.topBannerView.frame = CGRectMake(0, 0, self.imageView.width, CGRectGetMinY(self.imageView.frame));
     self.bottomBannerView.frame = CGRectMake(0, CGRectGetMaxY(self.imageView.frame), self.imageView.width, self.drawingView.height - CGRectGetMaxY(self.imageView.frame));
-    self.leftBannerView.frame = CGRectMake(0, 0, CGRectGetMinX(self.imageView.frame), self.drawingView.height);
-    self.rightBannerView.frame= CGRectMake(CGRectGetMaxX(self.imageView.frame), 0, self.drawingView.width - CGRectGetMaxX(self.imageView.frame), self.drawingView.height);
 }
 
 - (UIView *)topBannerView
@@ -264,38 +260,6 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
         });
     }
     return _bottomBannerView;
-}
-
-- (UIView *)leftBannerView
-{
-    if (!_leftBannerView)
-    {
-        _leftBannerView =
-        ({
-            UIView *view = [[UIView alloc] init];
-            view.backgroundColor = self.scrollView.backgroundColor;
-            [self.imageView.superview addSubview:view];
-            view;
-        });
-    }
-    
-    return _leftBannerView;
-}
-
-- (UIView *)rightBannerView
-{
-    if (!_rightBannerView)
-    {
-        _rightBannerView =
-        ({
-            UIView *view = [[UIView alloc] init];
-            view.backgroundColor = self.scrollView.backgroundColor;
-            [self.imageView.superview addSubview:view];
-            view;
-        });
-    }
-    
-    return _rightBannerView;
 }
 
 #pragma mark - 初始化 &getter
