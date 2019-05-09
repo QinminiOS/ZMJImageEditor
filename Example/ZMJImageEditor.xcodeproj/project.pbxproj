@@ -454,9 +454,9 @@
 		71FA89A12282772A009349CB /* Crop */ = {
 			isa = PBXGroup;
 			children = (
+				71FA89A322827856009349CB /* Controller */,
 				71858E3A2281756F00EE6CF2 /* Model */,
 				71FA89A42282786C009349CB /* View */,
-				71FA89A322827856009349CB /* Controller */,
 				71FA89A52282787D009349CB /* Provider */,
 			);
 			path = Crop;

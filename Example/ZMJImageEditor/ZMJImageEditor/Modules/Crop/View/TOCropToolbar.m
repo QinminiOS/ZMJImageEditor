@@ -64,8 +64,9 @@
     return self;
 }
 
-- (void)setup {
-    self.backgroundColor = [UIColor colorWithWhite:0.12f alpha:1.0f];
+- (void)setup
+{
+    self.backgroundColor = [UIColor clearColor];
     
     _rotateClockwiseButtonHidden = YES;
     
@@ -126,14 +127,15 @@
     _rotateCounterclockwiseButton.tintColor = [UIColor whiteColor];
     [_rotateCounterclockwiseButton setImage:[UIImage my_imageNamed:@"icon_fanzhuan_xuanzhong" inBundle:classBundle] forState:UIControlStateNormal];
     [_rotateCounterclockwiseButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:_rotateCounterclockwiseButton];
+    // [self addSubview:_rotateCounterclockwiseButton];
     
     _resetButton = [UIButton buttonWithType:UIButtonTypeSystem];
     _resetButton.contentMode = UIViewContentModeCenter;
     _resetButton.enabled = NO;
+    _resetButton.titleLabel.font = [UIFont systemFontOfSize:15];
     [_resetButton setTitle:@"还原" forState:UIControlStateNormal];
-    [_resetButton setTitleColor:[UIColor colorWithHexString:@"289BF0"] forState:UIControlStateNormal];
-    [_resetButton setTitleColor:[UIColor lightTextColor] forState:UIControlStateDisabled];
+    [_resetButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [_resetButton setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
     [_resetButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_resetButton];
 }
@@ -226,7 +228,7 @@
         
         
         [self layoutToolbarButtons:buttonsInOrderHorizontally withSameButtonSize:buttonSize inContainerRect:containerRect horizontally:YES];
-        self.resetButton.centerX = boundsSize.width/2.f - self.resetButton.width/2 - 5;
+        self.resetButton.centerX = boundsSize.width/2.f;
         self.rotateCounterclockwiseButton.centerX = boundsSize.width/2.f + self.rotateCounterclockwiseButton.width/2 + 5;
     }
     else {

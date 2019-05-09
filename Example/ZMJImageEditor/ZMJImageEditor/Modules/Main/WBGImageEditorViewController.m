@@ -416,19 +416,19 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
         CGRect viewFrame = [self.view convertRect:self.imageView.frame
                                            toView:self.navigationController.view];
          
-        [cropController presentAnimatedFromParentViewController:self
-                                                      fromImage:clipedImage
-                                                       fromView:nil
-                                                      fromFrame:viewFrame
-                                                          angle:0
-                                                   toImageFrame:CGRectZero
-                                                          setup:^{
-                                                              [weakSelf refreshImageView];
-                                                              weakSelf.currentMode = WBGEditorModeClip;
-                                                              [weakSelf setCurrentTool:nil];
-                                                          }
-                                                     completion:^{
-                                                     }];
+        [cropController
+         presentAnimatedFromParentViewController:self
+         fromImage:clipedImage
+         fromView:nil
+         fromFrame:viewFrame
+         angle:0
+         toImageFrame:CGRectZero
+         setup:^{
+             [weakSelf refreshImageView];
+             weakSelf.currentMode = WBGEditorModeClip;
+             [weakSelf setCurrentTool:nil];
+         }
+         completion:NULL];
     }];
     
 }

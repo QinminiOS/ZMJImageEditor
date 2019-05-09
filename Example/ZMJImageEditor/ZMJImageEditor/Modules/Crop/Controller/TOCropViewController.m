@@ -203,44 +203,40 @@
 
 - (BOOL)prefersStatusBarHidden
 {
-    //If we belong to a UINavigationController, defer to its own status bar style
-    if (self.navigationController) {
-        return self.navigationController.prefersStatusBarHidden;
-    }
-    
-    //If our presenting controller has already hidden the status bar,
-    //hide the status bar by default
-    if (self.presentingViewController.prefersStatusBarHidden) {
-        return YES;
-    }
-    
-    BOOL hidden = YES;
-    hidden = hidden && !(self.inTransition);          // Not currently in a presentation animation (Where removing the status bar would break the layout)
-    hidden = hidden && !(self.view.superview == nil); // Not currently waiting to the added to a super view
-    
-    return hidden;
+    return YES;
 }
 
 - (CGRect)frameForToolBarWithVerticalLayout:(BOOL)verticalLayout
 {
     CGRect frame = CGRectZero;
-    if (!verticalLayout) {
+    if (!verticalLayout)
+    {
         frame.origin.x = 0.0f;
         frame.origin.y = 0.0f;
         frame.size.width = 44.0f;
         frame.size.height = CGRectGetHeight(self.view.frame);
     }
-    else {
+    else
+    {
         frame.origin.x = 0.0f;
+        UIEdgeInsets edge = UIEdgeInsetsZero;
+        if (@available(iOS 11.0, *))
+        {
+            edge = [[[UIApplication sharedApplication] keyWindow] safeAreaInsets];
+        }
         
-        if (self.toolbarPosition == TOCropViewControllerToolbarPositionBottom) {
-            frame.origin.y = CGRectGetHeight(self.view.bounds) - 44.0f;
-        } else {
+        if (self.toolbarPosition == TOCropViewControllerToolbarPositionBottom)
+        {
+            frame.size.height = 44.0f + edge.bottom;
+            frame.origin.y = CGRectGetHeight(self.view.bounds) - frame.size.height;
+        }
+        else
+        {
             frame.origin.y = 0;
+            frame.size.height = 44.0f + edge.top;
         }
         
         frame.size.width = CGRectGetWidth(self.view.bounds);
-        frame.size.height = 44.0f;
         
         // If the bar is at the top of the screen and the status bar is visible, account for the status bar height
         if (self.toolbarPosition == TOCropViewControllerToolbarPositionTop && self.prefersStatusBarHidden == NO) {
@@ -266,23 +262,34 @@
     }
     
     CGRect frame = CGRectZero;
-    if (!verticalLayout) {
+    if (!verticalLayout)
+    {
         frame.origin.x = 44.0f;
         frame.origin.y = 0.0f;
         frame.size.width = CGRectGetWidth(bounds) - 44.0f;
         frame.size.height = CGRectGetHeight(bounds);
     }
-    else {
+    else
+    {
         frame.origin.x = 0.0f;
+        UIEdgeInsets edge = UIEdgeInsetsZero;
+        if (@available(iOS 11.0, *))
+        {
+            edge = [[[UIApplication sharedApplication] keyWindow] safeAreaInsets];
+        }
         
-        if (_toolbarPosition == TOCropViewControllerToolbarPositionBottom) {
-            frame.origin.y = 0.0f;
-        } else {
-            frame.origin.y = 44.0f;
+        if (_toolbarPosition == TOCropViewControllerToolbarPositionBottom)
+        {
+            frame.origin.y = 0.0f + edge.top;
+            frame.size.height = CGRectGetHeight(bounds) - 44.0f - 54 - edge.bottom;
+        }
+        else
+        {
+            frame.origin.y = 44.0f + edge.top;
+            frame.size.height = CGRectGetHeight(bounds) - 44.0f - 54 - edge.bottom;
         }
 
         frame.size.width = CGRectGetWidth(bounds);
-        frame.size.height = CGRectGetHeight(bounds) - 44.0f;
     }
     
     return frame;
