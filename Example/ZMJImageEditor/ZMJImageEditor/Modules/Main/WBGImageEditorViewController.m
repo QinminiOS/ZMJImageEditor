@@ -81,7 +81,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     return [self initWithImage:image delegate:nil dataSource:nil];
 }
 
-- (id)initWithImage:(UIImage*)image
+- (id)initWithImage:(UIImage *)image
            delegate:(id<WBGImageEditorDelegate>)delegate
          dataSource:(id<WBGImageEditorDataSource>)dataSource;
 {
@@ -850,6 +850,12 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     UIGraphicsEndImageContext();
     
     return image;
+}
+
+#pragma mark - Public
+- (CGFloat)bottomBarHeight
+{
+    return self.bottomBar.height;
 }
 
 @end

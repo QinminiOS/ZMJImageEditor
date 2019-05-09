@@ -15,14 +15,25 @@
 
 @implementation WBGMosicaToolBar
 
++ (CGFloat)fixedHeight
+{
+    return 55;
+}
+
 - (IBAction)onMasicNormalButtonTapped:(UIButton *)sender
 {
-    
+    if (self.mosicaStyleButtonClickBlock)
+    {
+        self.mosicaStyleButtonClickBlock(sender, WBGMosicaStyleNormal);
+    }
 }
 
 - (IBAction)onBackButtonTapped:(UIButton *)sender
 {
-    
+    if (self.backButtonClickBlock)
+    {
+        self.backButtonClickBlock(sender);
+    }
 }
 
 @end

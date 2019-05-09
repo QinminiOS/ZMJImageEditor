@@ -8,6 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSUInteger, WBGMosicaStyle)
+{
+    WBGMosicaStyleNormal,
+};
+
+typedef void (^WBGMosicaToolClickBlock)(UIButton *btn);
+typedef void (^WBGMosicaStyleClickBlock)(UIButton *btn, WBGMosicaStyle style);
+
 @interface WBGMosicaToolBar : UIView
+@property (nonatomic, copy) WBGMosicaToolClickBlock backButtonClickBlock;
+@property (nonatomic, copy) WBGMosicaStyleClickBlock mosicaStyleButtonClickBlock;
+
++ (CGFloat)fixedHeight;
 
 @end

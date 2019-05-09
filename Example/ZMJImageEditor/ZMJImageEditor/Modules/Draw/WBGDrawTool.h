@@ -7,7 +7,7 @@
 //
 
 #import "WBGImageToolBase.h"
-@class WBGPath;
+#import "WBGPath.h"
 
 @interface WBGDrawTool : WBGImageToolBase
 @property (nonatomic, copy) void (^drawToolStatus)(BOOL canPrev);
@@ -18,14 +18,4 @@
 //撤销
 - (void)backToLastDraw;
 - (void)drawLine;
-@end
-
-#pragma mark - HBPath
-@interface WBGPath : NSObject
-@property (nonatomic, strong) CAShapeLayer *shape;
-@property (nonatomic, strong) UIColor *pathColor;//画笔颜色
-
-+ (instancetype)pathToPoint:(CGPoint)beginPoint pathWidth:(CGFloat)pathWidth;
-- (void)pathLineToPoint:(CGPoint)movePoint;//画
-- (void)drawPath;//绘制
 @end

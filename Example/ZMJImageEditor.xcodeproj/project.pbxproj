@@ -52,6 +52,7 @@
 		71858E902281756F00EE6CF2 /* WBGBaseKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E712281756F00EE6CF2 /* WBGBaseKeyboard.m */; };
 		71858E932281787D00EE6CF2 /* WBGColorPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E922281787D00EE6CF2 /* WBGColorPanel.m */; };
 		71858E9522817A2E00EE6CF2 /* WBGColorPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 71858E9422817A2E00EE6CF2 /* WBGColorPanel.xib */; };
+		71F42E212283CB10007FFD7C /* WBGPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 71F42E1F2283CB10007FFD7C /* WBGPath.m */; };
 		71FA89AE22827E58009349CB /* WBGMosicaTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 71FA89AD22827E57009349CB /* WBGMosicaTool.m */; };
 		71FA89B022827F06009349CB /* WBGMosicaToolBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 71FA89AF22827F06009349CB /* WBGMosicaToolBar.xib */; };
 		71FA89B322827F14009349CB /* WBGMosicaToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 71FA89B222827F14009349CB /* WBGMosicaToolBar.m */; };
@@ -160,6 +161,8 @@
 		71858E912281787D00EE6CF2 /* WBGColorPanel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WBGColorPanel.h; sourceTree = "<group>"; };
 		71858E922281787D00EE6CF2 /* WBGColorPanel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WBGColorPanel.m; sourceTree = "<group>"; };
 		71858E9422817A2E00EE6CF2 /* WBGColorPanel.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WBGColorPanel.xib; sourceTree = "<group>"; };
+		71F42E1F2283CB10007FFD7C /* WBGPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBGPath.m; sourceTree = "<group>"; };
+		71F42E202283CB10007FFD7C /* WBGPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBGPath.h; sourceTree = "<group>"; };
 		71FA89AC22827E57009349CB /* WBGMosicaTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBGMosicaTool.h; sourceTree = "<group>"; };
 		71FA89AD22827E57009349CB /* WBGMosicaTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBGMosicaTool.m; sourceTree = "<group>"; };
 		71FA89AF22827F06009349CB /* WBGMosicaToolBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WBGMosicaToolBar.xib; sourceTree = "<group>"; };
@@ -379,6 +382,15 @@
 			path = Keyboard;
 			sourceTree = "<group>";
 		};
+		71F42E1E2283CAF2007FFD7C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				71F42E202283CB10007FFD7C /* WBGPath.h */,
+				71F42E1F2283CB10007FFD7C /* WBGPath.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		71FA899C228274DD009349CB /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -403,6 +415,7 @@
 		71FA899E228276CC009349CB /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				71F42E1E2283CAF2007FFD7C /* Model */,
 				71858E4E2281756F00EE6CF2 /* Views */,
 				71FA899F228276D2009349CB /* Tools */,
 			);
@@ -755,6 +768,7 @@
 				71FA89B322827F14009349CB /* WBGMosicaToolBar.m in Sources */,
 				71858E932281787D00EE6CF2 /* WBGColorPanel.m in Sources */,
 				71858E852281756F00EE6CF2 /* WBGMoreKeyboardCell.m in Sources */,
+				71F42E212283CB10007FFD7C /* WBGPath.m in Sources */,
 				71858E8F2281756F00EE6CF2 /* WBGMoreKeyboardItem.m in Sources */,
 				71858E732281756F00EE6CF2 /* XPixelItem.m in Sources */,
 				71858E822281756F00EE6CF2 /* TOCropScrollView.m in Sources */,

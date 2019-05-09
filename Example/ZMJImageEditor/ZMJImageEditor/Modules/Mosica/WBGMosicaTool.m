@@ -11,6 +11,7 @@
 #import "WBGScratchView.h"
 #import "XXNibBridge.h"
 #import "XRGBTool.h"
+#import "WBGChatMacros.h"
 
 @interface WBGMosicaTool ()
 @property (nonatomic, strong) WBGMosicaToolBar *mosicaToolBar;
@@ -23,6 +24,11 @@
 {
     self.mosicaToolBar = [WBGMosicaToolBar xx_instantiateFromNib];
     [self.editor.view addSubview:self.mosicaToolBar];
+    [self setupActions];
+    
+    CGFloat height = [WBGMosicaToolBar fixedHeight];
+    CGFloat y = HEIGHT_SCREEN - height - [self.editor bottomBarHeight];
+    self.mosicaToolBar.frame = CGRectMake(0, y, WIDTH_SCREEN, height);
     
     self.scratchView = self.editor.mosicaView;
     if (!self.scratchView.mosaicImage)
@@ -43,6 +49,22 @@
 - (void)executeWithCompletionBlock:(WBGImageToolCompletionBlock)completionBlock
 {
     
+}
+
+- (void)setupActions
+{
+//  目前只有一种样式不用
+//    __weak __typeof(self)weakSelf = self;
+//    self.mosicaToolBar.mosicaStyleButtonClickBlock = ^(UIButton *btn, WBGMosicaStyle style)
+//    {
+//        __strong __typeof(weakSelf) strongSelf = weakSelf;
+//    };
+    
+    __weak __typeof(self)weakSelf = self;
+    self.mosicaToolBar.backButtonClickBlock = ^(UIButton *btn) {
+        __strong __typeof(weakSelf) strongSelf = weakSelf;
+        [strongSelf.scratchView recover];
+    };
 }
 
 @end

@@ -16,7 +16,8 @@
 
 #define     BORDER_WIDTH_1PX    ([[UIScreen mainScreen] scale] > 0.0 ? 1.0 / [[UIScreen mainScreen] scale] : 1.0)
 
-typedef NS_ENUM(NSInteger, WBGEmojiType) {
+typedef NS_ENUM(NSInteger, WBGEmojiType)
+{
     WBGEmojiTypeEmoji,
     WBGEmojiTypeFavorite,
     WBGEmojiTypeFace,
@@ -25,7 +26,8 @@ typedef NS_ENUM(NSInteger, WBGEmojiType) {
     WBGEmojiTypeOther,
 };
 
-typedef NS_ENUM(NSInteger, WBGChatBarStatus) {
+typedef NS_ENUM(NSInteger, WBGChatBarStatus)
+{
     WBGChatBarStatusInit,
     WBGChatBarStatusVoice,
     WBGChatBarStatusEmoji,

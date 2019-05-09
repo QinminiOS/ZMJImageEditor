@@ -33,6 +33,8 @@ typedef NS_ENUM(NSUInteger, WBGEditorMode)
 @property (nonatomic, strong, readonly) WBGColorPanel *colorPanel;
 @property (nonatomic, assign, readonly) WBGEditorMode currentMode;
 
+- (CGFloat)bottomBarHeight;
+
 - (void)resetCurrentTool;
 
 - (void)editTextAgain;
