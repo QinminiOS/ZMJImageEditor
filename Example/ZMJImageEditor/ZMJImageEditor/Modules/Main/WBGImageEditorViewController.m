@@ -274,12 +274,6 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     if (_textTool == nil)
     {
         _textTool = [[WBGTextTool alloc] initWithImageEditor:self];
-        __weak typeof(self)weakSelf = self;
-        _textTool.dissmissTextTool = ^(NSString *currentText)
-        {
-            weakSelf.currentMode = WBGEditorModeNone;
-            weakSelf.currentTool = nil;
-        };
     }
     
     return _textTool;
@@ -367,13 +361,9 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 #pragma mark - Property
 - (void)setCurrentTool:(WBGImageToolBase *)currentTool
 {
-    if(_currentTool != currentTool)
-    {
-        [_currentTool cleanup];
-        _currentTool = currentTool;
-        [_currentTool setup];
-        
-    }
+    [_currentTool cleanup];
+    _currentTool = currentTool;
+    [_currentTool setup];
     
     [self swapToolBarWithEditting];
 }
@@ -426,10 +416,6 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 //文字模式
 - (IBAction)textAction:(UIButton *)sender
 {
-    if (_currentMode == WBGEditorModeText)
-    {
-        return;
-    }
     //先设置状态，然后在干别的
     self.currentMode = WBGEditorModeText;
     

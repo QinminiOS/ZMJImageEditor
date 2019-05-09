@@ -11,7 +11,7 @@
 #import "UIView+YYAdd.h"
 #import "WBGColorPanel.h"
 
-static const CGFloat kTopOffset = 0.f;
+static const CGFloat kTopOffset = 30.f;
 static const CGFloat kTextTopOffset = 20.f;
 static const NSInteger kTextMaxLimitNumber = 100;
 
@@ -29,37 +29,56 @@ static const NSInteger kTextMaxLimitNumber = 100;
     __weak typeof(self)weakSelf = self;
     self.textView = [[_WBGTextView alloc] initWithFrame:CGRectMake(0, kTopOffset, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - kTopOffset)];
     self.textView.textView.font = [UIFont systemFontOfSize:24.f weight:UIFontWeightRegular];
-    // self.editor.backButton.enabled = NO;
-    // self.editor.undoButton.enabled = NO;
-    self.textView.dissmissTextTool = ^(NSString *currentText, BOOL isUse) {
+    self.textView.textView.textColor = [UIColor whiteColor];
+    
+    self.textView.dissmissTextTool = ^(NSString *currentText, BOOL isUse)
+    {
         weakSelf.editor.scrollView.pinchGestureRecognizer.enabled = YES;
-        // weakSelf.editor.backButton.enabled = YES;
-        // weakSelf.editor.undoButton.enabled = YES;
         
-        if (weakSelf.isEditAgain) {
-            if (weakSelf.editAgainCallback && isUse) {
+        if (weakSelf.isEditAgain)
+        {
+            if (weakSelf.editAgainCallback && isUse)
+            {
                 weakSelf.editAgainCallback(currentText);
             }
+            
             weakSelf.isEditAgain = NO;
-        } else {
-            if (isUse) {
+        }
+        else
+        {
+            if (isUse)
+            {
                 [weakSelf addNewText:currentText];
             }
         }
         
-        weakSelf.dissmissTextTool(currentText);
+        if (weakSelf.dissmissTextTool)
+        {
+            weakSelf.dissmissTextTool(currentText);
+        }
     };
     [self.editor.view addSubview:self.textView];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeColor:) name:@"kColorPanNotificaiton" object:nil];
-    //TODO: todo?
+
 }
 
 - (void)cleanup
 {
     [self.textView removeFromSuperview];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"kColorPanNotificaiton" object:nil];
-    //TODO: todo?
+}
+
+- (void)hideTools:(BOOL)hidden
+{
+    if (hidden)
+    {
+        self.editor.bottomBar.alpha = 0;
+    }
+    else
+    {
+        self.editor.bottomBar.alpha = 1.0f;
+    }
 }
 
 - (void)executeWithCompletionBlock:(WBGImageToolCompletionBlock)completionBlock

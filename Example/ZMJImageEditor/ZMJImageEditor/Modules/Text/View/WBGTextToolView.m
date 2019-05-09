@@ -213,7 +213,7 @@ static WBGTextToolView *activeView = nil;
         _label = [[WBGTextLabel alloc] init];
         _label.numberOfLines = 0;
         _label.backgroundColor = [UIColor clearColor];
-        _label.font = (font ? font : [UIFont systemFontOfSize:12]);
+        _label.font = font;
         _label.minimumScaleFactor = font.pointSize * 0.8f;
         _label.adjustsFontSizeToFitWidth = YES;
         _label.textAlignment = NSTextAlignmentCenter;
@@ -355,16 +355,18 @@ static WBGTextToolView *activeView = nil;
     [recognizer setTranslation:CGPointZero inView:piece.superview];
 
     if (recognizer.state == UIGestureRecognizerStateBegan ||
-        recognizer.state == UIGestureRecognizerStateChanged) {
+        recognizer.state == UIGestureRecognizerStateChanged)
+    {
         [self.textTool.editor hiddenTopAndBottomBar:YES animation:YES];
-        //取消当前
-        [self.textTool.editor resetCurrentTool];
-    } else if (recognizer.state == UIGestureRecognizerStateEnded ||
+    }
+    else if (recognizer.state == UIGestureRecognizerStateEnded ||
                recognizer.state == UIGestureRecognizerStateFailed ||
-               recognizer.state == UIGestureRecognizerStateCancelled) {
+               recognizer.state == UIGestureRecognizerStateCancelled)
+    {
         
         CGRect rectCoordinate = [piece.superview convertRect:piece.frame toView:self.textTool.editor.imageView.superview];
-        if (!CGRectIntersectsRect(CGRectInset(self.textTool.editor.imageView.frame, 30, 30), rectCoordinate)) {
+        if (!CGRectIntersectsRect(CGRectInset(self.textTool.editor.imageView.frame, 30, 30), rectCoordinate))
+        {
             [UIView animateWithDuration:.2f animations:^{
                 piece.center = piece.superview.center;
                 self.center = piece.center;
