@@ -101,6 +101,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     return self;
 }
 
+#pragma mark - LifeCyle
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -137,6 +138,31 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     
     //获取自定制组件 - fecth custom config
     [self configCustomComponent];
+}
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    
+    if (!self.mosicaView)
+    {
+        self.mosicaView = [[WBGScratchView alloc] initWithFrame:self.imageView.superview.frame];
+        self.mosicaView.surfaceImage = self.originImage;
+        self.mosicaView.backgroundColor = [UIColor clearColor];
+        [self.imageView.superview addSubview:self.mosicaView];
+    }
+    
+    if (!self.drawingView)
+    {
+        self.drawingView = [[UIImageView alloc] initWithFrame:self.imageView.superview.frame];
+        self.drawingView.contentMode = UIViewContentModeCenter;
+        self.drawingView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin;
+        [self.imageView.superview addSubview:self.drawingView];
+        self.drawingView.userInteractionEnabled = YES;
+    }
+    
+    self.topBannerView.frame = CGRectMake(0, 0, self.imageView.width, CGRectGetMinY(self.imageView.frame));
+    self.bottomBannerView.frame = CGRectMake(0, CGRectGetMaxY(self.imageView.frame), self.imageView.width, self.drawingView.height - CGRectGetMaxY(self.imageView.frame));
 }
 
 - (void)configCustomComponent
@@ -181,34 +207,9 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     [valibleCompoment enumerateObjectsUsingBlock:^(UIButton * _Nonnull button,
                                                    NSUInteger idx,
                                                    BOOL * _Nonnull stop)
-    {
-        button.centerX = length * idx + padding;
-    }];
-}
-
-- (void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
-    
-    if (!self.mosicaView)
-    {
-        self.mosicaView = [[WBGScratchView alloc] initWithFrame:self.imageView.superview.frame];
-        self.mosicaView.surfaceImage = self.originImage;
-        self.mosicaView.backgroundColor = [UIColor clearColor];
-        [self.imageView.superview addSubview:self.mosicaView];
-    }
-    
-    if (!self.drawingView)
-    {
-        self.drawingView = [[UIImageView alloc] initWithFrame:self.imageView.superview.frame];
-        self.drawingView.contentMode = UIViewContentModeCenter;
-        self.drawingView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin;
-        [self.imageView.superview addSubview:self.drawingView];
-        self.drawingView.userInteractionEnabled = YES;
-    }
-    
-    self.topBannerView.frame = CGRectMake(0, 0, self.imageView.width, CGRectGetMinY(self.imageView.frame));
-    self.bottomBannerView.frame = CGRectMake(0, CGRectGetMaxY(self.imageView.frame), self.imageView.width, self.drawingView.height - CGRectGetMaxY(self.imageView.frame));
+     {
+         button.centerX = length * idx + padding;
+     }];
 }
 
 - (UIView *)topBannerView
@@ -242,7 +243,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     return _bottomBannerView;
 }
 
-#pragma mark - 初始化 &getter
+#pragma mark - Getter & Setter
 - (WBGDrawTool *)drawTool
 {
     if (_drawTool == nil)
@@ -287,6 +288,15 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     }
     
     return _mosicaTool;
+}
+
+- (void)setCurrentTool:(WBGImageToolBase *)currentTool
+{
+    [_currentTool cleanup];
+    _currentTool = currentTool;
+    [_currentTool setup];
+    
+    [self swapToolBarWithEditting];
 }
 
 - (void)initImageScrollView
@@ -356,16 +366,6 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView
 {
     
-}
-
-#pragma mark - Property
-- (void)setCurrentTool:(WBGImageToolBase *)currentTool
-{
-    [_currentTool cleanup];
-    _currentTool = currentTool;
-    [_currentTool setup];
-    
-    [self swapToolBarWithEditting];
 }
 
 #pragma mark - Actions
