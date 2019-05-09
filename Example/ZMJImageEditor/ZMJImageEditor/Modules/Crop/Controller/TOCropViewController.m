@@ -117,8 +117,8 @@
     self.toolbar.resetButtonTapped =    ^{ [weakSelf resetCropViewLayout]; };
     self.toolbar.clampButtonTapped =    ^{ [weakSelf showAspectRatioDialog]; };
     
-    self.toolbar.rotateCounterclockwiseButtonTapped = ^{ [weakSelf rotateCropViewCounterclockwise]; };
-    self.toolbar.rotateClockwiseButtonTapped        = ^{ [weakSelf rotateCropViewClockwise]; };
+    self.toolbar.rotateCounterclockwiseButtonTapped = ^{ [weakSelf rotateCropViewCounter]; };
+    self.toolbar.rotateClockwiseButtonTapped        = ^{ [weakSelf rotateCropView]; };
     
     self.toolbar.clampButtonHidden = self.aspectRatioPickerButtonHidden || circularMode;
     self.toolbar.rotateClockwiseButtonHidden = self.rotateClockwiseButtonHidden && !circularMode;
@@ -539,14 +539,14 @@
     [self.cropView setAspectRatio:aspectRatio animated:animated];
 }
 
-- (void)rotateCropViewClockwise
+- (void)rotateCropView
 {
-    [self.cropView rotateImageNinetyDegreesAnimated:YES clockwise:YES];
+    [self.cropView rotateImageNinetyDegreesAnimated:YES clockwise:NO];
 }
 
-- (void)rotateCropViewCounterclockwise
+- (void)rotateCropViewCounter
 {
-    [self.cropView rotateImageNinetyDegreesAnimated:YES clockwise:YES];
+    [self.cropView rotateImageNinetyDegreesAnimated:YES clockwise:NO];
 }
 
 #pragma mark - Crop View Delegates -

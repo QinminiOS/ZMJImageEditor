@@ -24,9 +24,10 @@
 #import "TOCropOverlayView.h"
 #import "TOCropScrollView.h"
 
-#define TOCROPVIEW_BACKGROUND_COLOR [UIColor colorWithWhite:0.12f alpha:1.0f]
+#define TOCROPVIEW_BACKGROUND_COLOR [UIColor blackColor]
 
-static const CGFloat kTOCropViewPadding = 14.0f;
+static const CGFloat kTOCropViewPaddingH = 40.0f;
+static const CGFloat kTOCropViewPaddingV = 60.0f;
 static const NSTimeInterval kTOCropTimerDuration = 0.8f;
 static const CGFloat kTOCropViewMinimumBoxSize = 42.0f;
 static const CGFloat kTOCropViewCircularPathRadius = 300.0f;
@@ -1631,10 +1632,10 @@ typedef NS_ENUM(NSInteger, TOCropViewOverlayEdge) {
 - (CGRect)contentBounds
 {
     CGRect contentRect = CGRectZero;
-    contentRect.origin.x = kTOCropViewPadding + self.cropRegionInsets.left;
-    contentRect.origin.y = kTOCropViewPadding + self.cropRegionInsets.top;
-    contentRect.size.width = CGRectGetWidth(self.bounds) - ((kTOCropViewPadding * 2) + self.cropRegionInsets.left + self.cropRegionInsets.right);
-    contentRect.size.height = CGRectGetHeight(self.bounds) - ((kTOCropViewPadding * 2) + self.cropRegionInsets.top + self.cropRegionInsets.bottom);
+    contentRect.origin.x = kTOCropViewPaddingH + self.cropRegionInsets.left;
+    contentRect.origin.y = kTOCropViewPaddingV + self.cropRegionInsets.top;
+    contentRect.size.width = CGRectGetWidth(self.bounds) - ((kTOCropViewPaddingH * 2) + self.cropRegionInsets.left + self.cropRegionInsets.right);
+    contentRect.size.height = CGRectGetHeight(self.bounds) - ((kTOCropViewPaddingV * 2) + self.cropRegionInsets.top + self.cropRegionInsets.bottom);
     return contentRect;
 }
 

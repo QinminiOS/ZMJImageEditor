@@ -115,19 +115,20 @@
     [_cancelIconButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_cancelIconButton];
     
+    // 选择比例，暂时不需要
     _clampButton = [UIButton buttonWithType:UIButtonTypeSystem];
     _clampButton.contentMode = UIViewContentModeCenter;
     _clampButton.tintColor = [UIColor whiteColor];
     [_clampButton setImage:[TOCropToolbar clampImage] forState:UIControlStateNormal];
     [_clampButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
-    //[self addSubview:_clampButton];
+    // [self addSubview:_clampButton];
     
     _rotateCounterclockwiseButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _rotateCounterclockwiseButton.contentMode = UIViewContentModeCenter;
     _rotateCounterclockwiseButton.tintColor = [UIColor whiteColor];
     [_rotateCounterclockwiseButton setImage:[UIImage my_imageNamed:@"icon_fanzhuan_xuanzhong" inBundle:classBundle] forState:UIControlStateNormal];
     [_rotateCounterclockwiseButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
-    // [self addSubview:_rotateCounterclockwiseButton];
+    [self addSubview:_rotateCounterclockwiseButton];
     
     _resetButton = [UIButton buttonWithType:UIButtonTypeSystem];
     _resetButton.contentMode = UIViewContentModeCenter;
@@ -229,7 +230,7 @@
         
         [self layoutToolbarButtons:buttonsInOrderHorizontally withSameButtonSize:buttonSize inContainerRect:containerRect horizontally:YES];
         self.resetButton.centerX = boundsSize.width/2.f;
-        self.rotateCounterclockwiseButton.centerX = boundsSize.width/2.f + self.rotateCounterclockwiseButton.width/2 + 5;
+        self.rotateCounterclockwiseButton.centerX = self.cancelTextButton.centerX;
     }
     else {
         CGRect frame = CGRectZero;
