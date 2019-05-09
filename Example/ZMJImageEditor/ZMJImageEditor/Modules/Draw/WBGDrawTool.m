@@ -34,6 +34,68 @@
     return self;
 }
 
+#pragma mark - implementation 重写父方法
+- (void)setup
+{
+    //初始化一些东西
+    _originalImageSize   = self.editor.imageView.image.size;
+    _drawingView         = self.editor.drawingView;
+    
+    //滑动手势
+    if (!self.panGesture)
+    {
+        self.panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(drawingViewDidPan:)];
+        self.panGesture.delegate = [WBGImageEditorGestureManager instance];
+        self.panGesture.maximumNumberOfTouches = 1;
+    }
+    
+    //点击手势
+    if (!self.tapGesture)
+    {
+        self.tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(drawingViewDidTap:)];
+        self.tapGesture.delegate = [WBGImageEditorGestureManager instance];
+        self.tapGesture.numberOfTouchesRequired = 1;
+        self.tapGesture.numberOfTapsRequired = 1;
+        
+    }
+    
+    [_drawingView addGestureRecognizer:self.panGesture];
+    [_drawingView addGestureRecognizer:self.tapGesture];
+    _drawingView.userInteractionEnabled = YES;
+    _drawingView.layer.shouldRasterize = YES;
+    _drawingView.layer.minificationFilter = kCAFilterTrilinear;
+    
+    self.editor.imageView.userInteractionEnabled = YES;
+    self.editor.scrollView.panGestureRecognizer.minimumNumberOfTouches = 2;
+    self.editor.scrollView.panGestureRecognizer.delaysTouchesBegan = NO;
+    self.editor.scrollView.pinchGestureRecognizer.delaysTouchesBegan = NO;
+    
+    self.panGesture.enabled = YES;
+    self.tapGesture.enabled = YES;
+    
+    self.editor.drawingView.userInteractionEnabled = YES;
+}
+
+- (void)cleanup
+{
+    self.editor.imageView.userInteractionEnabled = NO;
+    self.editor.scrollView.panGestureRecognizer.minimumNumberOfTouches = 1;
+    self.panGesture.enabled = NO;
+    self.tapGesture.enabled = NO;
+    //TODO: todo?
+}
+
+- (void)executeWithCompletionBlock:(WBGImageToolCompletionBlock)completionBlock
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        UIImage *image = [self buildImage];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completionBlock(image, nil, nil);
+        });
+    });
+}
+
 - (void)backToLastDraw
 {
     [_allLineMutableArray removeLastObject];
@@ -106,6 +168,7 @@
     }
 }
 
+#pragma mark - Draw
 - (void)drawLine
 {
     CGSize size = _drawingView.frame.size;
@@ -133,68 +196,6 @@
     UIGraphicsEndImageContext();
     
     return tmp;
-}
-
-#pragma mark - implementation 重写父方法
-- (void)setup
-{
-    //初始化一些东西
-    _originalImageSize   = self.editor.imageView.image.size;
-    _drawingView         = self.editor.drawingView;
-    
-    //滑动手势
-    if (!self.panGesture)
-    {
-        self.panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(drawingViewDidPan:)];
-        self.panGesture.delegate = [WBGImageEditorGestureManager instance];
-        self.panGesture.maximumNumberOfTouches = 1;
-    }
-    
-    //点击手势
-    if (!self.tapGesture)
-    {
-        self.tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(drawingViewDidTap:)];
-        self.tapGesture.delegate = [WBGImageEditorGestureManager instance];
-        self.tapGesture.numberOfTouchesRequired = 1;
-        self.tapGesture.numberOfTapsRequired = 1;
-        
-    }
-    
-    [_drawingView addGestureRecognizer:self.panGesture];
-    [_drawingView addGestureRecognizer:self.tapGesture];
-    _drawingView.userInteractionEnabled = YES;
-    _drawingView.layer.shouldRasterize = YES;
-    _drawingView.layer.minificationFilter = kCAFilterTrilinear;
-    
-    self.editor.imageView.userInteractionEnabled = YES;
-    self.editor.scrollView.panGestureRecognizer.minimumNumberOfTouches = 2;
-    self.editor.scrollView.panGestureRecognizer.delaysTouchesBegan = NO;
-    self.editor.scrollView.pinchGestureRecognizer.delaysTouchesBegan = NO;
-    
-    self.panGesture.enabled = YES;
-    self.tapGesture.enabled = YES;
-    
-    self.editor.drawingView.userInteractionEnabled = YES;
-}
-
-- (void)cleanup
-{
-    self.editor.imageView.userInteractionEnabled = NO;
-    self.editor.scrollView.panGestureRecognizer.minimumNumberOfTouches = 1;
-    self.panGesture.enabled = NO;
-    self.tapGesture.enabled = NO;
-    //TODO: todo?
-}
-
-- (void)executeWithCompletionBlock:(WBGImageToolCompletionBlock)completionBlock
-{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        UIImage *image = [self buildImage];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            completionBlock(image, nil, nil);
-        });
-    });
 }
 
 @end
