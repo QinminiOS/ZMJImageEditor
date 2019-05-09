@@ -46,7 +46,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 @property (weak,   nonatomic) IBOutlet UIScrollView *scrollView;
 
 @property (strong, nonatomic) UIImageView *drawingView;
-@property (strong, nonatomic) UIView *mosicaView;
+@property (strong, nonatomic) WBGScratchView *mosicaView;
 
 @property (weak, nonatomic) IBOutlet UIButton *panButton;
 @property (weak, nonatomic) IBOutlet UIButton *textButton;
@@ -213,7 +213,8 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     
     if (!self.mosicaView)
     {
-        self.mosicaView = [[UIView alloc] initWithFrame:self.imageView.superview.frame];
+        self.mosicaView = [[WBGScratchView alloc] initWithFrame:self.imageView.superview.frame];
+        self.mosicaView.surfaceImage = self.originImage;
         self.mosicaView.backgroundColor = [UIColor clearColor];
         [self.imageView.superview addSubview:self.mosicaView];
     }

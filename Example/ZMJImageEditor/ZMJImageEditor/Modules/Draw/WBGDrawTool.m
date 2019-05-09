@@ -173,6 +173,8 @@
     
     self.panGesture.enabled = YES;
     self.tapGesture.enabled = YES;
+    
+    self.editor.drawingView.userInteractionEnabled = YES;
 }
 
 - (void)cleanup

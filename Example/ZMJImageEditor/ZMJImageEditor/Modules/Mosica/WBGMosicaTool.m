@@ -14,7 +14,7 @@
 
 @interface WBGMosicaTool ()
 @property (nonatomic, strong) WBGMosicaToolBar *mosicaToolBar;
-@property (nonatomic, strong) WBGScratchView *scratchView;
+@property (nonatomic, weak) WBGScratchView *scratchView;
 @end
 
 @implementation WBGMosicaTool
@@ -24,17 +24,20 @@
     self.mosicaToolBar = [WBGMosicaToolBar xx_instantiateFromNib];
     [self.editor.view addSubview:self.mosicaToolBar];
     
-    UIImage *originImage = self.editor.originImage;
-    WBGScratchView *scratchView = [[WBGScratchView alloc] initWithFrame:self.editor.mosicaView.bounds];
-    scratchView.surfaceImage = originImage;
-    scratchView.mosaicImage = [XRGBTool getMosaicImageWith:originImage level:0];
-    [self.editor.mosicaView addSubview:scratchView];
-    self.scratchView = scratchView;
+    self.scratchView = self.editor.mosicaView;
+    if (!self.scratchView.mosaicImage)
+    {
+        self.scratchView.mosaicImage = [XRGBTool getMosaicImageWith:self.editor.originImage level:0];
+    }
+    
+    self.editor.drawingView.userInteractionEnabled = NO;
 }
 
 - (void)cleanup
 {
     [self.mosicaToolBar removeFromSuperview];
+    
+    self.editor.drawingView.userInteractionEnabled = YES;
 }
 
 - (void)executeWithCompletionBlock:(WBGImageToolCompletionBlock)completionBlock
