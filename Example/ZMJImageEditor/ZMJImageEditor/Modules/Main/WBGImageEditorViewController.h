@@ -24,8 +24,8 @@ typedef NS_ENUM(NSUInteger, WBGEditorMode)
 
 @property (nonatomic, copy, readonly) UIImage *originImage;
 
-@property (weak,   nonatomic, readonly) IBOutlet UIImageView *imageView;
-@property (weak,   nonatomic, readonly) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic, readonly) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic, readonly) IBOutlet UIScrollView *scrollView;
 
 @property (strong, nonatomic, readonly) WBGScratchView *mosicaView;
 @property (strong, nonatomic, readonly) UIImageView *drawingView;

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment version="2064" identifier="iOS"/>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -66,10 +67,10 @@
                             </connections>
                         </scrollView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="toj-tM-hDH">
-                            <rect key="frame" x="0.0" y="847" width="414" height="49"/>
+                            <rect key="frame" x="0.0" y="813" width="414" height="49"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vif-ym-mAZ">
-                                    <rect key="frame" x="30" y="8" width="32" height="32"/>
+                                    <rect key="frame" x="49" y="8" width="32" height="32"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal" image="icon_tuya"/>
                                     <state key="selected" image="icon_tuya_xuanzhong"/>
@@ -78,7 +79,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cnm-kZ-dpx">
-                                    <rect key="frame" x="92" y="8" width="32" height="32"/>
+                                    <rect key="frame" x="134" y="8" width="32" height="32"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal" image="icon_tianjiawenzi_wukuang"/>
                                     <state key="selected" image="icon_tianjiawenzi_youkuang"/>
@@ -87,7 +88,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dR4-MJ-4Kq">
-                                    <rect key="frame" x="148" y="8" width="32" height="32"/>
+                                    <rect key="frame" x="194" y="8" width="32" height="32"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                     <state key="normal" image="icon_masaike"/>
@@ -97,7 +98,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PFB-Ig-Llj">
-                                    <rect key="frame" x="216" y="8" width="32" height="32"/>
+                                    <rect key="frame" x="277" y="8" width="32" height="32"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal" image="icon_caiqie"/>
                                     <state key="selected" image="icon_caiqie"/>
@@ -110,6 +111,7 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="49" id="tEl-cY-7Xw"/>
                             </constraints>
+                            <viewLayoutGuide key="safeArea" id="oC4-nx-BHL"/>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vKW-ZA-nXo">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
@@ -158,12 +160,13 @@
                         <constraint firstAttribute="trailing" secondItem="toj-tM-hDH" secondAttribute="trailing" id="In8-ye-Jas"/>
                         <constraint firstItem="eg2-dz-mJn" firstAttribute="top" secondItem="H4n-yc-FcR" secondAttribute="top" id="J9K-nJ-E6y"/>
                         <constraint firstAttribute="bottom" secondItem="eg2-dz-mJn" secondAttribute="bottom" id="QTJ-8O-ejx"/>
-                        <constraint firstAttribute="bottom" secondItem="toj-tM-hDH" secondAttribute="bottom" id="UO5-vP-LGM"/>
+                        <constraint firstItem="W8m-e9-Nrf" firstAttribute="bottom" secondItem="toj-tM-hDH" secondAttribute="bottom" id="UO5-vP-LGM"/>
                         <constraint firstItem="vKW-ZA-nXo" firstAttribute="top" secondItem="H4n-yc-FcR" secondAttribute="top" id="V7Y-h0-Shc"/>
                         <constraint firstItem="eg2-dz-mJn" firstAttribute="leading" secondItem="H4n-yc-FcR" secondAttribute="leading" id="bL6-cg-ksh"/>
                         <constraint firstItem="toj-tM-hDH" firstAttribute="leading" secondItem="H4n-yc-FcR" secondAttribute="leading" id="uvW-7N-cFa"/>
                         <constraint firstItem="vKW-ZA-nXo" firstAttribute="leading" secondItem="H4n-yc-FcR" secondAttribute="leading" id="yjK-24-xJE"/>
                     </constraints>
+                    <viewLayoutGuide key="safeArea" id="W8m-e9-Nrf"/>
                 </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -173,6 +176,7 @@
                 <constraint firstItem="H4n-yc-FcR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Wor-oY-6q8"/>
                 <constraint firstItem="H4n-yc-FcR" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="ylf-ys-XpV"/>
             </constraints>
+            <viewLayoutGuide key="safeArea" id="ICE-FS-sOn"/>
             <point key="canvasLocation" x="-71.200000000000003" y="-65.217391304347828"/>
         </view>
     </objects>

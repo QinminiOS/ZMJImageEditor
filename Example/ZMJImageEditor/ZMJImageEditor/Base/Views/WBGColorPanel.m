@@ -27,6 +27,11 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
 
 @implementation WBGColorPanel
 
++ (CGFloat)fixedHeight
+{
+    return 50;
+}
+
 - (instancetype)init
 {
     self = [super init];

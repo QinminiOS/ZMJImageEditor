@@ -17,4 +17,6 @@ typedef void (^WBGUndoButtonTappedBlock)();
 @property (nonatomic, strong, readonly) UIColor *currentColor;
 @property (nonatomic, weak) id<WBGImageEditorDataSource> dataSource;
 @property (nonatomic, copy) WBGUndoButtonTappedBlock undoButtonTappedBlock;
+
++ (CGFloat)fixedHeight;
 @end

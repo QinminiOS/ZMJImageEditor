@@ -21,6 +21,7 @@
 #import "XXNibBridge.h"
 #import "YYCategories.h"
 #import "WBGMosicaTool.h"
+#import "Masonry.h"
 
 
 #pragma mark - WBGImageEditorViewController
@@ -36,22 +37,22 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 @property (weak, nonatomic) IBOutlet UIView *bottomBar;
 @property (weak, nonatomic) IBOutlet UIView *topBar;
 
+@property (weak,   nonatomic) IBOutlet UIImageView *imageView;
+@property (weak,   nonatomic) IBOutlet UIScrollView *scrollView;
+
+@property (weak, nonatomic) IBOutlet UIButton *panButton;
+@property (weak, nonatomic) IBOutlet UIButton *textButton;
+@property (weak, nonatomic) IBOutlet UIButton *clipButton;
+@property (weak, nonatomic) IBOutlet UIButton *paperButton;
+
 @property (nonatomic, assign) WBGEditorMode currentMode;
 @property (strong, nonatomic) WBGColorPanel *colorPanel;
 
 @property (strong, nonatomic) UIView *topBannerView;
 @property (strong, nonatomic) UIView *bottomBannerView;
 
-@property (weak,   nonatomic) IBOutlet UIImageView *imageView;
-@property (weak,   nonatomic) IBOutlet UIScrollView *scrollView;
-
 @property (strong, nonatomic) UIImageView *drawingView;
 @property (strong, nonatomic) WBGScratchView *mosicaView;
-
-@property (weak, nonatomic) IBOutlet UIButton *panButton;
-@property (weak, nonatomic) IBOutlet UIButton *textButton;
-@property (weak, nonatomic) IBOutlet UIButton *clipButton;
-@property (weak, nonatomic) IBOutlet UIButton *paperButton;
 
 @property (nonatomic, strong) WBGImageToolBase *currentTool;
 @property (nonatomic, strong) WBGDrawTool *drawTool;
@@ -86,20 +87,21 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
          dataSource:(id<WBGImageEditorDataSource>)dataSource;
 {
     self = [self init];
-    
     if (self)
     {
         _originImage = image;
         self.delegate = delegate;
         self.dataSource = dataSource;
     }
+    
     return self;
 }
 
 - (id)initWithDelegate:(id<WBGImageEditorDelegate>)delegate
 {
     self = [self init];
-    if (self){
+    if (self)
+    {
         
         self.delegate = delegate;
     }
@@ -112,17 +114,17 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     
     @weakify(self);
     self.colorPanel = [WBGColorPanel xx_instantiateFromNib];
+    self.colorPanel.dataSource = self.dataSource;
+    [self.view addSubview:_colorPanel];
+    [self.colorPanel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(0);
+        make.height.mas_equalTo([WBGColorPanel fixedHeight]);
+        make.bottom.mas_equalTo(self.bottomBar.mas_top);
+    }];
     [self.colorPanel setUndoButtonTappedBlock:^{
         @strongify(self);
         [self undoAction];
     }];
-    
-    // self.undoButton.hidden = YES;
-    
-    //self.colorPan.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 60, 100, self.colorPan.bounds.size.width, self.colorPan.bounds.size.height);
-    self.colorPanel.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height-99, [UIScreen mainScreen].bounds.size.width, 50);
-    self.colorPanel.dataSource = self.dataSource;
-    [self.view addSubview:_colorPanel];
     
     [self initImageScrollView];
     
@@ -197,13 +199,16 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
         self.colorPanel.hidden = NO;
     }
     
+    CGFloat padding = 45.0f;
+    CGFloat width = WIDTH_SCREEN - 2 * padding;
+    NSInteger count = valibleCompoment.count;
+    CGFloat length = width / ((count - 1 > 0) ? (count - 1) : 1);
+    
     [valibleCompoment enumerateObjectsUsingBlock:^(UIButton * _Nonnull button,
                                                    NSUInteger idx,
                                                    BOOL * _Nonnull stop)
     {
-        CGRect originFrame = button.frame;
-        originFrame.origin.x = idx == 0 ?(idx + 1) * 30.f : (idx + 1) * 30.f + originFrame.size.width * idx;
-        button.frame = originFrame;
+        button.centerX = length * idx + padding;
     }];
 }
 
@@ -719,25 +724,20 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
         return;
     }
     
-    [UIView animateWithDuration:animation ? .25f : 0.f
-                          delay:0
-         usingSpringWithDamping:1
-          initialSpringVelocity:1
-                        options:isHide ? UIViewAnimationOptionCurveEaseOut : UIViewAnimationOptionCurveEaseIn
-                     animations:^{
-        if (isHide) {
-            _bottomBarBottom.constant = -49.f;
-            _topBarTop.constant = -64.f;
-            self.colorPanel.hidden = YES;
-        } else {
-            _bottomBarBottom.constant = 0;
-            _topBarTop.constant = 0;
-            self.colorPanel.hidden = NO;
+    CGFloat time = animation ? .4f : 0.f;
+    
+    [UIView animateWithDuration:time animations:^{
+        if (isHide)
+        {
+            self.bottomBar.alpha = 0;
+            self.colorPanel.alpha = 0;
         }
-        _barsHiddenStatus = isHide;
-        [self.view layoutIfNeeded];
-    } completion:^(BOOL finished) {
-        
+        else
+        {
+            self.bottomBar.alpha = 1.0f;
+            self.colorPanel.alpha = 1.0f;
+        }
+        self.barsHiddenStatus = isHide;
     }];
 }
 
