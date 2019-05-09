@@ -9,10 +9,13 @@
 #import "WBGDrawTool.h"
 #import "WBGImageEditorGestureManager.h"
 #import "WBGTextToolView.h"
+#import "WBGColorPanel.h"
+#import "Masonry.h"
 
 @interface WBGDrawTool ()
 @property (nonatomic, weak) UIImageView *drawingView;
 @property (nonatomic, assign) CGSize originalImageSize;
+@property (nonatomic, weak) WBGColorPanel *colorPanel;
 @property (nonatomic, strong) UIPanGestureRecognizer *panGesture;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGesture;
 @end
@@ -27,6 +30,21 @@
     {
         self.editor = editor;
         _allLineMutableArray = [NSMutableArray new];
+        
+        WBGColorPanel *colorPanel = [WBGColorPanel xx_instantiateFromNib];
+        [editor.view addSubview:colorPanel];
+        self.colorPanel = colorPanel;
+        [colorPanel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_equalTo(0);
+            make.height.mas_equalTo([WBGColorPanel fixedHeight]);
+            make.bottom.mas_equalTo(editor.bottomBar.mas_top);
+        }];
+        
+        __weak __typeof(self)weakSelf = self;
+        [self.colorPanel setUndoButtonTappedBlock:^{
+            __strong __typeof(weakSelf)strongSelf = weakSelf;
+            [strongSelf backToLastDraw];
+        }];
     }
     
     return self;
@@ -38,7 +56,7 @@
     //初始化一些东西
     _originalImageSize = self.editor.imageView.image.size;
     _drawingView = self.editor.drawingView;
-    self.editor.colorPanel.hidden = NO;
+    self.colorPanel.hidden = NO;
     
     //滑动手势
     if (!self.panGesture)
@@ -77,7 +95,7 @@
 
 - (void)cleanup
 {
-    self.editor.colorPanel.hidden = YES;
+    self.colorPanel.hidden = YES;
     self.editor.imageView.userInteractionEnabled = NO;
     self.editor.scrollView.panGestureRecognizer.minimumNumberOfTouches = 1;
     self.panGesture.enabled = NO;
@@ -89,12 +107,12 @@
     if (hidden)
     {
         self.editor.bottomBar.alpha = 0;
-        self.editor.colorPanel.alpha = 0;
+        self.colorPanel.alpha = 0;
     }
     else
     {
         self.editor.bottomBar.alpha = 1.0f;
-        self.editor.colorPanel.alpha = 1.0f;
+        self.colorPanel.alpha = 1.0f;
     }
 }
 
@@ -148,15 +166,14 @@
         
         // 初始化一个UIBezierPath对象, 把起始点存储到UIBezierPath对象中, 用来存储所有的轨迹点
         WBGPath *path = [WBGPath pathToPoint:currentDraggingPosition pathWidth:MAX(1, self.pathWidth)];
-        path.pathColor         = self.editor.colorPanel.currentColor;
-        path.shape.strokeColor = self.editor.colorPanel.currentColor.CGColor;
+        path.pathColor = self.colorPanel.currentColor;
+        path.shape.strokeColor = self.colorPanel.currentColor.CGColor;
         [_allLineMutableArray addObject:path];
         
     }
     
     if(sender.state == UIGestureRecognizerStateChanged)
-    {
-        // 获得数组中的最后一个UIBezierPath对象(因为我们每次都把UIBezierPath存入到数组最后一个,因此获取时也取最后一个)
+    { // 获得数组中的最后一个UIBezierPath对象(因为我们每次都把UIBezierPath存入到数组最后一个,因此获取时也取最后一个)
         WBGPath *path = [_allLineMutableArray lastObject];
         [path pathLineToPoint:currentDraggingPosition];//添加点
         [self drawLine];

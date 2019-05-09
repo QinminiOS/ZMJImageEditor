@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XXNibBridge.h"
 
 extern NSString * const kColorPanelNotificaiton;
 

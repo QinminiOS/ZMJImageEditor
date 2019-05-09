@@ -45,7 +45,6 @@
     }
     
     self.editor.drawingView.userInteractionEnabled = NO;
-    self.editor.colorPanel.hidden = YES;
 }
 
 - (void)cleanup

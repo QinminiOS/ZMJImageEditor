@@ -17,7 +17,6 @@
 #import "UIView+YYAdd.h"
 #import "WBGImageEditor.h"
 #import "WBGMoreKeyboard.h"
-#import "XXNibBridge.h"
 #import "YYCategories.h"
 #import "WBGMosicaTool.h"
 #import "Masonry.h"
@@ -42,7 +41,6 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 @property (weak, nonatomic) IBOutlet UIButton *paperButton;
 
 @property (nonatomic, assign) WBGEditorMode currentMode;
-@property (strong, nonatomic) WBGColorPanel *colorPanel;
 
 @property (strong, nonatomic) UIView *topBannerView;
 @property (strong, nonatomic) UIView *bottomBannerView;
@@ -107,23 +105,10 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    @weakify(self);
-    self.colorPanel = [WBGColorPanel xx_instantiateFromNib];
-    self.colorPanel.dataSource = self.dataSource;
-    [self.view addSubview:_colorPanel];
-    [self.colorPanel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(0);
-        make.height.mas_equalTo([WBGColorPanel fixedHeight]);
-        make.bottom.mas_equalTo(self.bottomBar.mas_top);
-    }];
-    [self.colorPanel setUndoButtonTappedBlock:^{
-        @strongify(self);
-        [self undoAction];
-    }];
-    
+
     [self initImageScrollView];
     
+    @weakify(self);
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW,
                                  (int64_t)(.25 * NSEC_PER_SEC)),
                    dispatch_get_main_queue(), ^{
@@ -139,7 +124,6 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     self.textButton.hidden = YES;
     self.clipButton.hidden = YES;
     self.paperButton.hidden = YES;
-    self.colorPanel.hidden = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -188,11 +172,6 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     {
         self.clipButton.hidden = NO;
         [valibleCompoment addObject:self.clipButton];
-    }
-    
-    if (curComponent & WBGImageEditorColorPanComponent)
-    {
-        self.colorPanel.hidden = NO;
     }
     
     CGFloat padding = 45.0f;
@@ -299,7 +278,6 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
         __weak typeof(self)weakSelf = self;
         _textTool.dissmissTextTool = ^(NSString *currentText)
         {
-            [weakSelf hiddenColorPan:NO animation:YES];
             weakSelf.currentMode = WBGEditorModeNone;
             weakSelf.currentTool = nil;
         };
@@ -443,18 +421,15 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     }
 }
 
-
 #pragma mark - Actions
 ///发送
 - (IBAction)sendAction:(UIButton *)sender
 {
-
     [self buildClipImageShowHud:YES clipedCallback:^(UIImage *clipedImage) {
         if ([self.delegate respondsToSelector:@selector(imageEditor:didFinishEdittingWithImage:)]) {
             [self.delegate imageEditor:self didFinishEdittingWithImage:clipedImage];
         }
     }];
-    
 }
 
 ///涂鸦模式
@@ -492,7 +467,6 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
                                                    toImageFrame:CGRectZero
                                                           setup:^{
                                                               [weakSelf refreshImageView];
-                                                              weakSelf.colorPanel.hidden = YES;
                                                               weakSelf.currentMode = WBGEditorModeClip;
                                                               [weakSelf setCurrentTool:nil];
                                                           }
@@ -513,7 +487,6 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     self.currentMode = WBGEditorModeText;
     
     self.currentTool = self.textTool;
-    [self hiddenColorPan:YES animation:YES];
 }
 
 //马赛克模式
@@ -550,8 +523,6 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
         [_currentTool setup];
 
     }
-    
-    [self hiddenColorPan:YES animation:YES];
 }
 
 - (IBAction)onFinishButtonTapped:(UIButton *)sender
@@ -630,22 +601,19 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     __weak typeof(self)weakSelf = self;
     if (cropViewController.croppingStyle != TOCropViewCroppingStyleCircular) {
 
-        [cropViewController dismissAnimatedFromParentViewController:self
-                                                   withCroppedImage:image
-                                                             toView:self.imageView
-                                                            toFrame:CGRectZero
-                                                              setup:^{
-                                                                  [weakSelf refreshImageView];
-                                                                  [weakSelf viewDidLayoutSubviews];
-                                                                  weakSelf.colorPanel.hidden = NO;
-                                                              }
-                                                         completion:^{
-                                                             weakSelf.colorPanel.hidden = NO;
-                                                         }];
+        [cropViewController
+         dismissAnimatedFromParentViewController:self
+         withCroppedImage:image
+         toView:self.imageView
+         toFrame:CGRectZero
+         setup:^{
+             [weakSelf refreshImageView];
+             [weakSelf viewDidLayoutSubviews];
+         }
+         completion:NULL];
     }
     else
     {
-        
         [cropViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     }
     
@@ -658,21 +626,16 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 - (void)cropViewController:(TOCropViewController *)cropViewController didFinishCancelled:(BOOL)cancelled {
     
     __weak typeof(self)weakSelf = self;
-    [cropViewController dismissAnimatedFromParentViewController:self
-                                               withCroppedImage:self.imageView.image
-                                                         toView:self.imageView
-                                                        toFrame:CGRectZero
-                                                          setup:^{
-                                                              [weakSelf refreshImageView];
-                                                              [weakSelf viewDidLayoutSubviews];
-                                                              weakSelf.colorPanel.hidden = NO;
-                                                          }
-                                                     completion:^{
-                                                         [UIView animateWithDuration:.3f animations:^{
-                                                             weakSelf.colorPanel.hidden = NO;
-                                                         }];
-                                                         
-                                                     }];
+    [cropViewController
+     dismissAnimatedFromParentViewController:self
+     withCroppedImage:self.imageView.image
+     toView:self.imageView
+     toFrame:CGRectZero
+     setup:^{
+         [weakSelf refreshImageView];
+         [weakSelf viewDidLayoutSubviews];
+     }
+     completion:NULL];
 }
 
 #pragma mark -
@@ -715,23 +678,6 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     [UIView animateWithDuration:time animations:^{
         [self.currentTool hideTools:isHide];
         self.barsHiddenStatus = isHide;
-    }];
-}
-
-- (void)hiddenColorPan:(BOOL)yesOrNot
-             animation:(BOOL)animation
-{
-    UIViewAnimationOptions options = yesOrNot ? UIViewAnimationOptionCurveEaseOut : UIViewAnimationOptionCurveEaseIn;
-    
-    [UIView animateWithDuration:animation ? .25f : 0.f
-                          delay:0
-         usingSpringWithDamping:1
-          initialSpringVelocity:1
-                        options:options
-                     animations:^{
-        self.colorPanel.hidden = yesOrNot;
-    } completion:^(BOOL finished) {
-    
     }];
 }
 

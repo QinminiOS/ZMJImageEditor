@@ -28,7 +28,6 @@ static const NSInteger kTextMaxLimitNumber = 100;
     self.editor.scrollView.pinchGestureRecognizer.enabled = NO;
     __weak typeof(self)weakSelf = self;
     self.textView = [[_WBGTextView alloc] initWithFrame:CGRectMake(0, kTopOffset, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - kTopOffset)];
-    self.textView.textView.textColor = self.editor.colorPanel.currentColor;
     self.textView.textView.font = [UIFont systemFontOfSize:24.f weight:UIFontWeightRegular];
     // self.editor.backButton.enabled = NO;
     // self.editor.undoButton.enabled = NO;
@@ -85,7 +84,7 @@ static const NSInteger kTextMaxLimitNumber = 100;
     }
     
     WBGTextToolView *view = [[WBGTextToolView alloc] initWithTool:self text:text font:self.textView.textView.font orImage:nil];
-    view.fillColor = self.editor.colorPanel.currentColor;
+    view.fillColor = self.colorPanel.currentColor;
     view.borderColor = [UIColor whiteColor];
     view.font = self.textView.textView.font;
     view.text = text;

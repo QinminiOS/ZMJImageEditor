@@ -19,14 +19,12 @@ typedef NS_OPTIONS(NSInteger, WBGImageEditorComponent)
     WBGImageEditorTextComponent = 1 << 1,
     WBGImageEditorClipComponent = 1 << 2,
     WBGImageEditorPaperComponent = 1 << 3,
-    WBGImageEditorColorPanComponent = 1 << 4,
     
     //all
     WBGImageEditorALLComponent = WBGImageEditorDrawComponent
                                  | WBGImageEditorTextComponent
                                  | WBGImageEditorClipComponent
                                  | WBGImageEditorPaperComponent
-                                 | WBGImageEditorColorPanComponent,
 };
 
 @interface WBGImageEditor : UIViewController
