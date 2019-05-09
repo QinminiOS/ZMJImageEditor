@@ -118,16 +118,14 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 {
     [super viewWillAppear:animated];
     
-    //ShowBusyIndicatorForView(self.view);
+    //获取自定制组件 - fecth custom config
+    [self configCustomComponent];
+    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW,
                                  (int64_t)(.25 * NSEC_PER_SEC)),
                    dispatch_get_main_queue(),^ {
-      //  HideBusyIndicatorForView(self.view);
-        [self refreshImageView];
-    });
-    
-    //获取自定制组件 - fecth custom config
-    [self configCustomComponent];
+                       [self refreshImageView];
+                   });
 }
 
 - (void)viewDidLayoutSubviews
@@ -286,10 +284,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 
 - (void)refreshImageView
 {
-    if (self.imageView.image == nil)
-    {
-        self.imageView.image = self.originImage;
-    }
+    if (!self.imageView.image) self.imageView.image = self.originImage;
     
     [self resetImageViewFrame];
     [self resetZoomScaleWithAnimated:NO];
@@ -305,7 +300,11 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
         CGFloat W = ratio * size.width * _scrollView.zoomScale;
         CGFloat H = ratio * size.height * _scrollView.zoomScale;
         
-        _imageView.frame = CGRectMake(MAX(0, (_scrollView.width-W)/2), MAX(0, (_scrollView.height-H)/2), W, H);
+        _imageView.superview.frame = CGRectMake(MAX(0, (_scrollView.width-W)/2), MAX(0, (_scrollView.height-H)/2), W, H);
+        
+        // _imageView.frame = CGRectMake(MAX(0, (_scrollView.width-W)/2), MAX(0, (_scrollView.height-H)/2), W, H);
+        
+        _imageView.frame = CGRectMake(0, 0, W, H);;
     }
 }
 
@@ -585,12 +584,12 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 - (void)buildClipImageShowHud:(BOOL)showHud
                clipedCallback:(void(^)(UIImage *clipedImage))clipedCallback
 {
-    UIGraphicsBeginImageContextWithOptions(self.scrollView.size,
+    UIGraphicsBeginImageContextWithOptions(self.imageView.superview.size,
                                            NO,
                                            [UIScreen mainScreen].scale);
     
     CGContextRef ctx = UIGraphicsGetCurrentContext();
-    [self.scrollView.layer renderInContext:ctx];
+    [self.imageView.superview.layer renderInContext:ctx];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
