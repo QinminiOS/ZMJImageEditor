@@ -108,18 +108,6 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 
     [self initImageScrollView];
     
-    @weakify(self);
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW,
-                                 (int64_t)(.25 * NSEC_PER_SEC)),
-                   dispatch_get_main_queue(), ^{
-        @strongify(self)
-        if ([self.dataSource respondsToSelector:@selector(imageEditorCompoment)] &&
-            ([self.dataSource imageEditorCompoment] & WBGImageEditorDrawComponent))
-        {
-            [self.panButton sendActionsForControlEvents:UIControlEventTouchUpInside];
-        }
-    });
-    
     self.panButton.hidden = YES;
     self.textButton.hidden = YES;
     self.clipButton.hidden = YES;
