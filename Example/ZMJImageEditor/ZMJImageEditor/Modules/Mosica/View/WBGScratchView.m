@@ -12,11 +12,11 @@
 #import "UIView+TouchBlock.h"
 
 @interface WBGScratchView ()
-
 @property (nonatomic, strong) UIImageView *surfaceImageView;
 @property (nonatomic, strong) CALayer *imageLayer;
 @property (nonatomic, strong) CAShapeLayer *shapeLayer;
 @property (nonatomic, strong) WBGMosicaPath *mosicaPath;
+@property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
 @end
 
 @implementation WBGScratchView
@@ -43,6 +43,9 @@
         self.imageLayer.mask = self.shapeLayer;
         
         self.mosicaPath = [WBGMosicaPath new];
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onViewTapped:)];
+        [self addGestureRecognizer:tap];
     }
     
     return self;
@@ -113,6 +116,14 @@
     if (self.touchesCancelledBlock)
     {
         self.touchesCancelledBlock();
+    }
+}
+
+- (void)onViewTapped:(UITapGestureRecognizer *)gestureRecognizer
+{
+    if (self.tapGestureBlock)
+    {
+        self.tapGestureBlock();
     }
 }
 

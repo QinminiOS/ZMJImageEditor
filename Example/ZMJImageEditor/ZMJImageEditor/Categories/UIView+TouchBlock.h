@@ -10,10 +10,12 @@ typedef void (^TBTouchesBeganBlock)(void);
 typedef void (^TBTouchesMovedBlock)(void);
 typedef void (^TBTouchesEndedBlock)(void);
 typedef void (^TBTouchesCancelledBlock)(void);
+typedef void (^TBTapGestureBlock)(void);
 
 @interface UIView (TouchBlock)
 @property (nonatomic, copy) TBTouchesBeganBlock touchesBeganBlock;
 @property (nonatomic, copy) TBTouchesMovedBlock touchesMovedBlock;
 @property (nonatomic, copy) TBTouchesEndedBlock touchesEndedBlock;
 @property (nonatomic, copy) TBTouchesCancelledBlock touchesCancelledBlock;
+@property (nonatomic, copy) TBTapGestureBlock tapGestureBlock;
 @end

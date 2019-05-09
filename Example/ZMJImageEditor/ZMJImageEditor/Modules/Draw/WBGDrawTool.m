@@ -45,6 +45,20 @@
             __strong __typeof(weakSelf)strongSelf = weakSelf;
             [strongSelf backToLastDraw];
         }];
+        
+        self.drawToolStatus = ^(BOOL canPrev) {
+            //if (canPrev) {
+            //    weakSelf.undoButton.hidden = NO;
+            //} else {
+            //    weakSelf.undoButton.hidden = YES;
+            //}
+        };
+        self.drawingCallback = ^(BOOL isDrawing) {
+            [editor hiddenTopAndBottomBar:isDrawing animation:YES];
+        };
+        self.drawingDidTap = ^{
+            [editor hiddenTopAndBottomBar:!editor.barsHiddenStatus animation:YES];
+        };
     }
     
     return self;

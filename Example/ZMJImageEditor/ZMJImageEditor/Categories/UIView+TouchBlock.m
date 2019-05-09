@@ -51,4 +51,14 @@
     return objc_getAssociatedObject(self, @selector(touchesCancelledBlock));
 }
 
+- (void)setTapGestureBlock:(TBTapGestureBlock)tapGestureBlock
+{
+    objc_setAssociatedObject(self, @selector(tapGestureBlock), tapGestureBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
+
+- (TBTapGestureBlock)tapGestureBlock
+{
+    return objc_getAssociatedObject(self, @selector(tapGestureBlock));
+}
+
 @end

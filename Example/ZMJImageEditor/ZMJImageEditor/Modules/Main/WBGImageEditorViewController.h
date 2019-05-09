@@ -31,6 +31,7 @@ typedef NS_ENUM(NSUInteger, WBGEditorMode)
 
 @property (nonatomic, copy, readonly) UIImage *originImage;
 @property (nonatomic, assign, readonly) WBGEditorMode currentMode;
+@property (nonatomic, assign, readonly) BOOL barsHiddenStatus;
 
 - (CGFloat)bottomBarHeight;
 

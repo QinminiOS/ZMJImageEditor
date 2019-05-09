@@ -99,6 +99,11 @@
         [strongSelf.editor hiddenTopAndBottomBar:NO animation:YES];
     }];
     
+    [self.scratchView setTapGestureBlock:^{
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        [strongSelf.editor hiddenTopAndBottomBar:!strongSelf.editor.barsHiddenStatus animation:YES];
+    }];
+    
     self.mosicaToolBar.backButtonClickBlock = ^(UIButton *btn) {
         __strong __typeof(weakSelf) strongSelf = weakSelf;
         [strongSelf.scratchView backToLastDraw];

@@ -131,7 +131,9 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     [super viewWillAppear:animated];
     
     //ShowBusyIndicatorForView(self.view);
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW,
+                                 (int64_t)(.25 * NSEC_PER_SEC)),
+                   dispatch_get_main_queue(),^ {
       //  HideBusyIndicatorForView(self.view);
         [self refreshImageView];
     });
@@ -249,21 +251,6 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     if (_drawTool == nil)
     {
         _drawTool = [[WBGDrawTool alloc] initWithImageEditor:self];
-        
-        __weak typeof(self)weakSelf = self;
-        _drawTool.drawToolStatus = ^(BOOL canPrev) {
-            //if (canPrev) {
-            //    weakSelf.undoButton.hidden = NO;
-            //} else {
-            //    weakSelf.undoButton.hidden = YES;
-            //}
-        };
-        _drawTool.drawingCallback = ^(BOOL isDrawing) {
-            [weakSelf hiddenTopAndBottomBar:isDrawing animation:YES];
-        };
-        _drawTool.drawingDidTap = ^(void) {
-            [weakSelf hiddenTopAndBottomBar:!weakSelf.barsHiddenStatus animation:YES];
-        };
         _drawTool.pathWidth = [self.dataSource respondsToSelector:@selector(imageEditorDrawPathWidth)] ? [self.dataSource imageEditorDrawPathWidth].floatValue : 5.0f;
     }
     
