@@ -231,8 +231,10 @@
         [self layoutToolbarButtons:buttonsInOrderHorizontally withSameButtonSize:buttonSize inContainerRect:containerRect horizontally:YES];
         self.resetButton.centerX = boundsSize.width/2.f;
         self.rotateCounterclockwiseButton.centerX = self.cancelTextButton.centerX;
+        self.rotateCounterclockwiseButton.bottom = self.cancelTextButton.top - 20;
     }
-    else {
+    else
+    {
         CGRect frame = CGRectZero;
         frame.size.height = 44.0f;
         frame.size.width = 44.0f;
@@ -592,6 +594,22 @@
 - (UIButton *)rotateButton
 {
     return self.rotateCounterclockwiseButton;
+}
+
+#pragma mark - hitTest
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event
+{
+    if (!self.rotateCounterclockwiseButton.hidden &&
+        self.rotateCounterclockwiseButton.userInteractionEnabled &&
+        self.rotateCounterclockwiseButton.alpha > 0)
+    {
+        if (CGRectContainsPoint(self.rotateCounterclockwiseButton.frame, point))
+        {
+            return YES;
+        }
+    }
+    
+    return [super pointInside:point withEvent:event];
 }
 
 @end
