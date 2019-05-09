@@ -771,60 +771,19 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 - (void)buildClipImageShowHud:(BOOL)showHud
                clipedCallback:(void(^)(UIImage *clipedImage))clipedCallback
 {
-    if (showHud)
-    {
-        // ShowBusyTextIndicatorForView(self.view, @"生成图片中...", nil);
-    }
-    
-    CGFloat WS = self.imageView.width/ self.drawingView.width;
-    CGFloat HS = self.imageView.height/ self.drawingView.height;
-
-    UIGraphicsBeginImageContextWithOptions(self.imageView.size,
+    UIGraphicsBeginImageContextWithOptions(self.scrollView.size,
                                            NO,
-                                           self.imageView.image.scale);
-
-    [self.imageView.image drawAtPoint:CGPointZero];
-    CGFloat viewToimgW = self.imageView.width/self.imageView.image.size.width;
-    CGFloat viewToimgH = self.imageView.height/self.imageView.image.size.height;
-    __unused CGFloat drawX = self.imageView.left/viewToimgW;
-    CGFloat drawY = self.imageView.top/viewToimgH;
-    [_drawingView.image drawInRect:CGRectMake(0, -drawY, self.imageView.image.size.width/WS, self.imageView.image.size.height/HS)];
+                                           [UIScreen mainScreen].scale);
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        for (UIView *subV in _drawingView.subviews)
-        {
-            if ([subV isKindOfClass:[WBGTextToolView class]])
-            {
-                WBGTextToolView *textLabel = (WBGTextToolView *)subV;
-                //进入正常状态
-                [WBGTextToolView setInactiveTextView:textLabel];
-                
-                //生成图片
-                __unused UIView *tes = textLabel.archerBGView;
-                UIImage *textImg = [self.class screenshot:textLabel.archerBGView orientation:UIDeviceOrientationPortrait usePresentationLayer:YES];
-                CGFloat rotation = textLabel.archerBGView.layer.transformRotationZ;
-                textImg = [textImg imageRotatedByRadians:rotation];
-                
-                CGFloat selfRw = self.imageView.bounds.size.width / self.imageView.image.size.width;
-                CGFloat selfRh = self.imageView.bounds.size.height / self.imageView.image.size.height;
-                
-                CGFloat sw = textImg.size.width / selfRw;
-                CGFloat sh = textImg.size.height / selfRh;
-                
-                [textImg drawInRect:CGRectMake(textLabel.left/selfRw, (textLabel.top/selfRh) - drawY, sw, sh)];
-            }
-        }
-    });
-    
-    UIImage *tmp = UIGraphicsGetImageFromCurrentImageContext();
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    [self.scrollView.layer renderInContext:ctx];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        //HideBusyIndicatorForView(self.view);
-        UIImage *image = [UIImage imageWithCGImage:tmp.CGImage scale:[UIScreen mainScreen].scale orientation:UIImageOrientationUp];
+    if (clipedCallback)
+    {
         clipedCallback(image);
-        
-    });
+    }
 }
 
 + (UIImage *)screenshot:(UIView *)view
