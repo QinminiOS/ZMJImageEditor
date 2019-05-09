@@ -7,15 +7,15 @@
 //
 
 #import "WBGScratchView.h"
+#import "WBGPath.h"
+#import "WBGMosicaPath.h"
 
 @interface WBGScratchView ()
 
 @property (nonatomic, strong) UIImageView *surfaceImageView;
 @property (nonatomic, strong) CALayer *imageLayer;
 @property (nonatomic, strong) CAShapeLayer *shapeLayer;
-/** 手指的涂抹路径 */
-@property (nonatomic, assign) CGMutablePathRef path;
-
+@property (nonatomic, strong) WBGMosicaPath *mosicaPath;
 @end
 
 @implementation WBGScratchView
@@ -40,7 +40,8 @@
         self.shapeLayer.fillColor = nil;//此处必须设为nil，否则后边添加addLine的时候会自动填充
 
         self.imageLayer.mask = self.shapeLayer;
-        self.path = CGPathCreateMutable();
+        
+        self.mosicaPath = [WBGMosicaPath new];
     }
     
     return self;
@@ -63,9 +64,12 @@
     [super touchesBegan:touches withEvent:event];
     UITouch *touch = [touches anyObject];
     CGPoint point = [touch locationInView:self];
-    CGPathMoveToPoint(self.path, nil, point.x, point.y);
-    self.shapeLayer.path = self.path;
+    [self.mosicaPath beginNewDraw:point];
     
+    CGPathRef path = [self.mosicaPath makePath];
+    self.shapeLayer.path = path;
+    CGPathRelease(path);
+    path = NULL;
 }
 
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
@@ -73,8 +77,12 @@
     [super touchesMoved:touches withEvent:event];
     UITouch *touch = [touches anyObject];
     CGPoint point = [touch locationInView:self];
-    CGPathAddLineToPoint(self.path, nil, point.x, point.y);
-    self.shapeLayer.path = self.path;
+    [self.mosicaPath addLineToPoint:point];
+    
+    CGPathRef path = [self.mosicaPath makePath];
+    self.shapeLayer.path = path;
+    CGPathRelease(path);
+    path = NULL;
 }
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
@@ -82,20 +90,13 @@
     [super touchesEnded:touches withEvent:event];
 }
 
-- (void)recover
+- (void)backToLastDraw
 {
-    CGPathRelease(self.path);
-    self.path = CGPathCreateMutable();
-    self.shapeLayer.path = nil;
+    [self.mosicaPath backToLastDraw];
+    CGPathRef path = [self.mosicaPath makePath];
+    self.shapeLayer.path = path;
+    CGPathRelease(path);
+    path = NULL;
 }
-
-- (void)dealloc
-{
-    if (self.path)
-    {
-        CGPathRelease(self.path);
-    }
-}
-
 
 @end

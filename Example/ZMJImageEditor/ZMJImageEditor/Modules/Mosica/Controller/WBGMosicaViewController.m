@@ -67,7 +67,7 @@
             [self dismissViewControllerAnimated:YES completion:nil];
             break;
         case 101:
-            [_scratchView recover];
+            [_scratchView backToLastDraw];
             break;
         case 102:
         {

@@ -53,6 +53,7 @@
 		71858E932281787D00EE6CF2 /* WBGColorPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 71858E922281787D00EE6CF2 /* WBGColorPanel.m */; };
 		71858E9522817A2E00EE6CF2 /* WBGColorPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 71858E9422817A2E00EE6CF2 /* WBGColorPanel.xib */; };
 		71F42E212283CB10007FFD7C /* WBGPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 71F42E1F2283CB10007FFD7C /* WBGPath.m */; };
+		71F42E252283CDBC007FFD7C /* WBGMosicaPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 71F42E242283CDBC007FFD7C /* WBGMosicaPath.m */; };
 		71FA89AE22827E58009349CB /* WBGMosicaTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 71FA89AD22827E57009349CB /* WBGMosicaTool.m */; };
 		71FA89B022827F06009349CB /* WBGMosicaToolBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 71FA89AF22827F06009349CB /* WBGMosicaToolBar.xib */; };
 		71FA89B322827F14009349CB /* WBGMosicaToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 71FA89B222827F14009349CB /* WBGMosicaToolBar.m */; };
@@ -163,6 +164,8 @@
 		71858E9422817A2E00EE6CF2 /* WBGColorPanel.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WBGColorPanel.xib; sourceTree = "<group>"; };
 		71F42E1F2283CB10007FFD7C /* WBGPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBGPath.m; sourceTree = "<group>"; };
 		71F42E202283CB10007FFD7C /* WBGPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBGPath.h; sourceTree = "<group>"; };
+		71F42E232283CDBC007FFD7C /* WBGMosicaPath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WBGMosicaPath.h; sourceTree = "<group>"; };
+		71F42E242283CDBC007FFD7C /* WBGMosicaPath.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WBGMosicaPath.m; sourceTree = "<group>"; };
 		71FA89AC22827E57009349CB /* WBGMosicaTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBGMosicaTool.h; sourceTree = "<group>"; };
 		71FA89AD22827E57009349CB /* WBGMosicaTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBGMosicaTool.m; sourceTree = "<group>"; };
 		71FA89AF22827F06009349CB /* WBGMosicaToolBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WBGMosicaToolBar.xib; sourceTree = "<group>"; };
@@ -310,6 +313,7 @@
 		71858E2A2281756F00EE6CF2 /* Mosica */ = {
 			isa = PBXGroup;
 			children = (
+				71F42E222283CD94007FFD7C /* Model */,
 				71FA89AC22827E57009349CB /* WBGMosicaTool.h */,
 				71FA89AD22827E57009349CB /* WBGMosicaTool.m */,
 				71FA89A8228278B7009349CB /* Utils */,
@@ -391,6 +395,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		71F42E222283CD94007FFD7C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				71F42E232283CDBC007FFD7C /* WBGMosicaPath.h */,
+				71F42E242283CDBC007FFD7C /* WBGMosicaPath.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		71FA899C228274DD009349CB /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -415,7 +428,6 @@
 		71FA899E228276CC009349CB /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				71F42E1E2283CAF2007FFD7C /* Model */,
 				71858E4E2281756F00EE6CF2 /* Views */,
 				71FA899F228276D2009349CB /* Tools */,
 			);
@@ -434,6 +446,7 @@
 		71FA89A0228276F6009349CB /* Draw */ = {
 			isa = PBXGroup;
 			children = (
+				71F42E1E2283CAF2007FFD7C /* Model */,
 				71858E342281756F00EE6CF2 /* WBGDrawTool.h */,
 				71858E372281756F00EE6CF2 /* WBGDrawTool.m */,
 			);
@@ -774,6 +787,7 @@
 				71858E822281756F00EE6CF2 /* TOCropScrollView.m in Sources */,
 				71858E8B2281756F00EE6CF2 /* WBGMoreKeyboard+CollectionView.m in Sources */,
 				71858E752281756F00EE6CF2 /* XRGBTool.m in Sources */,
+				71F42E252283CDBC007FFD7C /* WBGMosicaPath.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

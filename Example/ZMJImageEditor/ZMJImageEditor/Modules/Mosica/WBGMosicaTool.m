@@ -63,7 +63,7 @@
     __weak __typeof(self)weakSelf = self;
     self.mosicaToolBar.backButtonClickBlock = ^(UIButton *btn) {
         __strong __typeof(weakSelf) strongSelf = weakSelf;
-        [strongSelf.scratchView recover];
+        [strongSelf.scratchView backToLastDraw];
     };
 }
 

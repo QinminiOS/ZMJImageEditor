@@ -14,7 +14,7 @@
 @property (nonatomic, strong) UIImage *mosaicImage;
 /** surfaceImage(放在顶层) */
 @property (nonatomic, strong) UIImage *surfaceImage;
-/** 恢复 */
-- (void)recover;
+
+- (void)backToLastDraw;
 
 @end
