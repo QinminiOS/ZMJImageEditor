@@ -9,6 +9,7 @@
 #import "WBGScratchView.h"
 #import "WBGPath.h"
 #import "WBGMosicaPath.h"
+#import "UIView+TouchBlock.h"
 
 @interface WBGScratchView ()
 
@@ -62,6 +63,12 @@
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [super touchesBegan:touches withEvent:event];
+    
+    if (self.touchesBeganBlock)
+    {
+        self.touchesBeganBlock();
+    }
+    
     UITouch *touch = [touches anyObject];
     CGPoint point = [touch locationInView:self];
     [self.mosicaPath beginNewDraw:point];
@@ -75,6 +82,12 @@
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [super touchesMoved:touches withEvent:event];
+    
+    if (self.touchesMovedBlock)
+    {
+        self.touchesMovedBlock();
+    }
+    
     UITouch *touch = [touches anyObject];
     CGPoint point = [touch locationInView:self];
     [self.mosicaPath addLineToPoint:point];
@@ -88,6 +101,19 @@
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [super touchesEnded:touches withEvent:event];
+    
+    if (self.touchesEndedBlock)
+    {
+        self.touchesEndedBlock();
+    }
+}
+
+- (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    if (self.touchesCancelledBlock)
+    {
+        self.touchesCancelledBlock();
+    }
 }
 
 - (void)backToLastDraw

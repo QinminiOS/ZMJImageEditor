@@ -43,7 +43,7 @@
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="RDs-zR-bUy" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="1JU-VZ-T6C"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="RDs-zR-bUy" secondAttribute="bottom" id="b8Y-8i-zW2"/>

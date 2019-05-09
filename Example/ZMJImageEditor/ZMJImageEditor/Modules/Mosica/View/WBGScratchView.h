@@ -10,9 +10,9 @@
 
 @interface WBGScratchView : UIView
 
-/** masoicImage(放在底层) */
+// masoicImage(放在底层)
 @property (nonatomic, strong) UIImage *mosaicImage;
-/** surfaceImage(放在顶层) */
+// surfaceImage(放在顶层)
 @property (nonatomic, strong) UIImage *surfaceImage;
 
 - (void)backToLastDraw;

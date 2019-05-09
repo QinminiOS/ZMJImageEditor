@@ -7,7 +7,18 @@
 //
 
 #import "XRGBTool.h"
-#import "XPixelItem.h"
+
+#define kScreenWidth  [UIScreen mainScreen].bounds.size.width
+#define kScreenHeight  [UIScreen mainScreen].bounds.size.height
+
+@interface XPixelItem : NSObject
+@property (nonatomic, strong) UIColor *color; // 当前像素点的RGBA
+@property (nonatomic, assign) CGPoint location; // 当前像素点的坐标
+@end
+
+@implementation XPixelItem
+@end
+
 
 @implementation XRGBTool
 

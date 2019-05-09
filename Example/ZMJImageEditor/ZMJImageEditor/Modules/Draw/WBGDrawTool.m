@@ -11,15 +11,13 @@
 #import "WBGTextToolView.h"
 
 @interface WBGDrawTool ()
+@property (nonatomic, weak) UIImageView *drawingView;
+@property (nonatomic, assign) CGSize originalImageSize;
 @property (nonatomic, strong) UIPanGestureRecognizer *panGesture;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGesture;
 @end
 
 @implementation WBGDrawTool
-{
-    __weak UIImageView *_drawingView;
-    CGSize _originalImageSize;
-}
 
 - (instancetype)initWithImageEditor:(WBGImageEditorViewController *)editor
 {
@@ -27,7 +25,7 @@
     
     if(self)
     {
-        self.editor   = editor;
+        self.editor = editor;
         _allLineMutableArray = [NSMutableArray new];
     }
     
@@ -38,8 +36,9 @@
 - (void)setup
 {
     //初始化一些东西
-    _originalImageSize   = self.editor.imageView.image.size;
-    _drawingView         = self.editor.drawingView;
+    _originalImageSize = self.editor.imageView.image.size;
+    _drawingView = self.editor.drawingView;
+    self.editor.colorPanel.hidden = NO;
     
     //滑动手势
     if (!self.panGesture)
@@ -78,11 +77,25 @@
 
 - (void)cleanup
 {
+    self.editor.colorPanel.hidden = YES;
     self.editor.imageView.userInteractionEnabled = NO;
     self.editor.scrollView.panGestureRecognizer.minimumNumberOfTouches = 1;
     self.panGesture.enabled = NO;
     self.tapGesture.enabled = NO;
-    //TODO: todo?
+}
+
+- (void)hideTools:(BOOL)hidden
+{
+    if (hidden)
+    {
+        self.editor.bottomBar.alpha = 0;
+        self.editor.colorPanel.alpha = 0;
+    }
+    else
+    {
+        self.editor.bottomBar.alpha = 1.0f;
+        self.editor.colorPanel.alpha = 1.0f;
+    }
 }
 
 - (void)executeWithCompletionBlock:(WBGImageToolCompletionBlock)completionBlock

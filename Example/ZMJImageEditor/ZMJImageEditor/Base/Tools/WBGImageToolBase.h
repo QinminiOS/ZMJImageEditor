@@ -21,6 +21,7 @@ typedef void (^WBGImageToolCompletionBlock)(UIImage *image,
 
 - (void)setup;
 - (void)cleanup;
+- (void)hideTools:(BOOL)hidden;
 - (void)executeWithCompletionBlock:(WBGImageToolCompletionBlock)completionBlock;
 
 @end

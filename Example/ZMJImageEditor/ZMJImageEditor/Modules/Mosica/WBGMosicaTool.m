@@ -12,6 +12,8 @@
 #import "XXNibBridge.h"
 #import "XRGBTool.h"
 #import "WBGChatMacros.h"
+#import "Masonry.h"
+#import "UIView+TouchBlock.h"
 
 @interface WBGMosicaTool ()
 @property (nonatomic, strong) WBGMosicaToolBar *mosicaToolBar;
@@ -22,21 +24,28 @@
 
 - (void)setup
 {
+    self.scratchView = self.editor.mosicaView;
     self.mosicaToolBar = [WBGMosicaToolBar xx_instantiateFromNib];
     [self.editor.view addSubview:self.mosicaToolBar];
+    [self.mosicaToolBar mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(0);
+        make.height.mas_equalTo([WBGMosicaToolBar fixedHeight]);
+        make.bottom.mas_equalTo(self.editor.bottomBar.mas_top);
+    }];
+    
     [self setupActions];
     
     CGFloat height = [WBGMosicaToolBar fixedHeight];
     CGFloat y = HEIGHT_SCREEN - height - [self.editor bottomBarHeight];
     self.mosicaToolBar.frame = CGRectMake(0, y, WIDTH_SCREEN, height);
     
-    self.scratchView = self.editor.mosicaView;
     if (!self.scratchView.mosaicImage)
     {
         self.scratchView.mosaicImage = [XRGBTool getMosaicImageWith:self.editor.originImage level:0];
     }
     
     self.editor.drawingView.userInteractionEnabled = NO;
+    self.editor.colorPanel.hidden = YES;
 }
 
 - (void)cleanup
@@ -44,6 +53,20 @@
     [self.mosicaToolBar removeFromSuperview];
     
     self.editor.drawingView.userInteractionEnabled = YES;
+}
+
+- (void)hideTools:(BOOL)hidden
+{
+    if (hidden)
+    {
+        self.editor.bottomBar.alpha = 0;
+        self.mosicaToolBar.alpha = 0;
+    }
+    else
+    {
+        self.editor.bottomBar.alpha = 1.0f;
+        self.mosicaToolBar.alpha = 1.0f;
+    }
 }
 
 - (void)executeWithCompletionBlock:(WBGImageToolCompletionBlock)completionBlock
@@ -61,6 +84,22 @@
 //    };
     
     __weak __typeof(self)weakSelf = self;
+    
+    [self.scratchView setTouchesBeganBlock:^{
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        [strongSelf.editor hiddenTopAndBottomBar:YES animation:YES];
+    }];
+    
+    [self.scratchView setTouchesCancelledBlock:^{
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        [strongSelf.editor hiddenTopAndBottomBar:NO animation:YES];
+    }];
+    
+    [self.scratchView setTouchesEndedBlock:^{
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        [strongSelf.editor hiddenTopAndBottomBar:NO animation:YES];
+    }];
+    
     self.mosicaToolBar.backButtonClickBlock = ^(UIButton *btn) {
         __strong __typeof(weakSelf) strongSelf = weakSelf;
         [strongSelf.scratchView backToLastDraw];

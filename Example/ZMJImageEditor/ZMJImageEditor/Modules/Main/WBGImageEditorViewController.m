@@ -17,7 +17,6 @@
 #import "UIView+YYAdd.h"
 #import "WBGImageEditor.h"
 #import "WBGMoreKeyboard.h"
-#import "WBGMosicaViewController.h"
 #import "XXNibBridge.h"
 #import "YYCategories.h"
 #import "WBGMosicaTool.h"
@@ -28,9 +27,6 @@
 
 @interface WBGImageEditorViewController () <UINavigationBarDelegate,
 UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBGKeyboardDelegate>
-
-@property (nonatomic, weak) IBOutlet NSLayoutConstraint *topBarTop;
-@property (nonatomic, weak) IBOutlet NSLayoutConstraint *bottomBarBottom;
 
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
 @property (weak, nonatomic) IBOutlet UIButton *finishButton;
@@ -536,15 +532,6 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (IBAction)undoAction:(UIButton *)sender
-{
-    if (self.currentMode == WBGEditorModeDraw)
-    {
-        WBGDrawTool *tool = (WBGDrawTool *)self.currentTool;
-        [tool backToLastDraw];
-    }
-}
-
 - (void)editTextAgain
 {
     //WBGTextTool 钩子调用
@@ -725,18 +712,8 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     }
     
     CGFloat time = animation ? .4f : 0.f;
-    
     [UIView animateWithDuration:time animations:^{
-        if (isHide)
-        {
-            self.bottomBar.alpha = 0;
-            self.colorPanel.alpha = 0;
-        }
-        else
-        {
-            self.bottomBar.alpha = 1.0f;
-            self.colorPanel.alpha = 1.0f;
-        }
+        [self.currentTool hideTools:isHide];
         self.barsHiddenStatus = isHide;
     }];
 }

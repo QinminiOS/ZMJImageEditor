@@ -31,6 +31,11 @@
     
 }
 
+- (void)hideTools:(BOOL)hidden
+{
+    
+}
+
 - (void)executeWithCompletionBlock:(void(^)(UIImage *image, NSError *error, NSDictionary *userInfo))completionBlock
 {
     if (completionBlock)
