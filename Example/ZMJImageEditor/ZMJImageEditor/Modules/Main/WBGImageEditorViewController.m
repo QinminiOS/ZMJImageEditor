@@ -379,16 +379,6 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 }
 
 #pragma mark - Actions
-///发送
-- (IBAction)sendAction:(UIButton *)sender
-{
-    [self buildClipImageShowHud:YES clipedCallback:^(UIImage *clipedImage) {
-        if ([self.delegate respondsToSelector:@selector(imageEditor:didFinishEdittingWithImage:)]) {
-            [self.delegate imageEditor:self didFinishEdittingWithImage:clipedImage];
-        }
-    }];
-}
-
 ///涂鸦模式
 - (IBAction)panAction:(UIButton *)sender
 {
@@ -457,11 +447,6 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     self.currentTool = self.mosicaTool;
 }
 
-- (IBAction)backAction:(UIButton *)sender
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
 - (void)editTextAgain
 {
     //WBGTextTool 钩子调用
@@ -482,11 +467,6 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     }
 }
 
-- (IBAction)onFinishButtonTapped:(UIButton *)sender
-{
-    
-}
-
 //贴图模块
 - (IBAction)onPicButtonTapped:(UIButton *)sender
 {
@@ -497,6 +477,20 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     
     [self.keyboard setChatMoreKeyboardData:sources.mutableCopy];
     [self.keyboard showInView:self.view withAnimation:YES];
+}
+
+- (IBAction)backAction:(UIButton *)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)onFinishButtonTapped:(UIButton *)sender
+{
+    [self buildClipImageShowHud:YES clipedCallback:^(UIImage *clipedImage) {
+        if ([self.delegate respondsToSelector:@selector(imageEditor:didFinishEdittingWithImage:)]) {
+            [self.delegate imageEditor:self didFinishEdittingWithImage:clipedImage];
+        }
+    }];
 }
 
 - (void)resetCurrentTool
@@ -638,16 +632,6 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     }];
 }
 
-+ (UIImage *)createViewImage:(UIView *)shareView
-{
-    UIGraphicsBeginImageContextWithOptions(shareView.bounds.size, NO, [UIScreen mainScreen].scale);
-    [shareView.layer renderInContext:UIGraphicsGetCurrentContext()];
-    shareView.layer.affineTransform = shareView.transform;
-    UIImage * image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return image;
-}
-
 - (void)buildClipImageShowHud:(BOOL)showHud
                clipedCallback:(void(^)(UIImage *clipedImage))clipedCallback
 {
@@ -664,31 +648,6 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     {
         clipedCallback(image);
     }
-}
-
-+ (UIImage *)screenshot:(UIView *)view
-            orientation:(UIDeviceOrientation)orientation
-   usePresentationLayer:(BOOL)usePresentationLayer
-{
-    __block CGSize targetSize = CGSizeZero;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        CGSize size = view.bounds.size;
-        targetSize = CGSizeMake(size.width * view.layer.transformScaleX, size.height *  view.layer.transformScaleY);
-    });
-    
-    UIGraphicsBeginImageContextWithOptions(targetSize, NO, [UIScreen mainScreen].scale);
-    
-    CGContextRef ctx = UIGraphicsGetCurrentContext();
-    CGContextSaveGState(ctx);
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [view drawViewHierarchyInRect:CGRectMake(0, 0, targetSize.width, targetSize.height) afterScreenUpdates:NO];
-    });
-    CGContextRestoreGState(ctx);
-    
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return image;
 }
 
 #pragma mark - Public
