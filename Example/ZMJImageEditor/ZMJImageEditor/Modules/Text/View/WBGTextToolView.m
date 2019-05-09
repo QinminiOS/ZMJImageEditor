@@ -61,22 +61,31 @@ static const CGFloat DELETEBUTTON_BOUNDS = 26.f;
 
 - (void)drawRect:(CGRect)rect
 {
-    if (self.image) {
+    if (self.image)
+    {
         [self.image drawInRect:CGRectInset(rect, 21, 25)];
         return;
     }
+    
     NSShadow *shadow = [[NSShadow alloc] init];
     shadow.shadowColor = [UIColor grayColor]; //阴影颜色
     shadow.shadowOffset= CGSizeMake(2, 2);//偏移量
     shadow.shadowBlurRadius = 5;//模糊度
     
-    rect.origin = CGPointMake(1, 2);
-    NSAttributedString *string = [[NSAttributedString alloc] initWithString:self.text
-                                                                 attributes:@{NSForegroundColorAttributeName : self.textColor,
-                                                                              NSFontAttributeName : self.textFont,
-                                                                              NSShadowAttributeName: shadow}];
-    [string drawInRect:CGRectInset(rect, 21, 25)];
+    UIColor *color = self.textColor ?: [UIColor whiteColor];
+    UIFont *font = self.textFont ?: [UIFont systemFontOfSize:12];
+    NSDictionary *attributes = @{
+                                 NSForegroundColorAttributeName : color,
+                                 NSFontAttributeName : font,
+                                 NSShadowAttributeName: shadow
+                                };
     
+    NSAttributedString *string = [[NSAttributedString alloc]
+                                  initWithString:self.text
+                                  attributes:attributes];
+    
+    rect.origin = CGPointMake(1, 2);
+    [string drawInRect:CGRectInset(rect, 21, 25)];
 }
 
 @end
@@ -204,11 +213,12 @@ static WBGTextToolView *activeView = nil;
         _label = [[WBGTextLabel alloc] init];
         _label.numberOfLines = 0;
         _label.backgroundColor = [UIColor clearColor];
-        _label.font = font;// [UIFont systemFontOfSize:MAX_FONT_SIZE];
+        _label.font = (font ? font : [UIFont systemFontOfSize:12]);
         _label.minimumScaleFactor = font.pointSize * 0.8f;
         _label.adjustsFontSizeToFitWidth = YES;
         _label.textAlignment = NSTextAlignmentCenter;
         _label.text = text;
+        _label.textColor = [UIColor blackColor];
         _label.layer.allowsEdgeAntialiasing = true;
         self.text = text;
         [self addSubview:_label];
