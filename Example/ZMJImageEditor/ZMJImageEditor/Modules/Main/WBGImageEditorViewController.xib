@@ -114,13 +114,12 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vKW-ZA-nXo">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yeV-aj-vVt">
-                                    <rect key="frame" x="334" y="0.0" width="58" height="64"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yeV-aj-vVt">
+                                    <rect key="frame" x="363" y="0.0" width="35" height="33"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <inset key="titleEdgeInsets" minX="0.0" minY="14" maxX="0.0" maxY="0.0"/>
                                     <state key="normal" title="完成">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="titleColor" red="0.0" green="1" blue="0.77647058823529413" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
                                     <state key="disabled">
                                         <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -129,9 +128,8 @@
                                         <action selector="onFinishButtonTapped:" destination="-1" eventType="touchUpInside" id="cXs-ta-PMh"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U1E-fP-iEK">
-                                    <rect key="frame" x="21" y="0.0" width="58" height="64"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U1E-fP-iEK">
+                                    <rect key="frame" x="16" y="0.0" width="35" height="33"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <inset key="titleEdgeInsets" minX="0.0" minY="14" maxX="0.0" maxY="0.0"/>
                                     <state key="normal" title="取消">
@@ -147,7 +145,11 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
+                                <constraint firstItem="U1E-fP-iEK" firstAttribute="top" secondItem="vKW-ZA-nXo" secondAttribute="top" id="A37-Af-mwK"/>
+                                <constraint firstAttribute="trailing" secondItem="yeV-aj-vVt" secondAttribute="trailing" constant="16" id="HU4-wm-d0m"/>
                                 <constraint firstAttribute="height" constant="64" id="g2k-gl-jyQ"/>
+                                <constraint firstItem="yeV-aj-vVt" firstAttribute="top" secondItem="vKW-ZA-nXo" secondAttribute="top" id="pfe-2S-gEu"/>
+                                <constraint firstItem="U1E-fP-iEK" firstAttribute="leading" secondItem="vKW-ZA-nXo" secondAttribute="leading" constant="16" id="y3F-Y8-nR6"/>
                             </constraints>
                         </view>
                     </subviews>
