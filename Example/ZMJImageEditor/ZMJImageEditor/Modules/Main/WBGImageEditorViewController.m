@@ -65,7 +65,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 
 - (id)init
 {
-    self = [self initWithNibName:@"WBGImageEditorViewController"
+    self = [self initWithNibName:NSStringFromClass([WBGImageEditorViewController class])
                           bundle:[NSBundle bundleForClass:self.class]];
     
     return self;
@@ -435,22 +435,11 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 
 - (void)editTextAgain
 {
-    //WBGTextTool 钩子调用
-    
-    if (_currentMode == WBGEditorModeText)
-    {
-        return;
-    }
     //先设置状态，然后在干别的
     self.currentMode = WBGEditorModeText;
-    
-    if(_currentTool != self.textTool)
-    {
-        [_currentTool cleanup];
-        _currentTool = self.textTool;
-        [_currentTool setup];
-
-    }
+    [_currentTool cleanup];
+    _currentTool = self.textTool;
+    [_currentTool setup];
 }
 
 //贴图模块
