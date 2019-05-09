@@ -13,6 +13,7 @@
 @protocol WBGImageEditorDataSource;
 @class WBGMoreKeyboardItem;
 
+
 typedef NS_OPTIONS(NSInteger, WBGImageEditorComponent)
 {
     WBGImageEditorDrawComponent = 1 << 0,
@@ -26,6 +27,7 @@ typedef NS_OPTIONS(NSInteger, WBGImageEditorComponent)
                                  | WBGImageEditorClipComponent
                                  | WBGImageEditorPaperComponent
 };
+
 
 @interface WBGImageEditor : UIViewController
 
@@ -47,6 +49,7 @@ typedef NS_OPTIONS(NSInteger, WBGImageEditorComponent)
 
 
 #pragma mark - Protocol
+
 @protocol WBGImageEditorDelegate <NSObject>
 @optional
 - (void)imageEditor:(WBGImageEditor *)editor
@@ -56,8 +59,8 @@ didFinishEdittingWithImage:(UIImage *)image;
 
 @end
 
-@protocol WBGImageEditorDataSource <NSObject>
 
+@protocol WBGImageEditorDataSource <NSObject>
 @required
 - (NSArray<WBGMoreKeyboardItem *> *)imageItemsEditor:(WBGImageEditor *)editor;
 - (WBGImageEditorComponent)imageEditorCompoment;

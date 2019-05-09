@@ -96,7 +96,6 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     self = [self init];
     if (self)
     {
-        
         self.delegate = delegate;
     }
     return self;
@@ -304,7 +303,6 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     self.scrollView.delegate = self;
     self.scrollView.clipsToBounds = NO;
     self.scrollView.backgroundColor = [UIColor blackColor];
-
 }
 
 - (void)refreshImageView
@@ -378,47 +376,6 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     }
     
     [self swapToolBarWithEditting];
-}
-
-#pragma mark- ImageTool setting
-+ (NSString*)defaultIconImagePath
-{
-    return nil;
-}
-
-+ (CGFloat)defaultDockedNumber
-{
-    return 0;
-}
-
-+ (NSString *)defaultTitle
-{
-    return @"";
-}
-
-+ (BOOL)isAvailable
-{
-    return YES;
-}
-
-+ (NSArray *)subtools
-{
-    return [NSArray new];
-}
-
-+ (NSDictionary*)optionalInfo
-{
-    return nil;
-}
-
-#pragma mark - Undo
-- (void)undoAction
-{
-    if (self.currentMode == WBGEditorModeDraw)
-    {
-        WBGDrawTool *tool = (WBGDrawTool *)self.currentTool;
-        [tool backToLastDraw];
-    }
 }
 
 #pragma mark - Actions
