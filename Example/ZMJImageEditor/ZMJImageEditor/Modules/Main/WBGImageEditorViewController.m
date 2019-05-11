@@ -134,7 +134,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     
     if (!self.mosicaView)
     {
-        self.mosicaView = [[WBGScratchView alloc] initWithFrame:self.imageView.superview.frame];
+        self.mosicaView = [[WBGScratchView alloc] initWithFrame:self.imageView.superview.bounds];
         self.mosicaView.surfaceImage = self.originImage;
         self.mosicaView.backgroundColor = [UIColor clearColor];
         [self.imageView.superview addSubview:self.mosicaView];

@@ -44,8 +44,8 @@
         
         self.mosicaPath = [WBGMosicaPath new];
         
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onViewTapped:)];
-        [self addGestureRecognizer:tap];
+        // UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onViewTapped:)];
+        // [self addGestureRecognizer:tap];
     }
     
     return self;

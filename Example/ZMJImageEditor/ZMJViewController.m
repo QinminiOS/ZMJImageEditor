@@ -9,6 +9,9 @@
 #import "ZMJViewController.h"
 #import "WBGImageEditor.h"
 #import "WBGMoreKeyboardItem.h"
+#import "YYWebImage.h"
+
+
 @interface ZMJViewController () <WBGImageEditorDelegate, WBGImageEditorDataSource>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
@@ -19,8 +22,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
     
+//    NSURL *url = [NSURL URLWithString:@"https://piccdn.cymini.qq.com:443/cy_article/0/fa973800868864f0e4a342a684a1dc86/0?tp=webp"];
+    
+//    [_imageView
+//     yy_setImageWithURL:url
+//     placeholder:nil
+//     options:0
+//     completion:^(UIImage * _Nullable image, NSURL * _Nonnull url, YYWebImageFromType from, YYWebImageStage stage, NSError * _Nullable error)
+//    {
+//        
+//    }];
     
 }
 
