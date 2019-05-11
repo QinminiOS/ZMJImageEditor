@@ -431,7 +431,8 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     [self updateImageViewWithImage:image fromCropViewController:cropViewController];
 }
 
-- (void)updateImageViewWithImage:(UIImage *)image fromCropViewController:(TOCropViewController *)cropViewController
+- (void)updateImageViewWithImage:(UIImage *)image
+          fromCropViewController:(TOCropViewController *)cropViewController
 {
     self.imageView.image = image;
     __unused CGFloat drawingWidth = self.drawingView.bounds.size.width;
@@ -444,7 +445,8 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 
     self.navigationItem.rightBarButtonItem.enabled = YES;
     __weak typeof(self)weakSelf = self;
-    if (cropViewController.croppingStyle != TOCropViewCroppingStyleCircular) {
+    if (cropViewController.croppingStyle != TOCropViewCroppingStyleCircular)
+    {
 
         [cropViewController
          dismissAnimatedFromParentViewController:self
@@ -462,10 +464,6 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
         [cropViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     }
     
-    //生成图片后，清空画布内容
-    [self.drawTool.allLineMutableArray removeAllObjects];
-    [self.drawTool drawLine];
-    [_drawingView removeAllSubviews];
 }
 
 - (void)cropViewController:(TOCropViewController *)cropViewController didFinishCancelled:(BOOL)cancelled
@@ -525,7 +523,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 - (void)buildClipImageShowHud:(BOOL)showHud
                clipedCallback:(void(^)(UIImage *clipedImage))clipedCallback
 {
-    UIGraphicsBeginImageContextWithOptions(self.imageView.superview.size,
+    UIGraphicsBeginImageContextWithOptions(self.drawingView.size,
                                            NO,
                                            [UIScreen mainScreen].scale);
     
