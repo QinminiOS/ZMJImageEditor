@@ -621,11 +621,13 @@
                                      completion:(void (^)(void))completion
 {
     // If a cropped image was supplied, use that, and only zoom out from the crop box
-    if (image) {
+    if (image)
+    {
         self.transitionController.image     = image ? image : self.image;
         self.transitionController.fromFrame = [self.cropView convertRect:self.cropView.cropBoxFrame toView:self.view];
     }
-    else { // else use the main image, and zoom out from its entirety
+    else
+    {   // else use the main image, and zoom out from its entirety
         self.transitionController.image     = self.image;
         self.transitionController.fromFrame = [self.cropView convertRect:self.cropView.imageViewFrame toView:self.view];
     }

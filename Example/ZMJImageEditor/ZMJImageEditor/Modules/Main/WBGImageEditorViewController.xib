@@ -36,29 +36,24 @@
                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eg2-dz-mJn">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2vm-iw-DfS" userLabel="container">
+                                <view tag="123" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2vm-iw-DfS" userLabel="container">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="L0E-Hz-dO7">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L0E-Hz-dO7">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    <constraints>
-                                        <constraint firstItem="L0E-Hz-dO7" firstAttribute="top" secondItem="2vm-iw-DfS" secondAttribute="top" id="Bko-Rg-mbM"/>
-                                        <constraint firstItem="L0E-Hz-dO7" firstAttribute="leading" secondItem="2vm-iw-DfS" secondAttribute="leading" id="ZUd-fk-0hr"/>
-                                        <constraint firstAttribute="trailing" secondItem="L0E-Hz-dO7" secondAttribute="trailing" id="a1Z-9o-fLR"/>
-                                        <constraint firstAttribute="bottom" secondItem="L0E-Hz-dO7" secondAttribute="bottom" id="xIh-U7-oxK"/>
-                                    </constraints>
                                 </view>
                             </subviews>
                             <constraints>
-                                <constraint firstAttribute="bottom" secondItem="2vm-iw-DfS" secondAttribute="bottom" id="5VT-vZ-IGp"/>
-                                <constraint firstItem="2vm-iw-DfS" firstAttribute="leading" secondItem="eg2-dz-mJn" secondAttribute="leading" id="CJV-Ub-3dB"/>
-                                <constraint firstAttribute="trailing" secondItem="2vm-iw-DfS" secondAttribute="trailing" id="CqU-je-mL9"/>
-                                <constraint firstItem="2vm-iw-DfS" firstAttribute="centerY" secondItem="eg2-dz-mJn" secondAttribute="centerY" id="Ksk-AF-opG"/>
-                                <constraint firstItem="2vm-iw-DfS" firstAttribute="centerX" secondItem="eg2-dz-mJn" secondAttribute="centerX" id="dzX-io-mJr"/>
-                                <constraint firstItem="2vm-iw-DfS" firstAttribute="top" secondItem="eg2-dz-mJn" secondAttribute="top" id="ydd-8w-NVF"/>
+                                <constraint firstItem="2vm-iw-DfS" firstAttribute="centerX" secondItem="eg2-dz-mJn" secondAttribute="centerX" id="Rjs-TI-LNg"/>
+                                <constraint firstItem="2vm-iw-DfS" firstAttribute="leading" secondItem="eg2-dz-mJn" secondAttribute="leading" id="eoh-MA-Rsc"/>
+                                <constraint firstAttribute="bottom" secondItem="2vm-iw-DfS" secondAttribute="bottom" id="hQA-d5-mrp"/>
+                                <constraint firstItem="2vm-iw-DfS" firstAttribute="top" secondItem="eg2-dz-mJn" secondAttribute="top" id="mOK-lL-rmD"/>
+                                <constraint firstItem="2vm-iw-DfS" firstAttribute="centerY" secondItem="eg2-dz-mJn" secondAttribute="centerY" id="uTI-o5-Jn3"/>
+                                <constraint firstAttribute="trailing" secondItem="2vm-iw-DfS" secondAttribute="trailing" id="zg1-yX-hS0"/>
                             </constraints>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="mbf-P5-HRA"/>
@@ -156,13 +151,13 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="vKW-ZA-nXo" secondAttribute="trailing" id="546-S2-UdZ"/>
-                        <constraint firstAttribute="trailing" secondItem="eg2-dz-mJn" secondAttribute="trailing" id="A11-hY-5UT"/>
                         <constraint firstAttribute="trailing" secondItem="toj-tM-hDH" secondAttribute="trailing" id="In8-ye-Jas"/>
-                        <constraint firstItem="eg2-dz-mJn" firstAttribute="top" secondItem="H4n-yc-FcR" secondAttribute="top" id="J9K-nJ-E6y"/>
-                        <constraint firstAttribute="bottom" secondItem="eg2-dz-mJn" secondAttribute="bottom" id="QTJ-8O-ejx"/>
+                        <constraint firstItem="eg2-dz-mJn" firstAttribute="trailing" secondItem="toj-tM-hDH" secondAttribute="trailing" id="SOK-dS-6w7"/>
                         <constraint firstItem="W8m-e9-Nrf" firstAttribute="bottom" secondItem="toj-tM-hDH" secondAttribute="bottom" id="UO5-vP-LGM"/>
                         <constraint firstItem="vKW-ZA-nXo" firstAttribute="top" secondItem="H4n-yc-FcR" secondAttribute="top" id="V7Y-h0-Shc"/>
-                        <constraint firstItem="eg2-dz-mJn" firstAttribute="leading" secondItem="H4n-yc-FcR" secondAttribute="leading" id="bL6-cg-ksh"/>
+                        <constraint firstItem="eg2-dz-mJn" firstAttribute="leading" secondItem="toj-tM-hDH" secondAttribute="leading" id="bhY-Fv-BdB"/>
+                        <constraint firstAttribute="bottom" secondItem="eg2-dz-mJn" secondAttribute="bottom" id="tLf-JV-oFG"/>
+                        <constraint firstItem="eg2-dz-mJn" firstAttribute="top" secondItem="H4n-yc-FcR" secondAttribute="top" id="uCO-t7-wLk"/>
                         <constraint firstItem="toj-tM-hDH" firstAttribute="leading" secondItem="H4n-yc-FcR" secondAttribute="leading" id="uvW-7N-cFa"/>
                         <constraint firstItem="vKW-ZA-nXo" firstAttribute="leading" secondItem="H4n-yc-FcR" secondAttribute="leading" id="yjK-24-xJE"/>
                     </constraints>

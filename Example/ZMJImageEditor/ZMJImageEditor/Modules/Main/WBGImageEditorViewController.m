@@ -107,25 +107,8 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     [super viewDidLoad];
 
     [self initImageScrollView];
-    
-    self.panButton.hidden = YES;
-    self.textButton.hidden = YES;
-    self.clipButton.hidden = YES;
-    self.paperButton.hidden = YES;
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    //获取自定制组件 - fecth custom config
     [self configCustomComponent];
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW,
-                                 (int64_t)(.25 * NSEC_PER_SEC)),
-                   dispatch_get_main_queue(),^ {
-                       [self refreshImageView];
-                   });
+    [self refreshImageView];
 }
 
 - (void)viewDidLayoutSubviews
@@ -134,15 +117,19 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     
     if (!self.mosicaView)
     {
-        self.mosicaView = [[WBGScratchView alloc] initWithFrame:self.imageView.superview.bounds];
+        self.mosicaView = [[WBGScratchView alloc] initWithFrame:self.imageView.frame];
         self.mosicaView.surfaceImage = self.originImage;
         self.mosicaView.backgroundColor = [UIColor clearColor];
         [self.imageView.superview addSubview:self.mosicaView];
+        
+        
+        __unused UIView *v = self.imageView.superview;
+        NSLog(@"view tag === %@", @(v.tag));
     }
     
     if (!self.drawingView)
     {
-        self.drawingView = [[UIImageView alloc] initWithFrame:self.imageView.superview.frame];
+        self.drawingView = [[UIImageView alloc] initWithFrame:self.imageView.frame];
         self.drawingView.contentMode = UIViewContentModeCenter;
         self.drawingView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin;
         [self.imageView.superview addSubview:self.drawingView];
@@ -155,6 +142,11 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 
 - (void)configCustomComponent
 {
+     self.panButton.hidden = YES;
+     self.textButton.hidden = YES;
+     self.clipButton.hidden = YES;
+     self.paperButton.hidden = YES;
+    
     NSMutableArray *valibleCompoment = [NSMutableArray new];
     WBGImageEditorComponent curComponent = [self.dataSource respondsToSelector:@selector(imageEditorCompoment)] ? [self.dataSource imageEditorCompoment] : 0;
     
@@ -284,11 +276,13 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 
 - (void)refreshImageView
 {
-    if (!self.imageView.image) self.imageView.image = self.originImage;
+    if (!self.imageView.image)
+    {
+        self.imageView.image = self.originImage;
+    }
     
     [self resetImageViewFrame];
     [self resetZoomScaleWithAnimated:NO];
-    [self viewDidLayoutSubviews];
 }
 
 - (void)resetImageViewFrame
@@ -300,11 +294,10 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
         CGFloat W = ratio * size.width * _scrollView.zoomScale;
         CGFloat H = ratio * size.height * _scrollView.zoomScale;
         
-        _imageView.superview.frame = CGRectMake(MAX(0, (_scrollView.width-W)/2), MAX(0, (_scrollView.height-H)/2), W, H);
-        
         // _imageView.frame = CGRectMake(MAX(0, (_scrollView.width-W)/2), MAX(0, (_scrollView.height-H)/2), W, H);
+        // _imageView.frame = CGRectMake(0, 0, W, H);
         
-        _imageView.frame = CGRectMake(0, 0, W, H);;
+         _imageView.frame = CGRectMake(MAX(0, (_scrollView.width-W)/2), MAX(0, (_scrollView.height-H)/2), W, H);
     }
 }
 
@@ -365,7 +358,6 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
      {
         TOCropViewController *cropController = [[TOCropViewController alloc] initWithCroppingStyle:TOCropViewCroppingStyleDefault image:clipedImage];
         cropController.delegate = self;
-        __weak typeof(self) weakSelf = self;
          
         CGRect viewFrame = [self.view convertRect:self.imageView.frame
                                            toView:self.navigationController.view];
@@ -377,11 +369,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
          fromFrame:viewFrame
          angle:0
          toImageFrame:CGRectZero
-         setup:^{
-             [weakSelf refreshImageView];
-             weakSelf.currentMode = WBGEditorModeClip;
-             [weakSelf setCurrentTool:nil];
-         }
+         setup:NULL
          completion:NULL];
     }];
     
@@ -523,18 +511,14 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     [_drawingView removeAllSubviews];
 }
 
-- (void)cropViewController:(TOCropViewController *)cropViewController didFinishCancelled:(BOOL)cancelled {
-    
-    __weak typeof(self)weakSelf = self;
+- (void)cropViewController:(TOCropViewController *)cropViewController didFinishCancelled:(BOOL)cancelled
+{
     [cropViewController
      dismissAnimatedFromParentViewController:self
-     withCroppedImage:self.imageView.image
+     withCroppedImage:nil
      toView:self.imageView
      toFrame:CGRectZero
-     setup:^{
-         [weakSelf refreshImageView];
-         [weakSelf viewDidLayoutSubviews];
-     }
+     setup:NULL
      completion:NULL];
 }
 
