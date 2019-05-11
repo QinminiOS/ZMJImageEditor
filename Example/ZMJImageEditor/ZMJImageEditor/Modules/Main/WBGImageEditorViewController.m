@@ -121,10 +121,6 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
         self.mosicaView.surfaceImage = self.originImage;
         self.mosicaView.backgroundColor = [UIColor clearColor];
         [self.imageView.superview addSubview:self.mosicaView];
-        
-        
-        __unused UIView *v = self.imageView.superview;
-        NSLog(@"view tag === %@", @(v.tag));
     }
     
     if (!self.drawingView)
@@ -138,6 +134,8 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     
     self.topBannerView.frame = CGRectMake(0, 0, self.imageView.width, CGRectGetMinY(self.imageView.frame));
     self.bottomBannerView.frame = CGRectMake(0, CGRectGetMaxY(self.imageView.frame), self.imageView.width, self.drawingView.height - CGRectGetMaxY(self.imageView.frame));
+    
+    self.drawingView.frame = self.imageView.frame;
 }
 
 - (void)configCustomComponent
@@ -293,9 +291,6 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
         CGFloat ratio = MIN(_scrollView.frame.size.width / size.width, _scrollView.frame.size.height / size.height);
         CGFloat W = ratio * size.width * _scrollView.zoomScale;
         CGFloat H = ratio * size.height * _scrollView.zoomScale;
-        
-        // _imageView.frame = CGRectMake(MAX(0, (_scrollView.width-W)/2), MAX(0, (_scrollView.height-H)/2), W, H);
-        // _imageView.frame = CGRectMake(0, 0, W, H);
         
          _imageView.frame = CGRectMake(MAX(0, (_scrollView.width-W)/2), MAX(0, (_scrollView.height-H)/2), W, H);
     }
@@ -573,7 +568,8 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
                                            [UIScreen mainScreen].scale);
     
     CGContextRef ctx = UIGraphicsGetCurrentContext();
-    [self.imageView.superview.layer renderInContext:ctx];
+    [self.mosicaView.layer renderInContext:ctx];
+    [self.drawingView.layer renderInContext:ctx];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
