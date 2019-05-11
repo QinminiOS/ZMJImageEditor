@@ -40,11 +40,6 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 @property (weak, nonatomic) IBOutlet UIButton *clipButton;
 @property (weak, nonatomic) IBOutlet UIButton *paperButton;
 
-@property (nonatomic, assign) WBGEditorMode currentMode;
-
-@property (strong, nonatomic) UIView *topBannerView;
-@property (strong, nonatomic) UIView *bottomBannerView;
-
 @property (strong, nonatomic) UIImageView *drawingView;
 @property (strong, nonatomic) WBGScratchView *mosicaView;
 
@@ -54,6 +49,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 @property (nonatomic, strong) WBGMosicaTool *mosicaTool;
 
 @property (nonatomic, copy) UIImage *originImage;
+@property (nonatomic, assign) WBGEditorMode currentMode;
 
 @property (nonatomic, assign) CGFloat clipInitScale;
 @property (nonatomic, assign) BOOL barsHiddenStatus;
@@ -132,9 +128,6 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
         self.drawingView.userInteractionEnabled = YES;
     }
     
-    self.topBannerView.frame = CGRectMake(0, 0, self.imageView.width, CGRectGetMinY(self.imageView.frame));
-    self.bottomBannerView.frame = CGRectMake(0, CGRectGetMaxY(self.imageView.frame), self.imageView.width, self.drawingView.height - CGRectGetMaxY(self.imageView.frame));
-    
     self.drawingView.frame = self.imageView.frame;
 }
 
@@ -188,37 +181,6 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
      {
          button.centerX = length * idx + padding;
      }];
-}
-
-- (UIView *)topBannerView
-{
-    if (!_topBannerView)
-    {
-        _topBannerView =
-        ({
-            UIView *view = [[UIView alloc] init];
-            view.backgroundColor = self.scrollView.backgroundColor;
-            [self.imageView.superview addSubview:view];
-            view;
-        });
-    }
-    
-    return _topBannerView;
-}
-
-- (UIView *)bottomBannerView
-{
-    if (!_bottomBannerView)
-    {
-        _bottomBannerView =
-        ({
-            UIView *view = [[UIView alloc] init];
-            view.backgroundColor = self.scrollView.backgroundColor;
-            [self.imageView.superview addSubview:view];
-            view;
-        });
-    }
-    return _bottomBannerView;
 }
 
 #pragma mark - Getter & Setter
