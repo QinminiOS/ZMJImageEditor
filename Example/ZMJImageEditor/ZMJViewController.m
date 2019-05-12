@@ -34,7 +34,7 @@
 //        
 //    }];
     
-    self.imageView.image = [UIImage imageNamed:@"1"];
+    // self.imageView.image = [UIImage imageNamed:@"1"];
     
 }
 

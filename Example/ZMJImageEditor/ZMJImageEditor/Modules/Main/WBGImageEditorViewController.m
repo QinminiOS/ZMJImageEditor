@@ -267,33 +267,19 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
         self.imageView.frame = CGRectMake(0, 0, scrollViewSize.width, imageSize.height*scrollViewSize.width/imageSize.width);
         
         // 设置scrollView的缩小比例;
-        CGFloat widthRatio = scrollViewSize.width/imageSize.width;
-        CGFloat heightRatio = scrollViewSize.height/imageSize.height;
+        CGSize newImageSize = self.containerView.size;
+        CGFloat widthRatio = 1.0f; // 宽已经缩放了
+        CGFloat heightRatio = scrollViewSize.height/newImageSize.height;
+        if (heightRatio >= 1.0f) heightRatio = 3.0f;
+        
         self.scrollView.minimumZoomScale = MIN(widthRatio, heightRatio);
         self.scrollView.maximumZoomScale = MAX(widthRatio, heightRatio);
-        
         self.scrollView.zoomScale = widthRatio;
     }
 }
 
 - (void)resetZoomScaleWithAnimated:(BOOL)animated
 {
-//    CGFloat Rw = _scrollView.frame.size.width / _imageView.frame.size.width;
-//    CGFloat Rh = _scrollView.frame.size.height / _imageView.frame.size.height;
-//
-//    //CGFloat scale = [[UIScreen mainScreen] scale];
-//    CGFloat scale = 1;
-//    Rw = MAX(Rw, _imageView.image.size.width / (scale * _scrollView.frame.size.width));
-//    Rh = MAX(Rh, _imageView.image.size.height / (scale * _scrollView.frame.size.height));
-//
-//    _scrollView.contentSize = _imageView.frame.size;
-//    _scrollView.minimumZoomScale = 1;
-//    _scrollView.maximumZoomScale = MAX(MAX(Rw, Rh), 3);
-//
-//    [_scrollView setZoomScale:_scrollView.minimumZoomScale animated:animated];
-//    [self scrollViewDidZoom:_scrollView];
-    
-    
     CGSize size = self.scrollView.bounds.size;
     CGSize contentSize = self.scrollView.contentSize;
     
@@ -477,7 +463,6 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
           fromCropViewController:(TOCropViewController *)cropViewController
 {
     self.imageView.image = image;
-    __unused CGFloat drawingWidth = self.drawingView.bounds.size.width;
     CGRect bounds = cropViewController.cropView.foregroundImageView.bounds;
     bounds.size = CGSizeMake(bounds.size.width/self.clipInitScale, bounds.size.height/self.clipInitScale);
     
