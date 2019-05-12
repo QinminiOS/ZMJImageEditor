@@ -12,7 +12,7 @@
 #import "WBGColorPanel.h"
 
 static const CGFloat kTopOffset = 30.f;
-static const CGFloat kTextTopOffset = 20.f;
+static const CGFloat kTextTopOffset = 60.f;
 static const NSInteger kTextMaxLimitNumber = 100;
 
 @interface WBGTextTool ()
