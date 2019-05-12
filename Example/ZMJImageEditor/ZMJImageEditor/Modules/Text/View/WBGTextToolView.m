@@ -68,9 +68,9 @@ static const CGFloat DELETEBUTTON_BOUNDS = 26.f;
     }
     
     NSShadow *shadow = [[NSShadow alloc] init];
-    shadow.shadowColor = [UIColor grayColor]; //阴影颜色
-    shadow.shadowOffset= CGSizeMake(2, 2);//偏移量
-    shadow.shadowBlurRadius = 5;//模糊度
+    // shadow.shadowColor = [UIColor grayColor]; //阴影颜色
+    // shadow.shadowOffset= CGSizeMake(2, 2);//偏移量
+    // shadow.shadowBlurRadius = 5;//模糊度
     
     UIColor *color = self.textColor ?: [UIColor whiteColor];
     UIFont *font = self.textFont ?: [UIFont systemFontOfSize:12];
@@ -701,7 +701,7 @@ static WBGTextToolView *activeView = nil;
     
     CGContextSetTextDrawingMode(contextRef, kCGTextFill);
     self.textColor = txtColor;
-    self.shadowOffset = CGSizeMake(10, 10);
+    // self.shadowOffset = CGSizeMake(10, 10);
     self.font = font;
     [super drawTextInRect:CGRectInset(rect, 5, 5)];
     

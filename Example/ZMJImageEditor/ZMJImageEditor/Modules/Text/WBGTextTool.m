@@ -12,7 +12,7 @@
 #import "WBGTextColorPanel.h"
 #import "WBGChatMacros.h"
 
-static const CGFloat kTopOffset = 30.f;
+static const CGFloat kTopOffset = 50.f;
 static const CGFloat kTextTopOffset = 60.f;
 static const NSInteger kTextMaxLimitNumber = 100;
 
@@ -29,7 +29,7 @@ static const NSInteger kTextMaxLimitNumber = 100;
     self.editor.scrollView.pinchGestureRecognizer.enabled = NO;
     
     self.textView = [[_WBGTextView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_SCREEN, HEIGHT_SCREEN)];
-    self.textView.textView.font = [UIFont systemFontOfSize:24.f weight:UIFontWeightRegular];
+    self.textView.textView.font = [UIFont systemFontOfSize:25.f weight:UIFontWeightBold];
     self.textView.textView.textColor = [UIColor whiteColor];
     self.textColorPanel = self.textView.colorPanel;
     
@@ -127,6 +127,7 @@ static const NSInteger kTextMaxLimitNumber = 100;
 @end
 
 
+
 #pragma mark - WBGTextView
 @interface _WBGTextView () <YYTextViewDelegate>
 @property (nonatomic, strong) NSString *needReplaceString;
@@ -144,10 +145,10 @@ static const NSInteger kTextMaxLimitNumber = 100;
         
         self.effectView = [[UIView alloc] init];
         self.effectView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.7f];
-        self.effectView.frame = CGRectMake(0, -kTopOffset, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
+        self.effectView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
         [self addSubview:self.effectView];
         
-        self.textView = [[YYTextView alloc] initWithFrame:CGRectMake(0, kTopOffset, WIDTH_SCREEN, HEIGHT_SCREEN - kTopOffset)];
+        self.textView = [[YYTextView alloc] initWithFrame:CGRectMake(16, kTopOffset, WIDTH_SCREEN - 16 * 2, HEIGHT_SCREEN - kTopOffset)];
         self.textView.top = kTextTopOffset;
         self.textView.scrollEnabled = YES;
         self.textView.returnKeyType = UIReturnKeyDone;
@@ -168,15 +169,17 @@ static const NSInteger kTextMaxLimitNumber = 100;
 
 - (void)addNotify
 {
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillShow:)
-                                                 name:UIKeyboardWillShowNotification
-                                               object:nil];
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(keyboardWillShow:)
+     name:UIKeyboardWillShowNotification
+     object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillHide:)
-                                                 name:UIKeyboardWillHideNotification
-                                               object:nil];
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(keyboardWillHide:)
+     name:UIKeyboardWillHideNotification
+     object:nil];
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification
