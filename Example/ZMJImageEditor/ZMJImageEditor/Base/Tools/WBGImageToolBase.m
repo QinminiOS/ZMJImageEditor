@@ -36,6 +36,11 @@
     
 }
 
+- (void)cropToRect:(CGRect)rect
+{
+    
+}
+
 - (void)executeWithCompletionBlock:(void(^)(UIImage *image, NSError *error, NSDictionary *userInfo))completionBlock
 {
     if (completionBlock)

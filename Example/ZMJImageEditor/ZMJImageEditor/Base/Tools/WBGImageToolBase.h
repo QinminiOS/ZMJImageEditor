@@ -24,4 +24,6 @@ typedef void (^WBGImageToolCompletionBlock)(UIImage *image,
 - (void)hideTools:(BOOL)hidden;
 - (void)executeWithCompletionBlock:(WBGImageToolCompletionBlock)completionBlock;
 
+- (void)cropToRect:(CGRect)rect;
+
 @end

@@ -14,5 +14,6 @@
 
 + (instancetype)pathToPoint:(CGPoint)beginPoint pathWidth:(CGFloat)pathWidth;
 - (void)pathLineToPoint:(CGPoint)movePoint;//画
+- (void)applyTransform:(CGAffineTransform)transform;
 - (void)drawPath;//绘制
 @end

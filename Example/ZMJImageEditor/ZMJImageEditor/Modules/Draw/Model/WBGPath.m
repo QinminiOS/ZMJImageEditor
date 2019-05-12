@@ -49,6 +49,11 @@
     self.shape.path = self.bezierPath.CGPath;
 }
 
+- (void)applyTransform:(CGAffineTransform)transform
+{
+    [self.bezierPath applyTransform:transform];
+}
+
 - (void)drawPath
 {
     [self.pathColor set];

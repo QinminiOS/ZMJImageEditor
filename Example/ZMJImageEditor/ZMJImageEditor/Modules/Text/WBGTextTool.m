@@ -9,7 +9,8 @@
 #import "WBGTextTool.h"
 #import "WBGTextToolView.h"
 #import "UIView+YYAdd.h"
-#import "WBGColorPanel.h"
+#import "WBGTextColorPanel.h"
+#import "WBGChatMacros.h"
 
 static const CGFloat kTopOffset = 30.f;
 static const CGFloat kTextTopOffset = 60.f;
@@ -17,7 +18,7 @@ static const NSInteger kTextMaxLimitNumber = 100;
 
 @interface WBGTextTool ()
 @property (nonatomic, weak) UIImageView *drawingView;
-@property (nonatomic, weak) WBGColorPanel *colorPanel;
+@property (nonatomic, weak) WBGTextColorPanel *textColorPanel;
 @end
 
 @implementation WBGTextTool
@@ -26,10 +27,20 @@ static const NSInteger kTextMaxLimitNumber = 100;
 {
     _drawingView = self.editor.drawingView;
     self.editor.scrollView.pinchGestureRecognizer.enabled = NO;
-    __weak typeof(self)weakSelf = self;
-    self.textView = [[_WBGTextView alloc] initWithFrame:CGRectMake(0, kTopOffset, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - kTopOffset)];
+    
+    self.textView = [[_WBGTextView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_SCREEN, HEIGHT_SCREEN)];
     self.textView.textView.font = [UIFont systemFontOfSize:24.f weight:UIFontWeightRegular];
     self.textView.textView.textColor = [UIColor whiteColor];
+    self.textColorPanel = self.textView.colorPanel;
+    
+    [self setupActions];
+    
+    [self.editor.view addSubview:self.textView];
+}
+
+- (void)setupActions
+{
+    __weak typeof(self)weakSelf = self;
     
     self.textView.dissmissTextTool = ^(NSString *currentText, BOOL isUse)
     {
@@ -57,16 +68,15 @@ static const NSInteger kTextMaxLimitNumber = 100;
             weakSelf.dissmissTextTool(currentText);
         }
     };
-    [self.editor.view addSubview:self.textView];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeColor:) name:@"kColorPanNotificaiton" object:nil];
-
+    self.textColorPanel.onTextColorChange = ^(UIColor *color) {
+        [weakSelf changeColor:color];
+    };
 }
 
 - (void)cleanup
 {
     [self.textView removeFromSuperview];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"kColorPanNotificaiton" object:nil];
 }
 
 - (void)hideTools:(BOOL)hidden
@@ -86,12 +96,11 @@ static const NSInteger kTextMaxLimitNumber = 100;
     
 }
 
-- (void)changeColor:(NSNotification *)notification
+- (void)changeColor:(UIColor *)color
 {
-    UIColor *panColor = (UIColor *)notification.object;
-    if (panColor && self.textView)
+    if (color && self.textView)
     {
-        [self.textView.textView setTextColor:panColor];
+        [self.textView.textView setTextColor:color];
     }
 }
 
@@ -103,7 +112,7 @@ static const NSInteger kTextMaxLimitNumber = 100;
     }
     
     WBGTextToolView *view = [[WBGTextToolView alloc] initWithTool:self text:text font:self.textView.textView.font orImage:nil];
-    view.fillColor = self.colorPanel.currentColor;
+    view.fillColor = self.textColorPanel.currentColor;
     view.borderColor = [UIColor whiteColor];
     view.font = self.textView.textView.font;
     view.text = text;
@@ -133,31 +142,23 @@ static const NSInteger kTextMaxLimitNumber = 100;
     {
         self.backgroundColor = [UIColor clearColor];
         
-        //__weak typeof(self)weakSelf = self;
-
-        // UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleRegular];
-        // self.effectView = [[UIVisualEffectView alloc] initWithEffect:blur];
-        
         self.effectView = [[UIView alloc] init];
         self.effectView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.7f];
         self.effectView.frame = CGRectMake(0, -kTopOffset, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
         [self addSubview:self.effectView];
         
-        self.textView = [[YYTextView alloc] initWithFrame:CGRectInset(self.bounds, 14, 0)];
+        self.textView = [[YYTextView alloc] initWithFrame:CGRectMake(0, kTopOffset, WIDTH_SCREEN, HEIGHT_SCREEN - kTopOffset)];
         self.textView.top = kTextTopOffset;
         self.textView.scrollEnabled = YES;
         self.textView.returnKeyType = UIReturnKeyDone;
         self.textView.delegate = self;
         self.textView.backgroundColor = [UIColor clearColor];
-        
-        //self.keyboardToolBar = [_WBGToolBar createToolBarWithCancel:^{
-        //    [weakSelf dismissTextEditing:NO];
-        //} done:^{
-        //    [weakSelf dismissTextEditing:YES];
-        //}];
-        
-        // self.textView.inputAccessoryView = self.keyboardToolBar;
         [self addSubview:self.textView];
+        
+        WBGTextColorPanel *colorPanel = [WBGTextColorPanel xx_instantiateFromNib];
+        colorPanel.frame = CGRectMake(0, HEIGHT_SCREEN, WIDTH_SCREEN, [WBGTextColorPanel fixedHeight]);
+        [self addSubview:colorPanel];
+        self.colorPanel = colorPanel;
         
         [self addNotify];
     }
@@ -187,11 +188,16 @@ static const NSInteger kTextMaxLimitNumber = 100;
     
     
     self.hidden = YES;
-    [UIView animateWithDuration:keyboardAnimationDuration delay:keyboardAnimationDuration options:keyboardAnimationCurve animations:^{
-        self.textView.height = [UIScreen mainScreen].bounds.size.height - keyboardRect.size.height - kTextTopOffset;
-        self.top = kTopOffset;
+    [UIView
+     animateWithDuration:keyboardAnimationDuration
+     delay:keyboardAnimationDuration
+     options:keyboardAnimationCurve
+     animations:^{
+        self.textView.height = HEIGHT_SCREEN - keyboardRect.size.height - kTextTopOffset;
         
-    } completion:^(BOOL finished) {}];
+        self.colorPanel.frame = CGRectMake(0, HEIGHT_SCREEN - [WBGTextColorPanel fixedHeight] - keyboardRect.size.height, WIDTH_SCREEN, [WBGTextColorPanel fixedHeight]);
+        
+    } completion:NULL];
     
     [UIView animateWithDuration:3 animations:^{
         self.hidden = NO;
@@ -224,13 +230,12 @@ static const NSInteger kTextMaxLimitNumber = 100;
 
 - (void)willMoveToSuperview:(UIView *)newSuperview
 {
-    if (newSuperview) {
+    if (newSuperview)
+    {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self.textView becomeFirstResponder];
             [self.textView scrollRangeToVisible:NSMakeRange(self.textView.text.length-1, 0)];
         });
-    } else {
-        
     }
 }
 

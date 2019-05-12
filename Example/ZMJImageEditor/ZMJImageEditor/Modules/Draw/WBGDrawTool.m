@@ -216,19 +216,31 @@
 - (void)drawLine
 {
     CGSize size = _drawingView.frame.size;
-    UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
+    UIGraphicsBeginImageContextWithOptions(size, NO, [UIScreen mainScreen].scale);
     CGContextRef context = UIGraphicsGetCurrentContext();
     //去掉锯齿
     CGContextSetAllowsAntialiasing(context, true);
     CGContextSetShouldAntialias(context, true);
     
-    for (WBGPath *path in _allLineMutableArray) {
+    for (WBGPath *path in _allLineMutableArray)
+    {
         [path drawPath];
     }
     
     _drawingView.image = UIGraphicsGetImageFromCurrentImageContext();
     
     UIGraphicsEndImageContext();
+}
+
+- (void)cropToRect:(CGRect)rect
+{
+//    for (WBGPath *path in _allLineMutableArray)
+//    {
+//        [path applyTransform:CGAffineTransformMakeTranslation(0, -100)];
+//        [path applyTransform:CGAffineTransformMakeRotation(M_PI_2)];
+//    }
+//    
+//    [self drawLine];
 }
 
 - (UIImage *)buildImage

@@ -15,6 +15,7 @@
 @property (nonatomic, copy) void (^drawingDidTap)(void);
 @property (nonatomic, strong) NSMutableArray<WBGPath *> *allLineMutableArray;
 @property (nonatomic, assign) CGFloat pathWidth;
+
 //撤销
 - (void)backToLastDraw;
 - (void)drawLine;

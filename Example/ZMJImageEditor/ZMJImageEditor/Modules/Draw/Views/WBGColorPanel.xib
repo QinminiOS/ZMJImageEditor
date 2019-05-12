@@ -20,7 +20,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="47" height="50"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="color" keyPath="color">
-                            <color key="value" red="1" green="0.058155415100000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="value" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="number" keyPath="radius">
                             <real key="value" value="9"/>
@@ -37,7 +37,7 @@
                             <real key="value" value="9"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="color">
-                            <color key="value" red="1" green="0.57647058819999997" blue="0.10980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
@@ -51,7 +51,7 @@
                             <real key="value" value="9"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="color">
-                            <color key="value" red="1" green="0.9638961318" blue="0.06622636874" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="value" red="0.93725490196078431" green="0.34901960784313724" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
@@ -65,7 +65,7 @@
                             <real key="value" value="9"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="color">
-                            <color key="value" red="0.0" green="0.90588235289999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="value" red="0.94509803921568625" green="0.82352941176470584" blue="0.14117647058823529" alpha="1" colorSpace="calibratedRGB"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
@@ -79,7 +79,7 @@
                             <real key="value" value="9"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="color">
-                            <color key="value" red="0.98039215690000003" green="0.1764705882" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="value" red="0.28235294117647058" green="0.63529411764705879" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
@@ -93,7 +93,7 @@
                             <real key="value" value="9"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="color">
-                            <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="value" red="0.46666666666666667" green="0.36862745098039218" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
@@ -107,7 +107,7 @@
                             <real key="value" value="9"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="color">
-                            <color key="value" red="0.098039215690000001" green="0.5568627451" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="value" red="0.21568627450980393" green="0.8901960784313725" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
@@ -118,7 +118,7 @@
                     <rect key="frame" x="328" y="0.0" width="47" height="50"/>
                     <state key="normal" image="icon_shanchushangyibu"/>
                     <connections>
-                        <action selector="onUndoButtonTapped:" destination="Cw0-tf-npd" eventType="touchUpInside" id="8Lp-xK-8r4"/>
+                        <action selector="onUndoButtonTapped:" destination="Cw0-tf-npd" eventType="touchUpInside" id="RuI-Pt-xf1"/>
                     </connections>
                 </button>
             </subviews>

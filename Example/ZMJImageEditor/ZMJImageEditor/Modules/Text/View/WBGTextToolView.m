@@ -541,11 +541,11 @@ static WBGTextToolView *activeView = nil;
         rectLayer1.hidden = rectLayer2.hidden = rectLayer3.hidden = !active;
         [CATransaction commit];
         
-        if (active) {
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeColor:) name:@"kColorPanNotificaiton" object:nil];
-        } else {
-            [[NSNotificationCenter defaultCenter] removeObserver:self name:@"kColorPanNotificaiton" object:nil];
-        }
+        //        if (active) {
+        //            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeColor:) name:@"kColorPanNotificaiton" object:nil];
+        //        } else {
+        //            [[NSNotificationCenter defaultCenter] removeObserver:self name:@"kColorPanNotificaiton" object:nil];
+        //        }
     });
 }
 

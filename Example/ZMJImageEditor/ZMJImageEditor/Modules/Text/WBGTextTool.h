@@ -8,6 +8,7 @@
 
 #import "WBGImageToolBase.h"
 #import "YYText.h"
+#import "WBGTextColorPanel.h"
 
 @class _WBGTextView;
 
@@ -23,4 +24,5 @@
 @property (nonatomic, strong) UIView *effectView;
 @property (nonatomic, copy) void(^dissmissTextTool)(NSString *currentText, BOOL isUse);//, BOOL isEditAgain);
 @property (nonatomic, strong) YYTextView *textView;
+@property (nonatomic, weak) WBGTextColorPanel *colorPanel;
 @end

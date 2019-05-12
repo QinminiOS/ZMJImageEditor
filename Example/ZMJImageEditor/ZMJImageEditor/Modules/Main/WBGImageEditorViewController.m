@@ -110,9 +110,6 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    
-    self.drawingView.frame = self.imageView.frame;
-    self.mosicaView.frame = self.imageView.frame;
 }
 
 - (void)configCustomComponent
@@ -234,7 +231,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     self.mosicaView = [[WBGScratchView alloc] initWithFrame:CGRectZero];
     self.mosicaView.surfaceImage = self.originImage;
     self.mosicaView.backgroundColor = [UIColor clearColor];
-    [self.containerView addSubview:self.mosicaView];
+    // [self.containerView addSubview:self.mosicaView];
     
     self.drawingView = [[UIImageView alloc] initWithFrame:CGRectZero];
     self.drawingView.contentMode = UIViewContentModeCenter;
@@ -270,6 +267,9 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
         self.scrollView.minimumZoomScale = MIN(widthRatio, heightRatio);
         self.scrollView.maximumZoomScale = MAX(widthRatio, heightRatio);
         self.scrollView.zoomScale = widthRatio;
+        
+        self.drawingView.frame = self.imageView.frame;
+        self.mosicaView.frame = self.imageView.frame;
     }
 }
 
@@ -464,12 +464,13 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
           fromCropViewController:(TOCropViewController *)cropViewController
 {
     self.imageView.image = image;
-    CGRect bounds = cropViewController.cropView.foregroundImageView.bounds;
-    bounds.size = CGSizeMake(bounds.size.width/self.clipInitScale, bounds.size.height/self.clipInitScale);
+    // CGRect bounds = cropViewController.cropView.foregroundImageView.bounds;
+    // bounds.size = CGSizeMake(bounds.size.width/self.clipInitScale, bounds.size.height/self.clipInitScale);
     
     [self refreshImageView];
     [self viewDidLayoutSubviews];
 
+    [self.drawTool cropToRect:cropRect];
 
     self.navigationItem.rightBarButtonItem.enabled = YES;
     __weak typeof(self)weakSelf = self;
