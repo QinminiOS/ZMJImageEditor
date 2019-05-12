@@ -8,8 +8,22 @@
 
 #import <UIKit/UIKit.h>
 #import "WBGChatMacros.h"
-#import "WBGKeyboardDelegate.h"
-#import "WBGKeyboardProtocol.h"
+
+@protocol WBGKeyboardProtocol <NSObject>
+@required
+- (CGFloat)keyboardHeight;
+@end
+
+
+@protocol WBGKeyboardDelegate <NSObject>
+@optional
+- (void)chatKeyboardWillShow:(id)keyboard animated:(BOOL)animated;
+- (void)chatKeyboardDidShow:(id)keyboard animated:(BOOL)animated;
+- (void)chatKeyboardWillDismiss:(id)keyboard animated:(BOOL)animated;
+- (void)chatKeyboardDidDismiss:(id)keyboard animated:(BOOL)animated;
+- (void)chatKeyboard:(id)keyboard didChangeHeight:(CGFloat)height;
+@end
+
 
 @interface WBGBaseKeyboard : UIView <WBGKeyboardProtocol>
 

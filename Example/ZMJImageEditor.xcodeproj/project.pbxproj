@@ -150,9 +150,6 @@
 		71858E692281756F00EE6CF2 /* WBGMoreKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBGMoreKeyboard.m; sourceTree = "<group>"; };
 		71858E6A2281756F00EE6CF2 /* WBGMoreKeyboardItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBGMoreKeyboardItem.h; sourceTree = "<group>"; };
 		71858E6B2281756F00EE6CF2 /* WBGBaseKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBGBaseKeyboard.h; sourceTree = "<group>"; };
-		71858E6C2281756F00EE6CF2 /* WBGMoreKeyboardDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBGMoreKeyboardDelegate.h; sourceTree = "<group>"; };
-		71858E6D2281756F00EE6CF2 /* WBGKeyboardDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBGKeyboardDelegate.h; sourceTree = "<group>"; };
-		71858E6E2281756F00EE6CF2 /* WBGKeyboardProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBGKeyboardProtocol.h; sourceTree = "<group>"; };
 		71858E6F2281756F00EE6CF2 /* WBGMoreKeyboardItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBGMoreKeyboardItem.m; sourceTree = "<group>"; };
 		71858E702281756F00EE6CF2 /* WBGMoreKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBGMoreKeyboard.h; sourceTree = "<group>"; };
 		71858E712281756F00EE6CF2 /* WBGBaseKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBGBaseKeyboard.m; sourceTree = "<group>"; };
@@ -375,11 +372,6 @@
 			children = (
 				71858E6B2281756F00EE6CF2 /* WBGBaseKeyboard.h */,
 				71858E712281756F00EE6CF2 /* WBGBaseKeyboard.m */,
-				71858E6D2281756F00EE6CF2 /* WBGKeyboardDelegate.h */,
-				71858E6E2281756F00EE6CF2 /* WBGKeyboardProtocol.h */,
-				71858E702281756F00EE6CF2 /* WBGMoreKeyboard.h */,
-				71858E692281756F00EE6CF2 /* WBGMoreKeyboard.m */,
-				71858E6C2281756F00EE6CF2 /* WBGMoreKeyboardDelegate.h */,
 				71858E6A2281756F00EE6CF2 /* WBGMoreKeyboardItem.h */,
 				71858E6F2281756F00EE6CF2 /* WBGMoreKeyboardItem.m */,
 			);
@@ -404,21 +396,19 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		71FA899C228274DD009349CB /* Cells */ = {
+		71FA899C228274DD009349CB /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				71858E502281756F00EE6CF2 /* WBGMoreKeyboardCell.h */,
 				71858E582281756F00EE6CF2 /* WBGMoreKeyboardCell.m */,
 			);
-			path = Cells;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		71FA899D228276AA009349CB /* Text */ = {
 			isa = PBXGroup;
 			children = (
-				71FA899C228274DD009349CB /* Cells */,
 				71FA89A62282789A009349CB /* View */,
-				71858E682281756F00EE6CF2 /* Keyboard */,
 				71858E322281756F00EE6CF2 /* WBGTextTool.h */,
 				71858E352281756F00EE6CF2 /* WBGTextTool.m */,
 			);
@@ -471,6 +461,7 @@
 				71FA89AB228279A8009349CB /* Main */,
 				71FA89A0228276F6009349CB /* Draw */,
 				71FA899D228276AA009349CB /* Text */,
+				B91A78D62288610300EC3785 /* Map */,
 				71858E2A2281756F00EE6CF2 /* Mosica */,
 				71FA89A12282772A009349CB /* Crop */,
 			);
@@ -569,6 +560,17 @@
 				71858E9422817A2E00EE6CF2 /* WBGColorPanel.xib */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		B91A78D62288610300EC3785 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				71FA899C228274DD009349CB /* Views */,
+				71858E682281756F00EE6CF2 /* Keyboard */,
+				71858E702281756F00EE6CF2 /* WBGMoreKeyboard.h */,
+				71858E692281756F00EE6CF2 /* WBGMoreKeyboard.m */,
+			);
+			path = Map;
 			sourceTree = "<group>";
 		};
 		ECFF949E9BE1709B8569CA3F /* Pods */ = {

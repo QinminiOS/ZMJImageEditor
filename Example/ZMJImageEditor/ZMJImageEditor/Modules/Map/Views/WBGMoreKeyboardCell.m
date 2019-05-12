@@ -11,16 +11,13 @@
 #import <Masonry/Masonry.h>
 
 @interface WBGMoreKeyboardCell ()
-
 @property (nonatomic, strong) UIButton *iconButton;
-
 @property (nonatomic, strong) UILabel *titleLabel;
-
 @end
 
 @implementation WBGMoreKeyboardCell
 
-- (id) initWithFrame:(CGRect)frame
+- (id)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
         [self.contentView addSubview:self.iconButton];

@@ -7,9 +7,13 @@
 //
 
 #import "WBGBaseKeyboard.h"
-#import "WBGKeyboardDelegate.h"
-#import "WBGMoreKeyboardDelegate.h"
 #import "WBGMoreKeyboardItem.h"
+
+@protocol WBGMoreKeyboardDelegate <NSObject>
+@optional
+- (void)moreKeyboard:(id)keyboard didSelectedFunctionItem:(WBGMoreKeyboardItem *)funcItem;
+@end
+
 
 @interface WBGMoreKeyboard : WBGBaseKeyboard
 
