@@ -51,6 +51,15 @@
     return self;
 }
 
+- (void)setFrame:(CGRect)frame
+{
+    [super setFrame:frame];
+    
+    self.surfaceImageView.frame = self.bounds;
+    self.imageLayer.frame = self.bounds;
+    self.shapeLayer.frame = self.bounds;
+}
+
 - (void)setMosaicImage:(UIImage *)mosaicImage
 {
     _mosaicImage = mosaicImage;

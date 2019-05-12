@@ -102,7 +102,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 {
     [super viewDidLoad];
 
-    [self initImageScrollView];
+    [self initViews];
     [self configCustomComponent];
     [self refreshImageView];
 }
@@ -111,25 +111,8 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 {
     [super viewDidLayoutSubviews];
     
-    if (!self.mosicaView)
-    {
-        self.mosicaView = [[WBGScratchView alloc] initWithFrame:self.imageView.frame];
-        self.mosicaView.surfaceImage = self.originImage;
-        self.mosicaView.backgroundColor = [UIColor clearColor];
-        // [self.imageView.superview addSubview:self.mosicaView];
-    }
-    
-    if (!self.drawingView)
-    {
-        self.drawingView = [[UIImageView alloc] initWithFrame:self.imageView.frame];
-        self.drawingView.contentMode = UIViewContentModeCenter;
-        self.drawingView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin;
-        self.drawingView.clipsToBounds = YES;
-        [self.imageView.superview addSubview:self.drawingView];
-        self.drawingView.userInteractionEnabled = YES;
-    }
-    
     self.drawingView.frame = self.imageView.frame;
+    self.mosicaView.frame = self.imageView.frame;
 }
 
 - (void)configCustomComponent
@@ -225,7 +208,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     [self swapToolBarWithEditting];
 }
 
-- (void)initImageScrollView
+- (void)initViews
 {
     self.scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.scrollView.showsHorizontalScrollIndicator = NO;
@@ -247,6 +230,18 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     imageView.image = self.originImage;
     [self.containerView addSubview:imageView];
     self.imageView = imageView;
+    
+    self.mosicaView = [[WBGScratchView alloc] initWithFrame:CGRectZero];
+    self.mosicaView.surfaceImage = self.originImage;
+    self.mosicaView.backgroundColor = [UIColor clearColor];
+    [self.containerView addSubview:self.mosicaView];
+    
+    self.drawingView = [[UIImageView alloc] initWithFrame:CGRectZero];
+    self.drawingView.contentMode = UIViewContentModeCenter;
+    self.drawingView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin;
+    self.drawingView.clipsToBounds = YES;
+    [self.containerView addSubview:self.drawingView];
+    self.drawingView.userInteractionEnabled = YES;
 }
 
 - (void)refreshImageView
