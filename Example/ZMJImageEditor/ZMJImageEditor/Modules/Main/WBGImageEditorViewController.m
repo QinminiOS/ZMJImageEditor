@@ -449,12 +449,18 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 #pragma mark - Cropper Delegate
 - (void)cropViewController:(TOCropViewController *)cropViewController
             didCropToImage:(UIImage *)image
-                  withRect:(CGRect)cropRect angle:(NSInteger)angle
+                  withRect:(CGRect)cropRect
+                     angle:(NSInteger)angle
 {
-    [self updateImageViewWithImage:image fromCropViewController:cropViewController];
+    [self updateImageViewWithImage:image
+                          withRect:cropRect
+                             angle:angle
+            fromCropViewController:cropViewController];
 }
 
 - (void)updateImageViewWithImage:(UIImage *)image
+                        withRect:(CGRect)cropRect
+                           angle:(NSInteger)angle
           fromCropViewController:(TOCropViewController *)cropViewController
 {
     self.imageView.image = image;
