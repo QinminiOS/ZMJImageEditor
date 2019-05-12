@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="WBGNavigationBarView">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dRQ-1c-Xuj">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6AS-Q2-Nmh">
+                            <rect key="frame" x="363" y="0.0" width="35" height="33"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <inset key="titleEdgeInsets" minX="0.0" minY="14" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="完成">
+                                <color key="titleColor" red="0.0" green="1" blue="0.77647058820000003" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <state key="disabled">
+                                <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="onDoneButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="ClQ-Xn-IPU"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zmU-MH-Th0">
+                            <rect key="frame" x="16" y="0.0" width="35" height="33"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <inset key="titleEdgeInsets" minX="0.0" minY="14" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="取消">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="disabled">
+                                <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="onCancelButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="GfO-PR-KMM"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="zmU-MH-Th0" firstAttribute="top" secondItem="dRQ-1c-Xuj" secondAttribute="top" id="18C-D2-fqO"/>
+                        <constraint firstItem="6AS-Q2-Nmh" firstAttribute="top" secondItem="dRQ-1c-Xuj" secondAttribute="top" id="P65-mq-zjp"/>
+                        <constraint firstAttribute="trailing" secondItem="6AS-Q2-Nmh" secondAttribute="trailing" constant="16" id="Z47-n0-XAn"/>
+                        <constraint firstAttribute="height" constant="64" id="aUt-Oa-V3V"/>
+                        <constraint firstItem="zmU-MH-Th0" firstAttribute="leading" secondItem="dRQ-1c-Xuj" secondAttribute="leading" constant="16" id="c9J-ex-ugo"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="dYH-dS-Yfl"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="dRQ-1c-Xuj" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="mzG-Mr-Wc1"/>
+                <constraint firstItem="dRQ-1c-Xuj" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="o0u-zy-5Le"/>
+                <constraint firstItem="dRQ-1c-Xuj" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="p9n-ww-9HL"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+        </view>
+    </objects>
+</document>

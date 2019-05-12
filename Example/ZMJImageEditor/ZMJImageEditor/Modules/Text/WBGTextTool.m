@@ -11,6 +11,7 @@
 #import "UIView+YYAdd.h"
 #import "WBGTextColorPanel.h"
 #import "WBGChatMacros.h"
+#import "WBGNavigationBarView.h"
 
 static const CGFloat kTopOffset = 50.f;
 static const CGFloat kTextTopOffset = 60.f;
@@ -132,6 +133,7 @@ static const NSInteger kTextMaxLimitNumber = 100;
 @interface _WBGTextView () <YYTextViewDelegate>
 @property (nonatomic, strong) NSString *needReplaceString;
 @property (nonatomic, assign) NSRange   needReplaceRange;
+@property (nonatomic, strong) WBGNavigationBarView *navigationBarView;
 @end
 
 @implementation _WBGTextView
@@ -139,6 +141,7 @@ static const NSInteger kTextMaxLimitNumber = 100;
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
+    
     if (self)
     {
         self.backgroundColor = [UIColor clearColor];
@@ -147,6 +150,10 @@ static const NSInteger kTextMaxLimitNumber = 100;
         self.effectView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.7f];
         self.effectView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
         [self addSubview:self.effectView];
+        
+        self.navigationBarView = [WBGNavigationBarView xx_instantiateFromNib];
+        [self addSubview:self.navigationBarView];
+        
         
         self.textView = [[YYTextView alloc] initWithFrame:CGRectMake(16, kTopOffset, WIDTH_SCREEN - 16 * 2, HEIGHT_SCREEN - kTopOffset)];
         self.textView.top = kTextTopOffset;
@@ -161,10 +168,24 @@ static const NSInteger kTextMaxLimitNumber = 100;
         [self addSubview:colorPanel];
         self.colorPanel = colorPanel;
         
+        [self setupActions];
         [self addNotify];
     }
     
     return self;
+}
+
+- (void)setupActions
+{
+    __weak __typeof(self)weakSelf = self;
+   
+    self.navigationBarView.onDoneButtonClickBlock = ^(UIButton *btn) {
+        [weakSelf dismissTextEditing:YES];
+    };
+    
+    self.navigationBarView.onCancelButtonClickBlock = ^(UIButton *btn) {
+        [weakSelf dismissTextEditing:NO];
+    };
 }
 
 - (void)addNotify
@@ -224,9 +245,10 @@ static const NSInteger kTextMaxLimitNumber = 100;
 
 - (void)dismissTextEditing:(BOOL)done
 {
-    
     [self.textView resignFirstResponder];
-    if (self.dissmissTextTool) {
+    
+    if (self.dissmissTextTool)
+    {
         self.dissmissTextTool(self.textView.text, done);
     }
 }

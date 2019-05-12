@@ -61,6 +61,8 @@
 		96FC64921FECDE2600ACB842 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96FC64941FECDE2600ACB842 /* Main.storyboard */; };
 		B91A78D4228858B700EC3785 /* WBGTextColorPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = B91A78D1228858B600EC3785 /* WBGTextColorPanel.xib */; };
 		B91A78D5228858B700EC3785 /* WBGTextColorPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A78D3228858B700EC3785 /* WBGTextColorPanel.m */; };
+		B91A78D9228865D800EC3785 /* WBGNavigationBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A78D8228865D800EC3785 /* WBGNavigationBarView.m */; };
+		B91A78DB2288660900EC3785 /* WBGNavigationBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B91A78DA2288660900EC3785 /* WBGNavigationBarView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -173,6 +175,9 @@
 		B91A78D1228858B600EC3785 /* WBGTextColorPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WBGTextColorPanel.xib; sourceTree = "<group>"; };
 		B91A78D2228858B600EC3785 /* WBGTextColorPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBGTextColorPanel.h; sourceTree = "<group>"; };
 		B91A78D3228858B700EC3785 /* WBGTextColorPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBGTextColorPanel.m; sourceTree = "<group>"; };
+		B91A78D7228865D800EC3785 /* WBGNavigationBarView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WBGNavigationBarView.h; sourceTree = "<group>"; };
+		B91A78D8228865D800EC3785 /* WBGNavigationBarView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WBGNavigationBarView.m; sourceTree = "<group>"; };
+		B91A78DA2288660900EC3785 /* WBGNavigationBarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WBGNavigationBarView.xib; sourceTree = "<group>"; };
 		BD4383784075711AC3458819 /* Pods_ZMJImageEditor_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZMJImageEditor_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C43CCE604ABC815A6FCB6D1A /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		F8B003FCF35DA1C073F3898D /* Pods-ZMJImageEditor_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZMJImageEditor_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZMJImageEditor_Example/Pods-ZMJImageEditor_Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -346,6 +351,9 @@
 				71858E432281756F00EE6CF2 /* WBGColorfullButton.m */,
 				71858E5C2281756F00EE6CF2 /* TOCropScrollView.h */,
 				71858E552281756F00EE6CF2 /* TOCropScrollView.m */,
+				B91A78D7228865D800EC3785 /* WBGNavigationBarView.h */,
+				B91A78D8228865D800EC3785 /* WBGNavigationBarView.m */,
+				B91A78DA2288660900EC3785 /* WBGNavigationBarView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -671,6 +679,7 @@
 			files = (
 				71858E9522817A2E00EE6CF2 /* WBGColorPanel.xib in Resources */,
 				B91A78D4228858B700EC3785 /* WBGTextColorPanel.xib in Resources */,
+				B91A78DB2288660900EC3785 /* WBGNavigationBarView.xib in Resources */,
 				96FC64921FECDE2600ACB842 /* Main.storyboard in Resources */,
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
 				71858E802281756F00EE6CF2 /* WBGImageEditorViewController.xib in Resources */,
@@ -769,6 +778,7 @@
 				71858E832281756F00EE6CF2 /* TOCropView.m in Sources */,
 				71858E7B2281756F00EE6CF2 /* WBGColorfullButton.m in Sources */,
 				71858E8E2281756F00EE6CF2 /* WBGMoreKeyboard.m in Sources */,
+				B91A78D9228865D800EC3785 /* WBGNavigationBarView.m in Sources */,
 				71858E862281756F00EE6CF2 /* TOCropToolbar.m in Sources */,
 				71FA89AE22827E58009349CB /* WBGMosicaTool.m in Sources */,
 				71858E7F2281756F00EE6CF2 /* WBGImageEditorViewController.m in Sources */,
