@@ -32,16 +32,16 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 @property (weak, nonatomic) IBOutlet UIView *bottomBar;
 @property (weak, nonatomic) IBOutlet UIView *topBar;
 
-@property (weak,   nonatomic) IBOutlet UIImageView *imageView;
-@property (weak,   nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) UIView *containerView;
+@property (weak, nonatomic) UIImageView *imageView;
+@property (strong, nonatomic) UIImageView *drawingView;
+@property (strong, nonatomic) WBGScratchView *mosicaView;
 
 @property (weak, nonatomic) IBOutlet UIButton *panButton;
 @property (weak, nonatomic) IBOutlet UIButton *textButton;
 @property (weak, nonatomic) IBOutlet UIButton *clipButton;
 @property (weak, nonatomic) IBOutlet UIButton *paperButton;
-
-@property (strong, nonatomic) UIImageView *drawingView;
-@property (strong, nonatomic) WBGScratchView *mosicaView;
 
 @property (nonatomic, strong) WBGImageToolBase *currentTool;
 @property (nonatomic, strong) WBGDrawTool *drawTool;
@@ -116,7 +116,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
         self.mosicaView = [[WBGScratchView alloc] initWithFrame:self.imageView.frame];
         self.mosicaView.surfaceImage = self.originImage;
         self.mosicaView.backgroundColor = [UIColor clearColor];
-        [self.imageView.superview addSubview:self.mosicaView];
+        // [self.imageView.superview addSubview:self.mosicaView];
     }
     
     if (!self.drawingView)
@@ -124,6 +124,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
         self.drawingView = [[UIImageView alloc] initWithFrame:self.imageView.frame];
         self.drawingView.contentMode = UIViewContentModeCenter;
         self.drawingView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin;
+        self.drawingView.clipsToBounds = YES;
         [self.imageView.superview addSubview:self.drawingView];
         self.drawingView.userInteractionEnabled = YES;
     }
@@ -232,15 +233,24 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     self.scrollView.delegate = self;
     self.scrollView.clipsToBounds = NO;
     self.scrollView.backgroundColor = [UIColor blackColor];
+    self.scrollView.contentInset = UIEdgeInsetsZero;
+    self.scrollView.contentOffset = CGPointZero;
+    if (@available(iOS 11.0, *)) {
+        self.scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
+    
+    UIView *containerView = [[UIView alloc] initWithFrame:CGRectZero];
+    [self.scrollView addSubview:containerView];
+    self.containerView = containerView;
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+    imageView.image = self.originImage;
+    [self.containerView addSubview:imageView];
+    self.imageView = imageView;
 }
 
 - (void)refreshImageView
 {
-    if (!self.imageView.image)
-    {
-        self.imageView.image = self.originImage;
-    }
-    
     [self resetImageViewFrame];
     [self resetZoomScaleWithAnimated:NO];
 }
@@ -250,30 +260,51 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     CGSize size = (_imageView.image) ? _imageView.image.size : _imageView.frame.size;
     if(size.width > 0 && size.height > 0 )
     {
-        CGFloat ratio = MIN(_scrollView.frame.size.width / size.width, _scrollView.frame.size.height / size.height);
-        CGFloat W = ratio * size.width * _scrollView.zoomScale;
-        CGFloat H = ratio * size.height * _scrollView.zoomScale;
+        CGSize imageSize = self.imageView.image.size;
+        CGSize scrollViewSize = _scrollView.frame.size;
         
-         _imageView.frame = CGRectMake(MAX(0, (_scrollView.width-W)/2), MAX(0, (_scrollView.height-H)/2), W, H);
+        self.containerView.frame = CGRectMake(0, 0, scrollViewSize.width, imageSize.height*scrollViewSize.width/imageSize.width);
+        self.imageView.frame = CGRectMake(0, 0, scrollViewSize.width, imageSize.height*scrollViewSize.width/imageSize.width);
+        
+        // 设置scrollView的缩小比例;
+        CGFloat widthRatio = scrollViewSize.width/imageSize.width;
+        CGFloat heightRatio = scrollViewSize.height/imageSize.height;
+        self.scrollView.minimumZoomScale = MIN(widthRatio, heightRatio);
+        self.scrollView.maximumZoomScale = MAX(widthRatio, heightRatio);
+        
+        self.scrollView.zoomScale = widthRatio;
     }
 }
 
 - (void)resetZoomScaleWithAnimated:(BOOL)animated
 {
-    CGFloat Rw = _scrollView.frame.size.width / _imageView.frame.size.width;
-    CGFloat Rh = _scrollView.frame.size.height / _imageView.frame.size.height;
+//    CGFloat Rw = _scrollView.frame.size.width / _imageView.frame.size.width;
+//    CGFloat Rh = _scrollView.frame.size.height / _imageView.frame.size.height;
+//
+//    //CGFloat scale = [[UIScreen mainScreen] scale];
+//    CGFloat scale = 1;
+//    Rw = MAX(Rw, _imageView.image.size.width / (scale * _scrollView.frame.size.width));
+//    Rh = MAX(Rh, _imageView.image.size.height / (scale * _scrollView.frame.size.height));
+//
+//    _scrollView.contentSize = _imageView.frame.size;
+//    _scrollView.minimumZoomScale = 1;
+//    _scrollView.maximumZoomScale = MAX(MAX(Rw, Rh), 3);
+//
+//    [_scrollView setZoomScale:_scrollView.minimumZoomScale animated:animated];
+//    [self scrollViewDidZoom:_scrollView];
     
-    //CGFloat scale = [[UIScreen mainScreen] scale];
-    CGFloat scale = 1;
-    Rw = MAX(Rw, _imageView.image.size.width / (scale * _scrollView.frame.size.width));
-    Rh = MAX(Rh, _imageView.image.size.height / (scale * _scrollView.frame.size.height));
     
-    _scrollView.contentSize = _imageView.frame.size;
-    _scrollView.minimumZoomScale = 1;
-    _scrollView.maximumZoomScale = MAX(MAX(Rw, Rh), 3);
+    CGSize size = self.scrollView.bounds.size;
+    CGSize contentSize = self.scrollView.contentSize;
     
-    [_scrollView setZoomScale:_scrollView.minimumZoomScale animated:animated];
-    [self scrollViewDidZoom:_scrollView];
+    CGFloat offsetX = (size.width > contentSize.width) ?
+    (size.width - contentSize.width) * 0.5 : 0.0;
+    
+    CGFloat offsetY = (size.height > contentSize.height) ?
+    (size.height - contentSize.height) * 0.5 : 0.0;
+    
+    self.containerView.center = CGPointMake(contentSize.width * 0.5 + offsetX, contentSize.height * 0.5 + offsetY);
+    
 }
 
 - (BOOL)prefersStatusBarHidden
@@ -284,12 +315,21 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 #pragma mark- ScrollView delegate
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
 {
-    return _imageView.superview;
+    return self.containerView;
 }
 
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView
 {
+    CGSize size = scrollView.bounds.size;
+    CGSize contentSize = scrollView.contentSize;
     
+    CGFloat offsetX = (size.width > contentSize.width) ?
+    (size.width - contentSize.width) * 0.5 : 0.0;
+    
+    CGFloat offsetY = (size.height > contentSize.height) ?
+    (size.height - contentSize.height) * 0.5 : 0.0;
+    
+    self.containerView.center = CGPointMake(contentSize.width * 0.5 + offsetX, contentSize.height * 0.5 + offsetY);
 }
 
 #pragma mark - Actions
@@ -298,12 +338,14 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 {
     if (_currentMode == WBGEditorModeDraw)
     {
-        return;
+        [self resetCurrentTool];
     }
-    //先设置状态，然后在干别的
-    self.currentMode = WBGEditorModeDraw;
-    
-    self.currentTool = self.drawTool;
+    else
+    {
+        //先设置状态，然后在干别的
+        self.currentMode = WBGEditorModeDraw;
+        self.currentTool = self.drawTool;
+    }
 }
 
 ///裁剪模式
@@ -316,7 +358,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
         TOCropViewController *cropController = [[TOCropViewController alloc] initWithCroppingStyle:TOCropViewCroppingStyleDefault image:clipedImage];
         cropController.delegate = self;
          
-        CGRect viewFrame = [self.view convertRect:self.imageView.frame
+        CGRect viewFrame = [self.view convertRect:self.containerView.frame
                                            toView:self.navigationController.view];
          
         [cropController
@@ -447,7 +489,6 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     __weak typeof(self)weakSelf = self;
     if (cropViewController.croppingStyle != TOCropViewCroppingStyleCircular)
     {
-
         [cropViewController
          dismissAnimatedFromParentViewController:self
          withCroppedImage:image
@@ -528,8 +569,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
                                            [UIScreen mainScreen].scale);
     
     CGContextRef ctx = UIGraphicsGetCurrentContext();
-    [self.mosicaView.layer renderInContext:ctx];
-    [self.drawingView.layer renderInContext:ctx];
+    [self.containerView.layer renderInContext:ctx];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     

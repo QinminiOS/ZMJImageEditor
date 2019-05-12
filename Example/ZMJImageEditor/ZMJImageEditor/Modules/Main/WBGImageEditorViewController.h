@@ -22,11 +22,10 @@ typedef NS_ENUM(NSUInteger, WBGEditorMode)
 
 @interface WBGImageEditorViewController : WBGImageEditor
 
-@property (weak, nonatomic, readonly) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic, readonly) IBOutlet UIScrollView *scrollView;
-
-@property (weak, nonatomic, readonly) UIView *bottomBar;
+@property (weak, nonatomic, readonly) UIImageView *imageView;
 @property (strong, nonatomic, readonly) WBGScratchView *mosicaView;
+@property (weak, nonatomic, readonly) UIView *bottomBar;
 @property (strong, nonatomic, readonly) UIImageView *drawingView;
 
 @property (nonatomic, copy, readonly) UIImage *originImage;

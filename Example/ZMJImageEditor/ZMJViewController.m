@@ -34,6 +34,8 @@
 //        
 //    }];
     
+    self.imageView.image = [UIImage imageNamed:@"1"];
+    
 }
 
 - (IBAction)editButtonAction:(UIBarButtonItem *)sender {
@@ -72,22 +74,19 @@
              ];
 }
 
-- (WBGImageEditorComponent)imageEditorCompoment {
+- (WBGImageEditorComponent)imageEditorCompoment
+{
     return WBGImageEditorALLComponent;
 }
 
-- (UIColor *)imageEditorDefaultColor {
+- (UIColor *)imageEditorDefaultColor
+{
     return UIColor.redColor;
 }
 
-- (NSNumber *)imageEditorDrawPathWidth {
-    return @(5.f);
-}
-#pragma mark - ------line------
-- (void)didReceiveMemoryWarning
+- (NSNumber *)imageEditorDrawPathWidth
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    return @(5.f);
 }
 
 @end

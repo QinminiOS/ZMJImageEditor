@@ -16,7 +16,6 @@
                 <outlet property="bottomBar" destination="toj-tM-hDH" id="aaz-UD-NrS"/>
                 <outlet property="clipButton" destination="PFB-Ig-Llj" id="Sdg-B5-Hzf"/>
                 <outlet property="finishButton" destination="yeV-aj-vVt" id="Cvb-g2-Sj7"/>
-                <outlet property="imageView" destination="L0E-Hz-dO7" id="8Uo-zs-uHX"/>
                 <outlet property="panButton" destination="vif-ym-mAZ" id="dhq-qL-UOU"/>
                 <outlet property="paperButton" destination="dR4-MJ-4Kq" id="ljA-cj-EGo"/>
                 <outlet property="scrollView" destination="eg2-dz-mJn" id="syX-xc-Eiv"/>
@@ -35,26 +34,6 @@
                     <subviews>
                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eg2-dz-mJn">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                            <subviews>
-                                <view tag="123" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2vm-iw-DfS" userLabel="container" customClass="ZMJTestView">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                    <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L0E-Hz-dO7">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </imageView>
-                                    </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                            </subviews>
-                            <constraints>
-                                <constraint firstItem="2vm-iw-DfS" firstAttribute="centerX" secondItem="eg2-dz-mJn" secondAttribute="centerX" id="Rjs-TI-LNg"/>
-                                <constraint firstItem="2vm-iw-DfS" firstAttribute="leading" secondItem="eg2-dz-mJn" secondAttribute="leading" id="eoh-MA-Rsc"/>
-                                <constraint firstAttribute="bottom" secondItem="2vm-iw-DfS" secondAttribute="bottom" id="hQA-d5-mrp"/>
-                                <constraint firstItem="2vm-iw-DfS" firstAttribute="top" secondItem="eg2-dz-mJn" secondAttribute="top" id="mOK-lL-rmD"/>
-                                <constraint firstItem="2vm-iw-DfS" firstAttribute="centerY" secondItem="eg2-dz-mJn" secondAttribute="centerY" id="uTI-o5-Jn3"/>
-                                <constraint firstAttribute="trailing" secondItem="2vm-iw-DfS" secondAttribute="trailing" id="zg1-yX-hS0"/>
-                            </constraints>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="mbf-P5-HRA"/>
                             </connections>
