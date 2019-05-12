@@ -471,7 +471,7 @@
 				71FA899D228276AA009349CB /* Text */,
 				71858E2A2281756F00EE6CF2 /* Mosica */,
 				71FA89A12282772A009349CB /* Crop */,
-				B91A78D62288610300EC3785 /* Map */,
+				B91A78D62288610300EC3785 /* Widget */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -570,7 +570,7 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		B91A78D62288610300EC3785 /* Map */ = {
+		B91A78D62288610300EC3785 /* Widget */ = {
 			isa = PBXGroup;
 			children = (
 				71FA899C228274DD009349CB /* Views */,
@@ -578,7 +578,7 @@
 				71858E702281756F00EE6CF2 /* WBGMoreKeyboard.h */,
 				71858E692281756F00EE6CF2 /* WBGMoreKeyboard.m */,
 			);
-			path = Map;
+			path = Widget;
 			sourceTree = "<group>";
 		};
 		ECFF949E9BE1709B8569CA3F /* Pods */ = {
