@@ -340,9 +340,8 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 - (IBAction)clipAction:(UIButton *)sender
 {
     
-    [self buildClipImageShowHud:NO
-                 clipedCallback:^(UIImage *clipedImage)
-     {
+    [self buildClipImageWithCallback:^(UIImage *clipedImage)
+    {
         TOCropViewController *cropController = [[TOCropViewController alloc] initWithCroppingStyle:TOCropViewCroppingStyleDefault image:clipedImage];
         cropController.delegate = self;
          
@@ -410,8 +409,10 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 
 - (IBAction)onFinishButtonTapped:(UIButton *)sender
 {
-    [self buildClipImageShowHud:YES clipedCallback:^(UIImage *clipedImage) {
-        if ([self.delegate respondsToSelector:@selector(imageEditor:didFinishEdittingWithImage:)]) {
+    [self buildClipImageWithCallback:^(UIImage *clipedImage)
+    {
+        if ([self.delegate respondsToSelector:@selector(imageEditor:didFinishEdittingWithImage:)])
+        {
             [self.delegate imageEditor:self didFinishEdittingWithImage:clipedImage];
         }
     }];
@@ -459,10 +460,16 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
                   withRect:(CGRect)cropRect
                      angle:(NSInteger)angle
 {
-    [self updateImageViewWithImage:image
-                          withRect:cropRect
-                             angle:angle
-            fromCropViewController:cropViewController];
+    
+    [self buildOriginClipImageWithCallback:^(UIImage *clipedImage)
+    {
+        UIImage *newImage = [clipedImage croppedImageWithFrame:cropRect angle:angle circularClip:NO];
+        
+        [self updateImageViewWithImage:newImage
+                              withRect:cropRect
+                                 angle:angle
+                fromCropViewController:cropViewController];
+    }];
 }
 
 - (void)updateImageViewWithImage:(UIImage *)image
@@ -555,8 +562,8 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     }];
 }
 
-- (void)buildClipImageShowHud:(BOOL)showHud
-               clipedCallback:(void(^)(UIImage *clipedImage))clipedCallback
+#pragma mark - Clipe
+- (void)buildClipImageWithCallback:(void(^)(UIImage *clipedImage))callback
 {
     UIGraphicsBeginImageContextWithOptions(self.drawingView.size,
                                            NO,
@@ -567,9 +574,26 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
-    if (clipedCallback)
+    if (callback)
     {
-        clipedCallback(image);
+        callback(image);
+    }
+}
+
+- (void)buildOriginClipImageWithCallback:(void(^)(UIImage *clipedImage))callback
+{
+    UIGraphicsBeginImageContextWithOptions(self.drawingView.size,
+                                           NO,
+                                           [UIScreen mainScreen].scale);
+    
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    [self.imageView.layer renderInContext:ctx];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    if (callback)
+    {
+        callback(image);
     }
 }
 
