@@ -7,11 +7,13 @@
 //
 
 #import "WBGPath.h"
+#import "WBGChatMacros.h"
 
 @interface WBGPath()
 @property (nonatomic, strong) UIBezierPath *bezierPath;
 @property (nonatomic, assign) CGPoint beginPoint;
 @property (nonatomic, assign) CGFloat pathWidth;
+@property (nonatomic, strong) NSMutableArray<NSValue *> *pointArray;
 @end
 
 @implementation WBGPath
@@ -37,6 +39,7 @@
     path.pathWidth  = pathWidth;
     path.bezierPath = bezierPath;
     path.shape      = shapeLayer;
+    path.pointArray = [NSMutableArray array];
     
     return path;
 }
@@ -45,8 +48,35 @@
 - (void)pathLineToPoint:(CGPoint)movePoint;
 {
     //判断绘图类型
+    [self.pointArray addObject:@(movePoint)];
+    
     [self.bezierPath addLineToPoint:movePoint];
     self.shape.path = self.bezierPath.CGPath;
+}
+
+- (void)transformToRect:(CGRect)rect
+{
+    UIBezierPath *bezierPath = [UIBezierPath bezierPath];
+    bezierPath.lineWidth     = self.pathWidth;
+    bezierPath.lineCapStyle  = kCGLineCapRound;
+    bezierPath.lineJoinStyle = kCGLineJoinRound;
+    
+    self.beginPoint = CGRectConvertPointToRect(self.beginPoint, rect);
+    [bezierPath moveToPoint:self.beginPoint];
+    NSMutableArray<NSValue *> *transArray = [NSMutableArray array];
+    
+    for (NSValue *value in self.pointArray)
+    {
+        CGPoint p = [value CGPointValue];
+        CGPoint trans = CGRectConvertPointToRect(p, rect);
+        
+        [bezierPath addLineToPoint:trans];
+        [transArray addObject:@(trans)];
+        
+    }
+    
+    self.pointArray = transArray;
+    self.bezierPath = bezierPath;
 }
 
 - (void)applyTransform:(CGAffineTransform)transform

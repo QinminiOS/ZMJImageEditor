@@ -49,6 +49,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 @property (nonatomic, strong) WBGMosicaTool *mosicaTool;
 
 @property (nonatomic, copy) UIImage *originImage;
+@property (nonatomic, assign) CGSize originSize;
 @property (nonatomic, assign) WBGEditorMode currentMode;
 
 @property (nonatomic, assign) CGFloat clipInitScale;
@@ -239,6 +240,12 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     self.drawingView.clipsToBounds = YES;
     [self.containerView addSubview:self.drawingView];
     self.drawingView.userInteractionEnabled = YES;
+    
+    // 原始尺寸
+    CGSize imageSize = self.imageView.image.size;
+    CGSize scrollViewSize = self.scrollView.frame.size;
+    CGSize originSize = CGSizeMake(scrollViewSize.width, imageSize.height*scrollViewSize.width/imageSize.width);
+    self.originSize = originSize;
 }
 
 - (void)refreshImageView
@@ -253,7 +260,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     if(size.width > 0 && size.height > 0 )
     {
         CGSize imageSize = self.imageView.image.size;
-        CGSize scrollViewSize = _scrollView.frame.size;
+        CGSize scrollViewSize = self.scrollView.frame.size;
         
         self.containerView.frame = CGRectMake(0, 0, scrollViewSize.width, imageSize.height*scrollViewSize.width/imageSize.width);
         self.imageView.frame = CGRectMake(0, 0, scrollViewSize.width, imageSize.height*scrollViewSize.width/imageSize.width);

@@ -66,4 +66,7 @@ typedef NS_ENUM(NSInteger, WBGChatBarStatus)
 #define     WBGColor(r, g, b, a) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:a]
 
 
+#define CGRectConvertPointToRect(point, rect) \
+        CGPointMake(point.x - rect.origin.x, point.y - rect.origin.y)
+
 #endif /* WBGChatMacros_h */

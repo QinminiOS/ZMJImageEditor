@@ -215,9 +215,12 @@
 #pragma mark - Draw
 - (void)drawLine
 {
-    CGSize size = _drawingView.frame.size;
-    UIGraphicsBeginImageContextWithOptions(size, NO, [UIScreen mainScreen].scale);
+    CGFloat scale = [UIScreen mainScreen].scale;
+    CGSize currentSize = _drawingView.frame.size;
+    
+    UIGraphicsBeginImageContextWithOptions(currentSize, NO, scale);
     CGContextRef context = UIGraphicsGetCurrentContext();
+    
     //去掉锯齿
     CGContextSetAllowsAntialiasing(context, true);
     CGContextSetShouldAntialias(context, true);
@@ -234,13 +237,13 @@
 
 - (void)cropToRect:(CGRect)rect
 {
-//    for (WBGPath *path in _allLineMutableArray)
-//    {
-//        [path applyTransform:CGAffineTransformMakeTranslation(0, -100)];
-//        [path applyTransform:CGAffineTransformMakeRotation(M_PI_2)];
-//    }
-//    
-//    [self drawLine];
+
+    for (WBGPath *path in _allLineMutableArray)
+    {
+        [path transformToRect:rect];
+    }
+    
+    [self drawLine];
 }
 
 - (UIImage *)buildImage
