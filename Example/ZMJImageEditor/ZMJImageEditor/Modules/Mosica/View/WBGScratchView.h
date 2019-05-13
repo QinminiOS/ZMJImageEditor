@@ -15,6 +15,7 @@
 // surfaceImage(放在顶层)
 @property (nonatomic, strong) UIImage *surfaceImage;
 
+- (void)transformToRect:(CGRect)rect angle:(NSInteger)angle;
 - (void)backToLastDraw;
 
 @end

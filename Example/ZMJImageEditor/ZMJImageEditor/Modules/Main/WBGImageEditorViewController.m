@@ -20,6 +20,7 @@
 #import "YYCategories.h"
 #import "WBGMosicaTool.h"
 #import "Masonry.h"
+#import "XRGBTool.h"
 
 
 #pragma mark - WBGImageEditorViewController
@@ -232,7 +233,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     self.mosicaView = [[WBGScratchView alloc] initWithFrame:CGRectZero];
     self.mosicaView.surfaceImage = self.originImage;
     self.mosicaView.backgroundColor = [UIColor clearColor];
-    // [self.containerView addSubview:self.mosicaView];
+    [self.containerView addSubview:self.mosicaView];
     
     self.drawingView = [[UIImageView alloc] initWithFrame:CGRectZero];
     self.drawingView.contentMode = UIViewContentModeCenter;
@@ -478,6 +479,8 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
           fromCropViewController:(TOCropViewController *)cropViewController
 {
     self.imageView.image = image;
+    self.mosicaView.mosaicImage = [XRGBTool getMosaicImageWith:image level:0];
+    self.mosicaView.surfaceImage = image;
 
     [self refreshImageView];
     [self viewDidLayoutSubviews];

@@ -85,10 +85,7 @@
     CGPoint point = [touch locationInView:self];
     [self.mosicaPath beginNewDraw:point];
     
-    CGPathRef path = [self.mosicaPath makePath];
-    self.shapeLayer.path = path;
-    CGPathRelease(path);
-    path = NULL;
+    [self draw];
 }
 
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
@@ -104,10 +101,7 @@
     CGPoint point = [touch locationInView:self];
     [self.mosicaPath addLineToPoint:point];
     
-    CGPathRef path = [self.mosicaPath makePath];
-    self.shapeLayer.path = path;
-    CGPathRelease(path);
-    path = NULL;
+    [self draw];
 }
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
@@ -136,11 +130,26 @@
     }
 }
 
+- (void)transformToRect:(CGRect)rect angle:(NSInteger)angle
+{
+    [self.mosicaPath transformToRect:rect angle:angle];
+    [self draw];
+}
+
+- (void)draw
+{
+    CGPathRef path = [self.mosicaPath makePath];
+    self.shapeLayer.path = path;
+    CGPathRelease(path);
+    path = NULL;
+}
+
 - (void)backToLastDraw
 {
     [self.mosicaPath backToLastDraw];
     CGPathRef path = [self.mosicaPath makePath];
     self.shapeLayer.path = path;
+    self.imageLayer.mask = self.shapeLayer;
     CGPathRelease(path);
     path = NULL;
 }

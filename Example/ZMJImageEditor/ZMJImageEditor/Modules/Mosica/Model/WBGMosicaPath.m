@@ -7,15 +7,45 @@
 //
 
 #import "WBGMosicaPath.h"
+#import "WBGChatMacros.h"
 
 @interface WBGPathItem : NSObject
-@property (nonatomic, assign) CGMutablePathRef path;
+@property (nonatomic, assign) CGPoint beginPoint;
+@property (nonatomic, strong) NSMutableArray<NSValue *> *pointArray;
+@property (nonatomic, strong) UIBezierPath *path;
+- (void)transformToRect:(CGRect)rect angle:(NSInteger)angle;
 @end
 
 @implementation WBGPathItem
-- (void)dealloc
+- (instancetype)init
 {
-    if (_path != NULL) { CGPathRelease(_path); _path = NULL; };
+    if (self = [super init])
+    {
+        _pointArray = [NSMutableArray array];
+    }
+    
+    return self;
+}
+
+- (void)transformToRect:(CGRect)rect angle:(NSInteger)angle
+{
+    UIBezierPath *bezierPath = [UIBezierPath bezierPath];
+    self.beginPoint = CGRectConvertPointToRect(self.beginPoint, rect);
+    [bezierPath moveToPoint:self.beginPoint];
+    
+    NSMutableArray<NSValue *> *transArray = [NSMutableArray array];
+    for (NSValue *value in self.pointArray)
+    {
+        CGPoint p = [value CGPointValue];
+        CGPoint trans = CGRectConvertPointToRect(p, rect);
+        
+        [bezierPath addLineToPoint:trans];
+        [transArray addObject:@(trans)];
+        
+    }
+    
+    self.path = bezierPath;
+    self.pointArray = transArray;
 }
 @end
 
@@ -41,7 +71,8 @@
 - (void)beginNewDraw:(CGPoint)point
 {
     WBGPathItem *item = [WBGPathItem new];
-    item.path = CGPathCreateMutable();
+    item.beginPoint = point;
+    item.path = [UIBezierPath bezierPath];
     [self.pathArray addObject:item];
     
     [self addPoint:point];
@@ -50,18 +81,28 @@
 - (void)addPoint:(CGPoint)point
 {
     WBGPathItem *item = [self.pathArray lastObject];
-    CGPathMoveToPoint(item.path, nil, point.x, point.y);
+    [item.pointArray addObject:@(point)];
+    [item.path moveToPoint:point];
 }
 
 - (void)addLineToPoint:(CGPoint)point
 {
     WBGPathItem *item = [self.pathArray lastObject];
-    CGPathAddLineToPoint(item.path, nil, point.x, point.y);
+    [item.pointArray addObject:@(point)];
+    [item.path addLineToPoint:point];
 }
 
 - (void)backToLastDraw
 {
     [self.pathArray removeLastObject];
+}
+
+- (void)transformToRect:(CGRect)rect angle:(NSInteger)angle
+{
+    for (WBGPathItem *item in self.pathArray)
+    {
+        [item transformToRect:rect angle:angle];
+    }
 }
 
 - (CGPathRef)makePath
@@ -70,7 +111,7 @@
     
     for (WBGPathItem *pathItem in _pathArray)
     {
-        CGPathAddPath(pathRef, nil, pathItem.path);
+        CGPathAddPath(pathRef, nil, pathItem.path.CGPath);
     }
     
     return pathRef;

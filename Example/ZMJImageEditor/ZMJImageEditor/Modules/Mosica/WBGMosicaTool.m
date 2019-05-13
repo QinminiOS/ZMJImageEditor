@@ -70,7 +70,7 @@
 
 - (void)cropToRect:(CGRect)rect angle:(NSInteger)angle
 {
-    
+    [self.scratchView transformToRect:rect angle:angle];
 }
 
 - (void)setupActions
