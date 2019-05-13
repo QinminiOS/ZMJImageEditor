@@ -478,16 +478,14 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
           fromCropViewController:(TOCropViewController *)cropViewController
 {
     self.imageView.image = image;
-    // CGRect bounds = cropViewController.cropView.foregroundImageView.bounds;
-    // bounds.size = CGSizeMake(bounds.size.width/self.clipInitScale, bounds.size.height/self.clipInitScale);
-    
+
     [self refreshImageView];
     [self viewDidLayoutSubviews];
 
     [self.drawTool cropToRect:cropRect];
 
     self.navigationItem.rightBarButtonItem.enabled = YES;
-    __weak typeof(self)weakSelf = self;
+    
     if (cropViewController.croppingStyle != TOCropViewCroppingStyleCircular)
     {
         [cropViewController
@@ -495,10 +493,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
          withCroppedImage:image
          toView:self.imageView
          toFrame:CGRectZero
-         setup:^{
-             [weakSelf refreshImageView];
-             [weakSelf viewDidLayoutSubviews];
-         }
+         setup:NULL
          completion:NULL];
     }
     else
