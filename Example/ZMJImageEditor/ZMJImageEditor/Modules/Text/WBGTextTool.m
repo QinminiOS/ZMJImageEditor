@@ -92,7 +92,7 @@ static const NSInteger kTextMaxLimitNumber = 100;
     }
 }
 
-- (void)cropToRect:(CGRect)rect
+- (void)cropToRect:(CGRect)rect angle:(NSInteger)angle
 {
     for (UIView *v in self.editor.drawingView.subviews)
     {
@@ -103,11 +103,6 @@ static const NSInteger kTextMaxLimitNumber = 100;
             v.origin = p;
         }
     }
-}
-
-- (void)executeWithCompletionBlock:(WBGImageToolCompletionBlock)completionBlock
-{
-    
 }
 
 - (void)changeColor:(UIColor *)color

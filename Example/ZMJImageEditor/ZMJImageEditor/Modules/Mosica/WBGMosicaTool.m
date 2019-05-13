@@ -68,7 +68,7 @@
     }
 }
 
-- (void)executeWithCompletionBlock:(WBGImageToolCompletionBlock)completionBlock
+- (void)cropToRect:(CGRect)rect angle:(NSInteger)angle
 {
     
 }

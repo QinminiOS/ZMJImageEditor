@@ -481,9 +481,11 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 
     [self refreshImageView];
     [self viewDidLayoutSubviews];
-
-    [self.drawTool cropToRect:cropRect];
-    [self.textTool cropToRect:cropRect];
+    
+    // todo
+    [self.drawTool cropToRect:cropRect angle:angle];
+    [self.textTool cropToRect:cropRect angle:angle];
+    [self.mosicaTool cropToRect:cropRect angle:angle];
 
     self.navigationItem.rightBarButtonItem.enabled = YES;
     

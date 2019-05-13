@@ -9,10 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "WBGImageEditorViewController.h"
 
-typedef void (^WBGImageToolCompletionBlock)(UIImage *image,
-                                            NSError *error,
-                                            NSDictionary *userInfo);
-
 @interface WBGImageToolBase : NSObject
 
 @property (nonatomic, weak) WBGImageEditorViewController *editor;
@@ -22,8 +18,6 @@ typedef void (^WBGImageToolCompletionBlock)(UIImage *image,
 - (void)setup;
 - (void)cleanup;
 - (void)hideTools:(BOOL)hidden;
-- (void)executeWithCompletionBlock:(WBGImageToolCompletionBlock)completionBlock;
-
-- (void)cropToRect:(CGRect)rect;
+- (void)cropToRect:(CGRect)rect angle:(NSInteger)angle;
 
 @end

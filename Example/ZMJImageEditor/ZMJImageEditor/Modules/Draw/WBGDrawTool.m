@@ -130,17 +130,6 @@
     }
 }
 
-- (void)executeWithCompletionBlock:(WBGImageToolCompletionBlock)completionBlock
-{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        UIImage *image = [self buildImage];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            completionBlock(image, nil, nil);
-        });
-    });
-}
-
 - (void)backToLastDraw
 {
     [_allLineMutableArray removeLastObject];
@@ -235,7 +224,7 @@
     UIGraphicsEndImageContext();
 }
 
-- (void)cropToRect:(CGRect)rect
+- (void)cropToRect:(CGRect)rect angle:(NSInteger)angle
 {
 
     for (WBGPath *path in _allLineMutableArray)

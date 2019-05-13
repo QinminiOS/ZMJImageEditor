@@ -36,17 +36,9 @@
     
 }
 
-- (void)cropToRect:(CGRect)rect
+- (void)cropToRect:(CGRect)rect angle:(NSInteger)angle
 {
     
-}
-
-- (void)executeWithCompletionBlock:(void(^)(UIImage *image, NSError *error, NSDictionary *userInfo))completionBlock
-{
-    if (completionBlock)
-    {
-        completionBlock(self.editor.imageView.image, nil, nil);
-    }
 }
 
 - (UIImage*)imageForKey:(NSString*)key defaultImageName:(NSString*)defaultImageName
