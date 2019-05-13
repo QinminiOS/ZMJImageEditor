@@ -483,6 +483,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     [self viewDidLayoutSubviews];
 
     [self.drawTool cropToRect:cropRect];
+    [self.textTool cropToRect:cropRect];
 
     self.navigationItem.rightBarButtonItem.enabled = YES;
     

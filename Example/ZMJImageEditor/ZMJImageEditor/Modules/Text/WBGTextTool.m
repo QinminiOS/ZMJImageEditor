@@ -92,6 +92,19 @@ static const NSInteger kTextMaxLimitNumber = 100;
     }
 }
 
+- (void)cropToRect:(CGRect)rect
+{
+    for (UIView *v in self.editor.drawingView.subviews)
+    {
+        if ([v isKindOfClass:[WBGTextToolView class]] ||
+            [v isKindOfClass:[WBGTextToolOverlapView class]])
+        {
+            CGPoint p = CGRectConvertPointToRect(v.origin, rect);
+            v.origin = p;
+        }
+    }
+}
+
 - (void)executeWithCompletionBlock:(WBGImageToolCompletionBlock)completionBlock
 {
     

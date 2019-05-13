@@ -475,11 +475,13 @@ static WBGTextToolView *activeView = nil;
     [super layoutSubviews];
     
     CGRect boundss;
-    if (!_archerBGView.superview) {
+    if (!_archerBGView.superview)
+    {
         [self.superview insertSubview:_archerBGView belowSubview:self];
         _archerBGView.frame = self.frame;
         boundss = self.bounds;
     }
+    
     boundss = _archerBGView.bounds;
     self.transform = CGAffineTransformMakeRotation(_rotation);
     
