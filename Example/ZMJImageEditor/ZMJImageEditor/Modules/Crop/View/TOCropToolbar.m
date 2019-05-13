@@ -22,7 +22,7 @@
 
 #import "TOCropToolbar.h"
 #import "UIImage+library.h"
-@import YYCategories;
+#import "FrameAccessor.h"
 
 #define TOCROPTOOLBAR_DEBUG_SHOWING_BUTTONS_CONTAINER_RECT     0   // convenience debug toggle
 

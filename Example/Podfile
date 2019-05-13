@@ -10,6 +10,8 @@ target 'ZMJImageEditor_Example' do
   pod 'XXNibBridge'
   pod 'YYText'
   pod 'YYWebImage'
+  pod 'FrameAccessor'
+  pod 'extobjc'
 
   target 'ZMJImageEditor_Tests' do
     inherit! :search_paths

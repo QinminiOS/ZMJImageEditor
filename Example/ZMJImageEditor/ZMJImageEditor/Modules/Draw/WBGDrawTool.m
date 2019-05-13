@@ -224,12 +224,12 @@
     UIGraphicsEndImageContext();
 }
 
-- (void)cropToRect:(CGRect)rect angle:(NSInteger)angle
+- (void)cropToRect:(CGRect)rect angle:(CGFloat)angle rotateCenter:(CGPoint)rotateCenter;
 {
 
     for (WBGPath *path in _allLineMutableArray)
     {
-        [path transformToRect:rect];
+        [path transformToRect:rect angle:angle rotateCenter:rotateCenter];
     }
     
     [self drawLine];

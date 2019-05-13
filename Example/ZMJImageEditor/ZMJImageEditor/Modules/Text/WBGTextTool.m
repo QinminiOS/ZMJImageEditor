@@ -8,10 +8,11 @@
 
 #import "WBGTextTool.h"
 #import "WBGTextToolView.h"
-#import "UIView+YYAdd.h"
+#import "FrameAccessor.h"
 #import "WBGTextColorPanel.h"
 #import "WBGChatMacros.h"
 #import "WBGNavigationBarView.h"
+#import "EXTobjc.h"
 
 static const CGFloat kTopOffset = 50.f;
 static const CGFloat kTextTopOffset = 60.f;
@@ -41,37 +42,40 @@ static const NSInteger kTextMaxLimitNumber = 100;
 
 - (void)setupActions
 {
-    __weak typeof(self)weakSelf = self;
+    @weakify(self);
     
     self.textView.dissmissTextTool = ^(NSString *currentText, BOOL isUse)
     {
-        weakSelf.editor.scrollView.pinchGestureRecognizer.enabled = YES;
+        @strongify(self);
         
-        if (weakSelf.isEditAgain)
+        self.editor.scrollView.pinchGestureRecognizer.enabled = YES;
+        
+        if (self.isEditAgain)
         {
-            if (weakSelf.editAgainCallback && isUse)
+            if (self.editAgainCallback && isUse)
             {
-                weakSelf.editAgainCallback(currentText);
+                self.editAgainCallback(currentText);
             }
             
-            weakSelf.isEditAgain = NO;
+            self.isEditAgain = NO;
         }
         else
         {
             if (isUse)
             {
-                [weakSelf addNewText:currentText];
+                [self addNewText:currentText];
             }
         }
         
-        if (weakSelf.dissmissTextTool)
+        if (self.dissmissTextTool)
         {
-            weakSelf.dissmissTextTool(currentText);
+            self.dissmissTextTool(currentText);
         }
     };
     
     self.textColorPanel.onTextColorChange = ^(UIColor *color) {
-        [weakSelf changeColor:color];
+        @strongify(self);
+        [self changeColor:color];
     };
 }
 
@@ -99,8 +103,8 @@ static const NSInteger kTextMaxLimitNumber = 100;
         if ([v isKindOfClass:[WBGTextToolView class]] ||
             [v isKindOfClass:[WBGTextToolOverlapView class]])
         {
-            CGPoint p = CGRectConvertPointToRect(v.origin, rect);
-            v.origin = p;
+            CGPoint p = CGRectConvertPointToRect(v.viewOrigin, rect);
+            v.viewOrigin = p;
         }
     }
 }
@@ -160,6 +164,7 @@ static const NSInteger kTextMaxLimitNumber = 100;
         [self addSubview:self.effectView];
         
         self.navigationBarView = [WBGNavigationBarView xx_instantiateFromNib];
+        self.navigationBarView.frame = CGRectMake(0, 0, WIDTH_SCREEN, [WBGNavigationBarView fixedHeight]);
         [self addSubview:self.navigationBarView];
         
         

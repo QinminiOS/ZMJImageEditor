@@ -56,7 +56,7 @@
     CGContextTranslateCTM(ctx, rotatedSize.width/2.0, rotatedSize.height/2.0);
     //执行坐标变换，旋转过radians弧度
     CGContextRotateCTM(ctx, radians);
-    CALayer *layer = [CALayer layer];
+    // CALayer *layer = [CALayer layer];
 
     //执行坐标变换，执行缩放
     CGContextScaleCTM(ctx, 1.0, -1.0);

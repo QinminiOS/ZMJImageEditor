@@ -36,7 +36,7 @@
     
 }
 
-- (void)cropToRect:(CGRect)rect angle:(NSInteger)angle
+- (void)cropToRect:(CGRect)rect angle:(CGFloat)angle rotateCenter:(CGPoint)rotateCenter
 {
     
 }

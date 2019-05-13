@@ -25,6 +25,7 @@
 #import "TOActivityCroppedImageProvider.h"
 #import "UIImage+CropRotate.h"
 #import "TOCroppedImageAttributes.h"
+#import "extobjc.h"
 
 @interface TOCropViewController () <UIActionSheetDelegate, UIViewControllerTransitioningDelegate, TOCropViewDelegate>
 
@@ -60,8 +61,8 @@
 - (void)doneButtonTapped;
 - (void)showAspectRatioDialog;
 - (void)resetCropViewLayout;
-- (void)rotateCropViewClockwise;
-- (void)rotateCropViewCounterclockwise;
+// - (void)rotateCropViewClockwise;
+// - (void)rotateCropViewCounterclockwise;
 
 /* View layout */
 - (CGRect)frameForToolBarWithVerticalLayout:(BOOL)verticalLayout;
@@ -110,15 +111,15 @@
     self.toolbar.frame = [self frameForToolBarWithVerticalLayout:CGRectGetWidth(self.view.bounds) < CGRectGetHeight(self.view.bounds)];
     [self.view addSubview:self.toolbar];
     
-    __weak typeof(self) weakSelf = self;
-    self.toolbar.doneButtonTapped =     ^{ [weakSelf doneButtonTapped]; };
-    self.toolbar.cancelButtonTapped =   ^{ [weakSelf cancelButtonTapped]; };
+    @weakify(self);
+    self.toolbar.doneButtonTapped =     ^{ @strongify(self); [self doneButtonTapped]; };
+    self.toolbar.cancelButtonTapped =   ^{ @strongify(self); [self cancelButtonTapped]; };
     
-    self.toolbar.resetButtonTapped =    ^{ [weakSelf resetCropViewLayout]; };
-    self.toolbar.clampButtonTapped =    ^{ [weakSelf showAspectRatioDialog]; };
+    self.toolbar.resetButtonTapped =    ^{ @strongify(self); [self resetCropViewLayout]; };
+    self.toolbar.clampButtonTapped =    ^{ @strongify(self); [self showAspectRatioDialog]; };
     
-    self.toolbar.rotateCounterclockwiseButtonTapped = ^{ [weakSelf rotateCropViewCounter]; };
-    self.toolbar.rotateClockwiseButtonTapped        = ^{ [weakSelf rotateCropView]; };
+    self.toolbar.rotateCounterclockwiseButtonTapped = ^{ @strongify(self); [self rotateCropViewCounter]; };
+    self.toolbar.rotateClockwiseButtonTapped        = ^{ @strongify(self); [self rotateCropView]; };
     
     self.toolbar.clampButtonHidden = self.aspectRatioPickerButtonHidden || circularMode;
     self.toolbar.rotateClockwiseButtonHidden = self.rotateClockwiseButtonHidden && !circularMode;
@@ -590,16 +591,16 @@
         self.imageCropFrame = toFrame;
     }
     
-    __weak typeof (self) weakSelf = self;
+    @weakify(self);
     [viewController presentViewController:self animated:YES completion:^ {
-        typeof (self) strongSelf = weakSelf;
+        @strongify(self);
         if (completion) {
             completion();
         }
         
-        [strongSelf.cropView setCroppingViewsHidden:NO animated:YES];
+        [self.cropView setCroppingViewsHidden:NO animated:YES];
         if (!CGRectIsEmpty(fromFrame)) {
-            [strongSelf.cropView setGridOverlayHidden:NO animated:YES];
+            [self.cropView setGridOverlayHidden:NO animated:YES];
         }
     }];
 }
@@ -651,20 +652,21 @@
     
     self.cropView.simpleRenderMode = YES;
     
-    __weak typeof (self) weakSelf = self;
+    @weakify(self);
     self.transitionController.prepareForTransitionHandler = ^{
-        typeof (self) strongSelf = weakSelf;
-        TOCropViewControllerTransitioning *transitioning = strongSelf.transitionController;
+        @strongify(self);
         
-        transitioning.toFrame = [strongSelf.cropView convertRect:strongSelf.cropView.cropBoxFrame toView:strongSelf.view];
+        TOCropViewControllerTransitioning *transitioning = self.transitionController;
+        
+        transitioning.toFrame = [self.cropView convertRect:self.cropView.cropBoxFrame toView:self.view];
         if (!CGRectIsEmpty(transitioning.fromFrame) || transitioning.fromView) {
-            strongSelf.cropView.croppingViewsHidden = YES;
+            self.cropView.croppingViewsHidden = YES;
         }
 
-        if (strongSelf.prepareForTransitionHandler)
-            strongSelf.prepareForTransitionHandler();
+        if (self.prepareForTransitionHandler)
+            self.prepareForTransitionHandler();
         
-        strongSelf.prepareForTransitionHandler = nil;
+        self.prepareForTransitionHandler = nil;
     };
     
     self.transitionController.isDismissing = NO;
@@ -677,18 +679,19 @@
         return nil;
     }
     
-    __weak typeof (self) weakSelf = self;
+    @weakify(self);
     self.transitionController.prepareForTransitionHandler = ^{
-        typeof (self) strongSelf = weakSelf;
-        TOCropViewControllerTransitioning *transitioning = strongSelf.transitionController;
+        @strongify(self);
+        
+        TOCropViewControllerTransitioning *transitioning = self.transitionController;
         
         if (!CGRectIsEmpty(transitioning.toFrame) || transitioning.toView)
-            strongSelf.cropView.croppingViewsHidden = YES;
+            self.cropView.croppingViewsHidden = YES;
         else
-            strongSelf.cropView.simpleRenderMode = YES;
+            self.cropView.simpleRenderMode = YES;
         
-        if (strongSelf.prepareForTransitionHandler)
-            strongSelf.prepareForTransitionHandler();
+        if (self.prepareForTransitionHandler)
+            self.prepareForTransitionHandler();
     };
     
     self.transitionController.isDismissing = YES;
@@ -748,7 +751,7 @@
 #pragma clang diagnostic pop
             }
         }
-        __weak typeof(activityController) blockController = activityController;
+        __weak UIActivityViewController *blockController = activityController;
         #if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_8_0
         activityController.completionWithItemsHandler = ^(NSString *activityType, BOOL completed, NSArray *returnedItems, NSError *activityError) {
             if (!completed)

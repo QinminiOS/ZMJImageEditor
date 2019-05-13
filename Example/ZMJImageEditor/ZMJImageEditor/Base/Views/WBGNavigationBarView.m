@@ -10,6 +10,11 @@
 
 @implementation WBGNavigationBarView
 
++ (CGFloat)fixedHeight
+{
+    return 64;
+}
+
 - (IBAction)onCancelButtonTapped:(UIButton *)sender
 {
     if (self.onCancelButtonClickBlock)

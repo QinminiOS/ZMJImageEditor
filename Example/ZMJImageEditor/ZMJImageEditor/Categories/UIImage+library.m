@@ -29,4 +29,60 @@
 #endif
 }
 
+- (void)writeToAlbumWithCompleteBlock:(void(^)(NSError *error, PHAsset *asset))completeBlock
+{
+    NSMutableArray *imageIds = [NSMutableArray array];
+    
+    [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
+        //写入图片到相册
+        PHAssetChangeRequest *req = [PHAssetChangeRequest creationRequestForAssetFromImage:self];
+        //记录本地标识，等待完成后取到相册中的图片对象
+        [imageIds addObject:req.placeholderForCreatedAsset.localIdentifier];
+        
+    } completionHandler:^(BOOL success, NSError *error) {
+        
+        if (success)
+        {
+            //成功后取相册中的图片对象
+            __block PHAsset *imageAsset = nil;
+            PHFetchResult *result = [PHAsset fetchAssetsWithLocalIdentifiers:imageIds options:nil];
+            [result enumerateObjectsUsingBlock:^(PHAsset * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                imageAsset = obj;
+                *stop = YES;
+            }];
+            
+            if (imageAsset)
+            {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (completeBlock)
+                    {
+                        completeBlock(nil, imageAsset);
+                    }
+                });
+            }
+            else
+            {
+                // LOGSYS_OC(kLevelError, @"PHAsset fetchAssetsWithLocalIdentifiers error: %@", error);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (completeBlock)
+                    {
+                        completeBlock(error, nil);
+                    }
+                });
+            }
+        }
+        else
+        {
+            // LOGSYS_OC(kLevelError, @"PHPhotoLibrary performChanges error: %@", error);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (completeBlock)
+                {
+                    completeBlock(error, nil);
+                }
+            });
+        }
+        
+    }];
+}
+
 @end

@@ -69,4 +69,30 @@ typedef NS_ENUM(NSInteger, WBGChatBarStatus)
 #define CGRectConvertPointToRect(point, rect) \
         CGPointMake(point.x - rect.origin.x, point.y - rect.origin.y)
 
+//#define CGPointRotate(point, anchorPoint, angle) \
+//        CGPointMake((point.x-anchorPoint.x)*cos(angle) - (point.y-anchorPoint.y)*sin(angle) + anchorPoint.x, \
+//                    (point.x-anchorPoint.x)*sin(angle) + (point.y-anchorPoint.y)*cos(angle)+anchorPoint.y)
+
+#define CGPointRotate(point, anchorPoint, angle) \
+({ \
+    CGPoint p = CGPointZero; \
+    if (angle == 0 || angle == 360) \
+    { \
+        p = point; \
+    } \
+    else if (angle == -90) \
+    { \
+        p = CGPointMake(point.y, anchorPoint.x * 2 - point.x); \
+    } \
+    else if (angle == -180) \
+    { \
+        p = CGPointMake(point.x, anchorPoint.y * 2 - point.y); \
+    } \
+    else if (angle == -270) \
+    { \
+        p = CGPointMake(anchorPoint.x * 2 - point.x, anchorPoint.y * 2 - point.y); \
+    } \
+    p; \
+})
+
 #endif /* WBGChatMacros_h */

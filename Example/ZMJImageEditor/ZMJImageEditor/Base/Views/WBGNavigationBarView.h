@@ -12,4 +12,5 @@
 @interface WBGNavigationBarView : UIView<XXNibBridge>
 @property (nonatomic, copy) void (^onDoneButtonClickBlock)(UIButton *btn);
 @property (nonatomic, copy) void (^onCancelButtonClickBlock)(UIButton *btn);
++ (CGFloat)fixedHeight;
 @end

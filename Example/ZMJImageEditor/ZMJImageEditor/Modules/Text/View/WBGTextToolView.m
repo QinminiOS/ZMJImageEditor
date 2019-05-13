@@ -9,7 +9,7 @@
 #import "WBGTextToolView.h"
 #import "WBGTextTool.h"
 #import "WBGImageEditorGestureManager.h"
-#import "UIView+YYAdd.h"
+#import "FrameAccessor.h"
 #import "UIImage+library.h"
 
 #define IMAGE_MAXSIZE 200
@@ -138,7 +138,7 @@ static const CGFloat DELETEBUTTON_BOUNDS = 26.f;
 - (void)layoutSubviews {
     [super layoutSubviews];
     _contentView.bounds = self.bounds;
-    _contentView.origin = CGPointZero;
+    _contentView.viewOrigin = CGPointZero;
 }
 
 - (void)drawRect:(CGRect)rect
@@ -448,7 +448,7 @@ static WBGTextToolView *activeView = nil;
     self.textTool.textView.textView.text = self.text;
     self.textTool.textView.textView.font = self.font;
     
-    __weak typeof (self)weakSelf = self;
+    __weak WBGTextToolView *weakSelf = self;
     self.textTool.editAgainCallback = ^(NSString *text){
         weakSelf.text = text;
         [weakSelf resizeSelf];

@@ -54,21 +54,24 @@
     self.shape.path = self.bezierPath.CGPath;
 }
 
-- (void)transformToRect:(CGRect)rect
+- (void)transformToRect:(CGRect)rect angle:(CGFloat)angle rotateCenter:(CGPoint)rotateCenter;
 {
     UIBezierPath *bezierPath = [UIBezierPath bezierPath];
     bezierPath.lineWidth     = self.pathWidth;
     bezierPath.lineCapStyle  = kCGLineCapRound;
     bezierPath.lineJoinStyle = kCGLineJoinRound;
     
+    self.beginPoint = CGPointRotate(self.beginPoint, rotateCenter, angle);
     self.beginPoint = CGRectConvertPointToRect(self.beginPoint, rect);
+    
     [bezierPath moveToPoint:self.beginPoint];
     NSMutableArray<NSValue *> *transArray = [NSMutableArray array];
     
     for (NSValue *value in self.pointArray)
     {
-        CGPoint p = [value CGPointValue];
-        CGPoint trans = CGRectConvertPointToRect(p, rect);
+        CGPoint origion = [value CGPointValue];
+        CGPoint newPoint = CGPointRotate(origion, rotateCenter, angle);
+        CGPoint trans = CGRectConvertPointToRect(newPoint, rect);
         
         [bezierPath addLineToPoint:trans];
         [transArray addObject:@(trans)];
@@ -77,11 +80,6 @@
     
     self.pointArray = transArray;
     self.bezierPath = bezierPath;
-}
-
-- (void)applyTransform:(CGAffineTransform)transform
-{
-    [self.bezierPath applyTransform:transform];
 }
 
 - (void)drawPath

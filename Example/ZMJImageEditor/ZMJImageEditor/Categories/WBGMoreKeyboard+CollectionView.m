@@ -9,7 +9,8 @@
 #import "WBGMoreKeyboard+CollectionView.h"
 #import "WBGMoreKeyboardCell.h"
 #import <Masonry/Masonry.h>
-@import YYCategories.UIView_YYAdd;
+#import "FrameAccessor.h"
+#import "EXTobjc.h"
 
 #define     SPACE_TOP        15
 #define     WIDTH_CELL       60
@@ -46,10 +47,13 @@
     else {
         [cell setItem:self.chatMoreKeyboardData[tIndex]];
     }
-    __weak typeof(self) weakSelf = self;
+    
+    @weakify(self);
     [cell setClickBlock:^(WBGMoreKeyboardItem *sItem) {
-        if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(moreKeyboard:didSelectedFunctionItem:)]) {
-            [weakSelf.delegate moreKeyboard:weakSelf didSelectedFunctionItem:sItem];
+        @strongify(self);
+        if (self.delegate && [self.delegate respondsToSelector:@selector(moreKeyboard:didSelectedFunctionItem:)])
+        {
+            [self.delegate moreKeyboard:self didSelectedFunctionItem:sItem];
         }
     }];
     return cell;

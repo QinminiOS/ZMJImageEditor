@@ -11,7 +11,7 @@
 #import "WBGChatMacros.h"
 #import "UIColor+TLChat.h"
 #import <Masonry/Masonry.h>
-@import YYCategories.UIView_YYAdd;
+#import "FrameAccessor.h"
 
 @implementation WBGMoreKeyboard
 

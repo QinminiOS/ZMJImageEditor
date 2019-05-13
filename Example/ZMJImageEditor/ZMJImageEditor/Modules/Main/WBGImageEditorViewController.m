@@ -14,10 +14,9 @@
 #import "TOCropViewController.h"
 #import "UIImage+CropRotate.h"
 #import "WBGTextToolView.h"
-#import "UIView+YYAdd.h"
+#import "FrameAccessor.h"
 #import "WBGImageEditor.h"
 #import "WBGMoreKeyboard.h"
-#import "YYCategories.h"
 #import "WBGMosicaTool.h"
 #import "Masonry.h"
 #import "XRGBTool.h"
@@ -112,6 +111,8 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
+    
+    [self refreshImageView];
 }
 
 - (void)configCustomComponent
@@ -267,7 +268,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
         self.imageView.frame = CGRectMake(0, 0, scrollViewSize.width, imageSize.height*scrollViewSize.width/imageSize.width);
         
         // 设置scrollView的缩小比例;
-        CGSize newImageSize = self.containerView.size;
+        CGSize newImageSize = self.containerView.viewSize;
         CGFloat widthRatio = 1.0f; // 宽已经缩放了
         CGFloat heightRatio = scrollViewSize.height/newImageSize.height;
         if (heightRatio >= 1.0f) heightRatio = 3.0f;
@@ -340,7 +341,6 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 ///裁剪模式
 - (IBAction)clipAction:(UIButton *)sender
 {
-    
     [self buildClipImageWithCallback:^(UIImage *clipedImage)
     {
         TOCropViewController *cropController = [[TOCropViewController alloc] initWithCroppingStyle:TOCropViewCroppingStyleDefault image:clipedImage];
@@ -478,6 +478,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
                            angle:(NSInteger)angle
           fromCropViewController:(TOCropViewController *)cropViewController
 {
+    CGPoint center = CGPointMake(self.imageView.viewSize.width/2, self.imageView.viewSize.height/2);
     self.imageView.image = image;
     self.mosicaView.mosaicImage = [XRGBTool getMosaicImageWith:image level:0];
     self.mosicaView.surfaceImage = image;
@@ -486,9 +487,9 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     [self viewDidLayoutSubviews];
     
     // todo
-    [self.drawTool cropToRect:cropRect angle:angle];
-    [self.textTool cropToRect:cropRect angle:angle];
-    [self.mosicaTool cropToRect:cropRect angle:angle];
+    [self.drawTool cropToRect:cropRect angle:angle rotateCenter:center];
+    [self.textTool cropToRect:cropRect angle:angle rotateCenter:center];
+    [self.mosicaTool cropToRect:cropRect angle:angle rotateCenter:center];
 
     self.navigationItem.rightBarButtonItem.enabled = YES;
     
@@ -566,7 +567,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 #pragma mark - Clipe
 - (void)buildClipImageWithCallback:(void(^)(UIImage *clipedImage))callback
 {
-    UIGraphicsBeginImageContextWithOptions(self.drawingView.size,
+    UIGraphicsBeginImageContextWithOptions(self.drawingView.viewSize,
                                            NO,
                                            [UIScreen mainScreen].scale);
     
@@ -583,7 +584,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 
 - (void)buildOriginClipImageWithCallback:(void(^)(UIImage *clipedImage))callback
 {
-    UIGraphicsBeginImageContextWithOptions(self.drawingView.size,
+    UIGraphicsBeginImageContextWithOptions(self.drawingView.viewSize,
                                            NO,
                                            [UIScreen mainScreen].scale);
     

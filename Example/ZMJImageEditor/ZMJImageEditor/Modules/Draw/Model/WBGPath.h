@@ -13,8 +13,7 @@
 @property (nonatomic, strong) UIColor *pathColor;//画笔颜色
 
 + (instancetype)pathToPoint:(CGPoint)beginPoint pathWidth:(CGFloat)pathWidth;
-- (void)pathLineToPoint:(CGPoint)movePoint;//画
-- (void)applyTransform:(CGAffineTransform)transform;
-- (void)transformToRect:(CGRect)rect;
-- (void)drawPath;//绘制
+- (void)pathLineToPoint:(CGPoint)movePoint; // 画
+- (void)transformToRect:(CGRect)rect angle:(CGFloat)angle rotateCenter:(CGPoint)rotateCenter;;
+- (void)drawPath; // 绘制
 @end
