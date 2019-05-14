@@ -571,9 +571,9 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 {
     [cropViewController
      dismissAnimatedFromParentViewController:self
-     withCroppedImage:nil
-     toView:self.imageView
-     toFrame:CGRectZero
+     withCroppedImage:[self buildTransitionImage]
+     toView:self.containerView
+     toFrame:self.containerView.frame
      setup:NULL
      completion:NULL];
 }
