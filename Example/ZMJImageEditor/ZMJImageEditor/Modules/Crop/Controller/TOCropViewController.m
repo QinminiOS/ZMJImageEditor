@@ -644,6 +644,7 @@
     }];
 }
 
+#pragma mark - UIViewControllerTransitioning
 - (id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
 {
     if (self.navigationController || self.modalTransitionStyle == UIModalTransitionStyleCoverVertical) {

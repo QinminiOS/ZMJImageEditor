@@ -417,18 +417,12 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
         
         [cropController
          presentAnimatedFromParentViewController:self
-         fromImage:clipedImage
-         fromView:nil
+         fromImage:[self buildTransitionImage]
+         fromView:self.containerView
          fromFrame:viewFrame
-         angle:0
-         toImageFrame:CGRectZero
-         setup:^{
-             cropController.angle = self.lastAngle;
-             if (!CGRectEqualToRect(self.lastCropRect, CGRectZero))
-             {
-                 cropController.imageCropFrame = self.lastCropRect;
-             }
-         }
+         angle:self.lastAngle
+         toImageFrame:self.lastCropRect
+         setup:nil
          completion:NULL];
     }];
     
@@ -645,12 +639,25 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     [self.drawingView.layer renderInContext:ctx];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-
     
     if (callback)
     {
         callback(image);
     }
+}
+
+- (UIImage *)buildTransitionImage
+{
+    UIGraphicsBeginImageContextWithOptions(self.containerView.viewSize,
+                                           NO,
+                                           [UIScreen mainScreen].scale);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    [self.originImage drawInRect:CGRectMake(0, 0, self.containerView.width, self.containerView.height)];
+    [self.containerView.layer renderInContext:context];
+    UIImage *transitionImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return transitionImage;
 }
 
 - (void)buildOriginClipImageWithCallback:(void(^)(UIImage *clipedImage))callback

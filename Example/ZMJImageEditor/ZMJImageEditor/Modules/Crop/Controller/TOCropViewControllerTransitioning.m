@@ -22,12 +22,14 @@
 
 #import "TOCropViewControllerTransitioning.h"
 #import <QuartzCore/QuartzCore.h>
+#import "WBGImageEditorViewController.h"
+#import "TOCropViewController.h"
 
 @implementation TOCropViewControllerTransitioning
 
 - (NSTimeInterval)transitionDuration:(id <UIViewControllerContextTransitioning>)transitionContext
 {
-    return 0.45f;
+    return 0.4f;
 }
 
 - (void)animateTransition:(id <UIViewControllerContextTransitioning>)transitionContext
@@ -40,8 +42,9 @@
     UIViewController *toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     
     // Work out which one is the crop view controller
-    UIViewController *cropViewController = (self.isDismissing == NO) ? toViewController : fromViewController;
-    UIViewController *previousController = (self.isDismissing == NO) ? fromViewController : toViewController;
+    TOCropViewController *cropViewController = (id)((self.isDismissing == NO) ? toViewController : fromViewController);
+    WBGImageEditorViewController *previousController = (id)((self.isDismissing == NO) ? fromViewController : toViewController);
+    
     
     // Just in case, match up the frame sizes
     cropViewController.view.frame = containerView.bounds;
