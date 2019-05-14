@@ -13,7 +13,6 @@
 @property (nonatomic, assign) CGPoint beginPoint;
 @property (nonatomic, strong) NSMutableArray<NSValue *> *pointArray;
 @property (nonatomic, strong) UIBezierPath *path;
-- (void)transformToRect:(CGRect)rect angle:(NSInteger)angle;
 @end
 
 @implementation WBGPathItem
@@ -25,27 +24,6 @@
     }
     
     return self;
-}
-
-- (void)transformToRect:(CGRect)rect angle:(NSInteger)angle
-{
-    UIBezierPath *bezierPath = [UIBezierPath bezierPath];
-    self.beginPoint = CGRectConvertPointToRect(self.beginPoint, rect);
-    [bezierPath moveToPoint:self.beginPoint];
-    
-    NSMutableArray<NSValue *> *transArray = [NSMutableArray array];
-    for (NSValue *value in self.pointArray)
-    {
-        CGPoint p = [value CGPointValue];
-        CGPoint trans = CGRectConvertPointToRect(p, rect);
-        
-        [bezierPath addLineToPoint:trans];
-        [transArray addObject:@(trans)];
-        
-    }
-    
-    self.path = bezierPath;
-    self.pointArray = transArray;
 }
 @end
 
@@ -95,14 +73,6 @@
 - (void)backToLastDraw
 {
     [self.pathArray removeLastObject];
-}
-
-- (void)transformToRect:(CGRect)rect angle:(NSInteger)angle
-{
-    for (WBGPathItem *item in self.pathArray)
-    {
-        [item transformToRect:rect angle:angle];
-    }
 }
 
 - (CGPathRef)makePath

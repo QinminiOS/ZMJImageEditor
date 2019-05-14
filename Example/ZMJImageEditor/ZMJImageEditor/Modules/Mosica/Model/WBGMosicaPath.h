@@ -16,8 +16,6 @@
 
 - (void)backToLastDraw;
 
-- (void)transformToRect:(CGRect)rect angle:(NSInteger)angle;
-
 // 生成path, 需要 CGPathRelease
 - (CGPathRef)makePath;
 

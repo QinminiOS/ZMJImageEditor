@@ -115,8 +115,6 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     self.imageView.frame = self.containerView.bounds;
     self.drawingView.frame = self.imageView.frame;
     self.mosicaView.frame = self.imageView.frame;
-    self.drawingView.transform = CGAffineTransformIdentity;
-    self.mosicaView.transform = CGAffineTransformIdentity;
 }
 
 - (void)configCustomComponent
@@ -240,7 +238,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     self.mosicaView = [[WBGScratchView alloc] initWithFrame:CGRectZero];
     self.mosicaView.surfaceImage = self.originImage;
     self.mosicaView.backgroundColor = [UIColor clearColor];
-    //[self.containerView addSubview:self.mosicaView];
+    [self.containerView addSubview:self.mosicaView];
     
     self.drawingView = [[WBGDrawView alloc] initWithFrame:CGRectZero];
     self.drawingView.clipsToBounds = YES;
@@ -319,14 +317,9 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     {
         CGFloat ratio = self.scrollView.width/cropRect.size.width;
         CGAffineTransform scale = CGAffineTransformMakeScale(ratio, ratio);
-        self.imageView.transform = CGAffineTransformConcat(scale, self.drawingView.transform);
-        self.imageView.center = CGPointMake(self.containerView.width/2, self.containerView.height/2);
-        
+        self.imageView.transform = CGAffineTransformConcat(scale, self.imageView.transform);
         self.drawingView.transform = CGAffineTransformConcat(scale, self.drawingView.transform);
-        self.drawingView.center = CGPointMake(self.containerView.width/2, self.containerView.height/2);
-        
-        self.mosicaView.transform = CGAffineTransformConcat(scale, self.drawingView.transform);
-        self.mosicaView.center = CGPointMake(self.containerView.width/2, self.containerView.height/2);
+        self.mosicaView.transform = CGAffineTransformConcat(scale, self.mosicaView.transform);
         
         CGPoint viewOrigin = CGPointMake(-cropRect.origin.x * ratio, -cropRect.origin.y * ratio);
         self.drawingView.viewOrigin = viewOrigin;

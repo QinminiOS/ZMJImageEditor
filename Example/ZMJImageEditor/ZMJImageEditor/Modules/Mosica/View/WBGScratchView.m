@@ -130,12 +130,6 @@
     }
 }
 
-- (void)transformToRect:(CGRect)rect angle:(NSInteger)angle
-{
-    [self.mosicaPath transformToRect:rect angle:angle];
-    [self draw];
-}
-
 - (void)draw
 {
     CGPathRef path = [self.mosicaPath makePath];

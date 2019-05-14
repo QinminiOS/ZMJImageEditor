@@ -68,11 +68,6 @@
     }
 }
 
-- (void)cropToRect:(CGRect)rect angle:(NSInteger)angle
-{
-    [self.scratchView transformToRect:rect angle:angle];
-}
-
 - (void)setupActions
 {
 //  目前只有一种样式不用
