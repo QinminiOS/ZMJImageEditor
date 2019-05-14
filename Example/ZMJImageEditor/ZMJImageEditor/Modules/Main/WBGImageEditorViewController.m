@@ -648,11 +648,11 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     [self.originImage drawInRect:CGRectMake(0, 0, self.originSize.width, self.originSize.height)];
-    self.imageView.hidden = YES;
-    [self.containerView.layer renderInContext:ctx];
+    [self.mosicaView.layer renderInContext:ctx];
+    [self.drawingView.layer renderInContext:ctx];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    self.imageView.hidden = NO;
+
     
     if (callback)
     {
