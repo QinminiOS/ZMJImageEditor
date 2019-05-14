@@ -13,13 +13,14 @@
 #import "WBGChatMacros.h"
 #import "WBGNavigationBarView.h"
 #import "EXTobjc.h"
+#import "WBGDrawView.h"
 
 static const CGFloat kTopOffset = 50.f;
 static const CGFloat kTextTopOffset = 60.f;
 static const NSInteger kTextMaxLimitNumber = 100;
 
 @interface WBGTextTool ()
-@property (nonatomic, weak) UIImageView *drawingView;
+@property (nonatomic, weak) WBGDrawView *drawingView;
 @property (nonatomic, weak) WBGTextColorPanel *textColorPanel;
 @end
 

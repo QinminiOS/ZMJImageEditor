@@ -9,6 +9,7 @@
 #import "WBGImageEditor.h"
 #import "WBGColorPanel.h"
 #import "WBGScratchView.h"
+#import "WBGDrawView.h"
 
 typedef NS_ENUM(NSUInteger, WBGEditorMode)
 {
@@ -25,7 +26,7 @@ typedef NS_ENUM(NSUInteger, WBGEditorMode)
 @property (weak, nonatomic, readonly) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic, readonly) UIImageView *imageView;
 @property (weak, nonatomic, readonly) UIView *bottomBar;
-@property (strong, nonatomic, readonly) UIImageView *drawingView;
+@property (strong, nonatomic, readonly) WBGDrawView *drawingView;
 @property (strong, nonatomic, readonly) WBGScratchView *mosicaView;
 
 @property (nonatomic, copy, readonly) UIImage *originImage;

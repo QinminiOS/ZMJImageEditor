@@ -20,6 +20,7 @@
 #import "WBGMosicaTool.h"
 #import "Masonry.h"
 #import "XRGBTool.h"
+#import "WBGDrawView.h"
 
 
 #pragma mark - WBGImageEditorViewController
@@ -35,7 +36,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) UIView *containerView;
 @property (weak, nonatomic) UIImageView *imageView;
-@property (strong, nonatomic) UIImageView *drawingView;
+@property (strong, nonatomic) WBGDrawView *drawingView;
 @property (strong, nonatomic) WBGScratchView *mosicaView;
 
 @property (weak, nonatomic) IBOutlet UIButton *panButton;
@@ -239,8 +240,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     self.mosicaView.backgroundColor = [UIColor clearColor];
     //[self.containerView addSubview:self.mosicaView];
     
-    self.drawingView = [[UIImageView alloc] initWithFrame:CGRectZero];
-    self.drawingView.contentMode = UIViewContentModeCenter;
+    self.drawingView = [[WBGDrawView alloc] initWithFrame:CGRectZero];
     self.drawingView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin;
     self.drawingView.clipsToBounds = YES;
     [self.containerView addSubview:self.drawingView];
@@ -285,8 +285,8 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 
 - (void)updateTransform:(CGFloat)radius withCropRect:(CGRect)cropRect
 {
-    CGSize imageSize = self.imageView.image.size;
-    CGSize scrollViewSize = self.scrollView.frame.size;
+  //  CGSize imageSize = self.imageView.image.size;
+  //  CGSize scrollViewSize = self.scrollView.frame.size;
     
     // 更新缩放比例
 //    CGFloat ratio = cropRect.size.width/self.originSize.width;
@@ -310,6 +310,12 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     
     // self.drawingView.transform = CGAffineTransformMakeTranslation(-cropRect.origin.x, -cropRect.origin.y);
     // self.drawingView.center = self.imageView.center;
+    
+    
+    CGAffineTransform rotation = CGAffineTransformMakeRotation(-M_PI_2);
+    
+    self.drawingView.transform = rotation;
+    self.imageView.transform = rotation;
 }
 
 - (void)resetZoomScaleWithAnimated:(BOOL)animated
@@ -534,9 +540,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
                            angle:(NSInteger)angle
           fromCropViewController:(TOCropViewController *)cropViewController
 {
-    self.imageView.image = image;
-    
-    
+    // self.imageView.image = image;
     // self.mosicaView.mosaicImage = [XRGBTool getMosaicImageWith:image level:0];
     // self.mosicaView.surfaceImage = image;
 

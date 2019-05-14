@@ -13,7 +13,7 @@
 #import "Masonry.h"
 
 @interface WBGDrawTool ()
-@property (nonatomic, weak) UIImageView *drawingView;
+@property (nonatomic, weak) WBGDrawView *drawingView;
 @property (nonatomic, assign) CGSize originalImageSize;
 @property (nonatomic, weak) WBGColorPanel *colorPanel;
 @property (nonatomic, strong) UIPanGestureRecognizer *panGesture;
@@ -29,7 +29,8 @@
     if(self)
     {
         self.editor = editor;
-        _allLineMutableArray = [NSMutableArray new];
+        self.allLineMutableArray = [NSMutableArray new];
+        self.drawingView = self.editor.drawingView;
         
         WBGColorPanel *colorPanel = [WBGColorPanel xx_instantiateFromNib];
         [editor.view addSubview:colorPanel];
@@ -40,36 +41,57 @@
             make.bottom.mas_equalTo(editor.bottomBar.mas_top);
         }];
         
-        __weak __typeof(self)weakSelf = self;
-        [self.colorPanel setUndoButtonTappedBlock:^{
-            __strong __typeof(weakSelf)strongSelf = weakSelf;
-            [strongSelf backToLastDraw];
-        }];
-        
-        self.drawToolStatus = ^(BOOL canPrev) {
-            //if (canPrev) {
-            //    weakSelf.undoButton.hidden = NO;
-            //} else {
-            //    weakSelf.undoButton.hidden = YES;
-            //}
-        };
-        self.drawingCallback = ^(BOOL isDrawing) {
-            [editor hiddenTopAndBottomBar:isDrawing animation:YES];
-        };
-        self.drawingDidTap = ^{
-            [editor hiddenTopAndBottomBar:!editor.barsHiddenStatus animation:YES];
-        };
+        [self setupActions];
     }
     
     return self;
+}
+
+- (void)setupActions
+{
+    __weak WBGDrawTool *weakSelf = self;
+    [self.colorPanel setUndoButtonTappedBlock:
+    ^{
+        __strong WBGDrawTool *strongSelf = weakSelf;
+        [strongSelf backToLastDraw];
+    }];
+    
+    self.drawToolStatus = ^(BOOL canPrev)
+    {
+        //if (canPrev) {
+        //    weakSelf.undoButton.hidden = NO;
+        //} else {
+        //    weakSelf.undoButton.hidden = YES;
+        //}
+    };
+    
+    self.drawingCallback = ^(BOOL isDrawing)
+    {
+         __strong WBGDrawTool *strongSelf = weakSelf;
+        [strongSelf.editor hiddenTopAndBottomBar:isDrawing animation:YES];
+    };
+    
+    self.drawingDidTap =
+    ^{
+         __strong WBGDrawTool *strongSelf = weakSelf;
+        [strongSelf.editor hiddenTopAndBottomBar:!strongSelf.editor.barsHiddenStatus animation:YES];
+    };
+    
+    [self.drawingView setDrawViewBlock:^(CGContextRef ctx)
+    {
+        __strong WBGDrawTool *strongSelf = weakSelf;
+        for (WBGPath *path in strongSelf.allLineMutableArray)
+        {
+            [path drawPath];
+        }
+    }];
 }
 
 #pragma mark - implementation 重写父方法
 - (void)setup
 {
     //初始化一些东西
-    _originalImageSize = self.editor.imageView.image.size;
-    _drawingView = self.editor.drawingView;
+    self.originalImageSize = self.editor.imageView.image.size;
     self.colorPanel.hidden = NO;
     
     //滑动手势
@@ -204,24 +226,7 @@
 #pragma mark - Draw
 - (void)drawLine
 {
-    CGFloat scale = [UIScreen mainScreen].scale;
-    CGSize currentSize = _drawingView.frame.size;
-
-    UIGraphicsBeginImageContextWithOptions(currentSize, NO, scale);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-
-    //去掉锯齿
-    CGContextSetAllowsAntialiasing(context, true);
-    CGContextSetShouldAntialias(context, true);
-
-    for (WBGPath *path in _allLineMutableArray)
-    {
-        [path drawPath];
-    }
-
-    _drawingView.image = UIGraphicsGetImageFromCurrentImageContext();
-
-    UIGraphicsEndImageContext();
+    [self.drawingView setNeedsDisplay];
 }
 
 - (void)cropToRect:(CGRect)rect angle:(CGFloat)angle rotateCenter:(CGPoint)rotateCenter;
@@ -233,17 +238,6 @@
     }
     
     [self drawLine];
-}
-
-- (UIImage *)buildImage
-{
-    UIGraphicsBeginImageContextWithOptions(_originalImageSize, NO, self.editor.imageView.image.scale);
-    [self.editor.imageView.image drawAtPoint:CGPointZero];
-    [_drawingView.image drawInRect:CGRectMake(0, 0, _originalImageSize.width, _originalImageSize.height)];
-    UIImage *tmp = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return tmp;
 }
 
 @end
