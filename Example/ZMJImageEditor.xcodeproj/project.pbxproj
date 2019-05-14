@@ -60,6 +60,7 @@
 		79E1363813D4552F3FB8302D /* Pods_ZMJImageEditor_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD4383784075711AC3458819 /* Pods_ZMJImageEditor_Example.framework */; };
 		805FDBA7CDD5AC04FA437661 /* Pods_ZMJImageEditor_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27DE14A43CA3CFB572079268 /* Pods_ZMJImageEditor_Tests.framework */; };
 		96FC64921FECDE2600ACB842 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96FC64941FECDE2600ACB842 /* Main.storyboard */; };
+		B90B278F228B019700908F0C /* WBGTextToolOverlapView.m in Sources */ = {isa = PBXBuildFile; fileRef = B90B278E228B019700908F0C /* WBGTextToolOverlapView.m */; };
 		B91A78D4228858B700EC3785 /* WBGTextColorPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = B91A78D1228858B600EC3785 /* WBGTextColorPanel.xib */; };
 		B91A78D5228858B700EC3785 /* WBGTextColorPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A78D3228858B700EC3785 /* WBGTextColorPanel.m */; };
 		B91A78D9228865D800EC3785 /* WBGNavigationBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A78D8228865D800EC3785 /* WBGNavigationBarView.m */; };
@@ -175,6 +176,8 @@
 		8160F7BC79F30F2E4C7F8903 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		96FC64931FECDE2600ACB842 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		96FC64961FECDE2A00ACB842 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		B90B278D228B019700908F0C /* WBGTextToolOverlapView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WBGTextToolOverlapView.h; sourceTree = "<group>"; };
+		B90B278E228B019700908F0C /* WBGTextToolOverlapView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WBGTextToolOverlapView.m; sourceTree = "<group>"; };
 		B91A78D1228858B600EC3785 /* WBGTextColorPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WBGTextColorPanel.xib; sourceTree = "<group>"; };
 		B91A78D2228858B600EC3785 /* WBGTextColorPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBGTextColorPanel.h; sourceTree = "<group>"; };
 		B91A78D3228858B700EC3785 /* WBGTextColorPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBGTextColorPanel.m; sourceTree = "<group>"; };
@@ -520,6 +523,8 @@
 				B91A78D2228858B600EC3785 /* WBGTextColorPanel.h */,
 				B91A78D3228858B700EC3785 /* WBGTextColorPanel.m */,
 				B91A78D1228858B600EC3785 /* WBGTextColorPanel.xib */,
+				B90B278D228B019700908F0C /* WBGTextToolOverlapView.h */,
+				B90B278E228B019700908F0C /* WBGTextToolOverlapView.m */,
 				71858E5B2281756F00EE6CF2 /* WBGTextToolView.h */,
 				71858E522281756F00EE6CF2 /* WBGTextToolView.m */,
 			);
@@ -813,6 +818,7 @@
 				71FA89B322827F14009349CB /* WBGMosicaToolBar.m in Sources */,
 				71858E932281787D00EE6CF2 /* WBGColorPanel.m in Sources */,
 				71858E852281756F00EE6CF2 /* WBGMoreKeyboardCell.m in Sources */,
+				B90B278F228B019700908F0C /* WBGTextToolOverlapView.m in Sources */,
 				71F42E212283CB10007FFD7C /* WBGPath.m in Sources */,
 				71858E8F2281756F00EE6CF2 /* WBGMoreKeyboardItem.m in Sources */,
 				71858E822281756F00EE6CF2 /* TOCropScrollView.m in Sources */,

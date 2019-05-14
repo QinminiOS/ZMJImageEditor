@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "WBGTextTool.h"
-
-@class WBGTextToolOverlapView;
+#import "WBGTextToolOverlapView.h"
 
 @interface WBGTextToolView : UIView
 @property (nonatomic, strong) NSString *text;
@@ -25,19 +24,10 @@
 + (void)setActiveTextView:(WBGTextToolView *)view;
 + (void)setInactiveTextView:(WBGTextToolView *)view;
 - (instancetype)initWithTool:(WBGTextTool *)tool text:(NSString *)text font:(UIFont *)font orImage:(UIImage *)image;
+- (void)rotate:(CGFloat)angle;
 - (void)setScale:(CGFloat)scale;
 - (void)sizeToFitWithMaxWidth:(CGFloat)width lineHeight:(CGFloat)lineHeight;
 
-@end
-
-@interface EditImageCropOverLayView : UIView
-@end
-
-@interface WBGTextToolOverlapView : UIView
-@property (nonatomic, copy  ) NSString *text;
-@property (nonatomic, strong) UIFont *textFont;
-@property (nonatomic, strong) UIColor *textColor;
-@property (nonatomic, strong) UIImage *image;
 @end
 
 @interface WBGTextLabel : UILabel

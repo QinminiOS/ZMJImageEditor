@@ -20,136 +20,6 @@ static const CGFloat MAX_TEXT_SCAL = 4.0f;
 static const CGFloat LABEL_OFFSET  = 13.f;
 static const CGFloat DELETEBUTTON_BOUNDS = 26.f;
 
-@interface WBGTextToolOverlapContentView : UIView
-@property (nonatomic, copy  ) NSString *text;
-@property (nonatomic, strong) UIFont *textFont;
-@property (nonatomic, strong) UIColor *textColor;
-@property (nonatomic, assign) CGFloat defaultFont;
-@property (nonatomic, strong) UIImage *image;
-@end
-
-@implementation WBGTextToolOverlapContentView
-
-- (void)setText:(NSString *)text {
-    if (_text != text) {
-        _text = text;
-        [self setNeedsDisplay];
-    }
-}
-
-- (void)setTextColor:(UIColor *)textColor {
-    if (_textColor != textColor) {
-        _textColor = textColor;
-        [self setNeedsDisplay];
-    }
-}
-
-- (void)setTextFont:(UIFont *)textFont {
-    if (_textFont != textFont) {
-        _textFont = textFont;
-        _defaultFont = textFont.pointSize;
-        [self setNeedsDisplay];
-    }
-}
-
-- (void)setImage:(UIImage *)image {
-    if (_image != image) {
-        _image = image;
-        [self setNeedsDisplay];
-    }
-}
-
-- (void)drawRect:(CGRect)rect
-{
-    if (self.image)
-    {
-        [self.image drawInRect:CGRectInset(rect, 21, 25)];
-        return;
-    }
-    
-    NSShadow *shadow = [[NSShadow alloc] init];
-    // shadow.shadowColor = [UIColor grayColor]; //阴影颜色
-    // shadow.shadowOffset= CGSizeMake(2, 2);//偏移量
-    // shadow.shadowBlurRadius = 5;//模糊度
-    
-    UIColor *color = self.textColor ?: [UIColor whiteColor];
-    UIFont *font = self.textFont ?: [UIFont systemFontOfSize:12];
-    NSDictionary *attributes = @{
-                                 NSForegroundColorAttributeName : color,
-                                 NSFontAttributeName : font,
-                                 NSShadowAttributeName: shadow
-                                };
-    
-    NSAttributedString *string = [[NSAttributedString alloc]
-                                  initWithString:self.text
-                                  attributes:attributes];
-    
-    rect.origin = CGPointMake(1, 2);
-    [string drawInRect:CGRectInset(rect, 21, 25)];
-}
-
-@end
-
-@interface WBGTextToolOverlapView ()
-@property (nonatomic, strong) WBGTextToolOverlapContentView *contentView;
-@end
-@implementation WBGTextToolOverlapView
-- (instancetype)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        _contentView = [[WBGTextToolOverlapContentView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
-        _contentView.backgroundColor = [UIColor clearColor];
-        [self addSubview:_contentView];
-    }
-    return self;
-}
-
-- (void)setText:(NSString *)text {
-    if (_text != text) {
-        _text = text;
-        [_contentView setText:_text];
-    }
-}
-
-- (void)setTextColor:(UIColor *)textColor {
-    if (_textColor != textColor) {
-        _textColor = textColor;
-        [_contentView setTextColor:_textColor];
-    }
-}
-
-- (void)setTextFont:(UIFont *)textFont {
-    if (_textFont != textFont) {
-        _textFont = textFont;
-        _contentView.defaultFont = textFont.pointSize;
-        [_contentView setTextFont:_textFont];
-    }
-}
-
-- (void)setImage:(UIImage *)image {
-    if (_image != image) {
-        _image = image;
-        [_contentView setImage:image];
-    }
-}
-
-
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    _contentView.bounds = self.bounds;
-    _contentView.viewOrigin = CGPointZero;
-}
-
-- (void)drawRect:(CGRect)rect
-{
-    //CGFloat scale = [(NSNumber *)[self valueForKeyPath:@"layer.transform.scale.x"] floatValue];
-    
-    //UIFont *font = [self.textFont fontWithSize:_defaultFont * scale];
-}
-
-@end
-
 @interface WBGTextToolView () <UIGestureRecognizerDelegate>
 @property (nonatomic, weak) WBGTextTool *textTool;
 @end
@@ -160,7 +30,7 @@ static const CGFloat DELETEBUTTON_BOUNDS = 26.f;
     UIButton *_deleteButton;
     
     CGFloat _scale;
-    CGFloat _arg;
+    CGFloat _angle;
     
     CGPoint _initialPoint;
     CGFloat _initialArg;
@@ -204,7 +74,7 @@ static WBGTextToolView *activeView = nil;
                      orImage:(UIImage *)image
 {
     self = [super initWithFrame:CGRectMake(0, 0, 132, 132)];
-    if(self)
+    if (self)
     {
         
         _archerBGView = [[WBGTextToolOverlapView alloc] initWithFrame:CGRectMake(0, 0, 132, 132)];
@@ -257,7 +127,7 @@ static WBGTextToolView *activeView = nil;
         [_deleteButton addTarget:self action:@selector(pushedDeleteBtn:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_deleteButton];
         
-        _arg = 0;
+        _angle = 0;
         [self setScale:1];
         
         [self initGestures];
@@ -299,6 +169,13 @@ static WBGTextToolView *activeView = nil;
     return view;
 }
 
+- (void)rotate:(CGFloat)angle
+{
+    _archerBGView.transform = CGAffineTransformRotate(_archerBGView.transform, angle);
+    _rotation = _rotation + angle;
+    
+    [self layoutSubviews];
+}
 
 #pragma mark- gesture events
 - (void)pushedDeleteBtn:(id)sender
@@ -478,8 +355,8 @@ static WBGTextToolView *activeView = nil;
     if (!_archerBGView.superview)
     {
         [self.superview insertSubview:_archerBGView belowSubview:self];
-        _archerBGView.frame = self.frame;
-        boundss = self.bounds;
+        _archerBGView.bounds = self.bounds;
+        _archerBGView.center = self.center;
     }
     
     boundss = _archerBGView.bounds;
@@ -493,38 +370,51 @@ static WBGTextToolView *activeView = nil;
     self.center = _archerBGView.center;
     
     _label.frame = CGRectMake(LABEL_OFFSET, LABEL_OFFSET, self.bounds.size.width - 2*LABEL_OFFSET, self.bounds.size.height - 2*LABEL_OFFSET);
+    
+    [self setupBorders];
+}
+
+- (void)setupBorders
+{
+    [CATransaction begin];
+    [CATransaction setDisableActions:YES];
+    
+    if (!rectLayer1)
     {
-        [CATransaction begin];
-        [CATransaction setDisableActions:YES];
-        if (!rectLayer1) {
-            rectLayer1 = [CALayer layer];
-            rectLayer1.backgroundColor = [UIColor whiteColor].CGColor;
-            [_label.layer addSublayer:rectLayer1];
-        }
-        rectLayer1.frame = CGRectMake(_label.width - 2 - _scale/2.f, - 2, 4, 4);
-        
-        
-        if (!rectLayer2) {
-            rectLayer2 = [CALayer layer];
-            rectLayer2.backgroundColor = [UIColor whiteColor].CGColor;
-            [_label.layer addSublayer:rectLayer2];
-        }
-        rectLayer2.frame = CGRectMake(_scale/2.f - 2, _label.height - 2 - _scale/2.f, 4, 4);
-        
-        
-        if (!rectLayer3) {
-            rectLayer3 = [CALayer layer];
-            rectLayer3.backgroundColor = [UIColor whiteColor].CGColor;
-            [_label.layer addSublayer:rectLayer3];
-        }
-        rectLayer3.frame = CGRectMake(_label.width - 2 - _scale/2.f, _label.height - 2 - _scale/2.f, 4, 4);
-        [CATransaction commit];
+        rectLayer1 = [CALayer layer];
+        rectLayer1.backgroundColor = [UIColor whiteColor].CGColor;
+        [_label.layer addSublayer:rectLayer1];
     }
+    
+    rectLayer1.frame = CGRectMake(_label.width - 2 - _scale/2.f, - 2, 4, 4);
+    
+    
+    if (!rectLayer2)
+    {
+        rectLayer2 = [CALayer layer];
+        rectLayer2.backgroundColor = [UIColor whiteColor].CGColor;
+        [_label.layer addSublayer:rectLayer2];
+    }
+    
+    rectLayer2.frame = CGRectMake(_scale/2.f - 2, _label.height - 2 - _scale/2.f, 4, 4);
+    
+    
+    if (!rectLayer3)
+    {
+        rectLayer3 = [CALayer layer];
+        rectLayer3.backgroundColor = [UIColor whiteColor].CGColor;
+        [_label.layer addSublayer:rectLayer3];
+    }
+    
+    rectLayer3.frame = CGRectMake(_label.width - 2 - _scale/2.f, _label.height - 2 - _scale/2.f, 4, 4);
+    
+    [CATransaction commit];
 }
 
 #pragma mark- Properties
 
-- (void)setAvtive:(BOOL)active {
+- (void)setAvtive:(BOOL)active
+{
     dispatch_async(dispatch_get_main_queue(), ^{
         [CATransaction begin];
         [CATransaction setDisableActions:YES];
@@ -542,12 +432,6 @@ static WBGTextToolView *activeView = nil;
         
         rectLayer1.hidden = rectLayer2.hidden = rectLayer3.hidden = !active;
         [CATransaction commit];
-        
-        //        if (active) {
-        //            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeColor:) name:@"kColorPanNotificaiton" object:nil];
-        //        } else {
-        //            [[NSNotificationCenter defaultCenter] removeObserver:self name:@"kColorPanNotificaiton" object:nil];
-        //        }
     });
 }
 
@@ -593,7 +477,7 @@ static WBGTextToolView *activeView = nil;
     
     _label.center = CGPointMake(rct.size.width/2, rct.size.height/2);
     
-    self.transform = CGAffineTransformMakeRotation(_arg);
+    self.transform = CGAffineTransformMakeRotation(_angle);
     
     _label.layer.borderWidth = 1/_scale;
 }
@@ -669,61 +553,30 @@ static WBGTextToolView *activeView = nil;
 
 @end
 
+
+#pragma mark - WBGTextTool
 @interface WBGTextTool ()
 @end
 
 @implementation WBGTextLabel
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-    }
-    return self;
-}
-
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    
-    EditImageCropOverLayView *view = [[EditImageCropOverLayView alloc] init];
-    view.bounds = self.bounds;
-    //[self addSubview:view];
-}
-
-- (void)drawTextInRect:(CGRect)rect
-{
-    CGSize shadowOffset = self.shadowOffset;
-    UIColor *txtColor = self.textColor;
-    UIFont *font = self.font;
-    
-    CGContextRef contextRef = UIGraphicsGetCurrentContext();
-    CGContextSetLineWidth(contextRef, 1);
-    CGContextSetLineJoin(contextRef, kCGLineJoinRound);
-    
-    CGContextSetTextDrawingMode(contextRef, kCGTextFill);
-    self.textColor = txtColor;
-    // self.shadowOffset = CGSizeMake(10, 10);
-    self.font = font;
-    [super drawTextInRect:CGRectInset(rect, 5, 5)];
-    
-    self.shadowOffset = shadowOffset;
-}
-
-@end
-
-
-
-@implementation EditImageCropOverLayView
-
-- (void)drawRect:(CGRect)rect
-{
-    // CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:0];
-    path.lineWidth = 2.5;
-    [[UIColor whiteColor] setStroke];
-    [path stroke];
-}
+//- (void)drawTextInRect:(CGRect)rect
+//{
+//    CGSize shadowOffset = self.shadowOffset;
+//    UIColor *txtColor = self.textColor;
+//    UIFont *font = self.font;
+//
+//    CGContextRef contextRef = UIGraphicsGetCurrentContext();
+//    CGContextSetLineWidth(contextRef, 1);
+//    CGContextSetLineJoin(contextRef, kCGLineJoinRound);
+//
+//    CGContextSetTextDrawingMode(contextRef, kCGTextFill);
+//    self.textColor = txtColor;
+//    // self.shadowOffset = CGSizeMake(10, 10);
+//    self.font = font;
+//    [super drawTextInRect:CGRectInset(rect, 5, 5)];
+//
+//    self.shadowOffset = shadowOffset;
+//}
 
 @end

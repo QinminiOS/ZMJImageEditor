@@ -14,6 +14,7 @@
 #import "WBGNavigationBarView.h"
 #import "EXTobjc.h"
 #import "WBGDrawView.h"
+#import "WBGTextToolOverlapView.h"
 
 static const CGFloat kTopOffset = 50.f;
 static const CGFloat kTextTopOffset = 60.f;
@@ -134,6 +135,10 @@ static const NSInteger kTextMaxLimitNumber = 100;
     view.userInteractionEnabled = YES;
     
     [self.editor.drawingView addSubview:view];
+    
+    // 更新位置 不然旋转了
+    CGFloat scale = [(NSNumber *)[self.editor.drawingView valueForKeyPath:@"layer.transform.rotation"] floatValue];
+    [view rotate:-scale];
     
     [WBGTextToolView setActiveTextView:view];
 }
