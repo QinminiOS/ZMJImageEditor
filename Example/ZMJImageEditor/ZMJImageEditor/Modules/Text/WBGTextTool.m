@@ -32,7 +32,7 @@ static const NSInteger kTextMaxLimitNumber = 100;
     _drawingView = self.editor.drawingView;
     self.editor.scrollView.pinchGestureRecognizer.enabled = NO;
     
-    self.textView = [[_WBGTextView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_SCREEN, HEIGHT_SCREEN)];
+    self.textView = [[WBGTextView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_SCREEN, HEIGHT_SCREEN)];
     self.textView.textView.font = [UIFont systemFontOfSize:25.f weight:UIFontWeightBold];
     self.textView.textView.textColor = [UIColor whiteColor];
     self.textColorPanel = self.textView.colorPanel;
@@ -148,13 +148,13 @@ static const NSInteger kTextMaxLimitNumber = 100;
 
 
 #pragma mark - WBGTextView
-@interface _WBGTextView () <YYTextViewDelegate>
+@interface WBGTextView () <YYTextViewDelegate>
 @property (nonatomic, strong) NSString *needReplaceString;
 @property (nonatomic, assign) NSRange   needReplaceRange;
 @property (nonatomic, strong) WBGNavigationBarView *navigationBarView;
 @end
 
-@implementation _WBGTextView
+@implementation WBGTextView
 
 - (instancetype)initWithFrame:(CGRect)frame
 {

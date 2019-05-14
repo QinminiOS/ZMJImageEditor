@@ -10,17 +10,17 @@
 #import "YYText.h"
 #import "WBGTextColorPanel.h"
 
-@class _WBGTextView;
+@class WBGTextView;
 
 @interface WBGTextTool : WBGImageToolBase
 @property (nonatomic, copy) void(^dissmissTextTool)(NSString *currentText);//, BOOL isEditAgain);
-@property (nonatomic, strong) _WBGTextView *textView;
+@property (nonatomic, strong) WBGTextView *textView;
 @property (nonatomic, assign) BOOL isEditAgain;
 @property (nonatomic, copy)   void(^editAgainCallback)(NSString *text);
 @end
 
 
-@interface _WBGTextView : UIView
+@interface WBGTextView : UIView
 @property (nonatomic, strong) UIView *effectView;
 @property (nonatomic, copy) void(^dissmissTextTool)(NSString *currentText, BOOL isUse);//, BOOL isEditAgain);
 @property (nonatomic, strong) YYTextView *textView;
