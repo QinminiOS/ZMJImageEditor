@@ -407,7 +407,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     [self setDisSelect];
     [self resetCurrentTool];
     
-    [self buildClipImageWithNoBorder:YES complete:^(UIImage *clipedImage)
+    [self buildClipImageWithBorder:YES complete:^(UIImage *clipedImage)
     {
         TOCropViewController *cropController = [[TOCropViewController alloc] initWithCroppingStyle:TOCropViewCroppingStyleDefault image:clipedImage];
         cropController.delegate = self;
@@ -482,7 +482,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 
 - (IBAction)onFinishButtonTapped:(UIButton *)sender
 {
-    [self buildClipImageWithNoBorder:NO complete:^(UIImage *clipedImage)
+    [self buildClipImageWithBorder:NO complete:^(UIImage *clipedImage)
     {
         UIImage *newImage = [clipedImage croppedImageWithFrame:self.lastCropRect angle:self.lastAngle circularClip:NO];
         
@@ -624,10 +624,10 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 }
 
 #pragma mark - Clipe
-- (void)buildClipImageWithNoBorder:(BOOL)border
-                          complete:(void(^)(UIImage *clipedImage))complete
+- (void)buildClipImageWithBorder:(BOOL)border
+                        complete:(void(^)(UIImage *clipedImage))complete
 {
-    if (border)
+    if (!border)
     {
         [self.textTool hideTextBorder];
     }
