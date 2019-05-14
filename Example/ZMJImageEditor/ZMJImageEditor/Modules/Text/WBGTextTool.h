@@ -17,6 +17,7 @@
 @property (nonatomic, strong) WBGTextView *textView;
 @property (nonatomic, assign) BOOL isEditAgain;
 @property (nonatomic, copy)   void(^editAgainCallback)(NSString *text);
+- (void)hideTextBorder;
 @end
 
 

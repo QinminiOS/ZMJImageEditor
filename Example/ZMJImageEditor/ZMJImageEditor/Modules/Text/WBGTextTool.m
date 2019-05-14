@@ -98,15 +98,13 @@ static const NSInteger kTextMaxLimitNumber = 100;
     }
 }
 
-- (void)cropToRect:(CGRect)rect angle:(NSInteger)angle
+- (void)hideTextBorder
 {
     for (UIView *v in self.editor.drawingView.subviews)
     {
-        if ([v isKindOfClass:[WBGTextToolView class]] ||
-            [v isKindOfClass:[WBGTextToolOverlapView class]])
+        if ([v isKindOfClass:[WBGTextToolView class]])
         {
-            CGPoint p = CGRectConvertPointToRect(v.viewOrigin, rect);
-            v.viewOrigin = p;
+            [v setHidden:YES];
         }
     }
 }

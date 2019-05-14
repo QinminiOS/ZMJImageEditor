@@ -36,11 +36,6 @@
     
 }
 
-- (void)cropToRect:(CGRect)rect angle:(CGFloat)angle rotateCenter:(CGPoint)rotateCenter
-{
-    
-}
-
 - (UIImage*)imageForKey:(NSString*)key defaultImageName:(NSString*)defaultImageName
 {
     return nil;
