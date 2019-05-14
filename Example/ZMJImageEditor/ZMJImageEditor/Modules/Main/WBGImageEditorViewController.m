@@ -51,7 +51,8 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 
 @property (nonatomic, copy) UIImage *originImage;
 @property (nonatomic, assign) CGSize originSize;
-@property (nonatomic, assign) CGRect cropRect;
+@property (nonatomic, assign) CGRect lastCropRect;
+@property (nonatomic, assign) CGFloat lastAngle;
 @property (nonatomic, assign) WBGEditorMode currentMode;
 
 @property (nonatomic, assign) CGFloat clipInitScale;
@@ -107,7 +108,8 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 
     [self initViews];
     [self configCustomComponent];
-    [self refreshImageView];
+    [self setupImageViewFrame];
+    [self resetZoomScaleWithAnimated:NO];
     
     // 初始化
     self.imageView.frame = self.containerView.bounds;
@@ -241,7 +243,6 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     //[self.containerView addSubview:self.mosicaView];
     
     self.drawingView = [[WBGDrawView alloc] initWithFrame:CGRectZero];
-    self.drawingView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin;
     self.drawingView.clipsToBounds = YES;
     [self.containerView addSubview:self.drawingView];
     self.drawingView.userInteractionEnabled = YES;
@@ -254,13 +255,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     
 }
 
-- (void)refreshImageView
-{
-    [self resetImageViewFrame];
-    [self resetZoomScaleWithAnimated:NO];
-}
-
-- (void)resetImageViewFrame
+- (void)setupImageViewFrame
 {
     CGSize size = (_imageView.image) ? _imageView.image.size : _imageView.frame.size;
     if(size.width > 0 && size.height > 0 )
@@ -269,7 +264,6 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
         CGSize scrollViewSize = self.scrollView.frame.size;
         
         self.containerView.frame = CGRectMake(0, 0, scrollViewSize.width, imageSize.height*scrollViewSize.width/imageSize.width);
-        // self.imageView.frame = CGRectMake(0, 0, scrollViewSize.width, imageSize.height*scrollViewSize.width/imageSize.width);
         
         // 设置scrollView的缩小比例;
         CGSize newImageSize = self.containerView.viewSize;
@@ -283,39 +277,68 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     }
 }
 
-- (void)updateTransform:(CGFloat)radius withCropRect:(CGRect)cropRect
+#pragma mark - Reset
+- (void)resetImageViewFrameWithCropRect:(CGRect)cropRect
 {
-  //  CGSize imageSize = self.imageView.image.size;
-  //  CGSize scrollViewSize = self.scrollView.frame.size;
+    CGSize imageSize = cropRect.size;
+    CGSize scrollViewSize = self.scrollView.frame.size;
     
-    // 更新缩放比例
-//    CGFloat ratio = cropRect.size.width/self.originSize.width;
-//    self.drawingView.y = -cropRect.origin.y * ratio;
-//    self.drawingView.x = -cropRect.origin.x * ratio;
+    self.containerView.frame = CGRectMake(0, 0, scrollViewSize.width, imageSize.height*scrollViewSize.width/imageSize.width);
     
-//    CGAffineTransform rotation = CGAffineTransformMakeRotation(radius);
-//    CGAffineTransform scale = CGAffineTransformMakeScale(transformRatio, transformRatio);
-//    CGAffineTransform concat = CGAffineTransformConcat(rotation, scale);
-//    self.drawingView.transform = concat;
-//
+    // 设置scrollView的缩小比例;
+    CGSize newImageSize = self.containerView.viewSize;
+    CGFloat widthRatio = 1.0f; // 宽已经缩放了
+    CGFloat heightRatio = scrollViewSize.height/newImageSize.height;
+    if (heightRatio >= 1.0f) heightRatio = MAX(3.0f, heightRatio);
     
-//    self.drawingView.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.3f];
-//
+    self.scrollView.minimumZoomScale = MIN(widthRatio, heightRatio);
+    self.scrollView.maximumZoomScale = MAX(widthRatio, heightRatio);
+    self.scrollView.zoomScale = widthRatio;
     
-//    // self.drawingView.center = self.imageView.center;
-//
-//    self.mosicaView.layer.affineTransform = final;
-//    self.mosicaView.center = self.imageView.center;
-    
-    
-    // self.drawingView.transform = CGAffineTransformMakeTranslation(-cropRect.origin.x, -cropRect.origin.y);
-    // self.drawingView.center = self.imageView.center;
-    
-    
-    CGAffineTransform rotation = CGAffineTransformMakeRotation(-M_PI_2);
-    
+    [self resetZoomScaleWithAnimated:NO];
+}
+
+- (void)resetDrawViewUseAngle:(CGFloat)angle cropRect:(CGRect)cropRect
+{
+    CGFloat radius = (angle/180.0f)*M_PI;
+    // 旋转
+    CGAffineTransform rotation = CGAffineTransformMakeRotation(radius);
     self.drawingView.transform = rotation;
     self.imageView.transform = rotation;
+    self.mosicaView.transform = rotation;
+    
+    if (angle == 0 || angle == -180)
+    {
+        // 不用管比例 ScrollView 帮你算了
+        CGPoint viewOrigin = CGPointMake(-cropRect.origin.x, -cropRect.origin.y);
+        self.drawingView.viewOrigin = viewOrigin;
+        self.imageView.viewOrigin = viewOrigin;
+        self.mosicaView.viewOrigin = viewOrigin;
+    }
+    else if (angle == -90 || angle == -270)
+    {
+        CGFloat ratio = self.scrollView.width/cropRect.size.width;
+        CGAffineTransform scale = CGAffineTransformMakeScale(ratio, ratio);
+        self.imageView.transform = CGAffineTransformConcat(scale, self.drawingView.transform);
+        self.imageView.center = CGPointMake(self.containerView.width/2, self.containerView.height/2);
+        
+        self.drawingView.transform = CGAffineTransformConcat(scale, self.drawingView.transform);
+        self.drawingView.center = CGPointMake(self.containerView.width/2, self.containerView.height/2);
+        
+        self.mosicaView.transform = CGAffineTransformConcat(scale, self.drawingView.transform);
+        self.mosicaView.center = CGPointMake(self.containerView.width/2, self.containerView.height/2);
+        
+        CGPoint viewOrigin = CGPointMake(-cropRect.origin.x * ratio, -cropRect.origin.y * ratio);
+        self.drawingView.viewOrigin = viewOrigin;
+        self.imageView.viewOrigin = viewOrigin;
+        self.mosicaView.viewOrigin = viewOrigin;
+    }
+}
+
+- (void)updateTransform:(CGFloat)angle withCropRect:(CGRect)cropRect
+{
+    [self resetImageViewFrameWithCropRect:cropRect];
+    [self resetDrawViewUseAngle:angle cropRect:cropRect];
 }
 
 - (void)resetZoomScaleWithAnimated:(BOOL)animated
@@ -407,9 +430,10 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
          angle:0
          toImageFrame:CGRectZero
          setup:^{
-             if (!CGRectEqualToRect(self.cropRect, CGRectZero))
+             cropController.angle = self.lastAngle;
+             if (!CGRectEqualToRect(self.lastCropRect, CGRectZero))
              {
-                 cropController.imageCropFrame = self.cropRect;
+                 cropController.imageCropFrame = self.lastCropRect;
              }
          }
          completion:NULL];
@@ -522,8 +546,6 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
                   withRect:(CGRect)cropRect
                      angle:(NSInteger)angle
 {
-    self.cropRect = cropRect;
-    
     [self buildOriginClipImageWithCallback:^(UIImage *clipedImage)
     {
         UIImage *newImage = [clipedImage croppedImageWithFrame:cropRect angle:angle circularClip:NO];
@@ -540,19 +562,11 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
                            angle:(NSInteger)angle
           fromCropViewController:(TOCropViewController *)cropViewController
 {
-    // self.imageView.image = image;
-    // self.mosicaView.mosaicImage = [XRGBTool getMosaicImageWith:image level:0];
-    // self.mosicaView.surfaceImage = image;
-
-    [self refreshImageView];
-    [self updateTransform:(angle/180)*M_PI withCropRect:cropRect];
-    
-    // todo
-//    [self.drawTool cropToRect:cropRect angle:angle];
-//    [self.textTool cropToRect:cropRect angle:angle];
-//    [self.mosicaTool cropToRect:cropRect angle:angle];
-
     self.navigationItem.rightBarButtonItem.enabled = YES;
+    
+    [self updateTransform:angle withCropRect:cropRect];
+    self.lastCropRect = cropRect;
+    self.lastAngle = angle;
     
     if (cropViewController.croppingStyle != TOCropViewCroppingStyleCircular)
     {
