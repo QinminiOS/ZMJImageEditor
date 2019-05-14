@@ -27,7 +27,7 @@
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cWi-cH-ouP">
                     <rect key="frame" x="91" y="17" width="22" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" image="icon_masaike_1"/>
+                    <state key="normal" image="icon_masaike_1_xuanzhong"/>
                     <state key="selected" image="icon_masaike_1_xuanzhong"/>
                     <connections>
                         <action selector="onMasicNormalButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="XXs-Rg-IyR"/>
@@ -59,7 +59,6 @@
         </view>
     </objects>
     <resources>
-        <image name="icon_masaike_1" width="22" height="22"/>
         <image name="icon_masaike_1_xuanzhong" width="22" height="22"/>
         <image name="icon_shanchushangyibu" width="22" height="22"/>
     </resources>

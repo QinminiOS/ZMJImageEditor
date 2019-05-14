@@ -18,6 +18,29 @@
 
 @implementation WBGPath
 
+static CGPoint CGPointRotate(CGPoint point, CGPoint anchorPoint, CGFloat angle)
+{
+    CGPoint p = CGPointZero;
+    if (angle == 0 || angle == 360)
+    {
+        p = point;
+    }
+    else if (angle == -90)
+    {
+        p = CGPointMake(point.y, anchorPoint.x * 2 - point.x);
+    }
+    else if (angle == -180)
+    {
+        p = CGPointMake(point.x, anchorPoint.y * 2 - point.y);
+    }
+    else if (angle == -270)
+    {
+        p = CGPointMake(anchorPoint.x * 2 - point.x, anchorPoint.y * 2 - point.y);
+    }
+    
+    return p;
+}
+
 + (instancetype)pathToPoint:(CGPoint)beginPoint pathWidth:(CGFloat)pathWidth
 {
     UIBezierPath *bezierPath = [UIBezierPath bezierPath];

@@ -32,28 +32,17 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
     return 50;
 }
 
-- (instancetype)init
+- (void)awakeFromNib
 {
-    self = [super init];
-    if (self) {
-        //[self addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panSelectColor:)]];
-    }
-    return self;
-}
-
-- (instancetype)initWithCoder:(NSCoder *)coder
-{
-    self = [super initWithCoder:coder];
-    if (self) {
-        //[self addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panSelectColor:)]];
-    }
-    return self;
+    [super awakeFromNib];
+    
+    self.redButton.isUse = YES;
 }
 
 - (UIColor *)currentColor
 {
     if (_currentColor == nil) {
-        _currentColor = ([self.dataSource respondsToSelector:@selector(imageEditorDefaultColor)] && [self.dataSource imageEditorDefaultColor]) ? [self.dataSource imageEditorDefaultColor] : UIColor.redColor;
+        _currentColor = ([self.dataSource respondsToSelector:@selector(imageEditorDefaultColor)] && [self.dataSource imageEditorDefaultColor]) ? [self.dataSource imageEditorDefaultColor] : self.redButton.color;
     }
     return _currentColor;
 }
@@ -65,7 +54,6 @@ NSString * const kColorPanNotificaiton = @"kColorPanNotificaiton";
 
 - (void)panSelectColor:(UIPanGestureRecognizer *)recognizer
 {
-    
     NSLog(@"recon = %@", NSStringFromCGPoint([recognizer translationInView:self]));
 }
 

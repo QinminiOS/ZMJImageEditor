@@ -204,24 +204,33 @@
 #pragma mark - Draw
 - (void)drawLine
 {
-    CGFloat scale = [UIScreen mainScreen].scale;
-    CGSize currentSize = _drawingView.frame.size;
+//    CGFloat scale = [UIScreen mainScreen].scale;
+//    CGSize currentSize = _drawingView.frame.size;
+//    
+//    UIGraphicsBeginImageContextWithOptions(currentSize, NO, scale);
+//    CGContextRef context = UIGraphicsGetCurrentContext();
+//    
+//    //去掉锯齿
+//    CGContextSetAllowsAntialiasing(context, true);
+//    CGContextSetShouldAntialias(context, true);
     
-    UIGraphicsBeginImageContextWithOptions(currentSize, NO, scale);
-    CGContextRef context = UIGraphicsGetCurrentContext();
+    // CGContextRotateCTM(context, M_PI);
     
-    //去掉锯齿
-    CGContextSetAllowsAntialiasing(context, true);
-    CGContextSetShouldAntialias(context, true);
+    for (CALayer *layer in self.drawingView.layer.sublayers)
+    {
+        [layer removeFromSuperlayer];
+    }
     
     for (WBGPath *path in _allLineMutableArray)
     {
-        [path drawPath];
+        // [path.shape drawPath];
+        
+        [self.drawingView.layer addSublayer:path.shape];
     }
     
-    _drawingView.image = UIGraphicsGetImageFromCurrentImageContext();
+    // _drawingView.image = UIGraphicsGetImageFromCurrentImageContext();
     
-    UIGraphicsEndImageContext();
+    // UIGraphicsEndImageContext();
 }
 
 - (void)cropToRect:(CGRect)rect angle:(CGFloat)angle rotateCenter:(CGPoint)rotateCenter;

@@ -30,6 +30,14 @@
     return 50;
 }
 
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    
+    self.redButton.isUse = YES;
+    self.currentColor = self.redButton.color;
+}
+
 - (UIColor *)currentColor
 {
     return _currentColor;

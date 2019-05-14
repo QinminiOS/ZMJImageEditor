@@ -50,6 +50,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 
 @property (nonatomic, copy) UIImage *originImage;
 @property (nonatomic, assign) CGSize originSize;
+@property (nonatomic, assign) CGRect cropRect;
 @property (nonatomic, assign) WBGEditorMode currentMode;
 
 @property (nonatomic, assign) CGFloat clipInitScale;
@@ -106,13 +107,12 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     [self initViews];
     [self configCustomComponent];
     [self refreshImageView];
-}
-
-- (void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
     
-    [self refreshImageView];
+    // 初始化
+    self.drawingView.frame = self.imageView.frame;
+    self.mosicaView.frame = self.imageView.frame;
+    self.drawingView.transform = CGAffineTransformIdentity;
+    self.drawingView.transform = CGAffineTransformIdentity;
 }
 
 - (void)configCustomComponent
@@ -210,6 +210,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 
 - (void)initViews
 {
+    self.scrollView.frame = [UIScreen mainScreen].bounds;
     self.scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.scrollView.showsHorizontalScrollIndicator = NO;
     self.scrollView.showsVerticalScrollIndicator = NO;
@@ -225,6 +226,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     UIView *containerView = [[UIView alloc] initWithFrame:CGRectZero];
     [self.scrollView addSubview:containerView];
     self.containerView = containerView;
+    self.containerView.clipsToBounds = YES;
     
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
     imageView.image = self.originImage;
@@ -234,7 +236,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     self.mosicaView = [[WBGScratchView alloc] initWithFrame:CGRectZero];
     self.mosicaView.surfaceImage = self.originImage;
     self.mosicaView.backgroundColor = [UIColor clearColor];
-    [self.containerView addSubview:self.mosicaView];
+    //[self.containerView addSubview:self.mosicaView];
     
     self.drawingView = [[UIImageView alloc] initWithFrame:CGRectZero];
     self.drawingView.contentMode = UIViewContentModeCenter;
@@ -248,6 +250,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     CGSize scrollViewSize = self.scrollView.frame.size;
     CGSize originSize = CGSizeMake(scrollViewSize.width, imageSize.height*scrollViewSize.width/imageSize.width);
     self.originSize = originSize;
+    
 }
 
 - (void)refreshImageView
@@ -276,10 +279,36 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
         self.scrollView.minimumZoomScale = MIN(widthRatio, heightRatio);
         self.scrollView.maximumZoomScale = MAX(widthRatio, heightRatio);
         self.scrollView.zoomScale = widthRatio;
-        
-        self.drawingView.frame = self.imageView.frame;
-        self.mosicaView.frame = self.imageView.frame;
     }
+}
+
+- (void)updateTransform:(CGFloat)radius withCropRect:(CGRect)cropRect
+{
+    CGSize imageSize = self.imageView.image.size;
+    CGSize scrollViewSize = self.scrollView.frame.size;
+    
+    // 更新缩放比例
+    CGFloat ratio = cropRect.size.width/self.originSize.width;
+    self.drawingView.y = -cropRect.origin.y * ratio;
+    self.drawingView.x = -cropRect.origin.x * ratio;
+    
+//    CGAffineTransform rotation = CGAffineTransformMakeRotation(radius);
+//    CGAffineTransform scale = CGAffineTransformMakeScale(transformRatio, transformRatio);
+//    CGAffineTransform concat = CGAffineTransformConcat(rotation, scale);
+//    self.drawingView.transform = concat;
+//
+    
+//    self.drawingView.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.3f];
+//
+    
+//    // self.drawingView.center = self.imageView.center;
+//
+//    self.mosicaView.layer.affineTransform = final;
+//    self.mosicaView.center = self.imageView.center;
+    
+    
+    // self.drawingView.transform = CGAffineTransformMakeTranslation(-cropRect.origin.x, -cropRect.origin.y);
+    // self.drawingView.center = self.imageView.center;
 }
 
 - (void)resetZoomScaleWithAnimated:(BOOL)animated
@@ -323,9 +352,20 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 }
 
 #pragma mark - Actions
+- (void)setDisSelect
+{
+    self.panButton.selected = NO;
+    self.textButton.selected = NO;
+    self.clipButton.selected = NO;
+    self.paperButton.selected = NO;
+}
+
 ///涂鸦模式
 - (IBAction)panAction:(UIButton *)sender
 {
+    [self setDisSelect];
+    self.panButton.selected = YES;
+    
     if (_currentMode == WBGEditorModeDraw)
     {
         [self resetCurrentTool];
@@ -341,6 +381,9 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 ///裁剪模式
 - (IBAction)clipAction:(UIButton *)sender
 {
+    [self setDisSelect];
+    [self resetCurrentTool];
+    
     [self buildClipImageWithCallback:^(UIImage *clipedImage)
     {
         TOCropViewController *cropController = [[TOCropViewController alloc] initWithCroppingStyle:TOCropViewCroppingStyleDefault image:clipedImage];
@@ -348,7 +391,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
          
         CGRect viewFrame = [self.view convertRect:self.containerView.frame
                                            toView:self.navigationController.view];
-         
+        
         [cropController
          presentAnimatedFromParentViewController:self
          fromImage:clipedImage
@@ -356,7 +399,12 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
          fromFrame:viewFrame
          angle:0
          toImageFrame:CGRectZero
-         setup:NULL
+         setup:^{
+             if (!CGRectEqualToRect(self.cropRect, CGRectZero))
+             {
+                 cropController.imageCropFrame = self.cropRect;
+             }
+         }
          completion:NULL];
     }];
     
@@ -365,6 +413,8 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 //文字模式
 - (IBAction)textAction:(UIButton *)sender
 {
+    [self setDisSelect];
+    
     //先设置状态，然后在干别的
     self.currentMode = WBGEditorModeText;
     
@@ -372,7 +422,11 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 }
 
 //马赛克模式
-- (IBAction)paperAction:(UIButton *)sender {
+- (IBAction)paperAction:(UIButton *)sender
+{
+    [self setDisSelect];
+    self.paperButton.selected = YES;
+    
     if (_currentMode == WBGEditorModeMosica)
     {
         return;
@@ -461,6 +515,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
                   withRect:(CGRect)cropRect
                      angle:(NSInteger)angle
 {
+    self.cropRect = cropRect;
     
     [self buildOriginClipImageWithCallback:^(UIImage *clipedImage)
     {
@@ -478,18 +533,19 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
                            angle:(NSInteger)angle
           fromCropViewController:(TOCropViewController *)cropViewController
 {
-    CGPoint center = CGPointMake(self.imageView.viewSize.width/2, self.imageView.viewSize.height/2);
     self.imageView.image = image;
-    self.mosicaView.mosaicImage = [XRGBTool getMosaicImageWith:image level:0];
-    self.mosicaView.surfaceImage = image;
+    
+    
+    // self.mosicaView.mosaicImage = [XRGBTool getMosaicImageWith:image level:0];
+    // self.mosicaView.surfaceImage = image;
 
     [self refreshImageView];
-    [self viewDidLayoutSubviews];
+    [self updateTransform:(angle/180)*M_PI withCropRect:cropRect];
     
     // todo
-    [self.drawTool cropToRect:cropRect angle:angle rotateCenter:center];
-    [self.textTool cropToRect:cropRect angle:angle rotateCenter:center];
-    [self.mosicaTool cropToRect:cropRect angle:angle rotateCenter:center];
+//    [self.drawTool cropToRect:cropRect angle:angle];
+//    [self.textTool cropToRect:cropRect angle:angle];
+//    [self.mosicaTool cropToRect:cropRect angle:angle];
 
     self.navigationItem.rightBarButtonItem.enabled = YES;
     
@@ -567,14 +623,17 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 #pragma mark - Clipe
 - (void)buildClipImageWithCallback:(void(^)(UIImage *clipedImage))callback
 {
-    UIGraphicsBeginImageContextWithOptions(self.drawingView.viewSize,
+    UIGraphicsBeginImageContextWithOptions(self.originSize,
                                            NO,
                                            [UIScreen mainScreen].scale);
     
     CGContextRef ctx = UIGraphicsGetCurrentContext();
+    [self.originImage drawInRect:CGRectMake(0, 0, self.originSize.width, self.originSize.height)];
+    self.imageView.hidden = YES;
     [self.containerView.layer renderInContext:ctx];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
+    self.imageView.hidden = NO;
     
     if (callback)
     {
@@ -584,12 +643,11 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 
 - (void)buildOriginClipImageWithCallback:(void(^)(UIImage *clipedImage))callback
 {
-    UIGraphicsBeginImageContextWithOptions(self.drawingView.viewSize,
+    UIGraphicsBeginImageContextWithOptions(self.originSize,
                                            NO,
                                            [UIScreen mainScreen].scale);
     
-    CGContextRef ctx = UIGraphicsGetCurrentContext();
-    [self.imageView.layer renderInContext:ctx];
+    [self.originImage drawInRect:CGRectMake(0, 0, self.originSize.width, self.originSize.height)];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
