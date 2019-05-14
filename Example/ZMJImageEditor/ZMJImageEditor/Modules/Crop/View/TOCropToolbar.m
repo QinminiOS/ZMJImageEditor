@@ -126,7 +126,7 @@
     _rotateCounterclockwiseButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _rotateCounterclockwiseButton.contentMode = UIViewContentModeCenter;
     _rotateCounterclockwiseButton.tintColor = [UIColor whiteColor];
-    [_rotateCounterclockwiseButton setImage:[UIImage my_imageNamed:@"icon_fanzhuan_xuanzhong" inBundle:classBundle] forState:UIControlStateNormal];
+    [_rotateCounterclockwiseButton setImage:[UIImage my_imageNamed:@"icon_fanzhuan" inBundle:classBundle] forState:UIControlStateNormal];
     [_rotateCounterclockwiseButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_rotateCounterclockwiseButton];
     

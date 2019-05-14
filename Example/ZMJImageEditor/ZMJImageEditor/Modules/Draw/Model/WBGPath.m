@@ -51,6 +51,7 @@ static CGPoint CGPointRotate(CGPoint point, CGPoint anchorPoint, CGFloat angle)
     
     
     CAShapeLayer *shapeLayer = [[CAShapeLayer alloc] init];
+    shapeLayer.contentsScale = [UIScreen mainScreen].scale;
     shapeLayer.lineCap = kCALineCapRound;
     shapeLayer.lineJoin = kCALineJoinRound;
     shapeLayer.lineWidth = pathWidth;

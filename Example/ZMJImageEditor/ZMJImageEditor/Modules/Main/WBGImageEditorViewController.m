@@ -109,10 +109,11 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     [self refreshImageView];
     
     // 初始化
+    self.imageView.frame = self.containerView.bounds;
     self.drawingView.frame = self.imageView.frame;
     self.mosicaView.frame = self.imageView.frame;
     self.drawingView.transform = CGAffineTransformIdentity;
-    self.drawingView.transform = CGAffineTransformIdentity;
+    self.mosicaView.transform = CGAffineTransformIdentity;
 }
 
 - (void)configCustomComponent
@@ -268,7 +269,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
         CGSize scrollViewSize = self.scrollView.frame.size;
         
         self.containerView.frame = CGRectMake(0, 0, scrollViewSize.width, imageSize.height*scrollViewSize.width/imageSize.width);
-        self.imageView.frame = CGRectMake(0, 0, scrollViewSize.width, imageSize.height*scrollViewSize.width/imageSize.width);
+        // self.imageView.frame = CGRectMake(0, 0, scrollViewSize.width, imageSize.height*scrollViewSize.width/imageSize.width);
         
         // 设置scrollView的缩小比例;
         CGSize newImageSize = self.containerView.viewSize;
@@ -288,9 +289,9 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     CGSize scrollViewSize = self.scrollView.frame.size;
     
     // 更新缩放比例
-    CGFloat ratio = cropRect.size.width/self.originSize.width;
-    self.drawingView.y = -cropRect.origin.y * ratio;
-    self.drawingView.x = -cropRect.origin.x * ratio;
+//    CGFloat ratio = cropRect.size.width/self.originSize.width;
+//    self.drawingView.y = -cropRect.origin.y * ratio;
+//    self.drawingView.x = -cropRect.origin.x * ratio;
     
 //    CGAffineTransform rotation = CGAffineTransformMakeRotation(radius);
 //    CGAffineTransform scale = CGAffineTransformMakeScale(transformRatio, transformRatio);
