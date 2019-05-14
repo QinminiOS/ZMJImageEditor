@@ -171,6 +171,11 @@ static WBGTextToolView *activeView = nil;
 
 - (void)rotate:(CGFloat)angle
 {
+    if (angle == 0)
+    {
+        return;
+    }
+    
     _archerBGView.transform = CGAffineTransformRotate(_archerBGView.transform, angle);
     _rotation = _rotation + angle;
     
