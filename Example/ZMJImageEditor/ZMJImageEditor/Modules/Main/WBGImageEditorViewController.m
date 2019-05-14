@@ -250,7 +250,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     CGSize scrollViewSize = self.scrollView.frame.size;
     CGSize originSize = CGSizeMake(scrollViewSize.width, imageSize.height*scrollViewSize.width/imageSize.width);
     self.originSize = originSize;
-    
+    self.lastCropRect = CGRectMake(0, 0, self.originSize.width, self.originSize.height);
 }
 
 - (void)setupImageViewFrame
@@ -484,9 +484,11 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 {
     [self buildClipImageWithCallback:^(UIImage *clipedImage)
     {
+        UIImage *newImage = [clipedImage croppedImageWithFrame:self.lastCropRect angle:self.lastAngle circularClip:NO];
+        
         if ([self.delegate respondsToSelector:@selector(imageEditor:didFinishEdittingWithImage:)])
         {
-            [self.delegate imageEditor:self didFinishEdittingWithImage:clipedImage];
+            [self.delegate imageEditor:self didFinishEdittingWithImage:newImage];
         }
     }];
 }
