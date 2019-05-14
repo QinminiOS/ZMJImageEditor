@@ -533,18 +533,13 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
                   withRect:(CGRect)cropRect
                      angle:(NSInteger)angle
 {
-    [self buildOriginClipImageWithCallback:^(UIImage *clipedImage)
-    {
-        UIImage *newImage = [clipedImage croppedImageWithFrame:cropRect angle:angle circularClip:NO];
-        
-        [self updateImageViewWithImage:newImage
-                              withRect:cropRect
-                                 angle:angle
-                fromCropViewController:cropViewController];
-    }];
+    [self updateImageViewWithImage:image
+                          withRect:cropRect
+                             angle:angle
+            fromCropViewController:cropViewController];
 }
 
-- (void)updateImageViewWithImage:(UIImage *)image
+- (void)updateImageViewWithImage:(UIImage *)clipedImage
                         withRect:(CGRect)cropRect
                            angle:(NSInteger)angle
           fromCropViewController:(TOCropViewController *)cropViewController
@@ -559,9 +554,9 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     {
         [cropViewController
          dismissAnimatedFromParentViewController:self
-         withCroppedImage:image
-         toView:self.imageView
-         toFrame:CGRectZero
+         withCroppedImage:clipedImage
+         toView:self.containerView
+         toFrame:self.containerView.frame
          setup:NULL
          completion:NULL];
     }
@@ -658,22 +653,6 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     UIGraphicsEndImageContext();
     
     return transitionImage;
-}
-
-- (void)buildOriginClipImageWithCallback:(void(^)(UIImage *clipedImage))callback
-{
-    UIGraphicsBeginImageContextWithOptions(self.originSize,
-                                           NO,
-                                           [UIScreen mainScreen].scale);
-    
-    [self.originImage drawInRect:CGRectMake(0, 0, self.originSize.width, self.originSize.height)];
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    if (callback)
-    {
-        callback(image);
-    }
 }
 
 #pragma mark - Public
