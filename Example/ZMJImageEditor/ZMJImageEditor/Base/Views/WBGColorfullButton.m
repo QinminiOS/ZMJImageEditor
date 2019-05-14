@@ -7,56 +7,92 @@
 //
 
 #import "WBGColorfullButton.h"
+#import "FrameAccessor.h"
+
+static CGFloat const kButtonSize = 22.0f;
+static CGFloat const kButtonLargeSize = 24.0f;
+
 IB_DESIGNABLE
 @implementation WBGColorfullButton
 {
     UIColor *_color;
     CGFloat _radius;
+    UIView *_dotColorView;
 }
 
-- (void)setRadius:(CGFloat)radius {
-    _radius = radius;
-    [self drawCirle];
-}
-
-- (void)setColor:(UIColor *)color {
-    _color = color;
-    [self drawCirle];
-}
-
-- (void)setIsUse:(BOOL)isUse {
-    _isUse = isUse;
-    [self drawCirle];
-}
-
-- (void)drawCirle {
-    for (CALayer *layer in self.layer.sublayers) {
-        if (!layer.hidden) [layer removeFromSuperlayer];
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    if (self = [super initWithFrame:frame])
+    {
+        [self setupUI];
     }
     
-    UIGraphicsBeginImageContext(self.bounds.size);
-    CAShapeLayer *layer = [CAShapeLayer layer];
-    layer.frame = self.bounds;
-    UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(self.bounds.size.width/2.f, self.bounds.size.height/2.f) radius:_isUse ? _radius+5: _radius startAngle:0 endAngle:2*M_PI clockwise:YES];
-    layer.fillColor = _color.CGColor;
-    layer.allowsEdgeAntialiasing = YES;
-    layer.backgroundColor = [UIColor clearColor].CGColor;
-//    if (_isUse) {
-        layer.strokeColor = [UIColor whiteColor].CGColor;
-        layer.lineWidth = 2.f;
-//    }
-    layer.path = path.CGPath;
-    [path fill];
-    UIGraphicsEndImageContext();
-    
-    [self.layer addSublayer:layer];
+    return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}*/
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    
+    [self setupUI];
+}
+
+- (void)setupUI
+{
+    _dotColorView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kButtonSize, kButtonSize)];
+    _dotColorView.userInteractionEnabled = NO;
+    [self addSubview:_dotColorView];
+    
+    self.backgroundColor = [UIColor clearColor];
+    
+    [self setIsUse:_isUse];
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    _dotColorView.center = CGPointMake(self.width/2, self.height/2);
+}
+
+- (void)setRadius:(CGFloat)radius
+{
+    _radius = radius;
+    
+    _dotColorView.layer.cornerRadius = kButtonSize/2;
+    _dotColorView.layer.masksToBounds = YES;
+}
+
+- (void)setColor:(UIColor *)color
+{
+    _color = color;
+    _dotColorView.backgroundColor = color;
+}
+
+- (void)setIsUse:(BOOL)isUse
+{
+    _isUse = isUse;
+    
+    if (!isUse)
+    {
+        _dotColorView.viewSize = CGSizeMake(kButtonSize, kButtonSize);
+        _dotColorView.center = CGPointMake(self.width/2, self.height/2);
+        _dotColorView.layer.cornerRadius = kButtonSize/2;
+        _dotColorView.backgroundColor = _color;
+        _dotColorView.layer.cornerRadius = kButtonSize/2;
+        _dotColorView.layer.borderWidth = 2.0f;
+        _dotColorView.layer.borderColor = [UIColor whiteColor].CGColor;
+    }
+    else
+    {
+        _dotColorView.viewSize = CGSizeMake(kButtonLargeSize, kButtonLargeSize);
+        _dotColorView.center = CGPointMake(self.width/2, self.height/2);
+        _dotColorView.layer.cornerRadius = kButtonLargeSize/2;
+        _dotColorView.backgroundColor = _color;
+        _dotColorView.layer.cornerRadius = kButtonSize/2;
+        _dotColorView.layer.borderWidth = 3.0f;
+        _dotColorView.layer.borderColor = [UIColor whiteColor].CGColor;
+    }
+}
 
 @end

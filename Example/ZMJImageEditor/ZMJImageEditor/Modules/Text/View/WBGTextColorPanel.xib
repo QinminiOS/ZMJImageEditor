@@ -17,7 +17,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ADy-tJ-IdC" customClass="WBGColorfullButton">
-                    <rect key="frame" x="0.0" y="0.0" width="47" height="50"/>
+                    <rect key="frame" x="16" y="0.0" width="43" height="50"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="color" keyPath="color">
                             <color key="value" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -31,7 +31,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="woL-hv-GBa" customClass="WBGColorfullButton">
-                    <rect key="frame" x="47" y="0.0" width="47" height="50"/>
+                    <rect key="frame" x="59" y="0.0" width="43" height="50"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="radius">
                             <real key="value" value="9"/>
@@ -45,7 +45,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ho-yx-UH7" customClass="WBGColorfullButton">
-                    <rect key="frame" x="94" y="0.0" width="46.5" height="50"/>
+                    <rect key="frame" x="102" y="0.0" width="42.5" height="50"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="radius">
                             <real key="value" value="9"/>
@@ -59,7 +59,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bHG-fd-srA" customClass="WBGColorfullButton">
-                    <rect key="frame" x="140.5" y="0.0" width="47" height="50"/>
+                    <rect key="frame" x="144.5" y="0.0" width="43" height="50"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="radius">
                             <real key="value" value="9"/>
@@ -73,7 +73,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gQA-nc-82Q" customClass="WBGColorfullButton">
-                    <rect key="frame" x="234.5" y="0.0" width="47" height="50"/>
+                    <rect key="frame" x="230.5" y="0.0" width="43" height="50"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="radius">
                             <real key="value" value="9"/>
@@ -87,7 +87,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IxS-lG-oih" customClass="WBGColorfullButton">
-                    <rect key="frame" x="281.5" y="0.0" width="46.5" height="50"/>
+                    <rect key="frame" x="273.5" y="0.0" width="42.5" height="50"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="radius">
                             <real key="value" value="9"/>
@@ -101,7 +101,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eoR-Gu-vbS" customClass="WBGColorfullButton">
-                    <rect key="frame" x="187.5" y="0.0" width="47" height="50"/>
+                    <rect key="frame" x="187.5" y="0.0" width="43" height="50"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="radius">
                             <real key="value" value="9"/>
@@ -115,7 +115,7 @@
                     </connections>
                 </button>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jYJ-ld-Zvb">
-                    <rect key="frame" x="328" y="0.0" width="47" height="50"/>
+                    <rect key="frame" x="316" y="0.0" width="43" height="50"/>
                     <state key="normal" image="icon_shanchushangyibu"/>
                 </button>
             </subviews>
@@ -123,7 +123,7 @@
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="ADy-tJ-IdC" secondAttribute="bottom" id="2yI-3f-qmK"/>
                 <constraint firstItem="eoR-Gu-vbS" firstAttribute="leading" secondItem="bHG-fd-srA" secondAttribute="trailing" id="35i-Qs-s1d"/>
-                <constraint firstAttribute="trailing" secondItem="jYJ-ld-Zvb" secondAttribute="trailing" id="8CL-el-VNv"/>
+                <constraint firstAttribute="trailing" secondItem="jYJ-ld-Zvb" secondAttribute="trailing" constant="16" id="8CL-el-VNv"/>
                 <constraint firstItem="6ho-yx-UH7" firstAttribute="leading" secondItem="woL-hv-GBa" secondAttribute="trailing" id="CJ7-L7-hLY"/>
                 <constraint firstItem="jYJ-ld-Zvb" firstAttribute="width" secondItem="IxS-lG-oih" secondAttribute="width" id="Dy3-In-H8w"/>
                 <constraint firstItem="woL-hv-GBa" firstAttribute="leading" secondItem="ADy-tJ-IdC" secondAttribute="trailing" id="GRC-el-mNE"/>
@@ -143,7 +143,7 @@
                 <constraint firstItem="bHG-fd-srA" firstAttribute="width" secondItem="6ho-yx-UH7" secondAttribute="width" id="eac-CA-VKd"/>
                 <constraint firstItem="gQA-nc-82Q" firstAttribute="leading" secondItem="eoR-Gu-vbS" secondAttribute="trailing" id="foB-qf-ZPF"/>
                 <constraint firstItem="gQA-nc-82Q" firstAttribute="width" secondItem="eoR-Gu-vbS" secondAttribute="width" id="iB1-Um-opF"/>
-                <constraint firstItem="ADy-tJ-IdC" firstAttribute="leading" secondItem="Cw0-tf-npd" secondAttribute="leading" id="jBf-gy-gDI"/>
+                <constraint firstItem="ADy-tJ-IdC" firstAttribute="leading" secondItem="Cw0-tf-npd" secondAttribute="leading" constant="16" id="jBf-gy-gDI"/>
                 <constraint firstItem="eoR-Gu-vbS" firstAttribute="leading" secondItem="bHG-fd-srA" secondAttribute="trailing" id="jw4-3b-I5C"/>
                 <constraint firstItem="woL-hv-GBa" firstAttribute="top" secondItem="ADy-tJ-IdC" secondAttribute="top" id="kKD-zu-gCI"/>
                 <constraint firstItem="bHG-fd-srA" firstAttribute="top" secondItem="6ho-yx-UH7" secondAttribute="top" id="l0S-7U-b3Q"/>
