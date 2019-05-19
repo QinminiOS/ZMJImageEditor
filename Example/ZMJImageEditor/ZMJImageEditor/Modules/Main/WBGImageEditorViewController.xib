@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_5" orientation="portrait">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -26,23 +26,34 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H4n-yc-FcR" userLabel="safeview">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                     <subviews>
                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eg2-dz-mJn">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="gradientOn" value="YES"/>
+                                <userDefinedRuntimeAttribute type="string" keyPath="gradientColors" value="000000:0,000000:0.8"/>
+                                <userDefinedRuntimeAttribute type="string" keyPath="gradientLocations" value="0.5,0,0.5,1"/>
+                                <userDefinedRuntimeAttribute type="point" keyPath="gradientEndPoint">
+                                    <point key="value" x="0.5" y="1"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="point" keyPath="gradientStartPoint">
+                                    <point key="value" x="0.5" y="0.0"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="mbf-P5-HRA"/>
                             </connections>
                         </scrollView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="toj-tM-hDH">
-                            <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                            <rect key="frame" x="0.0" y="698" width="375" height="114"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vif-ym-mAZ">
-                                    <rect key="frame" x="49" y="8" width="32" height="32"/>
+                                    <rect key="frame" x="49" y="38" width="32" height="32"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal" image="icon_tuya"/>
                                     <state key="selected" image="icon_tuya_xuanzhong"/>
@@ -51,7 +62,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cnm-kZ-dpx">
-                                    <rect key="frame" x="134" y="8" width="32" height="32"/>
+                                    <rect key="frame" x="134" y="38" width="32" height="32"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal" image="icon_tianjiawenzi_wukuang"/>
                                     <state key="selected" image="icon_tianjiawenzi_youkuang"/>
@@ -60,7 +71,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dR4-MJ-4Kq">
-                                    <rect key="frame" x="194" y="8" width="32" height="32"/>
+                                    <rect key="frame" x="194" y="38" width="32" height="32"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                     <state key="normal" image="icon_masaike"/>
@@ -70,7 +81,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PFB-Ig-Llj">
-                                    <rect key="frame" x="277" y="8" width="32" height="32"/>
+                                    <rect key="frame" x="277" y="38" width="32" height="32"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal" image="icon_caiqie"/>
                                     <state key="selected" image="icon_caiqie"/>
@@ -80,16 +91,24 @@
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="49" id="tEl-cY-7Xw"/>
-                            </constraints>
                             <viewLayoutGuide key="safeArea" id="oC4-nx-BHL"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="gradientOn" value="YES"/>
+                                <userDefinedRuntimeAttribute type="string" keyPath="gradientColors" value="000000:0,000000:0.3"/>
+                                <userDefinedRuntimeAttribute type="string" keyPath="gradientLocations" value="0,1"/>
+                                <userDefinedRuntimeAttribute type="point" keyPath="gradientStartPoint">
+                                    <point key="value" x="0.5" y="0.0"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="point" keyPath="gradientEndPoint">
+                                    <point key="value" x="0.5" y="1"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vKW-ZA-nXo">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yeV-aj-vVt">
-                                    <rect key="frame" x="363" y="0.0" width="35" height="33"/>
+                                    <rect key="frame" x="324" y="0.0" width="35" height="33"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <inset key="titleEdgeInsets" minX="0.0" minY="14" maxX="0.0" maxY="0.0"/>
                                     <state key="normal" title="完成">
@@ -121,18 +140,30 @@
                             <constraints>
                                 <constraint firstItem="U1E-fP-iEK" firstAttribute="top" secondItem="vKW-ZA-nXo" secondAttribute="top" id="A37-Af-mwK"/>
                                 <constraint firstAttribute="trailing" secondItem="yeV-aj-vVt" secondAttribute="trailing" constant="16" id="HU4-wm-d0m"/>
-                                <constraint firstAttribute="height" constant="64" id="g2k-gl-jyQ"/>
+                                <constraint firstAttribute="height" constant="45" id="g2k-gl-jyQ"/>
                                 <constraint firstItem="yeV-aj-vVt" firstAttribute="top" secondItem="vKW-ZA-nXo" secondAttribute="top" id="pfe-2S-gEu"/>
                                 <constraint firstItem="U1E-fP-iEK" firstAttribute="leading" secondItem="vKW-ZA-nXo" secondAttribute="leading" constant="16" id="y3F-Y8-nR6"/>
                             </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="gradientOn" value="YES"/>
+                                <userDefinedRuntimeAttribute type="string" keyPath="gradientColors" value="000000:0.2,000000:0"/>
+                                <userDefinedRuntimeAttribute type="string" keyPath="gradientLocations" value="0,1"/>
+                                <userDefinedRuntimeAttribute type="point" keyPath="gradientStartPoint">
+                                    <point key="value" x="0.5" y="0.0"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="point" keyPath="gradientEndPoint">
+                                    <point key="value" x="0.5" y="1"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                         </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="vKW-ZA-nXo" secondAttribute="trailing" id="546-S2-UdZ"/>
+                        <constraint firstItem="toj-tM-hDH" firstAttribute="top" secondItem="W8m-e9-Nrf" secondAttribute="bottom" constant="-80" id="GrE-MA-Afq"/>
                         <constraint firstAttribute="trailing" secondItem="toj-tM-hDH" secondAttribute="trailing" id="In8-ye-Jas"/>
                         <constraint firstItem="eg2-dz-mJn" firstAttribute="trailing" secondItem="toj-tM-hDH" secondAttribute="trailing" id="SOK-dS-6w7"/>
-                        <constraint firstItem="W8m-e9-Nrf" firstAttribute="bottom" secondItem="toj-tM-hDH" secondAttribute="bottom" id="UO5-vP-LGM"/>
+                        <constraint firstAttribute="bottom" secondItem="toj-tM-hDH" secondAttribute="bottom" id="UO5-vP-LGM"/>
                         <constraint firstItem="vKW-ZA-nXo" firstAttribute="top" secondItem="H4n-yc-FcR" secondAttribute="top" id="V7Y-h0-Shc"/>
                         <constraint firstItem="eg2-dz-mJn" firstAttribute="leading" secondItem="toj-tM-hDH" secondAttribute="leading" id="bhY-Fv-BdB"/>
                         <constraint firstAttribute="bottom" secondItem="eg2-dz-mJn" secondAttribute="bottom" id="tLf-JV-oFG"/>
@@ -151,7 +182,7 @@
                 <constraint firstItem="H4n-yc-FcR" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="ylf-ys-XpV"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ICE-FS-sOn"/>
-            <point key="canvasLocation" x="-71.200000000000003" y="-65.217391304347828"/>
+            <point key="canvasLocation" x="-72.799999999999997" y="-65.763546798029566"/>
         </view>
     </objects>
     <resources>

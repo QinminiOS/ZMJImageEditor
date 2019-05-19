@@ -10,13 +10,10 @@
 #import "FrameAccessor.h"
 
 static CGFloat const kButtonSize = 22.0f;
-static CGFloat const kButtonLargeSize = 24.0f;
+static CGFloat const kButtonLargeSize = 30.0f;
 
-IB_DESIGNABLE
 @implementation WBGColorfullButton
 {
-    UIColor *_color;
-    CGFloat _radius;
     UIView *_dotColorView;
 }
 
@@ -89,8 +86,7 @@ IB_DESIGNABLE
         _dotColorView.center = CGPointMake(self.width/2, self.height/2);
         _dotColorView.layer.cornerRadius = kButtonLargeSize/2;
         _dotColorView.backgroundColor = _color;
-        _dotColorView.layer.cornerRadius = kButtonSize/2;
-        _dotColorView.layer.borderWidth = 3.0f;
+        _dotColorView.layer.borderWidth = 4.0f;
         _dotColorView.layer.borderColor = [UIColor whiteColor].CGColor;
     }
 }

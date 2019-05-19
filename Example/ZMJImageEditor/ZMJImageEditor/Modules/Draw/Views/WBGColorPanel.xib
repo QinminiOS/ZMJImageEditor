@@ -117,6 +117,7 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jYJ-ld-Zvb">
                     <rect key="frame" x="316" y="0.0" width="43" height="50"/>
                     <state key="normal" image="icon_shanchushangyibu"/>
+                    <state key="highlighted" image="icon_shanchushangyibu"/>
                     <connections>
                         <action selector="onUndoButtonTapped:" destination="Cw0-tf-npd" eventType="touchUpInside" id="RuI-Pt-xf1"/>
                     </connections>
@@ -161,6 +162,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="m00-VI-yJH"/>
             <connections>
+                <outlet property="backButton" destination="jYJ-ld-Zvb" id="Onl-3W-Aae"/>
                 <outlet property="blueButton" destination="eoR-Gu-vbS" id="WGC-cg-5FS"/>
                 <outlet property="greenButton" destination="bHG-fd-srA" id="4uq-gT-Awj"/>
                 <outlet property="orangeButton" destination="woL-hv-GBa" id="0ZK-b4-woZ"/>

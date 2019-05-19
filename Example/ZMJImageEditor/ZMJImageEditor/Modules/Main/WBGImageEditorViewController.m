@@ -381,6 +381,8 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     self.textButton.selected = NO;
     self.clipButton.selected = NO;
     self.paperButton.selected = NO;
+    
+    [self.textTool hideTextBorder];
 }
 
 ///涂鸦模式
@@ -407,7 +409,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     [self setDisSelect];
     [self resetCurrentTool];
     
-    [self buildClipImageWithBorder:YES complete:^(UIImage *clipedImage)
+    [self buildClipImageWithBorder:NO complete:^(UIImage *clipedImage)
     {
         TOCropViewController *cropController = [[TOCropViewController alloc] initWithCroppingStyle:TOCropViewCroppingStyleDefault image:clipedImage];
         cropController.delegate = self;
@@ -588,10 +590,6 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
         case WBGEditorModeDraw:
         {
             self.panButton.selected = YES;
-            if (self.drawTool.allLineMutableArray.count > 0)
-            {
-                //self.undoButton.hidden  = NO;
-            }
         }
             break;
         case WBGEditorModeText:
@@ -599,7 +597,6 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
         case WBGEditorModeNone:
         {
             self.panButton.selected = NO;
-            //self.undoButton.hidden  = YES;
         }
             break;
         default:
@@ -620,6 +617,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     [UIView animateWithDuration:time animations:^{
         [self.currentTool hideTools:isHide];
         self.barsHiddenStatus = isHide;
+        self.topBar.alpha = (isHide ? 0 : 1);
     }];
 }
 

@@ -48,9 +48,9 @@
         [cell setItem:self.chatMoreKeyboardData[tIndex]];
     }
     
-    @weakify(self);
+    weakify(self);
     [cell setClickBlock:^(WBGMoreKeyboardItem *sItem) {
-        @strongify(self);
+        strongify(self);
         if (self.delegate && [self.delegate respondsToSelector:@selector(moreKeyboard:didSelectedFunctionItem:)])
         {
             [self.delegate moreKeyboard:self didSelectedFunctionItem:sItem];

@@ -111,15 +111,15 @@
     self.toolbar.frame = [self frameForToolBarWithVerticalLayout:CGRectGetWidth(self.view.bounds) < CGRectGetHeight(self.view.bounds)];
     [self.view addSubview:self.toolbar];
     
-    @weakify(self);
-    self.toolbar.doneButtonTapped =     ^{ @strongify(self); [self doneButtonTapped]; };
-    self.toolbar.cancelButtonTapped =   ^{ @strongify(self); [self cancelButtonTapped]; };
+    weakify(self);
+    self.toolbar.doneButtonTapped =     ^{ strongify(self); [self doneButtonTapped]; };
+    self.toolbar.cancelButtonTapped =   ^{ strongify(self); [self cancelButtonTapped]; };
     
-    self.toolbar.resetButtonTapped =    ^{ @strongify(self); [self resetCropViewLayout]; };
-    self.toolbar.clampButtonTapped =    ^{ @strongify(self); [self showAspectRatioDialog]; };
+    self.toolbar.resetButtonTapped =    ^{ strongify(self); [self resetCropViewLayout]; };
+    self.toolbar.clampButtonTapped =    ^{ strongify(self); [self showAspectRatioDialog]; };
     
-    self.toolbar.rotateCounterclockwiseButtonTapped = ^{ @strongify(self); [self rotateCropViewCounter]; };
-    self.toolbar.rotateClockwiseButtonTapped        = ^{ @strongify(self); [self rotateCropView]; };
+    self.toolbar.rotateCounterclockwiseButtonTapped = ^{ strongify(self); [self rotateCropViewCounter]; };
+    self.toolbar.rotateClockwiseButtonTapped        = ^{ strongify(self); [self rotateCropView]; };
     
     self.toolbar.clampButtonHidden = self.aspectRatioPickerButtonHidden || circularMode;
     self.toolbar.rotateClockwiseButtonHidden = self.rotateClockwiseButtonHidden && !circularMode;
@@ -591,9 +591,9 @@
         self.imageCropFrame = toFrame;
     }
     
-    @weakify(self);
+    weakify(self);
     [viewController presentViewController:self animated:YES completion:^ {
-        @strongify(self);
+        strongify(self);
         if (completion) {
             completion();
         }
@@ -653,9 +653,9 @@
     
     self.cropView.simpleRenderMode = YES;
     
-    @weakify(self);
+    weakify(self);
     self.transitionController.prepareForTransitionHandler = ^{
-        @strongify(self);
+        strongify(self);
         
         TOCropViewControllerTransitioning *transitioning = self.transitionController;
         
@@ -680,9 +680,9 @@
         return nil;
     }
     
-    @weakify(self);
+    weakify(self);
     self.transitionController.prepareForTransitionHandler = ^{
-        @strongify(self);
+        strongify(self);
         
         TOCropViewControllerTransitioning *transitioning = self.transitionController;
         

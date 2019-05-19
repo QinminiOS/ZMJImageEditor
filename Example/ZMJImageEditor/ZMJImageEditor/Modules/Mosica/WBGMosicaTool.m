@@ -30,7 +30,7 @@
     [self.mosicaToolBar mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
         make.height.mas_equalTo([WBGMosicaToolBar fixedHeight]);
-        make.bottom.mas_equalTo(self.editor.bottomBar.mas_top);
+        make.bottom.mas_equalTo(self.editor.bottomBar.mas_top).mas_offset(35);
     }];
     
     [self setupActions];

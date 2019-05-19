@@ -44,11 +44,11 @@ static const NSInteger kTextMaxLimitNumber = 100;
 
 - (void)setupActions
 {
-    @weakify(self);
+    weakify(self);
     
     self.textView.dissmissTextTool = ^(NSString *currentText, BOOL isUse)
     {
-        @strongify(self);
+        strongify(self);
         
         self.editor.scrollView.pinchGestureRecognizer.enabled = YES;
         
@@ -76,7 +76,7 @@ static const NSInteger kTextMaxLimitNumber = 100;
     };
     
     self.textColorPanel.onTextColorChange = ^(UIColor *color) {
-        @strongify(self);
+        strongify(self);
         [self changeColor:color];
     };
 }
@@ -100,13 +100,7 @@ static const NSInteger kTextMaxLimitNumber = 100;
 
 - (void)hideTextBorder
 {
-    for (UIView *v in self.editor.drawingView.subviews)
-    {
-        if ([v isKindOfClass:[WBGTextToolView class]])
-        {
-            [v setHidden:YES];
-        }
-    }
+    [WBGTextToolView hideTextBorder];
 }
 
 - (void)changeColor:(UIColor *)color
@@ -288,21 +282,24 @@ static const NSInteger kTextMaxLimitNumber = 100;
 
 #pragma mark - UITextViewDelegate
 
-- (void)textViewDidChange:(UITextView *)textView {
+- (void)textViewDidChange:(UITextView *)textView
+{
     // 选中范围的标记
     UITextRange *textSelectedRange = [textView markedTextRange];
     // 获取高亮部分
     UITextPosition *textPosition = [textView positionFromPosition:textSelectedRange.start offset:0];
     // 如果在变化中是高亮部分在变, 就不要计算字符了
-    if (textSelectedRange && textPosition) {
+    if (textSelectedRange && textPosition)
+    {
         return;
     }
+    
     // 文本内容
     NSString *textContentStr = textView.text;
-    NSLog(@"text = %@",textView.text);
-    NSInteger existTextNumber = textContentStr.length;
+    NSInteger existTextNumber = textContentStr.length; // 所以在这里为了提高效率不在判断
     
-    if (existTextNumber > kTextMaxLimitNumber) {
+    if (existTextNumber > kTextMaxLimitNumber)
+    {
         // 截取到最大位置的字符(由于超出截取部分在should时被处理了,所以在这里为了提高效率不在判断)
         NSString *str = [textContentStr substringToIndex:kTextMaxLimitNumber];
         [textView setText:str];
@@ -312,7 +309,6 @@ static const NSInteger kTextMaxLimitNumber = 100;
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
-    NSLog(@"%@", text);
     if ([text isEqualToString:@"\n"])
     {
         [self dismissTextEditing:YES];
@@ -324,14 +320,17 @@ static const NSInteger kTextMaxLimitNumber = 100;
     UITextPosition *pos = [textView positionFromPosition:selectedRange.start offset:0];
     
     //如果有高亮且当前字数开始位置小于最大限制时允许输入
-    if (selectedRange && pos) {
+    if (selectedRange && pos)
+    {
         NSInteger startOffset = [textView offsetFromPosition:textView.beginningOfDocument toPosition:selectedRange.start];
         NSInteger endOffset = [textView offsetFromPosition:textView.beginningOfDocument toPosition:selectedRange.end];
         NSRange offsetRange = NSMakeRange(startOffset, endOffset - startOffset);
         
-        if (offsetRange.location < kTextMaxLimitNumber && textView.text.length - offsetRange.length <= kTextMaxLimitNumber) {
+        if (offsetRange.location < kTextMaxLimitNumber && textView.text.length - offsetRange.length <= kTextMaxLimitNumber)
+        {
             self.needReplaceRange = offsetRange;
             self.needReplaceString = text;
+            
             return YES;
         }
         else
@@ -340,56 +339,95 @@ static const NSInteger kTextMaxLimitNumber = 100;
         }
     }
     
-    
     NSString *comcatstr = [textView.text stringByReplacingCharactersInRange:range withString:text];
-    
-    NSInteger caninputlen = kTextMaxLimitNumber - comcatstr.length;
+    NSInteger totalLen = [self countString:comcatstr];
+    NSInteger caninputlen = kTextMaxLimitNumber - totalLen;
     
     if (caninputlen >= 0)
     {
         return YES;
     }
+    else if (totalLen > kTextMaxLimitNumber)
+    {
+        return NO;
+    }
     else
     {
-        NSInteger len = text.length + caninputlen;
         //防止当text.length + caninputlen < 0时，使得rg.length为一个非法最大正数出错
-        NSRange rg = {0,MAX(len,0)};
+        NSRange rg = {0, MAX(totalLen, 0)};
         
         if (rg.length > 0)
         {
             NSString *s = @"";
             //判断是否只普通的字符或asc码(对于中文和表情返回NO)
             BOOL asc = [text canBeConvertedToEncoding:NSASCIIStringEncoding];
-            if (asc) {
-                s = [text substringWithRange:rg];//因为是ascii码直接取就可以了不会错
+            if (asc)
+            {
+                s = [text substringWithRange:rg]; // 因为是ascii码直接取就可以了不会错
             }
             else
             {
                 __block NSInteger idx = 0;
                 __block NSString  *trimString = @"";//截取出的字串
                 //使用字符串遍历，这个方法能准确知道每个emoji是占一个unicode还是两个
-                [text enumerateSubstringsInRange:NSMakeRange(0, [text length])
-                                         options:NSStringEnumerationByComposedCharacterSequences
-                                      usingBlock: ^(NSString* substring, NSRange substringRange, NSRange enclosingRange, BOOL* stop) {
-                                          
-                                          NSInteger steplen = substring.length;
-                                          if (idx >= rg.length) {
-                                              *stop = YES; //取出所需要就break，提高效率
-                                              return ;
-                                          }
-                                          
-                                          trimString = [trimString stringByAppendingString:substring];
-                                          
-                                          idx = idx + steplen;//这里变化了，使用了字串占的长度来作为步长
-                                      }];
+                [text
+                 enumerateSubstringsInRange:NSMakeRange(0, [text length])
+                 options:NSStringEnumerationByComposedCharacterSequences
+                 usingBlock: ^(NSString* substring, NSRange substringRange, NSRange enclosingRange, BOOL* stop)
+                 {
+                     NSInteger steplen = 0;
+                     if ([substring canBeConvertedToEncoding:NSASCIIStringEncoding])
+                     {
+                         steplen = 1;
+                     }
+                     else
+                     {
+                         steplen = steplen * 2;
+                     }
+                     
+                      if (idx >= rg.length)
+                      {
+                          *stop = YES; // 取出所需要就break，提高效率
+                          return;
+                      }
+                     
+                      trimString = [trimString stringByAppendingString:substring];
+                      idx = idx + steplen; // 这里变化了，使用了字串占的长度来作为步长
+                 }];
                 
                 s = trimString;
             }
+            
             //rang是指从当前光标处进行替换处理(注意如果执行此句后面返回的是YES会触发didchange事件)
             [textView setText:[textView.text stringByReplacingCharactersInRange:range withString:s]];
         }
+        
         return NO;
     }
+}
+
+- (NSInteger)countString:(NSString *)string
+{
+    __block NSInteger length = 0;
+    
+    [string
+     enumerateSubstringsInRange:NSMakeRange(0, [string length])
+     options:NSStringEnumerationByComposedCharacterSequences
+     usingBlock:^(NSString* substring, NSRange substringRange, NSRange enclosingRange, BOOL* stop)
+    {
+        NSInteger steplen = substring.length;
+        
+        if ([substring canBeConvertedToEncoding:NSASCIIStringEncoding])
+        {
+            length += 1;
+        }
+        else
+        {
+            length += steplen * 2;
+        }
+    }];
+    
+    return length;
 }
 
 @end

@@ -24,7 +24,7 @@
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="aAF-Vw-GFM"/>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cWi-cH-ouP">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cWi-cH-ouP">
                     <rect key="frame" x="91" y="17" width="22" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" image="icon_masaike_1_xuanzhong"/>
@@ -42,6 +42,13 @@
                         <action selector="onBackButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="N8P-bw-Q8x"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="请直接在图片上涂抹虚化" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XuW-87-w0I">
+                    <rect key="frame" x="71" y="16" width="175" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
@@ -55,7 +62,7 @@
                 <outlet property="backButton" destination="PYC-vs-yS1" id="b96-gM-U8d"/>
                 <outlet property="masicNormal" destination="cWi-cH-ouP" id="tev-rl-s9d"/>
             </connections>
-            <point key="canvasLocation" x="333" y="-69"/>
+            <point key="canvasLocation" x="331.8840579710145" y="-69.701086956521749"/>
         </view>
     </objects>
     <resources>

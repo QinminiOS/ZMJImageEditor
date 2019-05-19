@@ -33,12 +33,13 @@
         self.drawingView = self.editor.drawingView;
         
         WBGColorPanel *colorPanel = [WBGColorPanel xx_instantiateFromNib];
+        colorPanel.backButton.alpha = 0.5f;
         [editor.view addSubview:colorPanel];
         self.colorPanel = colorPanel;
         [colorPanel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(0);
             make.height.mas_equalTo([WBGColorPanel fixedHeight]);
-            make.bottom.mas_equalTo(editor.bottomBar.mas_top);
+            make.bottom.mas_equalTo(editor.bottomBar.mas_top).mas_offset(35);
         }];
         
         [self setupActions];
@@ -54,6 +55,15 @@
     ^{
         __strong WBGDrawTool *strongSelf = weakSelf;
         [strongSelf backToLastDraw];
+        
+        if (strongSelf.allLineMutableArray.count > 0)
+        {
+            strongSelf.colorPanel.backButton.alpha = 1.0f;
+        }
+        else
+        {
+            strongSelf.colorPanel.backButton.alpha = 0.5f;
+        }
     }];
     
     self.drawToolStatus = ^(BOOL canPrev)
@@ -83,6 +93,15 @@
         for (WBGPath *path in strongSelf.allLineMutableArray)
         {
             [path drawPath];
+        }
+        
+        if (strongSelf.allLineMutableArray.count > 0)
+        {
+            strongSelf.colorPanel.backButton.alpha = 1.0f;
+        }
+        else
+        {
+            strongSelf.colorPanel.backButton.alpha = 0.5f;
         }
     }];
 }

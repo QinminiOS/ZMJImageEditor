@@ -23,6 +23,8 @@
 
 + (void)setActiveTextView:(WBGTextToolView *)view;
 + (void)setInactiveTextView:(WBGTextToolView *)view;
++ (void)hideTextBorder;
+
 - (instancetype)initWithTool:(WBGTextTool *)tool text:(NSString *)text font:(UIFont *)font orImage:(UIImage *)image;
 - (void)rotate:(CGFloat)angle;
 - (void)setScale:(CGFloat)scale;

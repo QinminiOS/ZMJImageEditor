@@ -41,12 +41,14 @@ static const CGFloat DELETEBUTTON_BOUNDS = 26.f;
     CALayer *rectLayer3;
     
     CGFloat _rotation;
+    
+    BOOL _isAvtive;
 }
 
 static WBGTextToolView *activeView = nil;
 + (void)setActiveTextView:(WBGTextToolView *)view
 {
-    if(view != activeView)
+    if(view != activeView || (view == activeView && !activeView->_isAvtive))
     {
         [activeView setAvtive:NO];
         activeView = view;
@@ -56,6 +58,11 @@ static WBGTextToolView *activeView = nil;
         [activeView.superview bringSubviewToFront:activeView];
         
     }
+}
+
++ (void)hideTextBorder
+{
+    [activeView setAvtive:NO];
 }
 
 + (void)setInactiveTextView:(WBGTextToolView *)view
@@ -420,24 +427,24 @@ static WBGTextToolView *activeView = nil;
 
 - (void)setAvtive:(BOOL)active
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [CATransaction begin];
-        [CATransaction setDisableActions:YES];
-        _deleteButton.hidden = !active;
-        _label.layer.borderWidth = (active) ? 1/_scale : 0;
-        _label.layer.shadowColor = [UIColor grayColor].CGColor;
-        _label.layer.shadowOffset= CGSizeMake(0, 0);
-        _label.layer.shadowOpacity = .6f;
-        _label.layer.shadowRadius = 2.f;
-        
-        _deleteButton.layer.shadowColor = [UIColor grayColor].CGColor;
-        _deleteButton.layer.shadowOffset= CGSizeMake(0, 0);
-        _deleteButton.layer.shadowOpacity = .6f;
-        _deleteButton.layer.shadowRadius = 2.f;
-        
-        rectLayer1.hidden = rectLayer2.hidden = rectLayer3.hidden = !active;
-        [CATransaction commit];
-    });
+    _isAvtive = active;
+    
+    [CATransaction begin];
+    [CATransaction setDisableActions:YES];
+    _deleteButton.hidden = !active;
+    _label.layer.borderWidth = (active) ? 1/_scale : 0;
+    _label.layer.shadowColor = [UIColor grayColor].CGColor;
+    _label.layer.shadowOffset= CGSizeMake(0, 0);
+    _label.layer.shadowOpacity = .6f;
+    _label.layer.shadowRadius = 2.f;
+    
+    _deleteButton.layer.shadowColor = [UIColor grayColor].CGColor;
+    _deleteButton.layer.shadowOffset= CGSizeMake(0, 0);
+    _deleteButton.layer.shadowOpacity = .6f;
+    _deleteButton.layer.shadowRadius = 2.f;
+    
+    rectLayer1.hidden = rectLayer2.hidden = rectLayer3.hidden = !active;
+    [CATransaction commit];
 }
 
 - (void)changeColor:(NSNotification *)notification {

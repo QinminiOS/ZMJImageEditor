@@ -116,7 +116,7 @@ extern "C" {
 // analysis, and to use @try/@catch otherwise to avoid insertion of unnecessary
 // autorelease pools.
 #if defined(DEBUG) && !defined(NDEBUG)
-#define ext_keywordify autoreleasepool {}
+#define ext_keywordify @autoreleasepool {}
 #else
-#define ext_keywordify try {} @catch (...) {}
+#define ext_keywordify @try {} @catch (...) {}
 #endif
