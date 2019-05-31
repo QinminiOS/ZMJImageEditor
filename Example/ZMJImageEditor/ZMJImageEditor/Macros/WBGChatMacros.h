@@ -65,6 +65,11 @@ typedef NS_ENUM(NSInteger, WBGChatBarStatus)
 #define     WBGTimeStamp(date)   ([NSString stringWithFormat:@"%lf", [date timeIntervalSince1970]])
 #define     WBGColor(r, g, b, a) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:a]
 
+#define Lock_Guard(...) \
+    dispatch_semaphore_wait(_lock, DISPATCH_TIME_FOREVER); \
+    __VA_ARGS__; \
+    dispatch_semaphore_signal(_lock);
+
 
 #define CGRectConvertPointToRect(point, rect) \
         CGPointMake(point.x - rect.origin.x, point.y - rect.origin.y)

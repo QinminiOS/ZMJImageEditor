@@ -630,6 +630,8 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
         [self.textTool hideTextBorder];
     }
     
+    [self.scrollView setZoomScale:1.0];
+    
     UIGraphicsBeginImageContextWithOptions(self.originSize,
                                            NO,
                                            [UIScreen mainScreen].scale);

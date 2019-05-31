@@ -11,6 +11,7 @@
 #import "WBGTextToolView.h"
 #import "WBGColorPanel.h"
 #import "Masonry.h"
+#import "WBGChatMacros.h"
 
 @interface WBGDrawTool ()
 @property (nonatomic, weak) WBGDrawView *drawingView;
@@ -18,6 +19,7 @@
 @property (nonatomic, weak) WBGColorPanel *colorPanel;
 @property (nonatomic, strong) UIPanGestureRecognizer *panGesture;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGesture;
+@property (nonatomic, strong) dispatch_semaphore_t lock;
 @end
 
 @implementation WBGDrawTool
@@ -28,6 +30,8 @@
     
     if(self)
     {
+        self.lock = dispatch_semaphore_create(1);
+        
         self.editor = editor;
         self.allLineMutableArray = [NSMutableArray new];
         self.drawingView = self.editor.drawingView;
@@ -68,11 +72,15 @@
     
     self.drawToolStatus = ^(BOOL canPrev)
     {
-        //if (canPrev) {
-        //    weakSelf.undoButton.hidden = NO;
-        //} else {
-        //    weakSelf.undoButton.hidden = YES;
-        //}
+        __strong WBGDrawTool *strongSelf = weakSelf;
+        if (canPrev)
+        {
+            strongSelf.colorPanel.backButton.alpha = 1.0f;
+        }
+        else
+        {
+            strongSelf.colorPanel.backButton.alpha = 0.5f;
+        }
     };
     
     self.drawingCallback = ^(BOOL isDrawing)
@@ -90,18 +98,14 @@
     [self.drawingView setDrawViewBlock:^(CGContextRef ctx)
     {
         __strong WBGDrawTool *strongSelf = weakSelf;
-        for (WBGPath *path in strongSelf.allLineMutableArray)
+        Lock_Guard
+        (
+            NSArray<WBGPath *> *pathArray = [strongSelf.allLineMutableArray copy];
+         );
+        
+        for (WBGPath *path in pathArray)
         {
             [path drawPath];
-        }
-        
-        if (strongSelf.allLineMutableArray.count > 0)
-        {
-            strongSelf.colorPanel.backButton.alpha = 1.0f;
-        }
-        else
-        {
-            strongSelf.colorPanel.backButton.alpha = 0.5f;
         }
     }];
 }
@@ -173,12 +177,21 @@
 
 - (void)backToLastDraw
 {
-    [_allLineMutableArray removeLastObject];
+    Lock_Guard
+    (
+        [_allLineMutableArray removeLastObject];
+    );
+    
     [self drawLine];
     
     if (self.drawToolStatus)
     {
-        self.drawToolStatus(_allLineMutableArray.count > 0 ? : NO);
+        Lock_Guard
+        (
+            BOOL canPrev = _allLineMutableArray.count > 0 ? YES : NO;
+        );
+        
+        self.drawToolStatus(canPrev);
     }
 }
 
@@ -212,13 +225,21 @@
         WBGPath *path = [WBGPath pathToPoint:currentDraggingPosition pathWidth:MAX(1, self.pathWidth)];
         path.pathColor = self.colorPanel.currentColor;
         path.shape.strokeColor = self.colorPanel.currentColor.CGColor;
-        [_allLineMutableArray addObject:path];
         
+        Lock_Guard
+        (
+            [_allLineMutableArray addObject:path];
+        );
     }
     
     if(sender.state == UIGestureRecognizerStateChanged)
     { // 获得数组中的最后一个UIBezierPath对象(因为我们每次都把UIBezierPath存入到数组最后一个,因此获取时也取最后一个)
-        WBGPath *path = [_allLineMutableArray lastObject];
+        
+        Lock_Guard
+        (
+             WBGPath *path = [_allLineMutableArray lastObject];
+        );
+        
         [path pathLineToPoint:currentDraggingPosition];//添加点
         [self drawLine];
         
@@ -232,7 +253,12 @@
     {
         if (self.drawToolStatus)
         {
-            self.drawToolStatus(_allLineMutableArray.count > 0 ? : NO);
+            Lock_Guard
+            (
+                BOOL canPrev = _allLineMutableArray.count > 0 ? YES : NO;
+            );
+            
+            self.drawToolStatus(canPrev);
         }
         
         if (self.drawingCallback)

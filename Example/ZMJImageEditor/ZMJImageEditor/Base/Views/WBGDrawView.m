@@ -10,6 +10,22 @@
 
 @implementation WBGDrawView
 
++ (Class)layerClass
+{
+    return [CAShapeLayer class];
+}
+
++ (dispatch_queue_t)drawQueue
+{
+    static dispatch_queue_t _drawQueue = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _drawQueue = dispatch_queue_create("com.image.editor.queue", DISPATCH_QUEUE_SERIAL);
+    });
+    
+    return _drawQueue;
+}
+
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -21,15 +37,21 @@
     return self;
 }
 
-+ (Class)layerClass
+- (void)setNeedsDisplay
 {
-    return [CAShapeLayer class];
+    [super setNeedsDisplay];
+    
+    dispatch_async([self.class drawQueue], ^{
+        [self draw];
+    });
 }
 
-- (void)drawRect:(CGRect)rect
+- (void)draw
 {
     if (self.drawViewBlock)
     {
+        CGFloat scale = [[UIScreen mainScreen] scale];
+        UIGraphicsBeginImageContextWithOptions(self.frame.size, NO, scale);
         CGContextRef context = UIGraphicsGetCurrentContext();
         
         //去掉锯齿
@@ -37,6 +59,13 @@
         CGContextSetShouldAntialias(context, true);
         
         self.drawViewBlock(context);
+        
+        UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.layer.contents = (__bridge id _Nullable)(image.CGImage);
+        });
     }
 }
 
