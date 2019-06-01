@@ -98,8 +98,9 @@
     [self.drawingView setDrawViewBlock:^(CGContextRef ctx)
     {
         __strong WBGDrawTool *strongSelf = weakSelf;
-        Lock_Guard
+        Lock_Guard_Lock
         (
+            strongSelf->_lock,
             NSArray<WBGPath *> *pathArray = [strongSelf.allLineMutableArray copy];
          );
         
@@ -271,7 +272,7 @@
 #pragma mark - Draw
 - (void)drawLine
 {
-    [self.drawingView setNeedsDisplay];
+    [self.drawingView setNeedDraw];
 }
 
 @end

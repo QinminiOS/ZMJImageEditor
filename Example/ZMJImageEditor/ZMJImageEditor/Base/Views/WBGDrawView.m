@@ -32,26 +32,26 @@
     if (self)
     {
         [self setBackgroundColor:[UIColor clearColor]];
+        self.layer.contentsScale = [[UIScreen mainScreen] scale];
     }
     
     return self;
 }
 
-- (void)setNeedsDisplay
+- (void)setNeedDraw
 {
-    [super setNeedsDisplay];
-    
+    CGSize size = self.frame.size;
     dispatch_async([self.class drawQueue], ^{
-        [self draw];
+        [self draw:size];
     });
 }
 
-- (void)draw
+- (void)draw:(CGSize)size
 {
     if (self.drawViewBlock)
     {
         CGFloat scale = [[UIScreen mainScreen] scale];
-        UIGraphicsBeginImageContextWithOptions(self.frame.size, NO, scale);
+        UIGraphicsBeginImageContextWithOptions(size, NO, scale);
         CGContextRef context = UIGraphicsGetCurrentContext();
         
         //去掉锯齿
@@ -67,6 +67,11 @@
             self.layer.contents = (__bridge id _Nullable)(image.CGImage);
         });
     }
+}
+
+- (void)drawRect:(CGRect)rect
+{
+    [super drawRect:rect];
 }
 
 @end

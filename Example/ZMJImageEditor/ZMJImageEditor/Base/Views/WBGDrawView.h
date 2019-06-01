@@ -10,4 +10,5 @@
 
 @interface WBGDrawView : UIView
 @property (nonatomic, copy) void (^drawViewBlock)(CGContextRef ctx);
+- (void)setNeedDraw;
 @end

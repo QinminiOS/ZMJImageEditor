@@ -71,6 +71,11 @@ typedef NS_ENUM(NSInteger, WBGChatBarStatus)
     dispatch_semaphore_signal(_lock);
 
 
+#define Lock_Guard_Lock(lock, ...) \
+    dispatch_semaphore_wait(lock, DISPATCH_TIME_FOREVER); \
+    __VA_ARGS__; \
+    dispatch_semaphore_signal(lock);
+
 #define CGRectConvertPointToRect(point, rect) \
         CGPointMake(point.x - rect.origin.x, point.y - rect.origin.y)
 
