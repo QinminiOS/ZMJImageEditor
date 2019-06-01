@@ -26,7 +26,6 @@
     bezierPath.lineJoinStyle = kCGLineJoinRound;
     [bezierPath moveToPoint:beginPoint];
     
-    
     CAShapeLayer *shapeLayer = [[CAShapeLayer alloc] init];
     shapeLayer.contentsScale = [UIScreen mainScreen].scale;
     shapeLayer.lineCap = kCALineCapRound;
@@ -49,10 +48,53 @@
 - (void)pathLineToPoint:(CGPoint)movePoint;
 {
     //判断绘图类型
+    // self.shape.path = self.bezierPath.CGPath;
+    
     [self.pointArray addObject:@(movePoint)];
     
-    [self.bezierPath addLineToPoint:movePoint];
-    self.shape.path = self.bezierPath.CGPath;
+    // [self.bezierPath addLineToPoint:movePoint];
+    
+    // 贝塞尔曲线优化
+    if (self.pointArray.count <= 5)
+    {
+        if (self.pointArray.count % 5 == 0)
+        {
+            NSInteger lastIndex = self.pointArray.count - 1;
+            
+            CGPoint p4 = [self.pointArray[lastIndex] CGPointValue];
+            CGPoint p3 = [self.pointArray[lastIndex-1] CGPointValue];
+            CGPoint p2 = [self.pointArray[lastIndex-2] CGPointValue];
+            CGPoint p1 = [self.pointArray[lastIndex-3] CGPointValue];
+            CGPoint p0 = [self.pointArray[lastIndex-4] CGPointValue];
+            
+            p3 = CGPointMake((p2.x + p4.x)/2.0, (p2.y + p4.y)/2.0);
+            
+            [self.bezierPath moveToPoint:p0];
+            [self.bezierPath addCurveToPoint:p3 controlPoint1:p1 controlPoint2:p2];
+            
+            [self.pointArray replaceObjectAtIndex:lastIndex-1 withObject:@(p3)];
+        }
+    }
+    else
+    {
+        if ((self.pointArray.count - 5) % 3 == 0)
+        {
+            NSInteger lastIndex = self.pointArray.count - 1;
+            
+            CGPoint p4 = [self.pointArray[lastIndex] CGPointValue];
+            CGPoint p3 = [self.pointArray[lastIndex-1] CGPointValue];
+            CGPoint p2 = [self.pointArray[lastIndex-2] CGPointValue];
+            CGPoint p1 = [self.pointArray[lastIndex-3] CGPointValue];
+            CGPoint p0 = [self.pointArray[lastIndex-4] CGPointValue];
+            
+            p3 = CGPointMake((p2.x + p4.x)/2.0, (p2.y + p4.y)/2.0);
+            
+            [self.bezierPath moveToPoint:p0];
+            [self.bezierPath addCurveToPoint:p3 controlPoint1:p1 controlPoint2:p2];
+            
+            [self.pointArray replaceObjectAtIndex:lastIndex-1 withObject:@(p3)];
+        }
+    }
 }
 
 - (void)drawPath
