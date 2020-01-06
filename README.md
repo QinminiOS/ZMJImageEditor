@@ -16,6 +16,18 @@ ZMJImageEditor
 # ScreenShot
 <img src="./1.gif" width="300" height="640">
 
+<img src="./screenShot/1.png" width="30%" height="30%">
+<img src="./screenShot/2.png" width="30%" height="30%">
+<img src="./screenShot/3.png" width="30%" height="30%">
+<img src="./screenShot/4.png" width="30%" height="30%">
+<img src="./screenShot/5.png" width="30%" height="30%">
+<img src="./screenShot/6.png" width="30%" height="30%">
+<img src="./screenShot/7.png" width="30%" height="30%">
+<img src="./screenShot/8.png" width="30%" height="30%">
+<img src="./screenShot/9.png" width="30%" height="30%">
+<img src="./screenShot/10.png" width="30%" height="30%">
+
+
 # Usage
 
 调起
