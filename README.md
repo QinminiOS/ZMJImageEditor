@@ -14,7 +14,7 @@ ZMJImageEditor
 
 
 # ScreenShot
-<img src="./1.gif" width="30%" height="30%">
+<img src="./1.gif" width="300" height="640">
 
 # Usage
 
