@@ -14,7 +14,7 @@ ZMJImageEditor
 
 
 # ScreenShot
-![image](https://https://github.com/QinminiOS/ZMJImageEditor/blob/master/1.gif)
+<img src="./1.gif" width="30%" height="30%">
 
 # Usage
 
@@ -46,6 +46,15 @@ iOS7+
 
 # Author
 keshiim, Qinmin
+
+# Blog
+
+- [秦明Qinmin](https://www.jianshu.com/u/fff74d0ebed7)
+
+
+# Contact Me
+
+- Email: 11gmqin@gmail.com
 
 # License
 WBGImageEditor is available under the MIT license. See the LICENSE file for more info.
