@@ -57,7 +57,8 @@ WBGImageEditor *editor = [[WBGImageEditor alloc] initWithImage:_imageView.image 
 iOS7+
 
 # Author
-keshiim, Qinmin
+keshiim
+Qinmin
 
 # Blog
 
