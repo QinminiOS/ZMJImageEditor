@@ -14,7 +14,7 @@ ZMJImageEditor
 
 
 # ScreenShot
-
+![image](https://https://github.com/QinminiOS/ZMJImageEditor/blob/master/1.gif)
 
 # Usage
 
