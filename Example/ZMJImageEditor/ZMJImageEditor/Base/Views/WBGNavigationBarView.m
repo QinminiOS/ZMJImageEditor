@@ -8,11 +8,22 @@
 
 #import "WBGNavigationBarView.h"
 
+@interface WBGNavigationBarView()
+@property (weak, nonatomic) IBOutlet UIButton *doneButton;
+@end
+
 @implementation WBGNavigationBarView
 
 + (CGFloat)fixedHeight
 {
     return 64;
+}
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    
+    [self.doneButton setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
 }
 
 - (IBAction)onCancelButtonTapped:(UIButton *)sender

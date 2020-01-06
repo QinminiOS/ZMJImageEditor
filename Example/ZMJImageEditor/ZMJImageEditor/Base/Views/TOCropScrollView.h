@@ -22,11 +22,16 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol WBGHitTestDelegate <NSObject>
+- (nullable UIView *)hitTest:(CGPoint)point withEvent:(nullable UIEvent *)event;
+@end
+
 /*
  Subclassing UIScrollView was necessary in order to directly capture
  touch events that weren't otherwise accessible via UIGestureRecognizer objects.
  */
 @interface TOCropScrollView : UIScrollView
+@property (nullable, nonatomic, weak) id<WBGHitTestDelegate> hitTestDelegate;
 
 @property (nullable, nonatomic, copy) void (^touchesBegan)(void);
 @property (nullable, nonatomic, copy) void (^touchesCancelled)(void);

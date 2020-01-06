@@ -7,7 +7,6 @@
 //
 
 #import "WBGImageToolBase.h"
-#import "YYText.h"
 
 @interface WBGMosicaTool : WBGImageToolBase
 

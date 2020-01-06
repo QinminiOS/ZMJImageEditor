@@ -36,7 +36,7 @@
     
 }
 
-- (UIImage*)imageForKey:(NSString*)key defaultImageName:(NSString*)defaultImageName
+- (UIView *)drawView
 {
     return nil;
 }

@@ -24,6 +24,23 @@
 
 @implementation TOCropScrollView
 
+#pragma mark - HitTest
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
+{
+    BOOL responds = [self.hitTestDelegate respondsToSelector:@selector(hitTest:withEvent:)];
+    UIView *view =  responds ? [self.hitTestDelegate hitTest:point withEvent:event] : nil;
+    
+    if (view)
+    {
+        return view;
+    }
+    else
+    {
+        return [super hitTest:point withEvent:event];
+    }
+}
+
+#pragma mark - Touches
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     if (self.touchesBegan)

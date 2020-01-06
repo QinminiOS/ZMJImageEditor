@@ -9,11 +9,11 @@
 #import "WBGMosicaTool.h"
 #import "WBGMosicaToolBar.h"
 #import "WBGScratchView.h"
-#import "XXNibBridge.h"
 #import "XRGBTool.h"
 #import "WBGChatMacros.h"
 #import "Masonry.h"
 #import "UIView+TouchBlock.h"
+#import <XXNibBridge/XXNibBridge.h>
 
 @interface WBGMosicaTool ()
 @property (nonatomic, strong) WBGMosicaToolBar *mosicaToolBar;
@@ -52,6 +52,11 @@
     [self.mosicaToolBar removeFromSuperview];
     
     self.editor.drawingView.userInteractionEnabled = YES;
+}
+
+- (UIView *)drawView
+{
+    return self.scratchView;
 }
 
 - (void)hideTools:(BOOL)hidden

@@ -25,7 +25,8 @@
 #import "TOActivityCroppedImageProvider.h"
 #import "UIImage+CropRotate.h"
 #import "TOCroppedImageAttributes.h"
-#import "extobjc.h"
+#import <extobjc/extobjc.h>
+
 
 @interface TOCropViewController () <UIActionSheetDelegate, UIViewControllerTransitioningDelegate, TOCropViewDelegate>
 
@@ -37,6 +38,7 @@
 
 /* Views */
 @property (nonatomic, strong) TOCropToolbar *toolbar;
+@property (nonatomic, strong) CALayer *toolbarBgLayer;
 @property (nonatomic, strong, readwrite) TOCropView *cropView;
 @property (nonatomic, strong) UIView *toolbarSnapshotView;
 
@@ -108,7 +110,12 @@
     self.cropView.frame = [self frameForCropViewWithVerticalLayout:CGRectGetWidth(self.view.bounds) < CGRectGetHeight(self.view.bounds)];
     [self.view addSubview:self.cropView];
     
+    self.toolbarBgLayer = [CALayer layer];
+    self.toolbarBgLayer.backgroundColor = [UIColor colorWithWhite:0 alpha:0.7f].CGColor;
+    [self.view.layer addSublayer:self.toolbarBgLayer];
+    
     self.toolbar.frame = [self frameForToolBarWithVerticalLayout:CGRectGetWidth(self.view.bounds) < CGRectGetHeight(self.view.bounds)];
+    self.toolbar.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.toolbar];
     
     weakify(self);
@@ -199,7 +206,12 @@
         return UIStatusBarStyleLightContent;
     }
     
-    return UIStatusBarStyleDefault;
+    
+    if (@available(iOS 13.0, *)) {
+        return UIStatusBarStyleDarkContent;
+    } else {
+        return UIStatusBarStyleDefault;
+    }
 }
 
 - (BOOL)prefersStatusBarHidden
@@ -214,7 +226,7 @@
     {
         frame.origin.x = 0.0f;
         frame.origin.y = 0.0f;
-        frame.size.width = 44.0f;
+        frame.size.width = 44.0f + 54;
         frame.size.height = CGRectGetHeight(self.view.frame);
     }
     else
@@ -228,20 +240,20 @@
         
         if (self.toolbarPosition == TOCropViewControllerToolbarPositionBottom)
         {
-            frame.size.height = 44.0f + edge.bottom;
+            frame.size.height = 44.0f + 54 + edge.bottom;
             frame.origin.y = CGRectGetHeight(self.view.bounds) - frame.size.height;
         }
         else
         {
             frame.origin.y = 0;
-            frame.size.height = 44.0f + edge.top;
+            frame.size.height = 44.0f + 54 + edge.top;
         }
         
         frame.size.width = CGRectGetWidth(self.view.bounds);
         
         // If the bar is at the top of the screen and the status bar is visible, account for the status bar height
         if (self.toolbarPosition == TOCropViewControllerToolbarPositionTop && self.prefersStatusBarHidden == NO) {
-            frame.size.height = 64.0f;
+            frame.size.height = 64.0f + 54;
         }
     }
     
@@ -307,6 +319,7 @@
     [UIView performWithoutAnimation:^{
         self.toolbar.statusBarVisible = (self.toolbarPosition == TOCropViewControllerToolbarPositionTop && !self.prefersStatusBarHidden);
         self.toolbar.frame = [self frameForToolBarWithVerticalLayout:verticalLayout];
+        self.toolbarBgLayer.frame = self.toolbar.frame;
         [self.toolbar setNeedsLayout];
     }];
 }
@@ -330,6 +343,7 @@
     
     [UIView performWithoutAnimation:^{
         self.toolbar.frame = [self frameForToolBarWithVerticalLayout:UIInterfaceOrientationIsPortrait(toInterfaceOrientation)];
+        self.toolbarBgLayer.frame = self.toolbar.frame;
         [self.toolbar layoutIfNeeded];
         self.toolbar.alpha = 0.0f;
     }];
@@ -551,6 +565,11 @@
 }
 
 #pragma mark - Crop View Delegates -
+- (void)cropView:(TOCropView *)cropView maskLayerDidChangeVisible:(BOOL)hidden
+{
+    [self.toolbarBgLayer setHidden:hidden];
+}
+
 - (void)cropViewDidBecomeResettable:(TOCropView *)cropView
 {
     self.toolbar.resetButtonEnabled = YES;

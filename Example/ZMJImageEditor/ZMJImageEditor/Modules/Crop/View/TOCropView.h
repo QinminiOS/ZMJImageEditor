@@ -35,6 +35,7 @@ typedef NS_ENUM(NSInteger, TOCropViewCroppingStyle)
 
 - (void)cropViewDidBecomeResettable:(nonnull TOCropView *)cropView;
 - (void)cropViewDidBecomeNonResettable:(nonnull TOCropView *)cropView;
+- (void)cropView:(nonnull TOCropView *)cropView maskLayerDidChangeVisible:(BOOL)hidden;
 
 @end
 

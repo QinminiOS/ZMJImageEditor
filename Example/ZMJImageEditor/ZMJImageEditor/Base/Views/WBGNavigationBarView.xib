@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,11 +18,11 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6AS-Q2-Nmh">
-                            <rect key="frame" x="363" y="0.0" width="35" height="33"/>
+                            <rect key="frame" x="363" y="10" width="35" height="33"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <inset key="titleEdgeInsets" minX="0.0" minY="14" maxX="0.0" maxY="0.0"/>
                             <state key="normal" title="完成">
-                                <color key="titleColor" red="0.0" green="1" blue="0.77647058820000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleColor" red="0.47843137250000001" green="0.49019607840000001" blue="0.98823529409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <state key="disabled">
                                 <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
@@ -34,7 +32,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zmU-MH-Th0">
-                            <rect key="frame" x="16" y="0.0" width="35" height="33"/>
+                            <rect key="frame" x="16" y="10" width="35" height="33"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <inset key="titleEdgeInsets" minX="0.0" minY="14" maxX="0.0" maxY="0.0"/>
                             <state key="normal" title="取消">
@@ -50,8 +48,8 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="zmU-MH-Th0" firstAttribute="top" secondItem="dRQ-1c-Xuj" secondAttribute="top" id="18C-D2-fqO"/>
-                        <constraint firstItem="6AS-Q2-Nmh" firstAttribute="top" secondItem="dRQ-1c-Xuj" secondAttribute="top" id="P65-mq-zjp"/>
+                        <constraint firstItem="zmU-MH-Th0" firstAttribute="top" secondItem="dRQ-1c-Xuj" secondAttribute="top" constant="10" id="18C-D2-fqO"/>
+                        <constraint firstItem="6AS-Q2-Nmh" firstAttribute="top" secondItem="dRQ-1c-Xuj" secondAttribute="top" constant="10" id="P65-mq-zjp"/>
                         <constraint firstAttribute="trailing" secondItem="6AS-Q2-Nmh" secondAttribute="trailing" constant="16" id="Z47-n0-XAn"/>
                         <constraint firstAttribute="height" constant="64" id="aUt-Oa-V3V"/>
                         <constraint firstItem="zmU-MH-Th0" firstAttribute="leading" secondItem="dRQ-1c-Xuj" secondAttribute="leading" constant="16" id="c9J-ex-ugo"/>
@@ -67,6 +65,10 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="doneButton" destination="6AS-Q2-Nmh" id="iif-o2-06c"/>
+            </connections>
+            <point key="canvasLocation" x="139" y="153"/>
         </view>
     </objects>
 </document>

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "XXNibBridge.h"
+#import <XXNibBridge.h>
 
 @interface WBGNavigationBarView : UIView<XXNibBridge>
 @property (nonatomic, copy) void (^onDoneButtonClickBlock)(UIButton *btn);

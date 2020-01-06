@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "XXNibBridge.h"
+#import <XXNibBridge.h>
 
-@interface WBGTextColorPanel : UIView
+@interface WBGTextColorPanel : UIView<XXNibBridge>
 @property (nonatomic, strong, readonly) UIColor *currentColor;
 @property (nonatomic, copy) void (^onTextColorChange)(UIColor *color);
 

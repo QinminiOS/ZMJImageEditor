@@ -10,13 +10,13 @@
 #import "WBGImageEditorViewController.h"
 
 @interface WBGImageToolBase : NSObject
-
 @property (nonatomic, weak) WBGImageEditorViewController *editor;
 
 - (instancetype)initWithImageEditor:(WBGImageEditorViewController *)editor;
 
 - (void)setup;
 - (void)cleanup;
-- (void)hideTools:(BOOL)hidden;
+- (UIView *)drawView;
 
+- (void)hideTools:(BOOL)hidden;
 @end

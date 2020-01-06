@@ -25,15 +25,20 @@
 
 #pragma mark - WBGImageEditorViewController
 
-@interface WBGImageEditorViewController () <UINavigationBarDelegate,
-UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBGKeyboardDelegate>
+@interface WBGImageEditorViewController ()
+<UINavigationBarDelegate,
+UIScrollViewDelegate,
+TOCropViewControllerDelegate,
+WBGMoreKeyboardDelegate,
+WBGKeyboardDelegate,
+WBGHitTestDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
 @property (weak, nonatomic) IBOutlet UIButton *finishButton;
 @property (weak, nonatomic) IBOutlet UIView *bottomBar;
 @property (weak, nonatomic) IBOutlet UIView *topBar;
 
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet TOCropScrollView *scrollView;
 @property (weak, nonatomic) UIView *containerView;
 @property (weak, nonatomic) UIImageView *imageView;
 @property (strong, nonatomic) WBGDrawView *drawingView;
@@ -115,6 +120,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     self.imageView.frame = self.containerView.bounds;
     self.drawingView.frame = self.imageView.frame;
     self.mosicaView.frame = self.imageView.frame;
+    self.drawingView.originSize = self.originSize;
 }
 
 - (void)configCustomComponent
@@ -212,11 +218,14 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 
 - (void)initViews
 {
+    [self.finishButton setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
+    
     self.scrollView.frame = [UIScreen mainScreen].bounds;
     self.scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.scrollView.showsHorizontalScrollIndicator = NO;
     self.scrollView.showsVerticalScrollIndicator = NO;
     self.scrollView.delegate = self;
+    self.scrollView.hitTestDelegate = self;
     self.scrollView.clipsToBounds = NO;
     self.scrollView.backgroundColor = [UIColor blackColor];
     self.scrollView.contentInset = UIEdgeInsetsZero;
@@ -307,8 +316,13 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     
     if (angle == 0 || angle == -180)
     {
-        // 不用管比例 ScrollView 帮你算了
-        CGPoint viewOrigin = CGPointMake(-cropRect.origin.x, -cropRect.origin.y);
+        CGFloat ratio = self.scrollView.width/cropRect.size.width;
+        CGAffineTransform scale = CGAffineTransformMakeScale(ratio, ratio);
+        self.imageView.transform = CGAffineTransformConcat(scale, self.imageView.transform);
+        self.drawingView.transform = CGAffineTransformConcat(scale, self.drawingView.transform);
+        self.mosicaView.transform = CGAffineTransformConcat(scale, self.mosicaView.transform);
+        
+        CGPoint viewOrigin = CGPointMake(-cropRect.origin.x * ratio, -cropRect.origin.y * ratio);
         self.drawingView.viewOrigin = viewOrigin;
         self.imageView.viewOrigin = viewOrigin;
         self.mosicaView.viewOrigin = viewOrigin;
@@ -372,6 +386,20 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     (size.height - contentSize.height) * 0.5 : 0.0;
     
     self.containerView.center = CGPointMake(contentSize.width * 0.5 + offsetX, contentSize.height * 0.5 + offsetY);
+}
+
+#pragma mark - WBGHitTestDelegate
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
+{
+    UIView *view = [self.currentTool drawView];
+    if (view)
+    {
+        return view;
+    }
+    else
+    {
+         return nil;
+    }
 }
 
 #pragma mark - Actions
@@ -551,6 +579,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
     self.navigationItem.rightBarButtonItem.enabled = YES;
     
     [self updateTransform:angle withCropRect:cropRect];
+    
     self.lastCropRect = cropRect;
     self.lastAngle = angle;
     
@@ -573,13 +602,20 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 
 - (void)cropViewController:(TOCropViewController *)cropViewController didFinishCancelled:(BOOL)cancelled
 {
+    __weak WBGImageEditorViewController *weakSelf = self;
+    
     [cropViewController
      dismissAnimatedFromParentViewController:self
      withCroppedImage:[self buildTransitionImage]
      toView:self.containerView
      toFrame:self.containerView.frame
-     setup:NULL
-     completion:NULL];
+     setup:^{
+         __weak WBGImageEditorViewController *strongSelf = weakSelf;
+         strongSelf.imageView.hidden = YES;
+     } completion:^{
+         __weak WBGImageEditorViewController *strongSelf = weakSelf;
+         strongSelf.imageView.hidden = NO;
+     }];
 }
 
 #pragma mark -
@@ -630,7 +666,7 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
         [self.textTool hideTextBorder];
     }
     
-    [self.scrollView setZoomScale:1.0];
+    [self.scrollView setZoomScale:1.0f];
     
     UIGraphicsBeginImageContextWithOptions(self.originSize,
                                            NO,
@@ -651,6 +687,8 @@ UIScrollViewDelegate, TOCropViewControllerDelegate, WBGMoreKeyboardDelegate, WBG
 
 - (UIImage *)buildTransitionImage
 {
+    [self.scrollView setZoomScale:1.0f];
+    
     UIGraphicsBeginImageContextWithOptions(self.containerView.viewSize,
                                            NO,
                                            [UIScreen mainScreen].scale);

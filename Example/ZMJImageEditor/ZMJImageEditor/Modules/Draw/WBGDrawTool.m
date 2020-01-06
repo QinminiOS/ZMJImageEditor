@@ -12,9 +12,10 @@
 #import "WBGColorPanel.h"
 #import "Masonry.h"
 #import "WBGChatMacros.h"
+#import <XXNibBridge/XXNibBridge.h>
 
 @interface WBGDrawTool ()
-@property (nonatomic, weak) WBGDrawView *drawingView;
+@property (nonatomic, weak) WBGDrawView *canvas;
 @property (nonatomic, assign) CGSize originalImageSize;
 @property (nonatomic, weak) WBGColorPanel *colorPanel;
 @property (nonatomic, strong) UIPanGestureRecognizer *panGesture;
@@ -34,7 +35,7 @@
         
         self.editor = editor;
         self.allLineMutableArray = [NSMutableArray new];
-        self.drawingView = self.editor.drawingView;
+        self.canvas = self.editor.drawingView;
         
         WBGColorPanel *colorPanel = [WBGColorPanel xx_instantiateFromNib];
         colorPanel.backButton.alpha = 0.5f;
@@ -95,7 +96,7 @@
         [strongSelf.editor hiddenTopAndBottomBar:!strongSelf.editor.barsHiddenStatus animation:YES];
     };
     
-    [self.drawingView setDrawViewBlock:^(CGContextRef ctx)
+    [self.canvas setDrawViewBlock:^(CGContextRef ctx)
     {
         __strong WBGDrawTool *strongSelf = weakSelf;
         Lock_Guard_Lock
@@ -136,11 +137,11 @@
         
     }
     
-    [_drawingView addGestureRecognizer:self.panGesture];
-    [_drawingView addGestureRecognizer:self.tapGesture];
-    _drawingView.userInteractionEnabled = YES;
-    _drawingView.layer.shouldRasterize = YES;
-    _drawingView.layer.minificationFilter = kCAFilterTrilinear;
+    [_canvas addGestureRecognizer:self.panGesture];
+    [_canvas addGestureRecognizer:self.tapGesture];
+    _canvas.userInteractionEnabled = YES;
+    _canvas.layer.shouldRasterize = YES;
+    _canvas.layer.minificationFilter = kCAFilterTrilinear;
     
     self.editor.imageView.userInteractionEnabled = YES;
     self.editor.scrollView.panGestureRecognizer.minimumNumberOfTouches = 2;
@@ -160,6 +161,11 @@
     self.editor.scrollView.panGestureRecognizer.minimumNumberOfTouches = 1;
     self.panGesture.enabled = NO;
     self.tapGesture.enabled = NO;
+}
+
+- (UIView *)drawView
+{
+    return self.canvas;
 }
 
 - (void)hideTools:(BOOL)hidden
@@ -209,7 +215,7 @@
 //draw
 - (void)drawingViewDidPan:(UIPanGestureRecognizer*)sender
 {
-    CGPoint currentDraggingPosition = [sender locationInView:_drawingView];
+    CGPoint currentDraggingPosition = [sender locationInView:self.canvas];
     
     if(sender.state == UIGestureRecognizerStateBegan)
     {
@@ -225,7 +231,6 @@
         // 初始化一个UIBezierPath对象, 把起始点存储到UIBezierPath对象中, 用来存储所有的轨迹点
         WBGPath *path = [WBGPath pathToPoint:currentDraggingPosition pathWidth:MAX(1, self.pathWidth)];
         path.pathColor = self.colorPanel.currentColor;
-        path.shape.strokeColor = self.colorPanel.currentColor.CGColor;
         
         Lock_Guard
         (
@@ -272,7 +277,7 @@
 #pragma mark - Draw
 - (void)drawLine
 {
-    [self.drawingView setNeedDraw];
+    [self.canvas setNeedDraw];
 }
 
 @end

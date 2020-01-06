@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface WBGDrawView : UIView
+@property (nonatomic, assign) CGSize originSize;
 @property (nonatomic, copy) void (^drawViewBlock)(CGContextRef ctx);
 - (void)setNeedDraw;
 @end

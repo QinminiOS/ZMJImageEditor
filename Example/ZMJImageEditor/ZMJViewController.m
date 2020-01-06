@@ -9,7 +9,6 @@
 #import "ZMJViewController.h"
 #import "WBGImageEditor.h"
 #import "WBGMoreKeyboardItem.h"
-#import "YYWebImage.h"
 
 
 @interface ZMJViewController () <WBGImageEditorDelegate, WBGImageEditorDataSource>
@@ -41,6 +40,7 @@
 - (IBAction)editButtonAction:(UIBarButtonItem *)sender {
     if (self.imageView.image) {
         WBGImageEditor *editor = [[WBGImageEditor alloc] initWithImage:_imageView.image delegate:self dataSource:self];
+        editor.modalPresentationStyle = UIModalPresentationFullScreen;
         [self presentViewController:editor animated:YES completion:nil];
     } else {
         NSLog(@"木有图片");

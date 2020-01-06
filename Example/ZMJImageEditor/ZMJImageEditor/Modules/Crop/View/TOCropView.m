@@ -107,6 +107,8 @@ typedef NS_ENUM(NSInteger, TOCropViewOverlayEdge) {
 @property (nonatomic, assign) NSInteger restoreAngle;
 @property (nonatomic, assign) CGRect    restoreImageCropFrame;
 
+@property (nonatomic, strong) CAShapeLayer *maskShapLayer;
+
 - (void)setup;
 
 /* Image layout */
@@ -215,13 +217,13 @@ typedef NS_ENUM(NSInteger, TOCropViewOverlayEdge) {
     {
         // self.translucencyEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleRegular];
         self.translucencyView = [[UIVisualEffectView alloc] init];
-        self.translucencyView.backgroundColor = [UIColor blackColor];
+        self.translucencyView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.7f];
         self.translucencyView.frame = self.bounds;
     }
     else
     {
         UIView *toolbar = [[UIView alloc] init];
-        toolbar.backgroundColor = [UIColor blackColor];
+        toolbar.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.7f];//[UIColor blackColor];
         self.translucencyView = toolbar;
         self.translucencyView.frame = CGRectInset(self.bounds, -1.0f, -1.0f);
     }
@@ -232,7 +234,7 @@ typedef NS_ENUM(NSInteger, TOCropViewOverlayEdge) {
     
     // The forground container that holds the foreground image view
     self.foregroundContainerView = [[UIView alloc] initWithFrame:(CGRect){0,0,200,200}];
-    self.foregroundContainerView.clipsToBounds = YES;
+    self.foregroundContainerView.clipsToBounds = NO;
     self.foregroundContainerView.userInteractionEnabled = NO;
     [self addSubview:self.foregroundContainerView];
     
@@ -253,6 +255,11 @@ typedef NS_ENUM(NSInteger, TOCropViewOverlayEdge) {
         
         return;
     }
+    
+    // Mask Layer
+    self.maskShapLayer = [[CAShapeLayer alloc] init];
+    self.maskShapLayer.frame = [UIScreen mainScreen].bounds;
+    [self.layer addSublayer:self.maskShapLayer];
     
     // The white grid overlay view
     self.gridOverlayView = [[TOCropOverlayView alloc] initWithFrame:self.foregroundContainerView.frame];
@@ -668,6 +675,8 @@ typedef NS_ENUM(NSInteger, TOCropViewOverlayEdge) {
     self.cropBoxFrame = frame;
     
     [self checkForCanReset];
+    
+    [self updateMaskLayer];
 }
 
 - (void)resetLayoutToDefaultAnimated:(BOOL)animated
@@ -707,6 +716,8 @@ typedef NS_ENUM(NSInteger, TOCropViewOverlayEdge) {
         //Enable / Disable the reset button
         [self checkForCanReset];
         
+        [self updateMaskLayer];
+        
         return;
     }
     
@@ -719,14 +730,71 @@ typedef NS_ENUM(NSInteger, TOCropViewOverlayEdge) {
     
     [self setSimpleRenderMode:YES animated:NO];
     
+    //UpdateMask
+    {
+        [self toggleMaskLayer:YES];
+    }
+    
     //Perform an animation of the image zooming back out to its original size
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [UIView animateWithDuration:0.5f delay:0.0f usingSpringWithDamping:1.0f initialSpringVelocity:1.0f options:UIViewAnimationOptionBeginFromCurrentState animations:^{
             [self layoutInitialImage];
         } completion:^(BOOL complete) {
             [self setSimpleRenderMode:NO animated:YES];
+            
+            //UpdateMask
+            {
+                [self updateMaskLayer];
+                [self toggleMaskLayer:NO];
+            }
         }];
     });
+}
+
+- (void)updateMaskLayer
+{
+    // 创建一个绘制路径
+    CGMutablePathRef path = CGPathCreateMutable();
+    if (path == NULL)
+    {
+        return;
+    }
+    
+    // 绘制rect
+    CGPathAddRect(path, nil, self.bounds);
+    CGPathAddRect(path, nil, self.cropBoxFrame);
+    
+    // 设置填充规则(重点)
+    [self.maskShapLayer setFillRule:kCAFillRuleEvenOdd];
+    
+    // 关联绘制的path
+    [self.maskShapLayer setPath:path];
+    
+    // 设置填充的颜色
+    [self.maskShapLayer setFillColor:[UIColor colorWithWhite:0 alpha:0.7f].CGColor];
+    
+    CGPathRelease(path);
+    path = NULL;
+}
+
+- (void)toggleMaskLayer:(BOOL)hide
+{
+    if (hide)
+    {
+        [self.maskShapLayer setHidden:hide];
+        if ([self.delegate respondsToSelector:@selector(cropView:maskLayerDidChangeVisible:)])
+        {
+            [self.delegate cropView:self maskLayerDidChangeVisible:hide];
+        }
+    }
+    else
+    {
+        [self.maskShapLayer setHidden:hide];
+        if ([self.delegate respondsToSelector:@selector(cropView:maskLayerDidChangeVisible:)])
+        {
+            [self.delegate cropView:self maskLayerDidChangeVisible:hide];
+        }
+    }
 }
 
 - (void)toggleTranslucencyViewVisible:(BOOL)visible
@@ -774,7 +842,10 @@ typedef NS_ENUM(NSInteger, TOCropViewOverlayEdge) {
 {
     CGPoint point = [recognizer locationInView:self];
     
-    if (recognizer.state == UIGestureRecognizerStateBegan) {
+    if (recognizer.state == UIGestureRecognizerStateBegan)
+    {
+        [self toggleMaskLayer:YES];
+
         [self startEditing];
         self.panOriginPoint = point;
         self.cropOriginFrame = self.cropBoxFrame;
@@ -782,7 +853,9 @@ typedef NS_ENUM(NSInteger, TOCropViewOverlayEdge) {
     }
     
     if (recognizer.state == UIGestureRecognizerStateEnded)
+    {
         [self startResetTimer];
+    }
     
     [self updateCropBoxFrameWithGesturePoint:point];
 }
@@ -1296,6 +1369,9 @@ typedef NS_ENUM(NSInteger, TOCropViewOverlayEdge) {
         
         //Explicitly update the matching at the end of the calculations
         [strongSelf matchForegroundToBackground];
+        
+        //UpdateMaskLayer
+        [strongSelf updateMaskLayer];
     };
     
     if (!animated) {
@@ -1312,7 +1388,10 @@ typedef NS_ENUM(NSInteger, TOCropViewOverlayEdge) {
               initialSpringVelocity:1.0f
                             options:UIViewAnimationOptionBeginFromCurrentState
                          animations:translateBlock
-                         completion:nil];
+                         completion:^(BOOL finished)
+        {
+            [self toggleMaskLayer:NO];
+        }];
     });
 }
 

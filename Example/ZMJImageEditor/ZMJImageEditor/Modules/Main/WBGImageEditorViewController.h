@@ -6,6 +6,7 @@
 //  Copyright © 2017年 CALACULU. All rights reserved.
 //
 
+#import "TOCropScrollView.h"
 #import "WBGImageEditor.h"
 #import "WBGColorPanel.h"
 #import "WBGScratchView.h"
@@ -23,7 +24,7 @@ typedef NS_ENUM(NSUInteger, WBGEditorMode)
 
 
 @interface WBGImageEditorViewController : WBGImageEditor
-@property (weak, nonatomic, readonly) UIScrollView *scrollView;
+@property (weak, nonatomic, readonly) TOCropScrollView *scrollView;
 @property (weak, nonatomic, readonly) UIImageView *imageView;
 @property (weak, nonatomic, readonly) UIView *bottomBar;
 @property (weak, nonatomic, readonly) UIView *containerView;

@@ -65,9 +65,7 @@
 }
 
 - (void)setup
-{
-    self.backgroundColor = [UIColor clearColor];
-    
+{    
     _rotateClockwiseButtonHidden = YES;
     
     // On iOS 9, we can use the new layout features to determine whether we're in an 'Arabic' style language mode
@@ -92,14 +90,13 @@
     _doneTextButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [_doneTextButton setImage:[UIImage my_imageNamed:@"icon_queren" inBundle:classBundle] forState:UIControlStateNormal];
 
-    [_doneTextButton setTitleColor:[UIColor colorWithRed:1.0f green:0.8f blue:0.0f alpha:1.0f] forState:UIControlStateNormal];
+    [_doneTextButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_doneTextButton.titleLabel setFont:[UIFont systemFontOfSize:17.0f]];
     [_doneTextButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_doneTextButton];
     
     _doneIconButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [_doneIconButton setImage:[TOCropToolbar doneImage] forState:UIControlStateNormal];
-    [_doneIconButton setTintColor:[UIColor colorWithRed:1.0f green:0.8f blue:0.0f alpha:1.0f]];
     [_doneIconButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_doneIconButton];
     
@@ -168,7 +165,7 @@
         
         // Work out the cancel button frame
         CGRect frame = CGRectZero;
-        frame.origin.y = self.statusBarVisible ? 20.0f : 0.0f;
+        frame.origin.y = self.statusBarVisible ? 74.0f : 54.0f;
         frame.size.height = 44.0f;
         frame.size.width = 50;//[self.cancelTextButton.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:self.cancelTextButton.titleLabel.font}].width + 10;
 
@@ -203,7 +200,7 @@
             width = CGRectGetMinX(self.cancelTextButton.frame) - CGRectGetMaxX(self.doneTextButton.frame);
         }
         
-        CGRect containerRect = (CGRect){self.center.x - x - 44.f,frame.origin.y,width,44.0f};
+        CGRect containerRect = (CGRect){self.center.x - x - 44.f, frame.origin.y, width, 44.0f};
 
 #if TOCROPTOOLBAR_DEBUG_SHOWING_BUTTONS_CONTAINER_RECT
         containerView.frame = containerRect;
@@ -230,6 +227,7 @@
         
         [self layoutToolbarButtons:buttonsInOrderHorizontally withSameButtonSize:buttonSize inContainerRect:containerRect horizontally:YES];
         self.resetButton.centerX = boundsSize.width/2.f;
+        self.resetButton.y = frame.origin.y;
         self.rotateCounterclockwiseButton.centerX = self.cancelTextButton.centerX;
         self.rotateCounterclockwiseButton.bottom = self.cancelTextButton.top - 20;
     }

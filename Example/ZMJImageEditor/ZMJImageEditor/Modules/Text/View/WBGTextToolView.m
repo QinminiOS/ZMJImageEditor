@@ -15,7 +15,7 @@
 #define IMAGE_MAXSIZE 200
 
 static const CGFloat MAX_FONT_SIZE = 50.0f;
-static const CGFloat MIN_TEXT_SCAL = 0.614f;
+static const CGFloat MIN_TEXT_SCAL = 0.01f;
 static const CGFloat MAX_TEXT_SCAL = 4.0f;
 static const CGFloat LABEL_OFFSET  = 13.f;
 static const CGFloat DELETEBUTTON_BOUNDS = 26.f;

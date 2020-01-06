@@ -40,9 +40,9 @@
 
 - (void)setNeedDraw
 {
-    CGSize size = self.frame.size;
+    CGSize originSize = self.originSize;
     dispatch_async([self.class drawQueue], ^{
-        [self draw:size];
+        [self draw:originSize];
     });
 }
 

@@ -62,7 +62,7 @@
             }
             else
             {
-                // LOGSYS_OC(kLevelError, @"PHAsset fetchAssetsWithLocalIdentifiers error: %@", error);
+                // LOGSYS_OC(FCKLevelError, @"PHAsset fetchAssetsWithLocalIdentifiers error: %@", error);
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if (completeBlock)
                     {
@@ -73,7 +73,7 @@
         }
         else
         {
-            // LOGSYS_OC(kLevelError, @"PHPhotoLibrary performChanges error: %@", error);
+            // LOGSYS_OC(FCKLevelError, @"PHPhotoLibrary performChanges error: %@", error);
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (completeBlock)
                 {

@@ -15,13 +15,15 @@
 #import "EXTobjc.h"
 #import "WBGDrawView.h"
 #import "WBGTextToolOverlapView.h"
+#import <XXNibBridge/XXNibBridge.h>
+
 
 static const CGFloat kTopOffset = 50.f;
 static const CGFloat kTextTopOffset = 60.f;
 static const NSInteger kTextMaxLimitNumber = 100;
 
 @interface WBGTextTool ()
-@property (nonatomic, weak) WBGDrawView *drawingView;
+@property (nonatomic, weak) WBGDrawView *canvas;
 @property (nonatomic, weak) WBGTextColorPanel *textColorPanel;
 @end
 
@@ -29,7 +31,7 @@ static const NSInteger kTextMaxLimitNumber = 100;
 
 - (void)setup
 {
-    _drawingView = self.editor.drawingView;
+    _canvas = self.editor.drawingView;
     self.editor.scrollView.pinchGestureRecognizer.enabled = NO;
     
     self.textView = [[WBGTextView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_SCREEN, HEIGHT_SCREEN)];
@@ -81,6 +83,7 @@ static const NSInteger kTextMaxLimitNumber = 100;
     };
 }
 
+#pragma mark - implementation 重写父方法
 - (void)cleanup
 {
     [self.textView removeFromSuperview];
@@ -96,6 +99,11 @@ static const NSInteger kTextMaxLimitNumber = 100;
     {
         self.editor.bottomBar.alpha = 1.0f;
     }
+}
+
+- (UIView *)drawView
+{
+    return nil;
 }
 
 - (void)hideTextBorder
@@ -140,7 +148,7 @@ static const NSInteger kTextMaxLimitNumber = 100;
 
 
 #pragma mark - WBGTextView
-@interface WBGTextView () <YYTextViewDelegate>
+@interface WBGTextView () <UITextViewDelegate>
 @property (nonatomic, strong) NSString *needReplaceString;
 @property (nonatomic, assign) NSRange   needReplaceRange;
 @property (nonatomic, strong) WBGNavigationBarView *navigationBarView;
@@ -166,7 +174,7 @@ static const NSInteger kTextMaxLimitNumber = 100;
         [self addSubview:self.navigationBarView];
         
         
-        self.textView = [[YYTextView alloc] initWithFrame:CGRectMake(16, kTopOffset, WIDTH_SCREEN - 16 * 2, HEIGHT_SCREEN - kTopOffset)];
+        self.textView = [[UITextView alloc] initWithFrame:CGRectMake(16, kTopOffset, WIDTH_SCREEN - 16 * 2, HEIGHT_SCREEN - kTopOffset)];
         self.textView.top = kTextTopOffset;
         self.textView.scrollEnabled = YES;
         self.textView.returnKeyType = UIReturnKeyDone;
@@ -315,94 +323,49 @@ static const NSInteger kTextMaxLimitNumber = 100;
         return NO;
     }
     
-    UITextRange *selectedRange = [textView markedTextRange];
-    //获取高亮部分
-    UITextPosition *pos = [textView positionFromPosition:selectedRange.start offset:0];
+    NSString *newText = [self.textView.text stringByReplacingCharactersInRange:range withString:text];
+    NSInteger newTextLength = [self countString:newText];
     
-    //如果有高亮且当前字数开始位置小于最大限制时允许输入
-    if (selectedRange && pos)
+    if (newTextLength > kTextMaxLimitNumber)
     {
-        NSInteger startOffset = [textView offsetFromPosition:textView.beginningOfDocument toPosition:selectedRange.start];
-        NSInteger endOffset = [textView offsetFromPosition:textView.beginningOfDocument toPosition:selectedRange.end];
-        NSRange offsetRange = NSMakeRange(startOffset, endOffset - startOffset);
         
-        if (offsetRange.location < kTextMaxLimitNumber && textView.text.length - offsetRange.length <= kTextMaxLimitNumber)
-        {
-            self.needReplaceRange = offsetRange;
-            self.needReplaceString = text;
-            
-            return YES;
-        }
-        else
-        {
-            return NO;
-        }
-    }
-    
-    NSString *comcatstr = [textView.text stringByReplacingCharactersInRange:range withString:text];
-    NSInteger totalLen = [self countString:comcatstr];
-    NSInteger caninputlen = kTextMaxLimitNumber - totalLen;
-    
-    if (caninputlen >= 0)
-    {
-        return YES;
-    }
-    else if (totalLen > kTextMaxLimitNumber)
-    {
+        __block NSInteger idx = 0;
+        __block NSMutableString *trimString = [NSMutableString string]; // 截取出的字串
+        
+        [newText
+         enumerateSubstringsInRange:NSMakeRange(0, [newText length])
+         options:NSStringEnumerationByComposedCharacterSequences
+         usingBlock: ^(NSString* substring, NSRange substringRange, NSRange enclosingRange, BOOL* stop)
+         {
+             NSInteger steplen = substring.length;
+             if ([substring canBeConvertedToEncoding:NSASCIIStringEncoding])
+             {
+                 steplen = 1;
+             }
+             else
+             {
+                 steplen = steplen * 2;
+             }
+             
+             idx = idx + steplen;
+             
+             if (idx > kTextMaxLimitNumber)
+             {
+                 *stop = YES; // 取出所需要就break，提高效率
+             }
+             else
+             {
+                 [trimString appendString:substring];
+             }
+         }];
+        
+        self.textView.text = trimString;
+        
         return NO;
     }
     else
     {
-        //防止当text.length + caninputlen < 0时，使得rg.length为一个非法最大正数出错
-        NSRange rg = {0, MAX(totalLen, 0)};
-        
-        if (rg.length > 0)
-        {
-            NSString *s = @"";
-            //判断是否只普通的字符或asc码(对于中文和表情返回NO)
-            BOOL asc = [text canBeConvertedToEncoding:NSASCIIStringEncoding];
-            if (asc)
-            {
-                s = [text substringWithRange:rg]; // 因为是ascii码直接取就可以了不会错
-            }
-            else
-            {
-                __block NSInteger idx = 0;
-                __block NSString  *trimString = @"";//截取出的字串
-                //使用字符串遍历，这个方法能准确知道每个emoji是占一个unicode还是两个
-                [text
-                 enumerateSubstringsInRange:NSMakeRange(0, [text length])
-                 options:NSStringEnumerationByComposedCharacterSequences
-                 usingBlock: ^(NSString* substring, NSRange substringRange, NSRange enclosingRange, BOOL* stop)
-                 {
-                     NSInteger steplen = 0;
-                     if ([substring canBeConvertedToEncoding:NSASCIIStringEncoding])
-                     {
-                         steplen = 1;
-                     }
-                     else
-                     {
-                         steplen = steplen * 2;
-                     }
-                     
-                      if (idx >= rg.length)
-                      {
-                          *stop = YES; // 取出所需要就break，提高效率
-                          return;
-                      }
-                     
-                      trimString = [trimString stringByAppendingString:substring];
-                      idx = idx + steplen; // 这里变化了，使用了字串占的长度来作为步长
-                 }];
-                
-                s = trimString;
-            }
-            
-            //rang是指从当前光标处进行替换处理(注意如果执行此句后面返回的是YES会触发didchange事件)
-            [textView setText:[textView.text stringByReplacingCharactersInRange:range withString:s]];
-        }
-        
-        return NO;
+        return YES;
     }
 }
 

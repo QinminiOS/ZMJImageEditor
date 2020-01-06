@@ -32,19 +32,8 @@
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H4n-yc-FcR" userLabel="safeview">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                     <subviews>
-                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eg2-dz-mJn">
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eg2-dz-mJn" customClass="TOCropScrollView">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="boolean" keyPath="gradientOn" value="YES"/>
-                                <userDefinedRuntimeAttribute type="string" keyPath="gradientColors" value="000000:0,000000:0.8"/>
-                                <userDefinedRuntimeAttribute type="string" keyPath="gradientLocations" value="0.5,0,0.5,1"/>
-                                <userDefinedRuntimeAttribute type="point" keyPath="gradientEndPoint">
-                                    <point key="value" x="0.5" y="1"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="point" keyPath="gradientStartPoint">
-                                    <point key="value" x="0.5" y="0.0"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="mbf-P5-HRA"/>
                             </connections>
@@ -108,11 +97,11 @@
                             <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yeV-aj-vVt">
-                                    <rect key="frame" x="324" y="0.0" width="35" height="33"/>
+                                    <rect key="frame" x="324" y="10" width="35" height="33"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <inset key="titleEdgeInsets" minX="0.0" minY="14" maxX="0.0" maxY="0.0"/>
                                     <state key="normal" title="完成">
-                                        <color key="titleColor" red="0.0" green="1" blue="0.77647058823529413" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="titleColor" red="0.47843137250000001" green="0.49019607840000001" blue="0.98823529409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <state key="disabled">
                                         <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -122,7 +111,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U1E-fP-iEK">
-                                    <rect key="frame" x="16" y="0.0" width="35" height="33"/>
+                                    <rect key="frame" x="16" y="10" width="35" height="33"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <inset key="titleEdgeInsets" minX="0.0" minY="14" maxX="0.0" maxY="0.0"/>
                                     <state key="normal" title="取消">
@@ -138,10 +127,10 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstItem="U1E-fP-iEK" firstAttribute="top" secondItem="vKW-ZA-nXo" secondAttribute="top" id="A37-Af-mwK"/>
+                                <constraint firstItem="U1E-fP-iEK" firstAttribute="top" secondItem="vKW-ZA-nXo" secondAttribute="top" constant="10" id="A37-Af-mwK"/>
                                 <constraint firstAttribute="trailing" secondItem="yeV-aj-vVt" secondAttribute="trailing" constant="16" id="HU4-wm-d0m"/>
                                 <constraint firstAttribute="height" constant="45" id="g2k-gl-jyQ"/>
-                                <constraint firstItem="yeV-aj-vVt" firstAttribute="top" secondItem="vKW-ZA-nXo" secondAttribute="top" id="pfe-2S-gEu"/>
+                                <constraint firstItem="yeV-aj-vVt" firstAttribute="top" secondItem="vKW-ZA-nXo" secondAttribute="top" constant="10" id="pfe-2S-gEu"/>
                                 <constraint firstItem="U1E-fP-iEK" firstAttribute="leading" secondItem="vKW-ZA-nXo" secondAttribute="leading" constant="16" id="y3F-Y8-nR6"/>
                             </constraints>
                             <userDefinedRuntimeAttributes>
@@ -188,10 +177,10 @@
     <resources>
         <image name="icon_caiqie" width="22" height="22"/>
         <image name="icon_masaike" width="22" height="22"/>
-        <image name="icon_masaike_xuanzhong" width="22" height="22"/>
-        <image name="icon_tianjiawenzi_wukuang" width="22" height="22"/>
+        <image name="icon_masaike_xuanzhong" width="21.5" height="21.5"/>
+        <image name="icon_tianjiawenzi_wukuang" width="21.5" height="21.5"/>
         <image name="icon_tianjiawenzi_youkuang" width="22" height="22"/>
-        <image name="icon_tuya" width="22" height="22"/>
-        <image name="icon_tuya_xuanzhong" width="22" height="22"/>
+        <image name="icon_tuya" width="20.5" height="20.5"/>
+        <image name="icon_tuya_xuanzhong" width="20.5" height="20.5"/>
     </resources>
 </document>
