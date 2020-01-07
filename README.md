@@ -10,7 +10,7 @@ ZMJImageEditor 是一个和微信一样图片编辑的组件，功能强大，�
 
 - 3、Mosica
 
-- 4、Crop
+- 4、Crop/Rotate
 
 
 # GIF
@@ -39,7 +39,7 @@ WBGImageEditor *editor = [[WBGImageEditor alloc] initWithImage:_imageView.image 
 [self presentViewController:editor animated:YES completion:nil];
 ```
 
-回调delegate
+回调
 
 ```
 #pragma mark - WBGImageEditorDelegate
@@ -71,6 +71,10 @@ WBGImageEditor *editor = [[WBGImageEditor alloc] initWithImage:_imageView.image 
 # Contact Me
 
 - Email: 11gmqin@gmail.com
+
+# To do
+- 贝塞尔曲线提高圆滑度
+- 分组渲染降低每次渲染顶点数
 
 # License
 - WBGImageEditor is available under the MIT license. See the LICENSE file for more info.
