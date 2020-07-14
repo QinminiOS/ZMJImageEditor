@@ -45,6 +45,9 @@
     }
     
     self.editor.drawingView.userInteractionEnabled = NO;
+    self.editor.scrollView.panGestureRecognizer.minimumNumberOfTouches = 2;
+    self.editor.scrollView.panGestureRecognizer.delaysTouchesBegan = NO;
+    self.editor.scrollView.pinchGestureRecognizer.delaysTouchesBegan = NO;
 }
 
 - (void)cleanup
