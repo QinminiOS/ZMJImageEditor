@@ -1701,11 +1701,11 @@ typedef NS_ENUM(NSInteger, TOCropViewOverlayEdge) {
     { //crop box has been changed
         canReset = YES;
     }
-    else if ((NSInteger)floorf(self.scrollView.contentOffset.x) != (NSInteger)floorf(self.originalContentOffset.x) ||
-             (NSInteger)floorf(self.scrollView.contentOffset.y) != (NSInteger)floorf(self.originalContentOffset.y))
-    {
-        canReset = YES;
-    }
+    // else if ((NSInteger)floorf(self.scrollView.contentOffset.x) != (NSInteger)floorf(self.originalContentOffset.x) ||
+    //         (NSInteger)floorf(self.scrollView.contentOffset.y) != (NSInteger)floorf(self.originalContentOffset.y))
+    // {
+    //    canReset = YES;
+    // }
     
     self.canBeReset = canReset;
 }
